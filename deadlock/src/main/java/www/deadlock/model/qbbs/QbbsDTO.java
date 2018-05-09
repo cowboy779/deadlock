@@ -1,4 +1,6 @@
-package www.dao;
+package www.deadlock.model.qbbs;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class QbbsDTO {
 	 private int qnum; 
@@ -10,9 +12,17 @@ public class QbbsDTO {
      private String id;
      private int qcount;
      private int filesize;
+     private MultipartFile filenameMF;
      
 
+    
      
+	public MultipartFile getFilenameMF() {
+		return filenameMF;
+	}
+	public void setFilenameMF(MultipartFile filenameMF) {
+		this.filenameMF = filenameMF;
+	}
 	public int getFilesize() {
 		return filesize;
 	}

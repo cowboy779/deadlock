@@ -1,4 +1,4 @@
-package www.dao;
+package www.deadlock.model.qbbs;
 
 public class QrecoDTO {
     private int qrenum;
@@ -39,10 +39,6 @@ public class QrecoDTO {
 	public void setQnum(int qnum) {
 		this.qnum = qnum;
 	}
-     
-     
-	
-     
      
      
 }

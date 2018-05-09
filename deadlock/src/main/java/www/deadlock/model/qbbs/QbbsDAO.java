@@ -1,93 +1,63 @@
-package www.dao;
+package www.deadlock.model.qbbs;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import www.mybatis.MyAppSqlConfig;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 
+
+@Repository
 public class QbbsDAO {
-	private static SqlSessionFactory sqlMapper;
+	private static SqlSessionTemplate mybatis;
 
-	static {
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
-	}
-	
-	
 	
 	public void upcount(int qnum){
-		
-		SqlSession session=sqlMapper.openSession();
-		session.update("qbbs.upcount",qnum);
-		
-		session.commit();
-		session.close();
+		mybatis.update("qbbs.upcount",qnum);
 	}
 	
 
 	public QbbsDTO read(int qnum) {
-
-		return sqlMapper.openSession().selectOne("qbbs.read", qnum);
+		return mybatis.selectOne("qbbs.read", qnum);
 	}
+	
 	
 	public boolean create(QbbsDTO dto){
 		
 		boolean flag=false;
-		
-		int cnt;
-		
-		SqlSession session=sqlMapper.openSession();
-				
-		cnt=session.insert("qbbs.create", dto);
-		session.commit();
-		session.close();
-		
+		int cnt=mybatis.insert("qbbs.create", dto);
 		if(cnt>0) flag=true;
-
+		
 		return flag;
 	}
+	
 	
 	public boolean update(QbbsDTO dto){
 		boolean flag=false;
-		
-		int cnt;
-		
-		SqlSession session= sqlMapper.openSession();
-		
-		cnt=session.update("qbbs.update", dto);
-		session.commit();
-		session.close();
-		
+		int cnt=mybatis.update("qbbs.update", dto);
 		if(cnt>0) flag=true;
 		
 		return flag;
 	}
+	
 	
 	public boolean delete(int qnum){
 		boolean flag=false;
-		
-		int cnt;
-		SqlSession session =sqlMapper.openSession();
-		cnt=session.delete("qbbs.delete", qnum);
-		session.commit();
-		session.close();
-		
+		int cnt=mybatis.delete("qbbs.delete", qnum);
 		if(cnt>0) flag=true;
 		
 		return flag;
 	}
 	
+	
 	public int total(Map map) {
-		return sqlMapper.openSession().selectOne("qbbs.total", map);
+		return mybatis.selectOne("qbbs.total", map);
 	}
 	
+	
 	public List<QbbsDTO> list(Map map){
-		
-		return sqlMapper.openSession().selectList("qbbs.list", map);
+		return mybatis.selectList("qbbs.list", map);
 	}
 	
 

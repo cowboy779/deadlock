@@ -1,4 +1,4 @@
-package www.dao;
+package www.deadlock.model.qbbs;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,39 +1,28 @@
-package www.dao;
+package www.deadlock.model.qbbs;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import www.mybatis.MyAppSqlConfig;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public class QrecoDAO {
-	private static SqlSessionFactory sqlMapper;
+	private static SqlSessionTemplate mybatis;
 
-	static {
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
-	}
-	
 
 	public QrecoDTO read(int qrenum) {
 
-		return sqlMapper.openSession().selectOne("qreco.read", qrenum);
+		return mybatis.selectOne("qreco.read", qrenum);
 	}
 	
 	public boolean create(QrecoDTO dto){
 		
 		boolean flag=false;
 		
-		int cnt;
-		
-		SqlSession session=sqlMapper.openSession();
-				
-		cnt=session.insert("qreco.create", dto);
-		session.commit();
-		session.close();
+		int cnt=mybatis.insert("qreco.create", dto);
+	
 		
 		if(cnt>0) flag=true;
 
@@ -43,14 +32,8 @@ public class QrecoDAO {
 	public boolean update(QrecoDTO dto){
 		boolean flag=false;
 		
-		int cnt;
-		
-		SqlSession session= sqlMapper.openSession();
-		
-		cnt=session.update("qreco.update", dto);
-		session.commit();
-		session.close();
-		
+		int cnt=mybatis.update("qreco.update", dto);
+
 		if(cnt>0) flag=true;
 		
 		return flag;
@@ -59,24 +42,20 @@ public class QrecoDAO {
 	public boolean delete(int qrenum){
 		boolean flag=false;
 		
-		int cnt;
-		SqlSession session =sqlMapper.openSession();
-		cnt=session.delete("qreco.delete", qrenum);
-		session.commit();
-		session.close();
-		
+		int cnt=mybatis.delete("qreco.delete", qrenum);
+
 		if(cnt>0) flag=true;
 		
 		return flag;
 	}
 	
 	public int total(Map map) {
-		return sqlMapper.openSession().selectOne("qreco.total", map);
+		return mybatis.selectOne("qreco.total", map);
 	}
 	
 	public List<QrecoDTO> list(Map map){
 		
-		return sqlMapper.openSession().selectList("qreco.list", map);
+		return mybatis.selectList("qreco.list", map);
 	}
 	
 
