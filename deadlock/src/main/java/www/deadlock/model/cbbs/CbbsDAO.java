@@ -4,18 +4,26 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-
-public class CbbsDAO {
+@Repository
+public class CbbsDAO implements ICbbsDAO{
 	
-	SqlSessionTemplate mybatis;
+	@Autowired
+	private SqlSessionTemplate mybatis;
+	
+	/*테스트용*/
+	public void setMybatis(SqlSessionTemplate mybatis) {
+			this.mybatis = mybatis;
+	}
 	
 	
-   public CbbsDTO read(int cnum) {
+   public Object read(Object cnum) {
 		return mybatis.selectOne("cbbs.read", cnum);
 	}
    
-   public boolean create(CbbsDTO dto) {
+   public boolean create(Object dto) {
 	   boolean flag=false;
 	   
 	   int cnt=mybatis.insert("cbbs.create",dto);
@@ -25,7 +33,7 @@ public class CbbsDAO {
 	   return flag;
    }
    
-   public boolean update(CbbsDTO dto) {
+   public boolean update(Object dto) {
 	   boolean flag=false;
 	   
 	   int cnt=mybatis.update("cbbs.update", dto);
@@ -35,7 +43,7 @@ public class CbbsDAO {
 	   return flag;
    }
    
-   public boolean delete(int cnum) {
+   public boolean delete(Object cnum) {
 	   boolean flag=false;
 	   
 	   int cnt=mybatis.delete("cbbs.delete", cnum);

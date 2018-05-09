@@ -15,7 +15,7 @@ public class CbbsTest {
 		//update(dao);
 		//delete(dao);
 		//total(dao);
-		upccount(dao);
+		//upccount(dao);
 
 	}
 
