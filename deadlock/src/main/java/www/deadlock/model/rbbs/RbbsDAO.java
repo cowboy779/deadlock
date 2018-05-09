@@ -15,26 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RbbsDAO implements IrbbsDAO{
 
 	@Autowired
-	private static SqlSessionTemplate sqlMapper;
-
+	private static SqlSessionTemplate mybatis;
 	
+	
+	public static void setMybatis(SqlSessionTemplate mybatis) {
+		RbbsDAO.mybatis = mybatis;
+	}
+
+	public static SqlSessionTemplate getMybatis() {
+		return mybatis;
+	}
+
 	public Object read(Object bbsno) {
 		
 		
 
-		return sqlMapper.selectOne("bbs.read", bbsno);
+		return mybatis.selectOne("bbs.read", bbsno);
 	}
 
 	public List list(Map map) {
 
-		return sqlMapper.selectList("bbs.list", map);
+		return mybatis.selectList("bbs.list", map);
 	}
 
 	public boolean create(Object dto) {
 		boolean flag = false;
 
 
-		int cnt = sqlMapper.insert("bbs.create", dto);
+		int cnt = mybatis.insert("bbs.create", dto);
 		System.out.println(cnt);
 		if (cnt > 0)
 			flag = true;
@@ -46,7 +54,7 @@ public class RbbsDAO implements IrbbsDAO{
 		boolean flag = false;
 
 
-		int cnt = sqlMapper.insert("bbs.delete", rnum);
+		int cnt = mybatis.insert("bbs.delete", rnum);
 
 		if (cnt > 0)
 			flag = true;
@@ -57,7 +65,7 @@ public class RbbsDAO implements IrbbsDAO{
 	public boolean update(Object dto) {
 		boolean flag = false;
 
-		int cnt = sqlMapper.insert("bbs.update", dto);
+		int cnt = mybatis.insert("bbs.update", dto);
 
 		if (cnt > 0)
 			flag = true;
@@ -71,7 +79,7 @@ public class RbbsDAO implements IrbbsDAO{
 		
 		int total;
 
-		total = (Integer)sqlMapper.selectOne("bbs.total", map);
+		total = (Integer)mybatis.selectOne("bbs.total", map);
 	
 		return total;
 	}
@@ -80,7 +88,7 @@ public class RbbsDAO implements IrbbsDAO{
 		boolean flag = false;
 
 		
-		int cnt  = sqlMapper.update("bbs.upviewcount", rnum);
+		int cnt  = mybatis.update("bbs.upviewcount", rnum);
 		
 	
 		if(cnt>0) flag=true;
@@ -91,6 +99,11 @@ public class RbbsDAO implements IrbbsDAO{
 
 	public boolean createReply(RbbsDTO dto) {
 		boolean flag = false;
+		
+		
+		int cnt = mybatis.insert("bbs.createReply",dto);
+		
+		if(cnt>0) flag=true;
 		
 		return flag;
 	}

@@ -16,7 +16,18 @@ public class RbbsDTO {
 	private int grpno;
 	private int ansnum;
 	private int indent;
+	private int refnum;
 	private MultipartFile fnameMF;
+	
+	
+
+	public int getRefnum() {
+		return refnum;
+	}
+
+	public void setRefnum(int refnum) {
+		this.refnum = refnum;
+	}
 
 	public MultipartFile getFnameMF() {
 		return fnameMF;
