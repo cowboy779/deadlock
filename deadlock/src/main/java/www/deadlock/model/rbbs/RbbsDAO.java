@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import www.mybatis.MyAppSqlConfig;
-
 @Repository
 public class RbbsDAO {
 
