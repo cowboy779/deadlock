@@ -26,12 +26,11 @@ body {font-family: "Open Sans"}
 <!-- *********************************************** -->
 <body>
 <!-- *********************************************** -->
-<div class="w3-white">
-<div class="w3-center">
-<h2><span class="glyphicon glyphicon-th-list"></span>아이디 중복 확인</h2>
+<h2 align="center"><span class="glyphicon glyphicon-th-list"></span>아이디 중복 확인</h2>
 
 
-<FORM name='frm' method='POST' action='id_proc.jsp'>
+<FORM name='frm' method='POST' action='id_proc'>
+  <div align="center">
   <TABLE>
     <TR>
       <TD><input type="text" name="id" size="20" required></TD>
@@ -39,13 +38,10 @@ body {font-family: "Open Sans"}
   </TABLE>
   
  
-  
-  <p class="w3-center">
-    <button class="w3-button w3-red" >중복확인</button>
-  <button type="button" class="w3-button w3-black" onclick="window.close()">취소</button></p>
-</FORM>
+    <button>중복확인</button>
+  <button type="button" onclick="window.close()">취소</button>
 </div>
- </div>
+</FORM>
  
 <!-- *********************************************** -->
 </body>

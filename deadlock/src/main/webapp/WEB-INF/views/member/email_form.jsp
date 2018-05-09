@@ -27,8 +27,6 @@ body {font-family: "Open Sans"}
 <body>
 <!-- *********************************************** -->
  
-<div class="w3-white">
-<div class="w3-center">
 <h2><span class="glyphicon glyphicon-th-list"></span>이메일 중복 확인</h2>
  
 <FORM name='frm' method='POST' action='./email_proc.jsp'>
@@ -38,12 +36,9 @@ body {font-family: "Open Sans"}
     </TR>
   </TABLE>
   
- <p class="w3-center">
-    <button class="w3-button w3-red" >중복확인</button>
-  <button type="button" class="w3-button w3-black" onclick="window.close()">취소</button></p>
+    <button>중복확인</button>
+  <button type="button" onclick="window.close()">취소</button>
 </FORM>
- </div>
- </div>
  
 <!-- *********************************************** -->
 </body>

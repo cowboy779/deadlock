@@ -19,7 +19,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 <title>Insert title here</title>
-<link href="univers/main.3f6952e4.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/univers/main.3f6952e4.css" rel="stylesheet">
 
 </head>
 

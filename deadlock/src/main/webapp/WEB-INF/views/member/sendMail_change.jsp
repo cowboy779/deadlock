@@ -1,4 +1,4 @@
-<%@page import="member.SMTPAuthenticatior"%>
+<%@page import="www.deadlock.model.member.SMTPAuthenticatior"%>
 <%@page import="javax.mail.Transport"%>
 <%@page import="javax.mail.Message"%>
 <%@page import="javax.mail.Address"%>
@@ -59,7 +59,7 @@ try{
  %>
 <script>
 alert('인증코드가 발송되었습니다. \n메일을 확인해주세요');
-location.href='email_proc.jsp';
+location.href='email_proc';
 // opener.location.reload();
 self.close();
 </script>

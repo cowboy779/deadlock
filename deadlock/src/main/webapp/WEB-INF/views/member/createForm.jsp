@@ -48,51 +48,19 @@
         }).open();
     }
 </script> 
-<style type="text/css">
-TABLE{
-  margin: 0 auto;            /* 테이블 가운데 정렬 */
-  border-color: #AAAAAA;     /* 테이블 외곽선 색깔 */ 
-  border-width: 1px;         /* 테이블 외곽선 두께 */ 
-  border-style: solid;       /* 테이블 외곽선 스타일 */
-  border-collapse: collapse; /* 컬럼의 외곽선을 하나로 결합 */
-  font-size: 20px;
-  border-spacing:0px;
-  border-style:none;
-  padding:0px;
-}
-h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
 
-body {font-family: "Open Sans"}
-</style> 
-<%-- <link href="<%=root%>/css/style.css" rel="Stylesheet" type="text/css"> --%>
 <script type="text/javascript">
 function idCheck(id){
-	if(id==""){
-		alert("아이디를 입력해주세요");
-		document.frm.id.focus();
-	}else{
-		var url="id_proc.jsp";
-		url+="?id="+id;
+		var url="id_form";
 		
-		var wr = window.open(url,"새창이름","width=500,height=500");
+		var wr = window.open(url,"아이디 중복확인","width=500,height=500");
 		wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-	}
+	
 	
 }
-/* function emailCheck(email){
-	if(email==""){
-		alert("이메일을 입력해주세요");
-		document.frm.email.focus();
-	}else{
-		var url="email_proc.jsp";
-		url+="?email="+email;
-		
-		var wr = window.open(url,"새창이름","width=500, height=500");
-		wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-	}
-} */
+
 function emailCheck(email){
-	var url="email_form.jsp";
+	var url="email_form";
 	
 	var wr = window.open(url,"이메일 검증","width=500, height=500");
 	wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
@@ -149,8 +117,7 @@ function inputCheck(f){
 <!-- *********************************************** -->
 <body>
 <!-- *********************************************** -->
-       <div class="w3-white">
-        <div class="w3-container w3-padding w3-black w3-center">
+        <div align="center">
         회원가입<br>*표시는 반드시 작성하셔야 합니다.</DIV>
         
    
@@ -158,21 +125,21 @@ function inputCheck(f){
  <br>
 <FORM 	name='frm'
 		method='POST'
-		action='prcreateProc.jsp'
+		action='createProc'
 		enctype="multipart/form-data"
 		onsubmit="return inputCheck(this)">
 		
-  <TABLE>
+  <TABLE style="align-content: center; margin: auto; width: 60%">
     <tr>
     	<th><div style="margin:10px">회원사진<br></div></th>
-    	<td><input type='file' name='fname' accept=".jpg,.png,.gif">
+    	<td><input type='file' name='filenameMF' accept=".jpg,.png,.gif">
     	사진은 JPG, PNG, GIF 파일만 올려 주세요(본인사진)<br></td>
     </tr>
     <TR>
     <th><div style="margin:10px">*아이디<br></div></th>
       <TD>
-      <input type='text' name="id" size='20' placeholder="아이디(*필수)" value="">
-      <button style="font-size: 15px" type="button" class="w3-button w3-white w3-border" onclick="idCheck(document.frm.id.value)">중복 확인</button>
+      <input type='text' name="id" size='20' placeholder="아이디(*필수)" value="" readonly>
+      <button style="font-size: 15px" type="button" onclick="idCheck(document.frm.id.value)">중복 확인</button>
       </TD>
     </TR>
     <tr>
@@ -196,7 +163,7 @@ function inputCheck(f){
     <th><div style="margin:10px">*이메일<br></div></th>
     	<td>
     	<input type='email' name='email' size="20" placeholder="이메일(*필수)" readonly>
-    	<button style="font-size: 15px" type="button" class="w3-button w3-white w3-border" onclick="emailCheck(document.frm.email.value)">이메일 중복확인</button>
+    	<button style="font-size: 15px" type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복확인</button>
     	</td>
 
     	
@@ -204,7 +171,7 @@ function inputCheck(f){
     <tr>
     <th><div style="margin:10px">우편번호</div></th>
     	<td><input type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호">
-    	<button style="font-size: 15px" style="font-size: 18px" type="button" class="w3-button w3-white w3-border" onclick="sample6_execDaumPostcode()">주소검색</button>
+    	<button style="font-size: 15px" style="font-size: 18px" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>
     	</td>
     </tr>
     <tr>
@@ -235,15 +202,11 @@ function inputCheck(f){
     </tr>
    
   </TABLE>
-  <p class="w3-center">
-  <button class="w3-button w3-red"><b>회원가입  </b><span class="w3-tag w3-red"></span></button></p>
-    <!-- <input type='submit' value='회원가입'> -->
-    <!-- <input type="reset" value="다시작성"> -->
+  <div align="center">
+  <button>회원가입</button>
+  </div>
     
 </FORM>
- </div>
  
-<!-- *********************************************** -->
 </body>
-<!-- *********************************************** -->
 </html> 

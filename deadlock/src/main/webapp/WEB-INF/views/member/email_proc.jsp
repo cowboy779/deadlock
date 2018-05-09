@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
-<%-- <% --%>
+<%
 // 		boolean flag = dao.duplicateEmail(dto.getEmail());
 // 		String code = dao.emailcode();
-<%-- %> --%>
+%>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@ function emailCheck(){
 	//alert(param);
 	
 	$.post(
-		"email_proc_send.jsp",
+		"email_proc_send",
 		param,
 		function(data, textStatus){
 			//alert(textStatus);
@@ -53,7 +53,7 @@ function emailCheck(){
 }
 
 function sendMail(result){
-	var url = "sendMail.jsp";
+	var url = "sendMail";
 	url+="?from="+result.from;
 	url+="&to="+result.to;
 	url+="&subject="+result.subject;
@@ -125,7 +125,8 @@ function display_choose(){
  <div id="se"  style="display: none;">
 발송된 코드를 입력해주세요.
 <form id="checkEmail_form" action="sendMail.jsp" method="post">
-<input type="hidden" name="from" value="homanus@naver.com">
+<input type="hidden" name="from" value="deadlock7683@gmail.com">
+<!-- 여기서 코드값을 보내줘야 하므로, 컨트롤러에서 메소드를 호출하고, 데이터값을 리퀘스트 영역에 저장해준다. 일단은 여기까지 -->
 <%-- <input type="hidden" name="to" value="<%=dto.getEmail()%>"> --%>
 <input type="hidden" name="subject" value="메일 검증 코드">
 <%-- <input type="hidden" id="mail_code" name="content" value="코드 인증창에 아래의 코드를 입력해주세요.<br><%=code%>"> --%>
