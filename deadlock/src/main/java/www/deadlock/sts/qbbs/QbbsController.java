@@ -18,6 +18,13 @@ public class QbbsController {
 	private QbbsDAO qdao;
 	
 	
+	
+	@RequestMapping(value="/qbbs/update", method=RequestMethod.GET)
+	public String update() {
+		return "/qbbs/update";
+	}
+	
+	
 	@RequestMapping(value="/qbbs/create", method=RequestMethod.GET)
 	public String create() {
 		return "/qbbs/create";

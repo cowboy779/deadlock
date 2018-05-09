@@ -9,21 +9,27 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class QbbsDAO {
+public class QbbsDAO implements IQbbsDAO{
 	private static SqlSessionTemplate mybatis;
-
 	
+	
+	
+	public static void setMybatis(SqlSessionTemplate mybatis) {
+		QbbsDAO.mybatis = mybatis;
+	}
+
+
 	public void upcount(int qnum){
 		mybatis.update("qbbs.upcount",qnum);
 	}
 	
 
-	public QbbsDTO read(int qnum) {
+	public Object read(Object qnum) {
 		return mybatis.selectOne("qbbs.read", qnum);
 	}
 	
 	
-	public boolean create(QbbsDTO dto){
+	public boolean create(Object dto){
 		
 		boolean flag=false;
 		int cnt=mybatis.insert("qbbs.create", dto);
@@ -33,7 +39,7 @@ public class QbbsDAO {
 	}
 	
 	
-	public boolean update(QbbsDTO dto){
+	public boolean update(Object dto){
 		boolean flag=false;
 		int cnt=mybatis.update("qbbs.update", dto);
 		if(cnt>0) flag=true;
@@ -42,7 +48,7 @@ public class QbbsDAO {
 	}
 	
 	
-	public boolean delete(int qnum){
+	public boolean delete(Object qnum){
 		boolean flag=false;
 		int cnt=mybatis.delete("qbbs.delete", qnum);
 		if(cnt>0) flag=true;

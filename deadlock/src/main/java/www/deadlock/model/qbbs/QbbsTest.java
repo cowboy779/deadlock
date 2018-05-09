@@ -13,23 +13,23 @@ public class QbbsTest {
 		
 		QbbsDAO dao = new QbbsDAO();
 		 
-		//read(dao);
+		read(dao);
 		//create(dao);
 		//total(dao);
 		//update(dao);
 		//delete(dao);
 		//list(dao);
-		upcount(dao);
+		//upcount(dao);
 
 	}
 
 	
 	private static void upcount(QbbsDAO dao) {
-		QbbsDTO dto=dao.read(1);
+		QbbsDTO dto=(QbbsDTO) dao.read(1);
 		p("조회수 : "+dto.getQcount());
 		p("조회수 증가합니다.");
 		dao.upcount(1);
-		dto=dao.read(1);
+		dto=(QbbsDTO) dao.read(1);
 		p("변경된 조회수 : "+dto.getQcount());
 		
 	}
@@ -109,7 +109,7 @@ public class QbbsTest {
 	private static void read(QbbsDAO dao) {
 		int qnum = 1;
 		
-		QbbsDTO dto = dao.read(qnum);
+		QbbsDTO dto = (QbbsDTO) dao.read(qnum);
 		
 		p(dto);
 		

@@ -92,7 +92,7 @@ public class QrecoTest {
 	private static void read(QrecoDAO dao) {
 		int qrenum = 1;
 		
-		QrecoDTO dto = dao.read(qrenum);
+		QrecoDTO dto = (QrecoDTO) dao.read(qrenum);
 		
 		p(dto);
 		
