@@ -19,6 +19,8 @@ public class RbbsDAO implements IrbbsDAO{
 
 	
 	public Object read(Object bbsno) {
+		
+		
 
 		return sqlMapper.selectOne("bbs.read", bbsno);
 	}
