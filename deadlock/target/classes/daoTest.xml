@@ -38,5 +38,43 @@
     class="www.deadlock.model.member.MemberDAO"
     p:mybatis-ref="sqlSession"/>
     
+    <bean id="cdao"
+    class="www.deadlock.model.cbbs.CbbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="ndao"
+    class="www.deadlock.model.nbbs.NBbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="pdao"
+    class="www.deadlock.model.pbbs.PBbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="qdao"
+    class="www.deadlock.model.qbbs.QbbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="qrdao"
+    class="www.deadlock.model.qbbs.QrecoDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="rdao"
+    class="www.deadlock.model.rbbs.RbbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="Replydao"
+    class="www.deadlock.model.ybbs.ReplyDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="ydao"
+    class="www.deadlock.model.ybbs.YBbsDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    <bean id="yrdao"
+    class="www.deadlock.model.ybbs.YrecoDAO"
+    p:mybatis-ref="sqlSession"/>
+    
+    
+    
 		
 </beans>

@@ -1,5 +1,6 @@
 package www.deadlock.model.member;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -118,54 +119,75 @@ public class MemberDAOTest {
 		assertTrue(dao.updateGrade_V(map));
 	}
 
-	@Test
-	public void testRead() {
-		fail("Not yet implemented");
+	@Test @Ignore
+	public void testRead() throws Exception {
+		MemberDTO dto = dao.read("test");
+		assertNotNull(dto);
 	}
 
 	@Test @Ignore
-	public void testDelete() {
-		fail("Not yet implemented");
+	public void testDelete() throws Exception {
+		String id = "123";
+		assertTrue(dao.delete(id));
 	}
 
 	@Test @Ignore
-	public void testFind_Id() {
-		fail("Not yet implemented");
+	public void testFind_Id() throws Exception {
+		String email = "123@123";
+		assertEquals(dao.Find_Id(email), "test");
 	}
 
 	@Test @Ignore
-	public void testList() {
-		fail("Not yet implemented");
+	public void testList() throws Exception {
+		Map map = new HashMap();
+		map.put("sno", 1);
+		map.put("eno", 5);
+		map.put("col", "");
+		map.put("word", "");
+		assertNotNull(dao.list(map));
 	}
 
 	@Test @Ignore
-	public void testLoginCheck() {
-		fail("Not yet implemented");
+	public void testLoginCheck() throws Exception{
+		Map map = new HashMap();
+		map.put("id", "1444");
+		map.put("passwd", "1234");
+		assertEquals(dao.loginCheck(map),1);
+		}
+
+	@Test @Ignore
+	public void testTotal() throws Exception{
+		Map map = new HashMap();
+		map.put("col", "");
+		map.put("word", "");
+		
+		assertEquals(dao.total(map),6);
 	}
 
 	@Test @Ignore
-	public void testTotal() {
-		fail("Not yet implemented");
+	public void testDuplicateId() throws Exception {
+		String id = "nomal";
+		assertTrue(dao.duplicateId(id));
 	}
 
 	@Test @Ignore
-	public void testDuplicateId() {
-		fail("Not yet implemented");
+	public void testDuplicateEmail() throws Exception {
+		String email = "123@123";
+		assertTrue(dao.duplicateEmail(email));
 	}
 
 	@Test @Ignore
-	public void testDuplicateEmail() {
-		fail("Not yet implemented");
+	public void testGetFname() throws Exception {
+		String id = "nomal";
+		assertEquals(dao.getFname(id),"feaf.jpg");
 	}
 
 	@Test @Ignore
-	public void testGetFname() {
-		fail("Not yet implemented");
-	}
-
-	@Test @Ignore
-	public void testCheckPW() {
-		fail("Not yet implemented");
+	public void testCheckPW() throws Exception {
+		Map map = new HashMap();
+		map.put("id", "1444");
+		map.put("passwd", "1234");
+		assertTrue(dao.CheckPW(map));
 	}
 
 }
