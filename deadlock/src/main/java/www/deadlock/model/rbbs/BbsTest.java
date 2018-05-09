@@ -1,4 +1,4 @@
-package www.dao;
+package www.deadlock.model.rbbs;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,7 +9,6 @@ import java.util.Map;
 public class BbsTest {
 
 	public static void main(String[] args) {
-		
 		
 		RbbsDAO dao = new RbbsDAO();
 		

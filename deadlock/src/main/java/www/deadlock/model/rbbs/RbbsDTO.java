@@ -1,4 +1,6 @@
-package www.dao;
+package www.deadlock.model.rbbs;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class RbbsDTO {
 	
@@ -14,6 +16,15 @@ public class RbbsDTO {
 	private int grpno;
 	private int ansnum;
 	private int indent;
+	private MultipartFile fnameMF;
+
+	public MultipartFile getFnameMF() {
+		return fnameMF;
+	}
+
+	public void setFnameMF(MultipartFile fnameMF) {
+		this.fnameMF = fnameMF;
+	}
 
 	public int getRnum() {
 		return rnum;
