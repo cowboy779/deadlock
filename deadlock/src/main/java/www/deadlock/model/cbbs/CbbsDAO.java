@@ -3,55 +3,32 @@ package www.deadlock.model.cbbs;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import www.mybatis.MyAppSqlConfig;
-
-
+import org.mybatis.spring.SqlSessionTemplate;
 
 
 public class CbbsDAO {
 	
-private static SqlSessionFactory sqlMapper;
-	
-	static{
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
-	}
-	
-	
-	
-	
-	
+	SqlSessionTemplate mybatis;
 	
 	
    public CbbsDTO read(int cnum) {
-		return sqlMapper.openSession().selectOne("cbbs.read", cnum);
+		return mybatis.selectOne("cbbs.read", cnum);
 	}
    
-   
    public boolean create(CbbsDTO dto) {
-	   SqlSession session=sqlMapper.openSession();
-	   
 	   boolean flag=false;
 	   
-	   int cnt=session.insert("cbbs.create",dto);
+	   int cnt=mybatis.insert("cbbs.create",dto);
 	   
 	   if(cnt>0) flag=true;
-	   
-	   session.commit();
-	   session.close();
 	   
 	   return flag;
    }
    
    public boolean update(CbbsDTO dto) {
 	   boolean flag=false;
-	   SqlSession session=sqlMapper.openSession();
 	   
-	   int cnt=session.update("cbbs.update", dto);
-	   
-	   session.commit();
-	   session.close();
+	   int cnt=mybatis.update("cbbs.update", dto);
 	   
 	   if(cnt>0) flag=true;
 	   
@@ -60,44 +37,28 @@ private static SqlSessionFactory sqlMapper;
    
    public boolean delete(int cnum) {
 	   boolean flag=false;
-	   SqlSession session=sqlMapper.openSession();
-	   int cnt=session.delete("cbbs.delete", cnum);
+	   
+	   int cnt=mybatis.delete("cbbs.delete", cnum);
 	   
 	   if(cnt>0) flag=true;
-	   
-	   session.commit();
-	   session.close();
 	   
 	   return flag;
    }
 
    public List list(Map map) {
-	   SqlSession session=sqlMapper.openSession();
-	   List list=session.selectList("cbbs.list", map);
-	  
-	   session.commit();
-	   session.close();
-	   
+	   List list=mybatis.selectList("cbbs.list", map);
 	
 	return list;
-}
+   }
 
    public int total(Map map) {
-	   SqlSession session=sqlMapper.openSession();
-	   int total=session.selectOne("cbbs.total", map);
-	   
-	   session.commit();
-	   session.close();
+	   int total=mybatis.selectOne("cbbs.total", map);
 	   
 	return total;
-}
+   }
 
    public void upccount(int cnum) {
-	   SqlSession session=sqlMapper.openSession();
-	   session.update("cbbs.upccount", cnum);
-	   
-	   session.commit();
-	   session.close();
+	   mybatis.update("cbbs.upccount", cnum);
 	
    }
    
