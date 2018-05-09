@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>문의 생성</title>
+
+<script type="text/javascript">
+	function impot(aa) {
+		var create = document.getElementById("impo");
+		if(aa==3){
+/* 		create.style.visibility = "visible";
+ */		
+ 		create.setAttribute('style', 'visibility:hidden');
+		}
+		else{
+		//create.style.visibilty='hidden';
+		create.setAttribute('style','visibility:visible')
+		}
+	}
+
+</script>
+</head>
+<body>
+	<form action="./create">
+		<table width="699" border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>제목</td>
+				<td><input name="title" type="text"></td>
+			</tr>
+
+			<tr >
+				<td>분류</td>
+				<td><select onchange="impot(this.value)">
+						<option value="1">문의</option>
+						<option value="2">건의</option>
+						<option value="3">질문</option>
+				</select>
+				<div id="impo" style="visibility: visible;">
+				중요표시
+				<input name="id" type="checkbox" onclick="asdf()">
+				</div>
+				</td>
+			</tr>
+			<tr>
+			
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea cols="50" rows="10"></textarea></td>
+			</tr>
+			<tr>
+			<td>
+			파일
+			</td>
+			<td>
+			<input type="file">
+			</td>
+			</tr>
+
+		</table>
+		<div id="button">
+		<button>뒤로가기</button>
+		<button type="reset">다시쓰기</button>
+		<button>등록</button>
+		</div>
+
+
+	</form>
+
+
+</body>
+</html>

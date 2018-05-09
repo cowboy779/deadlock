@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>jQuery Mobile</title>
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div class="title">
+<h2>게시글 작성</h2>
+</div>
+<FORM name='frm'
+ 	  method='POST' 
+ 	  action='./create'
+  	  onsubmit="return incheck(this)"
+  	  enctype="multipart/form-data">
+<TABLE>
+<tr>
+<th>사진</th>
+ <TD><input type="file" name="filenameMF"></TD>
+</tr>
+
+<tr>
+<th>제목</th>
+<td><input type="text" name="title"></td>
+</tr>
+
+<tr>
+<th>내용</th>
+<td><input type="text" name="content"></td>
+</tr>
+
+<tr>
+<th>비밀번호</th>
+<td><input type="text" name="passwd"></td>
+</tr>
+
+
+<tr>
+<th>내용</th>
+<td><input type="text" name="content"></td>
+</tr>
+
+
+</TABLE>
+
+  <DIV class='bottom'>
+    <input type='submit' value='수정하기'>
+    <input type='button' value='취소' onclick="history.back()">
+  </DIV>
+
+</FORM>
+
+</body>
+</html>

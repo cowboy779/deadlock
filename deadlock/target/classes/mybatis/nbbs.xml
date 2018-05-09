@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nbbs">
+    
+    <select id="read" resultType="NbbsDTO" parameterType="int">
+    	select * from nbbs
+    	where nnum = #{bbsno} 
+    </select>
+    
+	<insert id="create" parameterType="NbbsDTO">
+		insert into nbbs(title,content,ndate,noname)
+		values (#{title},#{content},now(),#{noname});
+	</insert>
+	
+	<select id="list" parameterType="Map" resultType="NbbsDTO">
+		select c.*
+		from(
+			select @RNUM := @RNUM + 1 AS r, a.*
+			from(
+				  ( SELECT *  FROM nbbs  ) a, ( SELECT @RNUM := 0 ) b
+			)
+		)c
+		<![CDATA[ where r >= #{sno} and r <=#{eno}; ]]> 
+	</select>
+	
+	<insert id="update" parameterType="NbbsDTO">
+		update nbbs set title=#{title},content=#{content},corname=#{corname},cordate=now() 
+		where nnum=#{nnum};
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from nbbs where nnum = #{nnum}
+	</delete>
+	
+</mapper>
+

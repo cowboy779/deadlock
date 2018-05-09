@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+TH{
+	width:10%;
+	font-size: 12px;
+	text-align: left;
+
+}
+TD{
+	width : 100%;
+	height:100%;
+	text-align: center;
+	padding-bottom: 5px;
+	font-size: 12px;
+	
+}
+Table{
+	font-size : 14px;
+	text-align: center;
+	width: 40%;	
+	margin: auto;
+	
+}
+
+caption{
+	font-size : 20px;
+	text-align: left;
+	padding-top: 50px;
+	padding-bottom: 5px;
+}
+.rel{
+	position: relative;	
+	text-align: center;
+	width: 45%;
+	margin: auto;
+	padding-top: 50px;
+	/* border: 1px solid; */
+}
+.ab{
+	position: absolute;
+	right: 10px;
+	bottom : -25px;
+}
+
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+	<div class="rel">
+	<table>
+		<caption>공지사항 등록</caption>
+		<tr>
+		<th>
+		<select onchange="sel(this.selectedIndex)  ">
+			<option>이벤트</option>
+			<option>점검</option>
+			<option>알림</option>
+		</select>
+		</th>
+		</tr>
+		<tr>
+		<td><input type="text" name="title" placeholder="제목을 입력하세요" size="102" value="" ></td>
+		</tr>
+
+		<tr>
+		<td><textarea cols="100" rows="30" name="content" placeholder="공지사항을 입력하세요."></textarea></td>
+		</tr>
+
+	</table>
+	
+	<table style="border: 1px solid #ededef; width: 97%;">
+		<tr style="text-align: left;">
+		<th  style="background-color: #ededef; width: 20%; text-align:left;">알림</th>
+		<td   style="text-align: left; font-size: 12px;">
+		<input type="radio" name="alert" checked="checked"/>알림 없음
+		<input type="radio" name="alert"/>메일 알림
+		</td>
+		</tr>
+	
+	</table>
+	
+	<div class="ab">
+	<button onclick="javascript:location.href='./notice.html'">등록</button>
+	</div>
+</div>
+</body>
+</html>

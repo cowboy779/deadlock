@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="yreco">
+  
+  <insert id="create" parameterType="YrecoDTO">
+  
+   <selectKey keyProperty="yrenum" resultType="int" order="BEFORE">
+	select nvl(max(yrenum),0)+1 as yrenum from yreco
+	</selectKey>
+	
+	insert into yreco(yrenum,content,yredate, id, ynum)
+	values(#{yrenum},#{content},sysdate,#{id},#{ynum})
+   </insert>
+  
+  <select id="read" resultType="YrecoDTO" parameterType="int">
+  select yrenum, content, yredate, id, ynum
+	from yreco                                                          
+	where yrenum = #{yrenum}
+  </select>
+   
+   <update id="update" parameterType="YrecoDTO">
+    update yreco
+	set content = #{content}
+	where yrenum = #{yrenum}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+   delete from yreco
+   where yrenum = #{yrenum} 
+   </delete>
+   
+   <select id="list" parameterType="Map" resultType="YrecoDTO">
+   select yrenum, content, to_char(yredate,'yyyy-mm-dd') yredate, id,ynum, r
+	FROM(
+    select yrenum, content, yredate, ynum, id,rownum r
+    FROM(
+        select yrenum, content, yredate, id,ynum
+            from yreco
+            order by yrenum DESC
+                )
+            )
+            <![CDATA[
+            WHERE r >= 1 and r <= 5
+   			]]>
+   </select>
+   
+   <select id="total" parameterType="Map" resultType="int">
+   select count(*) from yreco
+	<where>
+				<choose>
+						<when test="col=='id'">
+						id like '%' || #{word} || '%'
+						</when>
+						<when test="col=='content'">
+						content like '%' || #{word} || '%'
+						</when>
+				</choose>
+	</where>   
+</select>
+   
+</mapper>

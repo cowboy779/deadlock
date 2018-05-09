@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qreco">
+    
+    <insert id="create" parameterType="qrecoDTO">
+    	insert into qreco(qrenum, content, qredate,id, qnum)
+		values((select nvl(max(qrenum),0)+1 from qreco),#{content}, sysdate,#{id}, #{qnum})
+    </insert>
+    
+    <select id="read" resultType="qrecoDTO" parameterType="int">
+    	select * from qreco
+    	where qrenum = #{qrenum}
+    </select>
+     
+    <update id="update" parameterType="qrecoDTO">
+    	update qreco
+		set     content=#{content}
+		where 	qrenum=#{qrenum}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+    	delete from qreco
+		where qrenum=#{qrenum}
+    </delete>
+    
+    <select id="list" resultType="qrecoDTO" parameterType="Map">
+    	select qrenum, content, to_char(qredate,'yyyy-mm-dd') qredate,id, qnum, r
+		from(
+		    select qrenum, content, qredate, id, qnum, rownum r
+		    from(
+		        select qrenum, content, qredate, id, qnum 
+		        from qreco
+		        order by qrenum desc
+		    )
+		)
+		<![CDATA[where r>=#{sno} and r<=#{eno}]]>
+    </select>
+    
+    <select id="total" parameterType="Map" resultType="int">
+    	select count(*) from qreco
+    </select>
+    
+</mapper>
+
+
+ 

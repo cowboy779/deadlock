@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+    
+    <select id="read" resultType="RbbsDTO" parameterType="int">
+    	select * from rbbs
+    	where rnum = #{bbsno}
+    </select>
+    
+    <select id="list" resultType="RbbsDTO" parameterType="map">
+   	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum, r
+	FROM(
+	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum, rownum r
+	FROM(
+	select id,rnum,title,rdate,fname,imp,grpno,indent,ansnum from rbbs order by rnum desc, ansnum
+		<choose>
+			<when test="col=='wname'">
+			wname like '%' || #{word}||'%'
+			</when>
+			<when test="col=='title'">
+			title like '%' || #{title}||'%'
+			</when>
+			<when test="col=='content'">
+			content like '%' || #{content} || '%'
+			</when>
+		</choose>
+	))
+	
+	<![CDATA[
+	where r>= #{sno} and r<=#{eno}
+	]]>
+    
+    </select>
+    
+    <insert id="create"  parameterType="rbbsDTO">
+    
+    insert into rbbs(rnum, id, title, content, rdate, fname, rcount,imp)
+	values((SELECT NVL(MAX(rnum),0) + 1 as rnum FROM rbbs), #{id}, 
+	#{title}, #{content}, sysdate, #{fname}, #{rcount},#{imp})
+    </insert>
+    
+    <delete id="delete" parameterType="int">
+    delete from rbbs where rnum=#{rnum}
+    </delete>
+    
+    <update id="update"  parameterType="rbbsDTO">
+    update rbbs set title=#{title},
+                content=#{content},
+                fname=#{fname},
+                rdate=sysdate
+                where rnum=#{rnum}
+    </update>
+    
+    <select id="total" parameterType="map">
+    select count(*) as cnt from rbbs
+    	<where>
+		<choose>
+			<when test="col=='wname'">
+			wname like '%' || #{word}||'%'
+			</when>
+			<when test="col=='title'">
+			title like '%' || #{title}||'%'
+			</when>
+			<when test="col=='content'">
+			content like '%' || #{content} || '%'
+			</when>
+		</choose>
+		</where>
+    </select>
+    
+	<update id="upviewcount" parameterType="int">
+	update rbbs set count = count+1
+					where rnum = #{rnum}
+	</update>
+    
+    <select id="idcheck" parameterType="Map" resultType="int">
+    	SELECT COUNT(rnum) as cnt       
+		FROM rbbs                           
+		WHERE rnum= #{rnum} AND id = #{id}   
+    </select>
+     
+</mapper>
+
