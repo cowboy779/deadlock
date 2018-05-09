@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Repository
-public class RbbsDAO {
+public class RbbsDAO implements IrbbsDAO{
 
 	@Autowired
 	private static SqlSessionTemplate sqlMapper;
 
 	
-	public RbbsDTO read(int bbsno) {
+	public Object read(Object bbsno) {
 
 		return sqlMapper.selectOne("bbs.read", bbsno);
 	}
@@ -28,7 +28,7 @@ public class RbbsDAO {
 		return sqlMapper.selectList("bbs.list", map);
 	}
 
-	public boolean create(RbbsDTO dto) {
+	public boolean create(Object dto) {
 		boolean flag = false;
 
 
@@ -40,7 +40,7 @@ public class RbbsDAO {
 		return flag;
 	}
 
-	public boolean delete(int rnum) {
+	public boolean delete(Object rnum) {
 		boolean flag = false;
 
 
@@ -52,7 +52,7 @@ public class RbbsDAO {
 		return flag;
 	}
 
-	public boolean update(RbbsDTO dto) {
+	public boolean update(Object dto) {
 		boolean flag = false;
 
 		int cnt = sqlMapper.insert("bbs.update", dto);
@@ -85,26 +85,13 @@ public class RbbsDAO {
 		
 		return flag;
 	}
-	
-	public boolean passCheck(Map map){
+
+
+	public boolean createReply(RbbsDTO dto) {
 		boolean flag = false;
-//		Map map = new HashMap();
-//		map.put("rnum", rnum);
-//		map.put("id", id);
-		
-		// map에 id,rnum 포함
-		
-	
-		
-		int cnt  = sqlMapper.selectOne("bbs.idcheck", map);
-		
-	
-		if(cnt>0)flag=true;
-		
 		
 		return flag;
 	}
-	
 
 	
 }

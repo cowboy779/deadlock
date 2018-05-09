@@ -88,7 +88,7 @@ public class BbsTest {
 	private static void read(RbbsDAO dao) {
 		int rnum = 1;
 		
-		RbbsDTO dto = dao.read(rnum);
+		RbbsDTO dto = (RbbsDTO)dao.read(rnum);
 		
 		p(dto);
 		
