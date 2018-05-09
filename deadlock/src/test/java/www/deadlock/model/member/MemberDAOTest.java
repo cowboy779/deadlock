@@ -182,7 +182,7 @@ public class MemberDAOTest {
 		assertEquals(dao.getFname(id),"feaf.jpg");
 	}
 
-	@Test @Ignore
+	@Test
 	public void testCheckPW() throws Exception {
 		Map map = new HashMap();
 		map.put("id", "1444");
