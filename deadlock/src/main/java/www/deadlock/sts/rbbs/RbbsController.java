@@ -29,13 +29,13 @@ public class RbbsController {
 		return "/bbs/list";
 	}
 	
-	@RequestMapping(value = "/bbs/createForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/rbbs/create", method = RequestMethod.GET)
 	public String create() {
 
 		return "/bbs/create";
 	}
 	
-	@RequestMapping(value = "/bbs/createForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/rbbs/create", method = RequestMethod.POST)
 	public String create(RbbsDTO dto, HttpServletRequest request) {
 		
 		String basePath = request.getRealPath("/storage_b");
