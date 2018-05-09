@@ -4,17 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import www.DAOSTDInter;
-import www.mybatis.MyAppSqlConfig;
 
-public class MemberDAO implements DAOSTDInter{
+@Repository
+public class MemberDAO{
 	
-	private static SqlSessionFactory sqlMapper;
+	@Autowired
+	private SqlSessionTemplate mybatis;
 	
-	static {
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
 	
 	public String emailcode() throws Exception {
@@ -30,135 +32,96 @@ public class MemberDAO implements DAOSTDInter{
 	}
 	
 	public boolean create(Object dto) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.insert("member.create",dto); 
+		int cnt = mybatis.insert("member.create",dto); 
 		if(cnt>0) {
 			flag = true;
 		}
-		
-		session.commit();
-		session.close();
 		
 		return flag;
 	}
 	
 	public boolean updatePasswd(MemberDTO dto)  throws Exception{
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.update("member.updatePasswd",dto);
+		int cnt = mybatis.update("member.updatePasswd",dto);
 		if(cnt > 0) {
 			flag = true;
 		}
-		
-		session.commit();
-		session.close();
 		
 		return flag;
 	}
 	
 	public boolean update(Object dto) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.update("member.update",dto);
+		int cnt = mybatis.update("member.update",dto);
 		if(cnt>0) {
 			flag = true;
 		}
-		
-		session.commit();
-		session.close();
 		
 		return flag;
 	}
 	
 	public boolean updateGrade_S(Map map) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.update("member.updateGrade_S",map);
+		int cnt = mybatis.update("member.updateGrade_S",map);
 		
 		if(cnt>0) {
 			flag = true;
 		}
 		
-		session.commit();
-		session.close();
-		
 		return flag;
 	}
 	
 	public boolean updateGrade_V(Map map) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.update("member.updateGrade_V",map);
+		int cnt = mybatis.update("member.updateGrade_V",map);
 		
 		if(cnt > 0) {
 			flag = true;
 		}
-		session.commit();
-		session.close();
-		
 		return flag;
 	}
 	
 	public MemberDTO read(Object id) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
-		MemberDTO dto = session.selectOne("member.read",id);
+		MemberDTO dto = mybatis.selectOne("member.read",id);
 		
 		return dto;
 	}
 	
 	public boolean delete(Object id) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.delete("member.delete",id);
+		int cnt = mybatis.delete("member.delete",id);
 		
 		if(cnt > 0) {
 			flag = true;
 		}
-		
-		session.commit();
-		session.close();
-		
 		return flag;
 	}
 	
 	public String Find_Id(String email) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		String id = "";
 		
-		id = session.selectOne("member.Fine_Id",email);
+		id = mybatis.selectOne("member.Fine_Id",email);
 		
 		return id;
 	}
 	
 	public List<MemberDTO> list(Map map) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
-		List<MemberDTO> list = session.selectList("member.list",map);
+		List<MemberDTO> list = mybatis.selectList("member.list",map);
 		
 		return list;
 	}
 	
 	public boolean loginCheck(Map map) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.selectOne("member.loginCheck",map);
+		int cnt = mybatis.selectOne("member.loginCheck",map);
 		
 		if(cnt>0) {
 			flag = true;
@@ -168,19 +131,15 @@ public class MemberDAO implements DAOSTDInter{
 	}
 	
 	public int total(Map map) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
-		int total = session.selectOne("member.total",map);
+		int total = mybatis.selectOne("member.total",map);
 		
 		return total;
 	}
 	
 	public boolean duplicateId(String id) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag = false;
 		
-		int cnt = session.selectOne("member.duplicateId",id);
+		int cnt = mybatis.selectOne("member.duplicateId",id);
 		if(cnt>0) {
 			flag = true;
 		}
@@ -188,11 +147,9 @@ public class MemberDAO implements DAOSTDInter{
 	}
 	
 	public boolean duplicateEmail(String email) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		boolean flag= false;
 		
-		int cnt = session.selectOne("member.duplicateEmail",email);
+		int cnt = mybatis.selectOne("member.duplicateEmail",email);
 		if(cnt>0) {
 			flag = true;
 		}
@@ -200,11 +157,9 @@ public class MemberDAO implements DAOSTDInter{
 	}
 	
 	public String getFname(String id) throws Exception {
-		SqlSession session = sqlMapper.openSession();
-		
 		String fname = "";
 		
-		fname = session.selectOne("member.getFname",id);
+		fname = mybatis.selectOne("member.getFname",id);
 		
 		return fname;
 	}
@@ -212,9 +167,7 @@ public class MemberDAO implements DAOSTDInter{
 	public boolean CheckPW(Map map) throws Exception {
 		boolean flag = false;
 		
-		SqlSession session = sqlMapper.openSession();
-		
-		int cnt = session.selectOne("member.CheckPW",map);
+		int cnt = mybatis.selectOne("member.CheckPW",map);
 		if(cnt>0) {
 			flag = true;
 		}

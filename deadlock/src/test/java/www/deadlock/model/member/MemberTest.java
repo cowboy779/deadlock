@@ -1,7 +1,7 @@
 package www.deadlock.model.member;
 
+
 public class MemberTest {
-	
 	
 
 	public static void main(String[] args) {

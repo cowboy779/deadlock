@@ -1,5 +1,8 @@
 package www.deadlock.sts.member;
 
-public class MemberController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class MemberController {
+	
 }
