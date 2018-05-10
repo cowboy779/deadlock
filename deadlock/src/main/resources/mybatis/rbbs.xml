@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bbs">
+<mapper namespace="rbbs">
     
     <select id="read" resultType="RbbsDTO" parameterType="int">
     	select * from rbbs
@@ -10,14 +10,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="list" resultType="RbbsDTO" parameterType="map">
-   	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum, r
+   	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum,refnum, r
 	FROM(
-	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum, rownum r
+	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum,refnum, rownum r
 	FROM(
-	select id,rnum,title,rdate,fname,imp,grpno,indent,ansnum from rbbs order by rnum desc, ansnum
+	select id,rnum,title,rdate,fname,imp,grpno,indent,ansnum,refnum from rbbs order by rnum desc, ansnum
+	<where>
 		<choose>
-			<when test="col=='wname'">
-			wname like '%' || #{word}||'%'
+			<when test="col=='id'">
+			id like '%' || #{word}||'%'
 			</when>
 			<when test="col=='title'">
 			title like '%' || #{title}||'%'
@@ -26,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			content like '%' || #{content} || '%'
 			</when>
 		</choose>
+	</where>
 	))
 	
 	<![CDATA[

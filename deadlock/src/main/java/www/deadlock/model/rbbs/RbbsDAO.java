@@ -30,19 +30,21 @@ public class RbbsDAO implements IrbbsDAO{
 		
 		
 
-		return mybatis.selectOne("bbs.read", bbsno);
+		return mybatis.selectOne("rbbs.read", bbsno);
 	}
 
 	public List list(Map map) {
+		
+		List list =  mybatis.selectList("rbbs.list", map);
 
-		return mybatis.selectList("bbs.list", map);
+		return list;
 	}
 
 	public boolean create(Object dto) {
 		boolean flag = false;
 
 
-		int cnt = mybatis.insert("bbs.create", dto);
+		int cnt = mybatis.insert("rbbs.create", dto);
 		System.out.println(cnt);
 		if (cnt > 0)
 			flag = true;
@@ -54,7 +56,7 @@ public class RbbsDAO implements IrbbsDAO{
 		boolean flag = false;
 
 
-		int cnt = mybatis.insert("bbs.delete", rnum);
+		int cnt = mybatis.insert("rbbs.delete", rnum);
 
 		if (cnt > 0)
 			flag = true;
@@ -65,7 +67,7 @@ public class RbbsDAO implements IrbbsDAO{
 	public boolean update(Object dto) {
 		boolean flag = false;
 
-		int cnt = mybatis.insert("bbs.update", dto);
+		int cnt = mybatis.insert("rbbs.update", dto);
 
 		if (cnt > 0)
 			flag = true;
@@ -79,7 +81,7 @@ public class RbbsDAO implements IrbbsDAO{
 		
 		int total;
 
-		total = (Integer)mybatis.selectOne("bbs.total", map);
+		total = (Integer)mybatis.selectOne("rbbs.total", map);
 	
 		return total;
 	}
@@ -88,7 +90,7 @@ public class RbbsDAO implements IrbbsDAO{
 		boolean flag = false;
 
 		
-		int cnt  = mybatis.update("bbs.upviewcount", rnum);
+		int cnt  = mybatis.update("rbbs.upviewcount", rnum);
 		
 	
 		if(cnt>0) flag=true;
@@ -101,7 +103,7 @@ public class RbbsDAO implements IrbbsDAO{
 		boolean flag = false;
 		
 		
-		int cnt = mybatis.insert("bbs.createReply",dto);
+		int cnt = mybatis.insert("rbbs.createReply",dto);
 		
 		if(cnt>0) flag=true;
 		

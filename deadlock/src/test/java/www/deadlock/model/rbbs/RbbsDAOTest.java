@@ -59,7 +59,7 @@ public class RbbsDAOTest {
 		map.put("sno", 1);
 		map.put("eno", 5);
 		List<RbbsDTO> list = dao.list(map);
-		assertEquals(list.size(),1);
+		assertEquals(list.size(),5);
 	}
 
 	@Test 
