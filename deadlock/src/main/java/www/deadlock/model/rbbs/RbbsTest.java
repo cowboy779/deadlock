@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class BbsTest {
+public class RbbsTest {
 
 	public static void main(String[] args) {
 		
