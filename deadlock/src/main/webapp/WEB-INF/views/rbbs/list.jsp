@@ -18,12 +18,12 @@
 <h2 class="main"><span class="glyphicon glyphicon-th-list"></span>MongchongE List</h2>
 
  <div class="search">
- <form action="${root }/bbs/list" method = "post">
+ <form action="${root }/rbbs/list" method = "post">
  <select name="col">
- 	<option value="wname"
+ 	<option value="id"
  	
- 	<c:if test="${col=='wname' }">selected</c:if>
- 	>이름</option>
+ 	<c:if test="${col=='id' }">selected</c:if>
+ 	>ID</option>
  	<option value="title"
  	<c:if test="${col=='title' }">selected</c:if>
  	>제목</option>
@@ -64,8 +64,8 @@
 <c:forEach var="dto" items="${list }">
   <tbody>
     <tr>
-    <td>${dto.bbsno }</td>
-    <td>${dto.wname }</td>
+    <td>${dto.rnum }</td>
+    <td>${dto.id }</td>
     <td>
 <c:if test="${dto.indent>0 }">
 <c:forEach begin="1" end="${dto.indent }">
@@ -75,8 +75,8 @@
 
 </c:if>
 
-<a href="javascript:read('${dto.bbsno }')">   ${dto.title }   </a>
-<c:if test="${util:newimg(dto.wdate) }">
+<a href="javascript:read('${dto.rnum }')">   ${dto.title }   </a>
+<c:if test="${util:newimg(dto.rdate) }">
 		<img src="${root }/images/new.gif">
 </c:if>
 <c:set var="rcount" value="${util:rcount(dto.bbsno,rdao) }"/>
@@ -84,11 +84,11 @@
 <span style="color:blue">[${rcount }]</span>
 </c:if>
     </td>
-    <td>${dto.wdate }</td>
-    <td>${dto.viewcnt }</td>
+    <td>${dto.rdate }</td>
+    <td>${dto.rcount}</td>
     <td>
-<c:if test="${not empty dto.filename }">
-<a href="javascript:fileDown('${dto.filename }')">${dto.filename }</a>
+<c:if test="${not empty dto.fname }">
+<a href="javascript:fileDown('${dto.fname }')">${dto.fname }</a>
 </c:if>
     
 	</td>
