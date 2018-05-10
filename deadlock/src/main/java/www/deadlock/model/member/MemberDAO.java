@@ -3,7 +3,6 @@ package www.deadlock.model.member;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -173,6 +172,12 @@ public class MemberDAO implements IMemberDAO{
 		}
 		
 		return flag;
+	}
+
+	@Override
+	public String getGrade(String id) throws Exception {
+		
+		return mybatis.selectOne("member.getGrade",id);
 	}
 
 

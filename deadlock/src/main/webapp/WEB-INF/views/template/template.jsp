@@ -9,11 +9,6 @@
 </head>
 <body class="minimal">
 
-<%-- <jsp:include page="top.jsp" flush="false"></jsp:include> --%>
-<!-- <div style="padding-top: 50px"> -->
-<%-- <jsp:include page="../home.jsp" ></jsp:include> --%>
-<!-- </div> -->
-
 <tiles:insertAttribute name="header"/>
 <div style="padding-top: 100px">
 <tiles:insertAttribute name="body"/>

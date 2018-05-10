@@ -21,7 +21,7 @@
         <put-attribute name="title" value="회원목록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
     </definition>   
-    <definition name="/member/login" extends="main"> 
+    <definition name="/member/loginForm" extends="main"> 
         <put-attribute name="title" value="로그인" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" /> 
     </definition>
@@ -29,7 +29,7 @@
         <put-attribute name="title" value="나의 정보" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/read.jsp" /> 
     </definition>
-    <definition name="/member/updateInfo" extends="main"> 
+    <definition name="/member/updateInfoForm" extends="main"> 
         <put-attribute name="title" value="정보 수정" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/updateInfoForm.jsp" /> 
     </definition>

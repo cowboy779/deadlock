@@ -27,10 +27,10 @@ body {font-family: "Open Sans"}
 <body>
 <!-- *********************************************** -->
  
-<h2><span class="glyphicon glyphicon-th-list"></span>이메일 중복 확인</h2>
- 
-<FORM name='frm' method='POST' action='./email_proc.jsp'>
-  <TABLE>
+<h2 align="center"><span class="glyphicon glyphicon-th-list"></span>이메일 중복 확인</h2>
+
+<FORM name='frm' method='POST' action='email_proc'>
+  <TABLE style="margin: auto;">
     <TR>
       <TD><input type="email" name="email" size="20" required></TD>
     </TR>

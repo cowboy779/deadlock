@@ -21,5 +21,6 @@ public interface IMemberDAO extends DAOSTDInter {
 	public boolean duplicateEmail(String email) throws Exception;
 	public String getFname(String id) throws Exception;
 	public boolean CheckPW(Map map) throws Exception;
+	public String getGrade(String id) throws Exception;
 	
 }

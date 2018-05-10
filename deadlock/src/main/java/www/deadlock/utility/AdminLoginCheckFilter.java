@@ -43,7 +43,7 @@ public class AdminLoginCheckFilter implements Filter {
             chain.doFilter(request, response); //요청 페이지로 이동
         } else {
             // 로그인이 안되었다면 로그인 페이지로 이동
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/member/login");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/member/loginForm");
             dispatcher.forward(request, response);
         }
     }

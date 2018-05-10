@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html> 
 <html>  
 <head> 
@@ -32,7 +33,7 @@
     실행된 함수가 false를 리턴하면 submit을 하지 않음. 
  --> 
 <form name="frm" method="post"  
-      action="./createForm.jsp"  
+      action="./createForm"  
       onsubmit="return send();"> 
  
 <!-- <div class='title' style='width: 20%;'>약관동의</div>  -->
@@ -227,8 +228,8 @@
 <div style="text-align: center"> 
   <input type="checkbox" name="agree" value="1" > 약관에 동의합니다</input> 
   <br><br>
-  <button class="w3-button w3-red" >회원가입</button>
-  <button type='button' class="w3-button w3-black" onclick='history.back()'><b>취소</b><span class="w3-tag w3-white"></span></button> 
+  <button>회원가입</button>
+  <button type='button' onclick='history.back()'>취소</button> 
 </div> 
  
 </form> 
