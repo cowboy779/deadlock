@@ -5,37 +5,37 @@
 
 <tiles-definitions> 
 
-<definition name="/member/list" extends="main"> 
+<definition name="/rbbs/list" extends="main"> 
         <put-attribute name="title" value="회원 목록" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/list.jsp" /> 
     </definition>   
-    <definition name="/member/create" extends="main"> 
+    <definition name="/rbbs/create" extends="main"> 
         <put-attribute name="title" value="회원가입" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/createForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/createForm.jsp" /> 
     </definition>
-    <definition name="/member/agree" extends="main"> 
+    <definition name="/rbbs/agree" extends="main"> 
         <put-attribute name="title" value="약관 동의" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/agreement.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/agreement.jsp" /> 
     </definition>   
-    <definition name="/member/update" extends="main"> 
+    <definition name="/rbbs/update" extends="main"> 
         <put-attribute name="title" value="회원정보 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updateForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/updateForm.jsp" /> 
     </definition>  
-    <definition name="/member/read" extends="main"> 
+    <definition name="/rbbs/read" extends="main"> 
         <put-attribute name="title" value="회원정보 보기" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/read.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/read.jsp" /> 
     </definition>
-    <definition name="/member/login" extends="main"> 
+    <definition name="/rbbs/login" extends="main"> 
         <put-attribute name="title" value="회원정보 보기" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/loginForm.jsp" /> 
     </definition>    
-    <definition name="/member/updateFile" extends="main"> 
+    <definition name="/rbbs/updateFile" extends="main"> 
         <put-attribute name="title" value="사진 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updateFileForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/updateFileForm.jsp" /> 
     </definition>    
-    <definition name="/member/delete" extends="main"> 
+    <definition name="/rbbs/delete" extends="main"> 
         <put-attribute name="title" value="게시판 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/deleteForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/deleteForm.jsp" /> 
     </definition>  
    
   

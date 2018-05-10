@@ -15,22 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RbbsDAO implements IrbbsDAO{
 
 	@Autowired
-	private static SqlSessionTemplate mybatis;
+	private SqlSessionTemplate mybatis;
 	
 	
-	public static void setMybatis(SqlSessionTemplate mybatis) {
-		RbbsDAO.mybatis = mybatis;
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		//RbbsDAO.mybatis = mybatis;
+		this.mybatis = mybatis;
 	}
 
-	public static SqlSessionTemplate getMybatis() {
-		return mybatis;
-	}
+
 
 	public Object read(Object bbsno) {
-		
-		
 
-		return mybatis.selectOne("rbbs.read", bbsno);
+		RbbsDTO dto = mybatis.selectOne("rbbs.read", bbsno);
+
+		return dto;
 	}
 
 	public List list(Map map) {

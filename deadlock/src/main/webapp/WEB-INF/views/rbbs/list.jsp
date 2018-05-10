@@ -79,10 +79,6 @@
 <c:if test="${util:newimg(dto.rdate) }">
 		<img src="${root }/images/new.gif">
 </c:if>
-<c:set var="rcount" value="${util:rcount(dto.bbsno,rdao) }"/>
-<c:if test="${rcount>0 }">
-<span style="color:blue">[${rcount }]</span>
-</c:if>
     </td>
     <td>${dto.rdate }</td>
     <td>${dto.rcount}</td>

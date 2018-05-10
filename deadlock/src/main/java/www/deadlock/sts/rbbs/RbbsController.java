@@ -26,11 +26,10 @@ public class RbbsController {
 	
 	
 	@RequestMapping("/rbbs/list")
-	public String list(HttpServletRequest request) throws Exception {
+	public String list(HttpServletRequest request){
 
 		String col = request.getParameter("col");
 		String word = request.getParameter("word");
-
 
 		// --------------------------------------------------------------
 		int nowPage = 1;
@@ -47,7 +46,9 @@ public class RbbsController {
 		map.put("word", word);
 		map.put("sno", sno);
 		map.put("eno", eno);
-		List<RbbsDTO> list = dao.list(map);
+		List list;
+		try {
+			list = dao.list(map);
 
 		int totalRecord = dao.total(map);
 
@@ -59,6 +60,10 @@ public class RbbsController {
 		request.setAttribute("col", col);
 		request.setAttribute("word", word);
 		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return "/rbbs/list";
 	}
@@ -71,7 +76,7 @@ public class RbbsController {
 
 	@RequestMapping(value = "/rbbs/createForm", method = RequestMethod.POST)
 	public String create(RbbsDTO dto, HttpServletRequest request) throws Exception {
-		String basePath = request.getRealPath("/storage_b");
+		String basePath = request.getRealPath("/storage");
 		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
 		int filesize = (int) dto.getFnameMF().getSize();
 
@@ -87,6 +92,17 @@ public class RbbsController {
 
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request,Model model) {
+		
+		RbbsDTO dto;
+		try {
+			dto = (RbbsDTO) dao.read(1);
+			model.addAttribute("dto", dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 
 		
 		return "/rbbs/read";

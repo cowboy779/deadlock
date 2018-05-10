@@ -1,4 +1,4 @@
-package www.dao;
+package www.deadlock.model.rbbs;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,8 +13,8 @@ public class BbsTest {
 		
 		RbbsDAO dao = new RbbsDAO();
 		
-		read(dao);
-		//list(dao);
+		//read(dao);
+		list(dao);
 		//create(dao);
 		//delete(dao);
 		//update(dao);
@@ -89,7 +89,7 @@ public class BbsTest {
 	private static void read(RbbsDAO dao) {
 		int rnum = 1;
 		
-		RbbsDTO dto = dao.read(rnum);
+		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
 		
 		p(dto);
 		

@@ -1,20 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="/ssi/ssi.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>문의 생성</title>
-
-<script type="text/javascript">
-
-
-</script>
+<title>Insert title here</title>
 </head>
 <body>
 	<form action="/rbbs/create">
 		<table width="699" border="1" cellspacing="0" cellpadding="0">
 			<tr>
 				<td>제목</td>
-				<td>글이 안써집니다 확인좀해주세요</td>
+				<td>${dto.title }</td>
 			</tr>
 
 			<tr >
@@ -27,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td>글이 안써집니다 스크린샷 동봉됨 확인요망</td>
+				<td>${dto.content }</td>
 			</tr>
 
 		</table>
@@ -41,7 +39,5 @@
 
 
 	</form>
-
-
 </body>
 </html>
