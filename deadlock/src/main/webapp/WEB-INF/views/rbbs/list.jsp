@@ -7,9 +7,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>문의 게시판</title>
 <script type="text/javascript">
-
-
-
+function bcreate(){
+	var url = "/rbbs/create"
+	location.href=url;
+	
+}
+function read(rnum){
+	var url = "${root}/rbbs/read"
+	url += "?rnum="+rnum;
+	url += "&col=${col}";
+	url += "&word=${word}";
+	url += "&nowPage=${nowPage}"
+	
+	location.href = url;
+}
 </script>
 </head>
 <body>
@@ -84,7 +95,7 @@
     <td>${dto.rcount}</td>
     <td>
 <c:if test="${not empty dto.fname }">
-<a href="javascript:fileDown('${dto.fname }')">${dto.fname }</a>
+${dto.fname }
 </c:if>
     
 	</td>

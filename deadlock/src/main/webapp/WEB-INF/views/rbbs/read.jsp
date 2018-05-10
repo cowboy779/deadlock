@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/rbbs/create">
 		<table width="699" border="1" cellspacing="0" cellpadding="0">
 			<tr>
 				<td>제목</td>
@@ -21,7 +20,7 @@
 			</tr>
 			<tr id="impo" style="visibility: visible;">
 				<td>중요도</td>
-				<td>중요</td>
+				<td>${dto.imp }</td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -31,13 +30,11 @@
 		</table>
 		<br>
 		<div id="button">
-		<button>리스트로</button>
+		<input type="button" onclick="location.href='./list'" value="리스트로">
 		<button>답변</button>
 		<button>삭제</button>
 		<button>수정</button>
 		</div>
 
-
-	</form>
 </body>
 </html>

@@ -12,4 +12,6 @@ public interface IrbbsDAO extends DAOSTDInter {
 	
 	public boolean createReply(RbbsDTO dto);
 	
+	public boolean idCheck(Map map);
+	
 }

@@ -17,16 +17,14 @@ import www.deadlock.model.rbbs.RbbsDAO;
 import www.deadlock.model.rbbs.RbbsDTO;
 import www.deadlock.utility.Utility;
 
-
 @Controller
 public class RbbsController {
 
 	@Autowired
 	private IrbbsDAO dao;
-	
-	
+
 	@RequestMapping("/rbbs/list")
-	public String list(HttpServletRequest request){
+	public String list(HttpServletRequest request) {
 
 		String col = request.getParameter("col");
 		String word = request.getParameter("word");
@@ -50,16 +48,16 @@ public class RbbsController {
 		try {
 			list = dao.list(map);
 
-		int totalRecord = dao.total(map);
+			int totalRecord = dao.total(map);
 
-		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
+			String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
 
-		request.setAttribute("list", list);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("paging", paging);
-		request.setAttribute("col", col);
-		request.setAttribute("word", word);
-		
+			request.setAttribute("list", list);
+			request.setAttribute("nowPage", nowPage);
+			request.setAttribute("paging", paging);
+			request.setAttribute("col", col);
+			request.setAttribute("word", word);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,42 +89,53 @@ public class RbbsController {
 	}
 
 	@RequestMapping("/rbbs/read")
-	public String read(HttpServletRequest request,Model model) {
-		
-		RbbsDTO dto;
-		try {
-			dto = (RbbsDTO) dao.read(1);
-			model.addAttribute("dto", dto);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+	public String read(HttpServletRequest request, Model model) throws Exception {
 
-		
+		String rnum = request.getParameter("rnum");
+		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
+			model.addAttribute("dto", dto);
+
 		return "/rbbs/read";
 	}
 
-	@RequestMapping(value="/rbbs/delete", method=RequestMethod.GET)
-	public String delete() {
-		
-		return "/rbbs/delete";
-	}
-	
-	@RequestMapping(value="/rbbs/delete" , method=RequestMethod.POST)
-	public String delete(HttpServletRequest request) {
-		
-		
-		return "/rbbs/delete";
+	@RequestMapping("/rbbs/delete")
+	public String delete(HttpServletRequest request) throws Exception {
+		Map map = new HashMap();
+		String id = request.getParameter("id");
+		String rnum = request.getParameter("rnum");
+
+		map.put("id", id);
+		map.put("rnum", rnum);
+
+		boolean flag = dao.idCheck(map);
+
+		if (flag) {
+
+			if (dao.delete(rnum)) {
+				return "redirect:/rbbs/list";
+			} else {
+				return "/rbbs/error";
+			}
+
+		} else {
+			return "/rbbs/perror";
+		}
+
 	}
 
 	@RequestMapping("/rbbs/reply")
-	public String reply(int num) {
+	public String createreply(RbbsDTO dto, HttpServletRequest request) {
 		
-		return "redirect:/rbbs/list";
+		boolean flag = dao.createReply(dto);
+		
+		if(flag) {
+			return "redirect:/rbbs/list";
+			
+		}else {
+			return "/rbbs/error";
+		}
+		
+
 	}
-	
-	
-	
+
 }

@@ -89,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	#{title}, #{content}, sysdate, #{fname}, #{rcount},#{imp}, #{grpno}, #{indent}+1, #{rnum}, #{ansnum}+1)
     
     </insert>
+    
      
 </mapper>
 

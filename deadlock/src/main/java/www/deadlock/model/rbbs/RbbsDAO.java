@@ -100,7 +100,6 @@ public class RbbsDAO implements IrbbsDAO{
 	public boolean createReply(RbbsDTO dto) {
 		boolean flag = false;
 		
-		
 		int cnt = mybatis.insert("rbbs.createReply",dto);
 		
 		if(cnt>0) flag=true;
@@ -108,5 +107,14 @@ public class RbbsDAO implements IrbbsDAO{
 		return flag;
 	}
 
-	
+	public boolean idCheck(Map map) {
+		boolean flag = false;
+
+		
+		int cnt = mybatis.selectOne("rbbs.idcheck", map);
+		
+		if(cnt>0) flag = true;
+		
+		return flag;
+	}
 }
