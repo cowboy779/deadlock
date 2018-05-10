@@ -42,8 +42,9 @@
           <li><a href="../univers/index.html" title="">01 : Home</a></li>
           <li><a href="../univers/works.html" title="">02 : 게시판</a></li>
           <li><a href="../univers/about.html" title="">03 : 방명록</a></li>
-          <li><a href="../univers/contact.html" title="">04 : 건의하기</a></li>
+          <li><a href="${root}/rbbs/list.html" title="">04 : 건의하기</a></li>
           <li><a href="../univers/components.html" title="">05 : 설문조사</a></li>
+          
         </ul>
 
 		<ul class="nav navbar-nav" style="float: right;">
