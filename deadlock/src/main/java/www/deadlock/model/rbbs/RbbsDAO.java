@@ -45,7 +45,6 @@ public class RbbsDAO implements IrbbsDAO{
 
 
 		int cnt = mybatis.insert("rbbs.create", dto);
-		System.out.println(cnt);
 		if (cnt > 0)
 			flag = true;
 
