@@ -4,18 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 
 @Repository
 public class QbbsDAO implements IQbbsDAO{
-	private static SqlSessionTemplate mybatis;
+	@Autowired
+	private SqlSessionTemplate mybatis;
 	
 	
 	
-	public static void setMybatis(SqlSessionTemplate mybatis) {
-		QbbsDAO.mybatis = mybatis;
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
 
 
@@ -62,8 +64,9 @@ public class QbbsDAO implements IQbbsDAO{
 	}
 	
 	
-	public List<QbbsDTO> list(Map map){
-		return mybatis.selectList("qbbs.list", map);
+	public List<QbbsDTO> list(Map map) {
+		List<QbbsDTO> list = mybatis.selectList("qbbs.list", map);
+		return list;
 	}
 	
 

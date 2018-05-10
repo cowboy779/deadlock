@@ -99,7 +99,7 @@ public class QbbsDAOTest {
 	}
 
 	@Test
-	public void testList() {
+	public void testList() throws Exception {
 		Map map=new HashMap();
 		map.put("col", "title");
 		map.put("word", "수정");

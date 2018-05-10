@@ -35,7 +35,7 @@ public class QbbsTest {
 	}
 
 
-	private static void list(QbbsDAO dao) {
+	private static void list(QbbsDAO dao) throws Exception {
 		Map map=new HashMap();
 		map.put("col", "title");
 		map.put("word", "수정");

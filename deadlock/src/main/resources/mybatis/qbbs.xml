@@ -10,8 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="create" parameterType="qbbsDTO">
-    	insert into qbbs(qnum,title,content,fname,qsep,qdate,id,qcount)
-		values((select nvl(max(qnum),0)+1 as qnum from qbbs),#{title},#{content},#{fname},#{qsep},sysdate,#{id},#{qcount})
+    	insert into qbbs(qnum,title,content,fname,qsep,gamenum,qdate,id)
+		values((select nvl(max(qnum),0)+1 as qnum from qbbs),#{title},#{content},#{fname},#{qsep},#{gamenum},sysdate,#{id})
     </insert>
      
     <update id="update" parameterType="qbbsDTO">
