@@ -117,4 +117,13 @@ public class RbbsDAO implements IrbbsDAO{
 		
 		return flag;
 	}
+
+	public String vCheck(String id) {
+		
+		String grade = mybatis.selectOne("rbbs.idCheck", id);
+		
+		
+		return grade;
+	}
+
 }

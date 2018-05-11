@@ -66,15 +66,15 @@ public class RbbsController {
 		return "/rbbs/list";
 	}
 
-	@RequestMapping(value = "/rbbs/createForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/rbbs/create", method = RequestMethod.GET)
 	public String create() {
 
 		return "/rbbs/create";
 	}
 
-	@RequestMapping(value = "/rbbs/createForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/rbbs/create", method = RequestMethod.POST)
 	public String create(RbbsDTO dto, HttpServletRequest request) throws Exception {
-		String basePath = request.getRealPath("/storage");
+		String basePath = request.getRealPath("/storage_rbbs");
 		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
 		int filesize = (int) dto.getFnameMF().getSize();
 
@@ -91,9 +91,12 @@ public class RbbsController {
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request, Model model) throws Exception {
 
-		String rnum = request.getParameter("rnum");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
-			model.addAttribute("dto", dto);
+		
+		dao.upViewCount(rnum);
+		
+		model.addAttribute("dto", dto);
 
 		return "/rbbs/read";
 	}

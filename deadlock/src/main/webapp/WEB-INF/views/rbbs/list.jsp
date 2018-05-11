@@ -46,7 +46,7 @@ function read(rnum){
  </select>
 <input type="search" name = "word" value="${word }" required>
 <button>search</button>
-<button type="button" onclick="location.href='${root}/bbs/createForm'">regit</button>
+<button type="button" onclick="location.href='${root}/rbbs/create'">regit</button>
 </form>
  </div>
 <br>

@@ -14,4 +14,6 @@ public interface IrbbsDAO extends DAOSTDInter {
 	
 	public boolean idCheck(Map map);
 	
+	public String vCheck(String id);
+	
 }

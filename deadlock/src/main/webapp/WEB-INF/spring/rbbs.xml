@@ -11,7 +11,7 @@
     </definition>   
     <definition name="/rbbs/create" extends="main"> 
         <put-attribute name="title" value="회원가입" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/rbbs/createForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/create.jsp" /> 
     </definition>
     <definition name="/rbbs/agree" extends="main"> 
         <put-attribute name="title" value="약관 동의" ></put-attribute> 
@@ -19,7 +19,7 @@
     </definition>   
     <definition name="/rbbs/update" extends="main"> 
         <put-attribute name="title" value="회원정보 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/rbbs/updateForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/update.jsp" /> 
     </definition>  
     <definition name="/rbbs/read" extends="main"> 
         <put-attribute name="title" value="회원정보 보기" ></put-attribute> 
@@ -35,7 +35,7 @@
     </definition>    
     <definition name="/rbbs/delete" extends="main"> 
         <put-attribute name="title" value="게시판 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/rbbs/deleteForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/delete.jsp" /> 
     </definition>  
    
   
