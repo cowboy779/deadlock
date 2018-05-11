@@ -90,10 +90,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     </insert>
     
-    <select id="vCheck" resultType="int">
+    <select id="vCheck" parameterMap="String" resultType="String">
     
     select grade
-    from member where id = #{id} 
+    from member where id = #{id} and grade = 'A'
     
     </select>
     
