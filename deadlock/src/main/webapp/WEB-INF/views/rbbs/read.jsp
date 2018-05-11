@@ -31,8 +31,8 @@
 		<br>
 		<div id="button">
 		<input type="button" onclick="location.href='./list'" value="리스트로">
-		<button>답변</button>
-		<button>삭제</button>
+		<input type="button" onclick="location.href='./reply'" value="답변">
+		<input type="button" onclick="location.href='./list'" value="리스트로">
 		<button>수정</button>
 		</div>
 

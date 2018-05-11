@@ -97,7 +97,6 @@ function read(rnum){
 <c:if test="${not empty dto.fname }">
 ${dto.fname }
 </c:if>
-    
 	</td>
     </tr>
     </tbody>
