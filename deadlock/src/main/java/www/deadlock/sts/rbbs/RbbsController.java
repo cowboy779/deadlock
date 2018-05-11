@@ -91,11 +91,11 @@ public class RbbsController {
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request, Model model) throws Exception {
 		//String id = (String)request.getSession().getAttribute("id");
-//		String id = "admin";
-//		boolean flag = false;
-//		flag= dao.vCheck(id);
-//		
-//		if(flag) {
+		String id = "admin";
+		boolean flag = false;
+		flag= dao.vCheck(id);
+		
+		if(flag) {
 
 		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
@@ -105,9 +105,9 @@ public class RbbsController {
 		model.addAttribute("dto", dto);
 
 		return "/rbbs/read";
-//		}else {
-//			return "/rbbs/aderror";
-//		}
+		}else {
+		return "/rbbs/aderror";
+		}
 	}
 
 	@RequestMapping("/rbbs/delete")
@@ -135,10 +135,20 @@ public class RbbsController {
 
 	}
 
-	@RequestMapping("/rbbs/reply")
+	@RequestMapping(value = "/rbbs/reply", method = RequestMethod.GET)
+	public String createreply(HttpServletRequest request) {
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		
+		request.setAttribute("rnum", rnum);
+
+		return "/rbbs/reply";
+	}
+	
+	@RequestMapping(value = "/rbbs/reply", method = RequestMethod.POST)
 	public String createreply(RbbsDTO dto, HttpServletRequest request) {
 		
 		boolean flag = dao.createReply(dto);
+		
 		
 		if(flag) {
 			return "redirect:/rbbs/list";
@@ -151,7 +161,9 @@ public class RbbsController {
 
 	@RequestMapping("/rbbs/update")
 	public String update(HttpServletRequest request) {
+
 		
+
 		
 		return "/rbbs/update";
 	}

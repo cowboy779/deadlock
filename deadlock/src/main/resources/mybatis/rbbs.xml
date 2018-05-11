@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where rnum = #{bbsno}
     </select>
     
-    <select id="list" resultType="RbbsDTO" parameterType="map">
+    <select id="list" resultType="RbbsDTO" parameterType="Map">
    	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum,refnum, r
 	FROM(
 	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum,refnum, rownum r
@@ -90,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     </insert>
     
-    <select id="vCheck" parameterMap="String" resultType="int">
+    <select id="vCheck" parameterType="String" resultType="int">
     
     select count(*) as cnt
     from member where id = #{id} and grade = 'A'

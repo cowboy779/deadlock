@@ -44,7 +44,7 @@ function read(rnum){
  	<option value="total">전체출력</option>
  
  </select>
-<input type="search" name = "word" value="${word }" required>
+<input type="search" name="word" value="${word }" required>
 <button>search</button>
 <button type="button" onclick="location.href='${root}/rbbs/create'">regit</button>
 </form>
@@ -97,14 +97,12 @@ function read(rnum){
 <c:if test="${not empty dto.fname }">
 ${dto.fname }
 </c:if>
-	</td>
-    </tr>
-    </tbody>
+</td>
+</tr>
+</tbody>
 </c:forEach>
 </c:otherwise>
 </c:choose>
-
-
 </TABLE>
   
   <DIV class='bottom'>
