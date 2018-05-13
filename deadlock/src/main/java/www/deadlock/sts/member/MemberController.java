@@ -154,15 +154,28 @@ public class MemberController {
 		return "/member/id_form";
 	}
 	
-	@RequestMapping("/member/id_proc")
-	public String id_proc(HttpServletRequest request) throws Exception {
+	@RequestMapping("/member/id_proc_check")
+	public String id_proc_check(HttpServletRequest request,Model model) throws Exception {
 		String id = request.getParameter("id");
-		boolean flag = dao.duplicateId(id);
+		boolean flag = false;
 		
-		request.setAttribute("flag", flag);
+		flag = dao.duplicateId(id);
 		
-		return "/member/id_proc";
+		model.addAttribute("flag",flag);
+		model.addAttribute("id",id);
+		
+		return "/member/id_proc_check";
 	}
+	
+//	@RequestMapping("/member/id_proc")
+//	public String id_proc(HttpServletRequest request) throws Exception {
+//		String id = request.getParameter("id");
+//		boolean flag = dao.duplicateId(id);
+//		
+//		request.setAttribute("flag", flag);
+//		
+//		return "/member/id_proc";
+//	}
 	
 	@RequestMapping("/member/loginForm")
 	public String loginForm(HttpServletRequest request) {
@@ -400,20 +413,50 @@ public class MemberController {
 			model.addAttribute("col",request.getParameter("col"));
 			model.addAttribute("word",request.getParameter("word"));
 			model.addAttribute("nowPage",request.getParameter("nowPage"));
-			return "redirect:read";
+			return "redirect:/member/read";
 		}else {
 			return "error";
 		}
 		
 	}
 	
+	@RequestMapping("/member/updatePasswdForm")
+	public String updatePasswd(HttpServletRequest request) throws Exception {
+		String passwd = request.getParameter("passwd1");
+		String id = request.getParameter("id");
+		
+		Map map = new HashMap();
+		map.put("passwd", passwd);
+		map.put("id", id);
+		
+		boolean flag = dao.CheckPW(map);
+		request.setAttribute("flag", flag);
+		
+		return "/member/updatePasswdForm";
+	}
 	
-	//패스워드변경 안 됐음.
-	@RequestMapping("/member/updatePasswd")
-	public String updatePasswd() {
+	//proc만 하면 끝
+	@RequestMapping("/member/updatePasswdProc")
+	public String updatePasswdProc(Model model, HttpServletRequest request) throws Exception{
+		String passwd = request.getParameter("passwd");
+		String id = request.getParameter("id");
+		if(id == null) {
+			id = (String)request.getSession().getAttribute("id");
+		}
 		
+		MemberDTO dto = new MemberDTO();
+		dto.setId(id);
+		dto.setPasswd(passwd);
 		
-		return "";
+		if(dao.updatePasswd(dto)) {
+			model.addAttribute("id",id);
+			model.addAttribute("col",request.getParameter("col"));
+			model.addAttribute("word",request.getParameter("word"));
+			model.addAttribute("nowPage",request.getParameter("nowPage"));
+			return "redirect:/member/read";
+		}else {
+			return "error";
+		}
 	}
 	
 }

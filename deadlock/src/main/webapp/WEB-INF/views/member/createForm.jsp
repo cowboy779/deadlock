@@ -6,6 +6,8 @@
 <meta charset="UTF-8"> 
 <title></title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 리캡챠 -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -60,7 +62,7 @@ function idCheck(id){
 	
 }
 
-function emailCheck(email){
+function emailCheck(){
 	var url="email_form";
 	
 	var wr = window.open(url,"이메일 검증","width=500, height=500");
@@ -103,13 +105,21 @@ function inputCheck(f){
 		
 		return false;
 	}
-	
-/* 	if(f.email.value==""){
-		alert("이메일을 입력해주세요");
-		f.email.focus();
+	if(f.email.value==""){
+		alert("이메일을 입력해주세요.");
+		emailCheck();
 		
 		return false;
-	} */
+	}
+
+	if (typeof(grecaptcha) != 'undefined') {
+	       if (grecaptcha.getResponse() == "") {
+	           alert("스팸방지코드를 확인해 주세요.");
+	           return false;
+	       }
+	    }else{
+	    	return false;
+	    }
 }
 
 
@@ -164,7 +174,7 @@ function inputCheck(f){
     <th><div style="margin:10px">*이메일<br></div></th>
     	<td>
     	<input type='email' name='email' size="20" placeholder="이메일(*필수)" readonly>
-    	<button style="font-size: 15px" type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복확인</button>
+    	<button style="font-size: 15px" type="button" onclick="emailCheck()">이메일 중복확인</button>
     	</td>
 
     	
@@ -186,9 +196,9 @@ function inputCheck(f){
     <th><div style="margin:10px">직업</div></th>
     	<td>
     	<select name="job">
-    		<option value="0">선택하세요</option>
+    		<option value="0" selected>선택하세요</option>
     		<option value="A01">회사원</option>
-    		<option value="A02" selected>전산관련직</option>
+    		<option value="A02">전산관련직</option>
     		<option value="A03">연구전문직</option>
     		<option value="A04">학생</option>
     		<option value="A05">일반자영업</option>
@@ -199,14 +209,19 @@ function inputCheck(f){
     		<option value="A10">기타</option>
     	</select>
     	</td>
-    	
     </tr>
-   
+    <tr>
+    	<th><div style="margin:10px">스팸방지</div></th>
+    	<td>
+    	 	<div id="grecaptcha" class="g-recaptcha" data-sitekey="6LdqpVgUAAAAAD4GL5mVsRPaFNFtrKyq42a1gD-X"></div>
+    	</td>
+    </tr>
   </TABLE>
+  <br>
   <div align="center">
   <button>회원가입</button>
   </div>
-    
+  <br>
 </FORM>
  
 </body>
