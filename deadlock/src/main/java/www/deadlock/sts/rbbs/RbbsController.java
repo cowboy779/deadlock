@@ -159,12 +159,27 @@ public class RbbsController {
 		
 	}
 
-	@RequestMapping("/rbbs/update")
-	public String update(HttpServletRequest request) {
+	@RequestMapping(value="/rbbs/update", method = RequestMethod.GET)
+	public String update(HttpServletRequest request, Model model) {
 
 		
-
+		
 		
 		return "/rbbs/update";
 	}
+	
+	@RequestMapping(value="/rbbs/update", method = RequestMethod.POST)
+	public String update(RbbsDTO dto ,HttpServletRequest request) {
+		
+		boolean flag = dao.createReply(dto);
+		
+		if(flag) {
+			return  "redirect:/rbbs/list";
+		}else {
+		
+			return "/rbbs/error";
+		}
+		
+	}
+	
 }

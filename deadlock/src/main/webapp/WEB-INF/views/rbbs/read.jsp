@@ -6,6 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function oneclick(wh){
+	url = "${root}"+"/rbbs/"+wh;
+	url += "?rnum="+${rnum};
+	
+	
+	location.herf = url;
+}
+
+
+
+</script>
 </head>
 <body>
 		<table width="699" border="1" cellspacing="0" cellpadding="0">
@@ -30,10 +42,9 @@
 		</table>
 		<br>
 		<div id="button">
-		<input type="button" onclick="location.href='./list'" value="리스트로">
-		<input type="button" onclick="location.href='./reply'" value="답변">
-		<input type="button" onclick="location.href='./list'" value="리스트로">
-		<button>수정</button>
+		<input type="button" onclick='oneclick(list);' value="리스트로">
+		<input type="button" onclick="oneclick(reply)" value="답변">
+		<input type="button" onclick="oneclick(update)'" value="수정">
 		</div>
 
 </body>
