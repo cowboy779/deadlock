@@ -20,6 +20,7 @@ function incheck(f){
 		alert("제목을 입력하시요");
 		f.title.focus();
 		
+		
 		return false;
 	}	
 	
