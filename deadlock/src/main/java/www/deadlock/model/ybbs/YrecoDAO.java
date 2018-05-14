@@ -1,53 +1,56 @@
-package www.dao;
+package www.deadlock.model.ybbs;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 
-import www.mybatis.MyAppSqlConfig;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-public class YrecoDAO {
-
-	private static SqlSessionFactory sqlMapper;
+@Repository
+public class YrecoDAO implements IYrecoDAO{
 	
-	static{
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
+	@Autowired
+	private SqlSessionTemplate mybatis;
+	
+	/*Test용*/
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
   
-	public boolean create(YrecoDTO dto){
+	public boolean create(Object dto){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().insert("yreco.create",dto);
+		int cnt = mybatis.insert("yreco.create",dto);
 		if(cnt>0)flag=true;
 		return flag;
 	}
 	
 	
-	public YrecoDTO read(int yrenum){
-		return sqlMapper.openSession().selectOne("yreco.read",yrenum);
+	public YrecoDTO read(Object yrenum){
+		return mybatis.selectOne("yreco.read",yrenum);
 	}
 	
-	public boolean update(YrecoDTO dto){
+	public boolean update(Object dto){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().update("yreco.update",dto);
+		int cnt = mybatis.update("yreco.update",dto);
 		if(cnt>0)flag=true;
 		return flag;
 	}
 	
-	public boolean delete(int yrenum){
+	public boolean delete(Object ynum){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().delete("yreco.delete",yrenum);
+		int cnt = mybatis.delete("yreco.ydelete",ynum);
 		if(cnt>0)flag=true;
 		return flag;
 	}
 	
 	public List<YrecoDTO> list(Map map){
-		return sqlMapper.openSession().selectList("yreco.list",map);
+		return mybatis.selectList("yreco.ylist",map);
 	}
 	
 	public int total(Map map){
-		return sqlMapper.openSession().selectOne("yreco.total",map);
+		return mybatis.selectOne("yreco.total",map);
 	}
 	
 }

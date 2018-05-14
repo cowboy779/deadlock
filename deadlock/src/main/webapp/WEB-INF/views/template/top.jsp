@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file ="/ssi/ssi.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
       <div class="collapse navbar-collapse" id="navbar-default" >
         <ul class="nav navbar-nav ">
           <li><a href="../univers/index.html" title="">01 : Home</a></li>
-          <li><a href="../univers/works.html" title="">02 : 게시판</a></li>
+          <li><a href="${root }/ybbs/list" title="">02 : 게시판</a></li>
           <li><a href="../univers/about.html" title="">03 : 방명록</a></li>
           <li><a href="../univers/contact.html" title="">04 : 건의하기</a></li>
           <li><a href="../univers/components.html" title="">05 : 설문조사</a></li>

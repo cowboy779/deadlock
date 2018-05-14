@@ -1,4 +1,6 @@
-package www.dao;
+package www.deadlock.model.ybbs;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class YBbsDTO {
 	private int ynum;
@@ -7,12 +9,21 @@ public class YBbsDTO {
 	private String ydate;
 	private int ycount;
 	private String id;
-	private String filesize;
+	private int filesize;
+	private MultipartFile fnameMF;
+
+	public MultipartFile getFnameMF() {
+		return fnameMF;
+	}
+	public void setFnameMF(MultipartFile fnameMF) {
+		this.fnameMF = fnameMF;
+	}
 	
-	public String getFilesize() {
+	
+	public int getFilesize() {
 		return filesize;
 	}
-	public void setFilesize(String filesize) {
+	public void setFilesize(int filesize) {
 		this.filesize = filesize;
 	}
 	public String getId() {

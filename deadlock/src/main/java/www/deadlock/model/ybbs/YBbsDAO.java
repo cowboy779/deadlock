@@ -1,65 +1,68 @@
-package www.dao;
-
-
-
+package www.deadlock.model.ybbs;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import www.mybatis.MyAppSqlConfig;
+@Repository
+public class YBbsDAO implements IYBbsDAO{
 
-public class YBbsDAO {
-
-	private static SqlSessionFactory sqlMapper;
+	@Autowired
+	private SqlSessionTemplate mybatis;
 	
-	static{
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
-   public YBbsDTO read(int ynum) {
+	
+   public YBbsDTO read(Object ynum){
 		
-		return sqlMapper.openSession().selectOne("ybbs.read", ynum);
+		return mybatis.selectOne("ybbs.read", ynum);
 	}
    
-   public boolean create(YBbsDTO dto){
-	   SqlSession session = sqlMapper.openSession();
-	   boolean flag = false;
-	   int cnt = session.insert("ybbs.create",dto);
-	   if(cnt>0)flag=true;
-	   session.commit();
-	   session.close();
+   public boolean create(Object dto){
 	   
+	   boolean flag = false;
+	   int cnt = mybatis.insert("ybbs.create",dto);
+	   if(cnt>0)flag=true;
+
 	   return flag;
    }
 
 	
-	public boolean update(YBbsDTO dto){
+	public boolean update(Object dto){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().update("ybbs.update",dto);
+		int cnt = mybatis.update("ybbs.update",dto);
 		if(cnt>0)flag=true;
 		return flag;
 	}
 
-	public boolean delete(int ynum){
+	public boolean delete(Object ynum){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().delete("ybbs.delete",ynum);
+		System.out.println("dao의 ynum:"+ynum);
+		int cnt = mybatis.delete("ybbs.delete",ynum);
+		System.out.println("dao cnt:"+cnt);
 		if(cnt>0)flag=true;
 		return flag;
 	} 
    
 	public List<YBbsDTO> list(Map map){
 	
-	return sqlMapper.openSession().selectList("ybbs.list", map);
+	return mybatis.selectList("ybbs.list", map);
+	}
+	
+	public void ycount(int ynum){
+		mybatis.update("ybbs.ycount",ynum);
 	}
 	
 	
 	public int total(Map map){
 		
-		return sqlMapper.openSession().selectOne("ybbs.total",map);
+		return mybatis.selectOne("ybbs.total",map);
 	}
+	
 	
 }
 

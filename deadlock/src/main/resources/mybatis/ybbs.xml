@@ -14,10 +14,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values(#{ynum},#{content},#{title},sysdate,#{fname},#{id},#{filesize})
     </insert>
 	
-	<delete id= "delete" parameterType="int">
+	<delete id="delete" parameterType="int">
 	delete from ybbs
 	where ynum = #{ynum}
 	</delete>
+	
+	
+	
+	<update id="ycount" parameterType="int">
+	update ybbs
+	set ycount = ycount +1
+	where ynum= #{ynum}       
+	</update>
     
    
     <update id = "update" parameterType="YBbsDTO">

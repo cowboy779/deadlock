@@ -1,4 +1,4 @@
-package www.dao;
+package www.deadlock.model.ybbs;
 
 public class YrecoDTO {
 	private int yrenum;
