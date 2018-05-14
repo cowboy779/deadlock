@@ -9,6 +9,7 @@
 *{ 
   font-family: gulim; 
   font-size: 20px; 
+  
 } 
 </style> 
 <script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
