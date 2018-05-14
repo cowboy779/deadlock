@@ -2,5 +2,6 @@
 <%@ include file="/ssi/ssi.jsp" %>
 {
 nickname:'${nickname}',
-msg:'${msg}'
+msg:'${msg}',
+realtime:'${realtime}'
 }

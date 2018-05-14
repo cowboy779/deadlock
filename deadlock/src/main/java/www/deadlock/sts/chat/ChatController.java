@@ -1,5 +1,6 @@
 package www.deadlock.sts.chat;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import www.deadlock.utility.*;
 import www.deadlock.model.chat.ChatMgr;
+import www.deadlock.model.chat.Chat_MessageDTO;
 import www.deadlock.model.chat.Chat_RoomDTO;
 import www.deadlock.model.chat.IChat_MessageDAO;
 import www.deadlock.model.chat.IChat_RoomDAO;
@@ -31,8 +33,8 @@ public class ChatController{
 	@Autowired
 	private IMemberDAO dao;
 	
-//	@Autowired
-//	private IChat_MessageDAO mdao;
+	@Autowired
+	private IChat_MessageDAO mdao;
 
 	@RequestMapping("/chat/chatCreate")
 	public String chatCreate(HttpServletRequest request) throws Exception {
@@ -112,6 +114,45 @@ public class ChatController{
 		request.setAttribute("nowPage", request.getParameter("nowPage"));
 		
 		return "chat/chatRead";
+	}
+	
+	@RequestMapping("/chat/chat_write")
+	public String chat_write(HttpServletRequest request) {
+		String nickname = request.getParameter("nickname");
+		String msg = request.getParameter("msg");
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		
+		
+		
+		
+		try {
+			URLDecoder.decode(nickname, "UTF-8");
+			URLDecoder.decode(msg, "UTF-8");
+			
+			Chat_MessageDTO dto = new Chat_MessageDTO();
+			dto.setChat_index(chat_index);
+			dto.setChat_content(msg);
+			dto.setNickname(nickname);
+			
+			mdao.create(dto.getChat_index());
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("msg", msg);
+			
+			return "/chat/chat_write";
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "/chat/error";
+		}
+		
+	}
+	
+	@RequestMapping("/chat/chat_proc")
+	public String chat_proc(HttpServletRequest request) {
+		
+		
+		return "";
 	}
 	
 }
