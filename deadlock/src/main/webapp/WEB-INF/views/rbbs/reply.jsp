@@ -15,6 +15,7 @@
 		enctype = 'multipart/form-data'>
 		
 		<input type="hidden" name="rnum" value="${param.rnum }">
+		<input type="hidden" name="grpno" value="${grpno }">
   <TABLE>
     <TR>
       <TH>분류</TH>

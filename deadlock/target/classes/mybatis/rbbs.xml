@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="read" resultType="RbbsDTO" parameterType="int">
     	select * from rbbs
-    	where rnum = #{bbsno}
+    	where rnum = #{rnum}
     </select>
     
     <select id="list" resultType="RbbsDTO" parameterType="Map">
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM(
 	select id,rnum,title,rdate,fname,imp,grpno,indent, ansnum,refnum, rownum r
 	FROM(
-	select id,rnum,title,rdate,fname,imp,grpno,indent,ansnum,refnum from rbbs order by rnum desc, ansnum
+	select id,rnum,title, to_char(rdate, 'yyyy-mm-dd') rdate ,fname,imp,grpno,indent,ansnum,refnum from rbbs
 	<where>
 		<choose>
 			<when test="col=='id'">
@@ -28,7 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</where>
-	))
+			order by grpno desc, ansnum
+		)
+	)
 	
 	<![CDATA[
 	where r>= #{sno} and r<=#{eno}
@@ -84,8 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="createReply" parameterType="RbbsDTO">
+    
+    <selectKey keyProperty="rnum" resultType="int" order="BEFORE">
+	select nvl(max(rnum), 0) +1 as rnum from rbbs
+	</selectKey>
+    
+    
     insert into rbbs(rnum, id, title, content, rdate, fname, rcount,imp, grpno, indent, refnum ,ansnum)
-	values((SELECT NVL(MAX(rnum),0) + 1 as rnum FROM rbbs), #{id}, 
+	values(#{rnum}, #{id}, 
 	#{title}, #{content}, sysdate, #{fname}, #{rcount},#{imp}, #{grpno}, #{indent}+1, #{rnum}, #{ansnum}+1)
     
     </insert>

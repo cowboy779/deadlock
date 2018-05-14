@@ -103,6 +103,7 @@ public class RbbsController {
 		dao.upViewCount(rnum);
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("rnum", rnum);
 
 		return "/rbbs/read";
 		}else {
@@ -136,10 +137,14 @@ public class RbbsController {
 	}
 
 	@RequestMapping(value = "/rbbs/reply", method = RequestMethod.GET)
-	public String createreply(HttpServletRequest request) {
+	public String createreply(HttpServletRequest request,Model model) throws Exception {
 		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
 		
-		request.setAttribute("rnum", rnum);
+		int grpno = dto.getGrpno();
+		
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("grpno", grpno);
 
 		return "/rbbs/reply";
 	}
@@ -147,8 +152,15 @@ public class RbbsController {
 	@RequestMapping(value = "/rbbs/reply", method = RequestMethod.POST)
 	public String createreply(RbbsDTO dto, HttpServletRequest request) {
 		
-		boolean flag = dao.createReply(dto);
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		dto.setRnum(rnum);
+		String basePath = request.getRealPath("/storage_rbbs");
+		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
+		int filesize = (int) dto.getFnameMF().getSize();
+
+		dto.setFname(filename);
 		
+		boolean flag = dao.createReply(dto);
 		
 		if(flag) {
 			return "redirect:/rbbs/list";
@@ -159,11 +171,16 @@ public class RbbsController {
 		
 	}
 
-	@RequestMapping(value="/rbbs/update", method = RequestMethod.GET)
-	public String update(HttpServletRequest request, Model model) {
+	@RequestMapping(value= "/rbbs/update" , method = RequestMethod.GET)
+	public String update(HttpServletRequest request, Model model) throws Exception {
+
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		
+		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
 
 		
-		
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("dto", dto);
 		
 		return "/rbbs/update";
 	}

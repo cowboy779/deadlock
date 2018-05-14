@@ -8,15 +8,12 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function oneclick(wh){
-	url = "${root}"+"/rbbs/"+wh;
-	url += "?rnum="+${rnum};
+	var url = "${root}/rbbs/"+wh;
+	url += "?rnum=${rnum}";
 	
 	
-	location.herf = url;
+	location.href = url;
 }
-
-
-
 </script>
 </head>
 <body>
@@ -25,8 +22,12 @@ function oneclick(wh){
 				<td>제목</td>
 				<td>${dto.title }</td>
 			</tr>
+			<tr>
+				<td>날짜</td>
+				<td>${dto.rdate }</td>
+			</tr>
 
-			<tr >
+			<tr>
 				<td>분류</td>
 				<td>건의</td>
 			</tr>
@@ -42,9 +43,9 @@ function oneclick(wh){
 		</table>
 		<br>
 		<div id="button">
-		<input type="button" onclick='oneclick(list);' value="리스트로">
-		<input type="button" onclick="oneclick(reply)" value="답변">
-		<input type="button" onclick="oneclick(update)'" value="수정">
+		<input type="button" onclick="javascript:oneclick('list')" value="리스트로">
+		<input type="button" onclick="oneclick('reply')" value="답변">
+		<input type="button" onclick="oneclick('update')" value="수정">
 		</div>
 
 </body>
