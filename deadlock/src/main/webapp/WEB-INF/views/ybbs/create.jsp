@@ -16,11 +16,10 @@
 <script type="text/javascript">
 function incheck(f){
 	
+	
 	if(f.title.value==""){
 		alert("제목을 입력하시요");
-		f.title.focus();
-		
-		
+		f.title.focus();		
 		return false;
 	}	
 	
