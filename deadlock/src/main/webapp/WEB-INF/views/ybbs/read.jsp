@@ -61,6 +61,15 @@ function del(){
 	location.href=url;
 }
 
+function yyupdate(ynum){
+	var url ="./update";
+	url += "?ynum="+ynum;
+	url += "&col=${param.col}"; 
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	
+	location.href=url;
+}
 </script>
 
 </head> 
@@ -109,8 +118,8 @@ function del(){
   </TABLE>
 
 <DIV>
-
-   <button id = "button" onclick="del()">삭제2</button>
+   <input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
+   <button id = "button" onclick="del()">삭제</button>
 </DIV>
 
 <hr>

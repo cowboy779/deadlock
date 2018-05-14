@@ -77,6 +77,52 @@ public class YbbsController {
 		}
 	}
 
+	
+	
+	@RequestMapping(value = "/ybbs/update", method = RequestMethod.POST)
+	public String update(HttpServletRequest request, Model model, YBbsDTO dto) {
+
+		String oldfile = request.getParameter(dto.getFname());
+		String basePath = request.getRealPath("/storage_y");
+		String fname = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
+
+		int filesize = (int) dto.getFnameMF().getSize();
+
+		dto.setFname(fname);
+		dto.setFilesize(filesize);
+
+		if(request.getAttribute("id")!=null) {
+			if (dao.update(dto)) {
+				if (filesize > 0)
+					Utility.deleteFile(basePath, oldfile);
+				model.addAttribute("col", request.getParameter("col"));
+				model.addAttribute("word", request.getParameter("word"));
+				model.addAttribute("nowPage", request.getParameter("nowPage"));
+				model.addAttribute("ynum",request.getParameter("ynum"));
+				model.addAttribute("oldfile",request.getParameter("oldfile"));
+
+				
+				return "redirect:/ybbs/list";
+			} else {
+				return "/ybbs/error";
+			}
+		} else {
+			return "/ybbs/Error";
+		}
+	}
+
+	@RequestMapping(value = "/ybbs/update", method = RequestMethod.GET)
+	public String update(int ynum, Model model) {
+
+		model.addAttribute("dto", dao.read(ynum));
+
+		return "/ybbs/update";
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("/ybbs/read")
 	public String read(int ynum, Model model, HttpServletRequest request) {
 		
