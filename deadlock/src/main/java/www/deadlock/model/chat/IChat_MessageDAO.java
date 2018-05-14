@@ -1,5 +1,7 @@
 package www.deadlock.model.chat;
 
-public interface IChat_MessageDAO {
+import deadlock.DAOSTDInter;
+
+public interface IChat_MessageDAO extends DAOSTDInter {
 
 }

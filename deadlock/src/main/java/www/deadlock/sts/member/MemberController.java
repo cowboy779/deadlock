@@ -167,16 +167,6 @@ public class MemberController {
 		return "/member/id_proc_check";
 	}
 	
-//	@RequestMapping("/member/id_proc")
-//	public String id_proc(HttpServletRequest request) throws Exception {
-//		String id = request.getParameter("id");
-//		boolean flag = dao.duplicateId(id);
-//		
-//		request.setAttribute("flag", flag);
-//		
-//		return "/member/id_proc";
-//	}
-	
 	@RequestMapping("/member/loginForm")
 	public String loginForm(HttpServletRequest request) {
 		String c_id = "";     // ID 저장 여부를 저장하는 변수, Y

@@ -77,10 +77,9 @@ $(function(){
 });
 
 </script>
-</head> 
+</head>
 <body>
 <h2 align="center"><span class="glyphicon glyphicon-th-list"></span>아이디 중복 확인</h2>
-
 
 <div align="center" id="id_form">
 <FORM id="id_form_data" name='frm' method='POST'>
