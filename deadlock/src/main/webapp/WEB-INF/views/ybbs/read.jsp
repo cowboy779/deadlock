@@ -33,7 +33,7 @@ function ydelete(yrenum){
 	var url ="./ydelete";
 	url += "?yrenum="+yrenum;
 	url += "&ynum=${dto.ynum}";
-	url += "&oldfile=${dto.fname}";
+	url += "&nPage=${nPage}";
 	url += "&col=${param.col}"; 
 	url += "&word=${param.word}";
 	url += "&nowPage=${param.nowPage}";
@@ -41,12 +41,10 @@ function ydelete(yrenum){
 	location.href=url;
 }
 	
-
-
-function yupdate(yrenum,content){
-	var f = document.rform;
-	f.content.value = content;
-	f.yrenum.value= yrenum;
+function yupdate(yrenum,ycontent){
+	var f = document.yform;
+	f.content.value = ycontent;
+	f.yrenum.value = yrenum;
 	f.ysubmit.value="수정";
 	f.action = "./yupdate";
 }
@@ -104,7 +102,7 @@ function del(){
     <th>내용</th>
     <td>
      <textarea id="content" rows="100" cols="100" name="content">
-     ${dto.content }
+     ${content }
       	</textarea>
     </td>
     </tr>
@@ -125,7 +123,7 @@ function del(){
 	<textarea rows="3" cols="28" name="content"></textarea>	
 	<br>
 	<input type ="submit" name="ysubmit" value="등록">
-	<input type ="hidden" name = "id" value="${sessionScope.id }">
+	<input type ="hidden" name = "id" value="${id }">
 	<input type ="hidden" name = "ynum" value="${dto.ynum }">
 	<input type ="hidden" name = "col" value="${param.col }">
 	<input type ="hidden" name = "word" value="${param.word }">
@@ -143,7 +141,7 @@ function del(){
 ${ydto.id}<br>
 <p>${ydto.content }</p>
 ${ydto.yredate }
-<c:if test="${sessionScope.id==ydto.id}">
+<c:if test="${id==ydto.id}">
 <span style="float:right">
 <a href="javascript:yupdate('${ydto.yrenum }','${ydto.content}')">수정</a>
 <a href="javascript:ydelete('${ydto.yrenum}')">삭제</a>

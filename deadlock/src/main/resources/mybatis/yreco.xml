@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <delete id="ydelete" parameterType="int">
    delete from yreco
-   where ynum = #{ynum}
+   where yrenum = #{yrenum}
    </delete>
    
    <select id="ylist" parameterType="Map" resultType="YrecoDTO">

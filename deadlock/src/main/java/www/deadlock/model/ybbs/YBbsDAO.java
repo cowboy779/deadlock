@@ -41,9 +41,7 @@ public class YBbsDAO implements IYBbsDAO{
 
 	public boolean delete(Object ynum){
 		boolean flag = false;
-		System.out.println("dao의 ynum:"+ynum);
 		int cnt = mybatis.delete("ybbs.delete",ynum);
-		System.out.println("dao cnt:"+cnt);
 		if(cnt>0)flag=true;
 		return flag;
 	} 

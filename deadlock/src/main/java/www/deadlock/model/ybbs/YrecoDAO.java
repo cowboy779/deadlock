@@ -38,9 +38,9 @@ public class YrecoDAO implements IYrecoDAO{
 		return flag;
 	}
 	
-	public boolean delete(Object ynum){
+	public boolean delete(Object yrenum){
 		boolean flag = false;
-		int cnt = mybatis.delete("yreco.ydelete",ynum);
+		int cnt = mybatis.delete("yreco.ydelete",yrenum);
 		if(cnt>0)flag=true;
 		return flag;
 	}

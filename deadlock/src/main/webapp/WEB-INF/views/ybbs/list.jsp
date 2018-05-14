@@ -14,10 +14,6 @@ function fileDown(filename){
 	location.href=url;
 }
 
-// function bcreate(){
-// 	var url = "./createForm";
-// 	location.href=url;
-// }
 function read(ynum){
 	var url = "./read";
 	url += "?ynum="+ynum;
@@ -89,7 +85,7 @@ function read(ynum){
     	<td>${dto.content}</td>
     	<td>${dto.ydate}</td>
     	<td>${dto.ycount}</td>
-    	<td>${id }</td>
+    	<td>${dto.id }</td>
     	<td>
     	<c:choose>
     	<c:when test="${empty dto.fname }">${dto.fname}

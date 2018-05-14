@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>11.1.0.7.0</version>
+			<version>12.1.0.1-atlassian-hosted</version>
 		</dependency>
 
 
@@ -226,7 +226,7 @@
 		<repository>
 			<id>oracle</id>
 			<name>ORACLE JDBC Repository</name>
-			<url>http://maven.jahia.org/maven2</url>
+			<url>http://maven.atlassian.com/3rdparty/</url>
 		</repository>
 	</repositories>
 

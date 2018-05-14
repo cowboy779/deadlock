@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import www.deadlock.model.ybbs.YBbsDAO;
 import www.deadlock.model.ybbs.YBbsDTO;
 import www.deadlock.model.ybbs.YrecoDAO;
@@ -29,30 +28,30 @@ public class YbbsController {
 	private YrecoDAO rdao;
 
 	@RequestMapping("/ybbs/yupdate")
-	public String rupdate() {
-		
-		
-		
-		return "redirect:/ybbs/read"; 
+	public String rupdate(YrecoDTO dto, Model model, String nowPage, String col, String word, String nPage) {
+		if (rdao.update(dto)) {
+			model.addAttribute("ynum", dto.getYnum());
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("col", col);
+			model.addAttribute("word", word);
+			model.addAttribute("nPage", nPage);
+			return "redirect:/ybbs/read";
+		} else {
+			return "/ybbs/error";
+		}
 	}
 	
 	
 	@RequestMapping("/ybbs/ydelete")
-	public String rdelete(HttpServletRequest request,Model model) {
-		
-		int ynum = Integer.parseInt(request.getParameter("ynum"));
-		int yrenum = Integer.parseInt(request.getParameter("yrenum"));
-		String nowPage = request.getParameter("nowPage");
-		String col = request.getParameter("col");
-		String word = request.getParameter("word");
-		
+	public String rdelete(int ynum, int yrenum, String nowPage, String col, String word, int nPage, Model model) {
+
 		Map map = new HashMap();
 		int total = rdao.total(map);
 		int totalPage = (int)(Math.ceil((double)total/3));
-		if (rdao.delete(ynum)) {
-//			if (nPage != 1 && nPage == totalPage && total % 3 == 1)nPage = nPage - 1;
-			model.addAttribute("yrenum", yrenum);
-//			model.addAttribute("nPage", nPage);
+		if (rdao.delete(yrenum)) {
+			if (nPage != 1 && nPage == totalPage && total % 3 == 1)nPage = nPage - 1;
+			model.addAttribute("ynum", ynum);
+			model.addAttribute("nPage", nPage);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("col", col);
 			model.addAttribute("word", word);
@@ -62,9 +61,11 @@ public class YbbsController {
 		}
 
 	}
+	
 	@RequestMapping("/ybbs/ycreate")
 	public String ycreate(YrecoDTO dto, Model model, String nowPage, String col, String word) {
 		if (rdao.create(dto)) {
+			
 			model.addAttribute("col", col);
 			model.addAttribute("word", word);
 			model.addAttribute("nowPage", nowPage);
@@ -78,13 +79,12 @@ public class YbbsController {
 
 	@RequestMapping("/ybbs/read")
 	public String read(int ynum, Model model, HttpServletRequest request) {
-
+		
+		String id = "user1";
+		request.setAttribute("id", id);
+		
 		dao.ycount(ynum);
 		YBbsDTO dto = dao.read(ynum);
-
-		String id = "admin";
-		request.setAttribute("id", id);
-
 		String content = dto.getContent();
 		content = content.replaceAll("\r\n", "<br>");
 
@@ -107,6 +107,7 @@ public class YbbsController {
 		map.put("ynum", ynum);
 
 		List<YrecoDTO> ylist = rdao.list(map);
+		
 		int total = rdao.total(map);
 
 		String col = request.getParameter("col");
@@ -144,9 +145,9 @@ public class YbbsController {
 
 	@RequestMapping(value = "/ybbs/create", method = RequestMethod.GET)
 	public String create(HttpServletRequest request,YBbsDTO dto) {
-		String id = "admin";
+		String id = "user1";
 		request.setAttribute("id", id);
-		dto.setId(id);
+//		dto.setId(id);
 
 		return "/ybbs/create";
 	}
@@ -167,7 +168,7 @@ public class YbbsController {
 			model.addAttribute("word", request.getParameter("word"));
 			model.addAttribute("nowPage", request.getParameter("nowPage"));
 
-			return "redirect/ybbs/list";
+			return "redirect:/ybbs/list";
 		} else {
 			return "/ybbs/read";
 		}
@@ -180,7 +181,7 @@ public class YbbsController {
 		if (id == dto.getId()) {
 			return "/ybbs/delete";
 		} else {
-			return "redirect/ybbs/error";
+			return "redirect:/ybbs/error";
 		}
 	}
 
@@ -189,7 +190,7 @@ public class YbbsController {
 
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
-		dto.setId("admin");
+		dto.setId("user1");
 
 		if (col.equals("total"))
 			word = "";
