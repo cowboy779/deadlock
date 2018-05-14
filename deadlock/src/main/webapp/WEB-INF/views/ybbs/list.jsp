@@ -89,7 +89,7 @@ function read(ynum){
     	<td>${dto.content}</td>
     	<td>${dto.ydate}</td>
     	<td>${dto.ycount}</td>
-    	<td>${dto.id }</td>
+    	<td>${id }</td>
     	<td>
     	<c:choose>
     	<c:when test="${empty dto.fname }">${dto.fname}
