@@ -76,51 +76,6 @@ function yyupdate(ynum){
 <body>
  
 <DIV class="title">조회</DIV>
- 
-  <TABLE>
-  	<TR>
-      <TH>조회수</TH>
-      <TD>${dto.ycount}</TD>
-    </TR>
-    
-    <TR>
-      <TH>등록날짜</TH>
-      <TD>${dto.ydate}</TD>
-    </TR>
-  	
-    <TR>
-      <TH>제목</TH>
-      <TD>${dto.title}</TD>
-    </TR>
-    
-    <TR>
-      <TH>파일명</TH>
-      <td>
-      <c:choose>
-      <c:when test="${empty dto.fname}">파일없음
-      </c:when>
-      <c:otherwise>
-      <a href="javascript:fileDown('${dto.fname}')">
-      ${dto.fname}(${dto.filesize})</a>
-      </c:otherwise>
-      </c:choose>
-      </td>
-    </TR>
-    
-    <tr>
-    <th>내용</th>
-    <td>
-     <textarea id="content" rows="100" cols="100" name="content">
-     ${content }
-      	</textarea>
-    </td>
-    </tr>
-  </TABLE>
-
-<DIV>
-   <input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
-   <button id = "button" onclick="del()">삭제</button>
-</DIV>
 
 <hr>
 
@@ -159,14 +114,7 @@ ${ydto.yredate }
 </div>
 </c:forEach>
 <div class="bottom">
-${paging2}
-</div>
-
-<hr>
-
-<jsp:include page="list.jsp" flush="false" />
-<div>
-${paging4}
+${paging3}
 </div>
 </body>
 </html> 

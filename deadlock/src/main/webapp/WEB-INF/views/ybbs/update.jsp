@@ -75,10 +75,10 @@ function incheck(){
       
     </TR>
 
-    <TR>
-      <TH>id<TH>
-      <TD><input type="text" name="id" value="${id}" readonly></TD>
-    </TR>
+<!--     <TR> -->
+<!--       <TH>id<TH> -->
+<%--       <TD><input type="text" name="id" value="${id}" readonly></TD> --%>
+<!--     </TR> -->
  
     <TR>
       <TH>파일</TH>

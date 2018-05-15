@@ -18,6 +18,7 @@
         <put-attribute name="title" value="수정" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/ybbs/update.jsp" /> 
     </definition>  
+    
     <definition name="/ybbs/read" extends="main"> 
         <put-attribute name="title" value="보기" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/ybbs/read.jsp" /> 

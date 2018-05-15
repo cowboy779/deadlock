@@ -80,9 +80,9 @@ public class YbbsController {
 	
 	
 	@RequestMapping(value = "/ybbs/update", method = RequestMethod.POST)
-	public String update(HttpServletRequest request, Model model, YBbsDTO dto) {
+	public String update(HttpServletRequest request, Model model, YBbsDTO dto,String oldfile) {
 
-		String oldfile = request.getParameter(dto.getFname());
+	
 		String basePath = request.getRealPath("/storage_y");
 		String fname = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
 
@@ -90,32 +90,26 @@ public class YbbsController {
 
 		dto.setFname(fname);
 		dto.setFilesize(filesize);
-
-		if(request.getAttribute("id")!=null) {
+		
 			if (dao.update(dto)) {
 				if (filesize > 0)
 					Utility.deleteFile(basePath, oldfile);
+				
 				model.addAttribute("col", request.getParameter("col"));
 				model.addAttribute("word", request.getParameter("word"));
 				model.addAttribute("nowPage", request.getParameter("nowPage"));
-				model.addAttribute("ynum",request.getParameter("ynum"));
-				model.addAttribute("oldfile",request.getParameter("oldfile"));
 
-				
 				return "redirect:/ybbs/list";
 			} else {
 				return "/ybbs/error";
 			}
-		} else {
-			return "/ybbs/Error";
-		}
+		
 	}
 
 	@RequestMapping(value = "/ybbs/update", method = RequestMethod.GET)
 	public String update(int ynum, Model model) {
 
 		model.addAttribute("dto", dao.read(ynum));
-
 		return "/ybbs/update";
 	}
 	
@@ -136,7 +130,8 @@ public class YbbsController {
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("content", content);
-
+			
+		
 		// 일단 여기부터 댓글
 		String url = "read";
 		int nPage = 1;
@@ -146,24 +141,30 @@ public class YbbsController {
 		int recoredPerPage = 3;
 		int sno = ((nPage - 1) * recoredPerPage) + 1;
 		int eno = nPage * recoredPerPage;
-
+		
 		Map map = new HashMap();
 		map.put("sno", sno);
 		map.put("eno", eno);
 		map.put("ynum", ynum);
-
+	
 		List<YrecoDTO> ylist = rdao.list(map);
+		List<YBbsDTO> list = dao.list(map);
 		
 		int total = rdao.total(map);
+		int ytotal = dao.total(map);
 
 		String col = request.getParameter("col");
 		String word = request.getParameter("word");
 		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 
-		String paging = Utility.paging2(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
-
+		String paging2 = Utility.paging2(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
+		String paging4 =  Utility.paging4(ytotal, nowPage, recoredPerPage, col, word);
+		
+		model.addAttribute("list",list);
 		model.addAttribute("ylist", ylist);
-		model.addAttribute("paging", paging);
+		model.addAttribute("nowPage",nowPage);
+		model.addAttribute("paging2", paging2);
+		model.addAttribute("paging4",paging4);
 		model.addAttribute("nPage", nPage);
 
 		return "/ybbs/read";

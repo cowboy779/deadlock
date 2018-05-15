@@ -3,62 +3,60 @@ package www.deadlock.model.pbbs;
 import java.util.List;
 import java.util.Map;
 
-public class PBbsDAO {
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-	private static SqlSessionFactory sqlMapper;
+@Repository
+public class PBbsDAO implements IPBbsDAO{
+
+	@Autowired
+	private SqlSessionTemplate mybatis;
 	
-	static{
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
 	
    public boolean passwdCheck(Map map){
 	   boolean flag = false;
-	   int cnt = sqlMapper.openSession().selectOne("pbbs.passwdCheck", map);
+	   int cnt = mybatis.selectOne("pbbs.passwdCheck", map);
 	   if(cnt>0)flag=true;
 	   return flag;
    }
 	
-   public PBbsDTO read(int bnum) {
+   public PBbsDTO read(Object bnum) {
 		
-		return sqlMapper.openSession().selectOne("pbbs.read", bnum);
+		return mybatis.selectOne("pbbs.read", bnum);
 	}
    
-   public boolean create(PBbsDTO dto){
-	   SqlSession session = sqlMapper.openSession();
+   public boolean create(Object dto){
 	   boolean flag = false;
-	   int cnt = session.insert("pbbs.create",dto);
+	   int cnt = mybatis.insert("pbbs.create",dto);
 	   if(cnt>0)flag=true;
-	   session.commit();
-	   session.close();
-	   
 	   return flag;
    }
 
 	
-	public boolean update(PBbsDTO dto){
+	public boolean update(Object dto){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().update("pbbs.update",dto);
+		int cnt = mybatis.update("pbbs.update",dto);
 		if(cnt>0)flag=true;
 		return flag;
 	}
 
-	public boolean delete(int bnum){
+	public boolean delete(Object bnum){
 		boolean flag = false;
-		int cnt = sqlMapper.openSession().delete("pbbs.delete",bnum);
+		int cnt = mybatis.delete("pbbs.delete",bnum);
 		if(cnt>0)flag=true;
 		return flag;
 	} 
    
 	public List<PBbsDTO> list(Map map){
-	
-	return sqlMapper.openSession().selectList("pbbs.list", map);
+	return mybatis.selectList("pbbs.list", map);
 	}
 	
-	
-	public int total(Map map){
-		
-		return sqlMapper.openSession().selectOne("pbbs.total",map);
+	public int total(Map map){	
+		return mybatis.selectOne("pbbs.total",map);
 	}
 	
 
