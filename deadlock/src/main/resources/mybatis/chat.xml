@@ -4,6 +4,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
+<select id="Canyou_Seethem" parameterType="map" resultType="int">
+select count(*)
+FROM chat_message
+where chat_index = #{chat_index}
+AND
+chat_date >=
+TO_DATE(#{finalDate},
+'YYYY-MM-DD hh24:mi:ss')
+</select>
+
+<select id="Chat_content_read" parameterType="map" resultType="Chat_MessageDTO">
+select chat_message_index, chat_content,
+chat_index,
+to_char(chat_date,'yyyy-mm-dd hh24:mi:ss')chat_date,
+nickname
+FROM chat_message
+WHERE chat_index = #{chat_index}
+AND
+chat_date >=
+TO_DATE(#{finalDate},
+'YYYY-MM-DD hh24:mi:ss')
+
+</select>
+
+<select id="table_count" parameterType="int" resultType="int">
+SELECT count(*) FROM chat_message
+WHERE chat_index = #{chat_index}
+</select>
+
+<select id="getNickname" parameterType="String" resultType="String">
+SELECT mname FROM member
+where id = #{id}
+</select>
+
+<insert id="create_content" parameterType="Chat_MessageDTO">
+INSERT INTO chat_message(
+chat_message_index,chat_content,chat_index,chat_date,
+nickname
+)
+VALUES(
+(select nvl(max(chat_message_index),0)+1 FROM chat_message),
+#{chat_content},#{chat_index},
+sysdate,
+#{nickname}
+)
+</insert>
+
 <select id="getRealTime" resultType="String">
 SELECT to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') 
 FROM dual

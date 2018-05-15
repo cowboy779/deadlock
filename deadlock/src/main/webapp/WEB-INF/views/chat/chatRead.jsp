@@ -67,20 +67,108 @@ form input#btn
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
-var chatManager = new function(){
+
 	//중복 실행을 막기 위한 flag값
-	var dup_flag	= true;
+	var dup_flag = true;
 	//시간 설정
-	var interval	= 500;
+	var interval = 1000;
 	//마지막으로 읽어온 시간을 저장, 그 값을 토대로 읽어오기 위함
-	var finalDate	= '';
+	var finalDate = "";
+	//계속해서 시간이 초기화 되는 것 방지
+	var timeFlag = true;
+	//디비의 변화를 캐치하기 위한 변수
+	var table_cnt = 0;
+	
+	
+	
+var chatManager = new function(){
 	
 	//*******************************************
-	//시작하자마자 호출 될 AJAX.
+	//채팅방에 입장하자마자 호출
 	//이 때엔 현재 시간을 가져와 finalDate에 저장한다.
 	//*******************************************
+	this.time_Get = function(){
+		
+		if(!timeFlag){
+			return false;
+		}else{
+			timeFlag = false;
+			
+			$.post(
+				"chat_time",
+				"",
+				function(data,textStatus){
+
+					alert("호출");
+					var result = eval("("+data+")");
+					finalDate = result.realtime;
+					chatManager.check();
+				}
+			)
+		}
+	}
 	
-	//채팅 내용 가져오기
+	this.check = function(){
+		
+		$.post(
+			"chat_check",
+			"table_cnt="+table_cnt+"&chat_index=${dto.chat_index}",
+			function(data,textStatus){
+				var result = eval("("+data+")");
+				
+				if(result.flag=='true'){
+					dup_flag = true;
+// 					timeFlag = true;
+				}
+				chatManager.proc();
+			}
+			
+		)
+	}
+	
+	this.show = function(){
+		
+		if(table_cnt == 0){
+			return false;
+		}
+		
+		$.post(
+			"chat_show",
+			"table_cnt="+table_cnt+"&chat_index=${dto.chat_index}&finalDate="+finalDate,
+			function(data,textStatus){
+				var result = eval("("+data+")");
+				
+				list = result;
+				
+				if(result.cflag =='true'){
+					chatManager.chat_print();
+				}
+			}
+		)
+	}
+	
+	this.chat_print = function(){
+		var o = document.getElementById("list");
+		var dt, dd;
+		// 채팅내용 추가 하기
+			
+		//일단 값 뽑아오는 것 부터..
+			alert(list);
+		
+			dt = document.createElement("dt");
+			dt.appendChild(document.createTextNode(dto.nickname));
+			o.appendChild(dt);
+			
+			dd = document.createElement("dd");
+			dd.appendChild(document.createTextNode(dto.msg));
+			o.appendChild(dd);
+		
+		//스크롤 가장 아래로 내리기
+		o.scrollTop = o.scrollHeight;
+		timeFlag = true;
+// 		chatManager.time_Get();
+	}
+	
 	this.proc = function() {
 		//중복 방지 플래그 확인
 		if(!dup_flag){
@@ -90,15 +178,19 @@ var chatManager = new function(){
 		//중복 방지를 위한 false값 할당
 		dup_flag = false;
 		
-		$post(
+		$.post(
 			//controller를 이용, 메소드를 호출함과 동시에
 			//저장 된 date값을 넘겨주면서
 			//마지막으로 읽어온 date값을 토대로 그 이후의 내용만 읽어온다.
 			"chat_proc",
-			param,
+			"chat_index=${dto.chat_index}",
 			function(data,textStatus){
 				var result = eval("("+data+")");
-				//호출할 메소드 아마도 show가 될 것.
+				
+				//채팅방 primary key를 기준으로 count 쿼리문 실행, 이전의 것과 비교하여 변화가 있다면
+				//채팅 내용을 새롭게 읽어오기 위함.
+				table_cnt = result.count;
+				chatManager.show();
 			}
 		)
 		
@@ -111,28 +203,27 @@ var chatManager = new function(){
 		var param = $("#Please_chat").serialize();
 		
 		//비동기 통신과 동시에 DB에 채팅 내용을 저장한다.
-		$post(
+		$.post(
 			"chat_write",
 			param,
 			function(data, textStatus){
 				//alert(textStatus);
 				
 				//JSON data값을 받아온다.				
-				var result = eval("("+data+")");
+// 				var result = eval("("+data+")");
 				//채팅 내용 비워주기
-				$("#msg").text("");
+				$("#msg").val("");
 				//채팅내용 갱신을 위한 메소드 호출
-				chatManager.proc();
+				chatManager.check();
 			}
 		)//post close
 		
 	}//write close
 	
 	//정해둔 시간마다 호출
-	setInterval(this.proc, interval);
+	setInterval(this.time_Get, interval);
 	
 }//chatManager close
-
 </script>
 </head> 
 <body>
@@ -153,7 +244,7 @@ var chatManager = new function(){
 	  <!-- 로그인 여부를 물어본 이후, 로그인 한 회원이면 닉네임값을 읽어와서 입력 아니라면 새로 등록하도록 해준다. -->
 <c:choose>
 	<c:when test="${not empty sessionScope.id}">
-		<input name="nickname" id="nickname" type="text" value="${dto.chat_nickname}" readonly/>
+		<input name="nickname" id="nickname" type="text" value="${nickname}" readonly/>
 	</c:when>
 	<c:otherwise>
 		<input name="nickname" id="nickname" type="text" required="required">

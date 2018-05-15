@@ -3,5 +3,9 @@
 {
 nickname:'${nickname}',
 msg:'${msg}',
-realtime:'${realtime}'
+realtime:'${realtime}',
+flag:'${flag}',
+count:'${count}',
+list:'${list}',
+cflag:'${cflag}'
 }

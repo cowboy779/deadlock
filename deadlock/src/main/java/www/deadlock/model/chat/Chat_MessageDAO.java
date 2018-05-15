@@ -18,6 +18,37 @@ public class Chat_MessageDAO implements IChat_MessageDAO {
 	}
 	
 	@Override
+	public boolean Canyou_Seethem(Map map) throws Exception {
+		boolean flag = false;
+		
+		int cnt = mybatis.selectOne("chat.Canyou_Seethem", map);
+		if(cnt>0) {
+			flag = true;
+		}
+		return flag;
+		
+	}
+	
+	
+	@Override
+	public List Chat_content_read(Map map) throws Exception {
+
+		List list = mybatis.selectList("chat.Chat_content_read", map);
+		
+		return list;
+	}
+	
+	@Override
+	public int insert_check(int chat_index) throws Exception {
+		int table_count = 0;
+		
+		table_count = mybatis.selectOne("chat.table_count", chat_index);
+		
+		return table_count;
+	}
+	
+	
+	@Override
 	public String getRealTime() throws Exception {
 		String realtime = "";
 		
@@ -26,11 +57,19 @@ public class Chat_MessageDAO implements IChat_MessageDAO {
 		return realtime;
 	}
 	
+	@Override
+	public String getNcikname(String id) throws Exception {
+		String nickname = "";
+		
+		nickname = mybatis.selectOne("chat.getNickname",id);
+		
+		return nickname;
+	}
 	
 	@Override
-	public boolean create(Object chat_index) throws Exception {
+	public boolean create(Object dto) throws Exception {
 		boolean flag = false;
-		int cnt = mybatis.insert("chat.create_content",chat_index);
+		int cnt = mybatis.insert("chat.create_content",dto);
 		if(cnt>0) {
 			flag = true;
 		}
@@ -69,6 +108,9 @@ public class Chat_MessageDAO implements IChat_MessageDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
+
+
+
 
 }

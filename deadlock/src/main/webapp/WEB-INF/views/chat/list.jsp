@@ -45,7 +45,6 @@ function create(){
 <button>검색</button>
 </form>
 </div>
-
   <TABLE class="table table-hover" style="margin: auto; width: 30%;">
 	   <c:if test="${empty list}">
 	    		<tbody>
@@ -61,7 +60,7 @@ function create(){
     </tr>
 <c:forEach var="dto" items="${list }">
     <tr>
-      <td>${i = i + 1 }</td>
+      <td>${nowPage}-${i = i + 1 }</td>
        <td><a href="javascript:read(${dto.chat_index})">${dto.chat_title}</a></td>
       <td>${dto.chat_nickname}</td>
     </tr>

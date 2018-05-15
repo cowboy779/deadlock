@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import www.deadlock.utility.*;
-import www.deadlock.model.chat.ChatMgr;
 import www.deadlock.model.chat.Chat_MessageDTO;
 import www.deadlock.model.chat.Chat_RoomDTO;
 import www.deadlock.model.chat.IChat_MessageDAO;
 import www.deadlock.model.chat.IChat_RoomDAO;
 import www.deadlock.model.member.IMemberDAO;
 import www.deadlock.model.member.MemberDTO;
+import www.deadlock.utility.Utility;
 
 
 @Controller
@@ -89,7 +88,7 @@ public class ChatController{
 		int totalRecord = rdao.total(map);
 		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
 		
-		int i = 0;
+		int i = 0; 
 		
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("col", col);
@@ -108,6 +107,12 @@ public class ChatController{
 		
 		Chat_RoomDTO dto = (Chat_RoomDTO) rdao.read(chat_index);
 		
+		if(request.getSession().getAttribute("id") != null) {
+			String realId = (String)request.getSession().getAttribute("id");
+			String nickname = mdao.getNcikname(realId);
+			request.setAttribute("nickname", nickname);
+		}
+		
 		request.setAttribute("dto", dto);
 		request.setAttribute("col", request.getParameter("col"));
 		request.setAttribute("word", request.getParameter("word"));
@@ -122,9 +127,6 @@ public class ChatController{
 		String msg = request.getParameter("msg");
 		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
 		
-		
-		
-		
 		try {
 			URLDecoder.decode(nickname, "UTF-8");
 			URLDecoder.decode(msg, "UTF-8");
@@ -134,7 +136,7 @@ public class ChatController{
 			dto.setChat_content(msg);
 			dto.setNickname(nickname);
 			
-			mdao.create(dto.getChat_index());
+			mdao.create(dto);
 			request.setAttribute("nickname", nickname);
 			request.setAttribute("msg", msg);
 			
@@ -148,11 +150,107 @@ public class ChatController{
 		
 	}
 	
+	@RequestMapping("/chat/chat_time")
+	public String getTime(HttpServletRequest request) {
+		try {
+			String realtime = mdao.getRealTime();
+			request.setAttribute("realtime", realtime);
+			return "/chat/chat_write";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "/chat/error";
+		}
+	}
+	
 	@RequestMapping("/chat/chat_proc")
 	public String chat_proc(HttpServletRequest request) {
+		int count = 0;
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
 		
-		
-		return "";
+		try {
+			
+			count = mdao.insert_check(chat_index);
+			request.setAttribute("count", count);
+			return "/chat/chat_write";
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "/chat/error";
+		}
 	}
+	
+	@RequestMapping("/chat/chat_check")
+	public String chat_check(HttpServletRequest request) {
+		int table_cnt = Integer.parseInt(request.getParameter("table_cnt"));
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		boolean flag = false;
+		try {
+			
+			mdao.insert_check(chat_index);
+			if(table_cnt != chat_index) {
+				flag = true;
+				request.setAttribute("flag", flag);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/chat/error";
+		}
+		
+		return "/chat/chat_write";
+		
+	}
+	
+	@RequestMapping("/chat/chat_show")
+	public String chat_show(HttpServletRequest request) {
+		//아마 필요가 없게 될 것 같다. 일단 보류
+//		int table_cnt = Integer.parseInt(request.getParameter("table_cnt"));
+		
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		String finalDate = request.getParameter("finalDate");
+		
+		Map map = new HashMap(); 
+		map.put("chat_index", chat_index);
+		map.put("finalDate", finalDate);
+		
+		try {
+			boolean cflag = mdao.Canyou_Seethem(map);
+			if(cflag) {
+				
+			List list = mdao.Chat_content_read(map);
+			
+			
+//			String nickname = dto.getNickname();
+//			String chat_content = dto.getChat_content();
+			
+//			request.setAttribute("nickname", nickname);
+//			request.setAttribute("msg", chat_content);
+			request.setAttribute("cflag", cflag);
+			
+			request.setAttribute("list", list);
+			}
+			
+			return "/chat/chat_write";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "/chat/error";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
