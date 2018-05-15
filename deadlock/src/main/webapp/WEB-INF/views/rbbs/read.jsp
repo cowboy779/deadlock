@@ -15,6 +15,7 @@ function oneclick(wh){
 	location.href = url;
 }
 </script>
+ <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
 		<table width="699" border="1" cellspacing="0" cellpadding="0">
@@ -43,9 +44,13 @@ function oneclick(wh){
 		</table>
 		<br>
 		<div id="button">
-		<input type="button" onclick="javascript:oneclick('list')" value="리스트로">
+		<a type="button" onclick="javascript:oneclick('list')" >리스트로</a>
 		<input type="button" onclick="oneclick('reply')" value="답변">
 		<input type="button" onclick="oneclick('update')" value="수정">
+		<form action="javascript:oneclick('delete')">
+		<input type="submit" value="삭제">
+		<input type="hidden" name="oldfile" value="${dto.fname }">
+		</form>
 		</div>
 
 </body>

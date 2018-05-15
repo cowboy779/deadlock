@@ -114,6 +114,8 @@ public class RbbsController {
 	@RequestMapping("/rbbs/delete")
 	public String delete(HttpServletRequest request) throws Exception {
 		Map map = new HashMap();
+		String basePath = request.getRealPath("./storage_rbbs");
+		String oldfile = request.getParameter("oldfile");
 		String id = request.getParameter("id");
 		String rnum = request.getParameter("rnum");
 
@@ -125,6 +127,9 @@ public class RbbsController {
 		if (flag) {
 
 			if (dao.delete(rnum)) {
+				
+				Utility.deleteFile(basePath, oldfile);
+				
 				return "redirect:/rbbs/list";
 			} else {
 				return "/rbbs/error";
@@ -142,10 +147,14 @@ public class RbbsController {
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
 		
 		int grpno = dto.getGrpno();
+		int indent = dto.getIndent();
+		int ansnum	= dto.getAnsnum();
 		
 		model.addAttribute("rnum", rnum);
 		model.addAttribute("grpno", grpno);
-
+		model.addAttribute("indent", indent);
+		model.addAttribute("ansnum", ansnum);
+		
 		return "/rbbs/reply";
 	}
 	
@@ -198,5 +207,6 @@ public class RbbsController {
 		}
 		
 	}
+	
 	
 }

@@ -73,7 +73,7 @@ public class RbbsDTO {
 		return rdate;
 	}
 
-	public void setRdate(String date) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 

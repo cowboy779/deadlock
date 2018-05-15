@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="/ssi/ssi.jsp" %>
+<%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,6 +16,8 @@
 		
 		<input type="hidden" name="rnum" value="${param.rnum }">
 		<input type="hidden" name="grpno" value="${grpno }">
+		<input type="hidden" name="indent" value="${indent }">
+		<input type="hidden" name="ansnum" value="${ansnum }">
   <TABLE>
     <TR>
       <TH>분류</TH>

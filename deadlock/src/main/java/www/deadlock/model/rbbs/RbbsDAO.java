@@ -28,6 +28,7 @@ public class RbbsDAO implements IrbbsDAO{
 	public Object read(Object rnum) {
 
 		RbbsDTO dto = mybatis.selectOne("rbbs.read", rnum);
+		
 
 		return dto;
 	}

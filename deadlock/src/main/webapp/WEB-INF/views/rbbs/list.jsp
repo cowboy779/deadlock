@@ -22,6 +22,8 @@ function read(rnum){
 	location.href = url;
 }
 </script>
+
+ <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
 
@@ -44,9 +46,9 @@ function read(rnum){
  	<option value="total">전체출력</option>
  
  </select>
-<input type="search" name="word" value="${word }" required>
-<button>search</button>
-<button type="button" onclick="location.href='${root}/rbbs/create'">regit</button>
+<input type="search" name="word" value="${word }"  required>
+<button type="submit" class="btn btn-default btn-lg">search</button>
+<button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-lg">regit</button>
 </form>
  </div>
 <br>

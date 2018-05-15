@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="rbbs">
     
     <select id="read" resultType="RbbsDTO" parameterType="int">
-    	select * from rbbs
+    	select rnum,id,title,content, to_char(rdate, 'yyyy-mm-dd') rdate,fname,rcount,imp,ansnum,indent,grpno,filesize,refnum from rbbs
     	where rnum = #{rnum}
     </select>
     
@@ -87,13 +87,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="createReply" parameterType="RbbsDTO">
     
-    <selectKey keyProperty="rnum" resultType="int" order="BEFORE">
-	select nvl(max(rnum), 0) +1 as rnum from rbbs
-	</selectKey>
-    
-    
     insert into rbbs(rnum, id, title, content, rdate, fname, rcount,imp, grpno, indent, refnum ,ansnum)
-	values(#{rnum}, #{id}, 
+	values((select nvl(max(rnum), 0) +1 as rnum from rbbs), #{id}, 
 	#{title}, #{content}, sysdate, #{fname}, #{rcount},#{imp}, #{grpno}, #{indent}+1, #{rnum}, #{ansnum}+1)
     
     </insert>
