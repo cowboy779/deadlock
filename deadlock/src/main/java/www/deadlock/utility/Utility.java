@@ -108,8 +108,8 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 		
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none;}");
+		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1.3em;}");
+		str.append("  #paging A:link {text-decoration:none; font-size: 1.3em;}");
 		str.append("  #paging A:hover{text-decoration:none;}");
 		str.append("  #paging A:visited {text-decoration:none;}");
 		str.append("  .span_box_1{ ");
@@ -119,12 +119,13 @@ public class Utility {
 		str.append("    text-align: center;");
 		str.append("  }");
 		str.append("</style>");
-		str.append("<DIV id='paging'>");
+		str.append(" <div class='collapse navbar-collapse' id='navbar-collapse'>");
+		str.append("<DIV id='paging'><ul class='nav navbar-nav'>");
 
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><a href='./list?col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'  class='btn btn-default btn-sm'>이전</a></span>");
+			str.append("<span class='span_box_1'><li><a href='./list?col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "'  class='btn btn-default btn-sm'>이전</a></li></span>");
 		}
 		// -----------------------
 
@@ -134,10 +135,10 @@ public class Utility {
 			}
 
 			if (nowPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
+				str.append("<span class='span_box_2'><li>" + i + "&nbsp;</li></span>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
 			} else {
-				str.append("<span class='span_box_1'><A href='./list.do?col=" + col + "&word=" + word + "&nowPage=" + i
-						+ "' class='btn btn-default btn-sm'>" + i + "</A></span>"); // 내페이지를 제외한 다른 곳
+				str.append("<span class='span_box_1'><li><A href='./list.do?col=" + col + "&word=" + word + "&nowPage=" + i
+						+ "' >" + i + "</A></li></span>"); // 내페이지를 제외한 다른 곳
 			}
 		}
 
@@ -146,7 +147,7 @@ public class Utility {
 			str.append("<span class='span_box_1'><A href='./list.do?col=" + col + "&word=" + word + "&nowPage="
 					+ _nowPage + "'  class='btn btn-default btn-sm'>다음</A></span>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></div>");
 
 		return str.toString();
 	}
