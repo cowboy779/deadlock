@@ -7,9 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import www.deadlock.model.pbbs.PBbsDTO;
+
 @Repository
 public class YBbsDAO implements IYBbsDAO{
-
+	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
@@ -50,7 +52,7 @@ public class YBbsDAO implements IYBbsDAO{
 	
 	return mybatis.selectList("ybbs.list", map);
 	}
-	
+
 	public void ycount(int ynum){
 		mybatis.update("ybbs.ycount",ynum);
 	}
@@ -60,6 +62,8 @@ public class YBbsDAO implements IYBbsDAO{
 		
 		return mybatis.selectOne("ybbs.total",map);
 	}
+
+
 	
 	
 }

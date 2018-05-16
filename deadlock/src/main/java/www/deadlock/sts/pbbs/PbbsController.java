@@ -1,5 +1,6 @@
 package www.deadlock.sts.pbbs;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 
 import www.deadlock.model.pbbs.PBbsDAO;
 import www.deadlock.model.pbbs.PBbsDTO;
 import www.deadlock.utility.Utility;
+
 
 @Controller
 public class PbbsController {
@@ -22,26 +24,51 @@ public class PbbsController {
 	@Autowired
 	private PBbsDAO dao;
 	
-	@RequestMapping("/pbbs/bcreate")
-	public String create(PBbsDTO dto, Model model, String nowPage, String col, String word) {
-		if (dao.create(dto)) {
-
-			model.addAttribute("col", col);
-			model.addAttribute("word", word);
-			model.addAttribute("nowPage", nowPage);
-			model.addAttribute("bnum", dto.getBnum());
-
-			return "redirect:/pbbs/list";
-		} else {
-			return "pbbs/error";
-		}
-
-	}
-
+	@RequestMapping("/pbbs/delete")
+    public String delete(@ModelAttribute int bnum) {
+ 
+        dao.delete(bnum);
+ 
+        // 리스트 갱신
+        return "redirect:/pbbs/list";
+    }
+ 
+    @RequestMapping("/pbbs/update")
+    public String update(PBbsDTO dto) {
+    
+    	dao.update(dto);
+        return "redirect:/pbbs/list";
+    }
+	
+	
+	  @RequestMapping("/pbbs/view")
+	    public String view(int bnum, String passwd, Model model) {
+		  Map map = new HashMap();
+	        // 비밀번호가 맞는지 체크
+	        int result = dao.passwdCheck(bnum, passwd);
+	 
+	        if (result>0) {
+	            // 맞으면 view.jsp 로 이동(수정/삭제화면)
+	            model.addAttribute("dto", dao.ybDetail(bnum));
+	            
+	            //view.jsp 에서 수정 삭제 할 수 있다.
+	            return "/pbbs/view";
+	 
+	        } else {
+	 
+	            // 틀리면
+	            model.addAttribute("message", "비밀번호가 일치하지 않습니다");
+	            return "redirect:/pbbs/list";
+	        }
+	 
+	    }
+	
+	
+	
 	
 	@RequestMapping("/pbbs/list")
-	public String list(HttpServletRequest request) {
-
+	public void list(Model model,HttpServletRequest request) {
+		
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
 
@@ -65,20 +92,39 @@ public class PbbsController {
 		map.put("word", word);
 		map.put("sno", sno);
 		map.put("eno", eno);
-
-		List<PBbsDTO> blist = dao.list(map);
-
-		// 전체 레코드 개수 가져오기
+		
+		
+		List<PBbsDTO> list = dao.list(map);
+		
 		int totalRecord = dao.total(map);
 		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
-
-		request.setAttribute("blist", blist);
-		request.setAttribute("paging", paging);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("col", col);
-		request.setAttribute("word", word);
-
-		return "/pbbs/list";
+		
+		model.addAttribute("list",list);
+//		model.addAttribute("listsize",list.size());
+		model.addAttribute("paging",paging);
+		System.out.println("리스트"+list);
+		
 	}
+	
+	
+	
+	@RequestMapping("/pbbs/create")
+    public String write(@ModelAttribute PBbsDTO dto, Model model) {
+ 
+        // 입력한 내용이 없을때
+        if (dto.getBname() == null) {
+ 
+           
+            return "/pbbs/create";
+        } else {
+            // 입력한 내용이 있을때
+            // 테이블에 insert
+            // 목록 갱신
+ 
+        	dao.create(dto);
+                //입력후 리스트로 이동
+            return "redirect:/pbbs/list";
 
+        }
+	}
 }

@@ -45,7 +45,7 @@ public class YrecoDAO implements IYrecoDAO{
 		return flag;
 	}
 	
-	public List<YrecoDTO> list(Map map){
+	public List list(Map map){
 		return mybatis.selectList("yreco.ylist",map);
 	}
 	

@@ -27,10 +27,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where yrenum = #{yrenum}
    </update>
    
-   <delete id="delete" parameterType="int">
-   delete from yreco
-   where yrenum = #{yrenum} 
-   </delete>
    
    <delete id="ydelete" parameterType="int">
    delete from yreco
