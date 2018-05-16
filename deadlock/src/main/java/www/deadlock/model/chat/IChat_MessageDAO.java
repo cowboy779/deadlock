@@ -16,4 +16,6 @@ public interface IChat_MessageDAO extends DAOSTDInter {
 	public List Chat_content_read(Map map) throws Exception;
 
 	public boolean Canyou_Seethem(Map map) throws Exception;
+	
+	public String getTime() throws Exception;
 }

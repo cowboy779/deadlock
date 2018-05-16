@@ -18,6 +18,16 @@ public class Chat_RoomDAO implements IChat_RoomDAO{
 	}
 	
 	@Override
+	public boolean chat_room_Check(Map map) {
+		boolean flag = false;
+		int cnt = mybatis.selectOne("chat.chat_room_Check",map);
+		if(cnt>0) {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	@Override
 	public boolean create(Object dto) {
 		boolean flag = false;
 		int cnt = mybatis.insert("chat.create",dto);

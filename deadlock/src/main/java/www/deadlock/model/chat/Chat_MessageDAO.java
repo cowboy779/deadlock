@@ -18,6 +18,17 @@ public class Chat_MessageDAO implements IChat_MessageDAO {
 	}
 	
 	@Override
+	public String getTime() {
+		String getTime = "";
+		try {
+			getTime = mybatis.selectOne("chat.getTime");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return getTime;
+	}
+	
+	@Override
 	public boolean Canyou_Seethem(Map map) throws Exception {
 		boolean flag = false;
 		
@@ -99,8 +110,11 @@ public class Chat_MessageDAO implements IChat_MessageDAO {
 
 	@Override
 	public boolean delete(Object pk) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		int cnt = mybatis.delete("chat.delete_message",pk);
+		if(cnt>0)flag=true;
+		
+		return flag;
 	}
 
 	@Override

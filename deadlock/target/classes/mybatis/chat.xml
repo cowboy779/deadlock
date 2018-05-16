@@ -4,27 +4,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
+<select id="chat_room_Check" parameterType="map" resultType="int">
+SELECT count(*)
+FROM chat_room
+WHERE chat_index = #{chat_index}
+AND
+id = #{id}
+</select>
+
+<delete id="delete_message" parameterType="int">
+delete from chat_message
+WHERE chat_index = #{chat_index}
+</delete>
+
 <select id="Canyou_Seethem" parameterType="map" resultType="int">
 select count(*)
 FROM chat_message
 where chat_index = #{chat_index}
 AND
-chat_date >=
-TO_DATE(#{finalDate},
-'YYYY-MM-DD hh24:mi:ss')
+chat_date
+>= 
+TO_TIMESTAMP(#{finalDate},
+'YYYY-MM-DD hh24:mi:ss.ff')
 </select>
 
 <select id="Chat_content_read" parameterType="map" resultType="Chat_MessageDTO">
 select chat_message_index, chat_content,
 chat_index,
-to_char(chat_date,'yyyy-mm-dd hh24:mi:ss')chat_date,
+chat_date,
 nickname
 FROM chat_message
 WHERE chat_index = #{chat_index}
 AND
 chat_date >=
-TO_DATE(#{finalDate},
-'YYYY-MM-DD hh24:mi:ss')
+TO_TIMESTAMP(#{finalDate},
+'YYYY-MM-DD hh24:mi:ss.ff')
 
 </select>
 
@@ -46,13 +60,18 @@ nickname
 VALUES(
 (select nvl(max(chat_message_index),0)+1 FROM chat_message),
 #{chat_content},#{chat_index},
-sysdate,
+systimestamp(2),
 #{nickname}
 )
 </insert>
 
 <select id="getRealTime" resultType="String">
-SELECT to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') 
+SELECT to_char(current_timestamp(2),'yyyy/mm/dd hh24:mi:ss.ff') 
+FROM dual
+</select>
+
+<select id="getTime" resultType="String">
+SELECT to_char(current_timestamp(2),'hh24:mi:ss') 
 FROM dual
 </select>
 
@@ -74,12 +93,12 @@ FROM chat_room
 where chat_index = #{chat_index}
 </select>
 
-<update id="update" parameterType="Chat_RoomDTO">
-UPDATE chat_room
-SET chat_title = #{chat_title},
-    chat_nickname = #{chat_nickname}
-WHERE chat_index = #{chat_index}
-</update>
+<!-- <update id="update" parameterType="Chat_RoomDTO"> -->
+<!-- UPDATE chat_room -->
+<!-- SET chat_title = #{chat_title}, -->
+<!--     chat_nickname = #{chat_nickname} -->
+<!-- WHERE chat_index = #{chat_index} -->
+<!-- </update> -->
 
 <delete id="delete" parameterType="int">
 DELETE FROM chat_room

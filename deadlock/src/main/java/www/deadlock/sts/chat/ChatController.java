@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import www.deadlock.model.chat.ChatMgr;
 import www.deadlock.model.chat.Chat_MessageDTO;
 import www.deadlock.model.chat.Chat_RoomDTO;
 import www.deadlock.model.chat.IChat_MessageDAO;
@@ -26,14 +29,65 @@ public class ChatController{
 	@Autowired
 	private IChat_RoomDAO rdao;
 	
-//	@Autowired
-//	private ChatMgr mgr;
+	@Autowired
+	private ChatMgr mgr;
 	
 	@Autowired
 	private IMemberDAO dao;
 	
 	@Autowired
 	private IChat_MessageDAO mdao;
+	
+	@RequestMapping("/chat/loginList")
+	public ModelAndView loginList(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
+		try {
+			if(request.getSession().getAttribute("id") != null) {
+				String realId = (String)request.getSession().getAttribute("id");
+				String nickname = mdao.getNcikname(realId);
+				String getTime = mdao.getTime();
+				
+				modelAndView.addObject("nickname",nickname);
+				modelAndView.addObject("getTime",getTime);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping("/chat/delete")
+	public String delete(HttpServletRequest request) throws Exception {
+		
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		
+		mgr.delete(chat_index);
+		
+		return "redirect:/chat/list";
+	}
+	
+	@RequestMapping("/chat/deleteProc")
+	public ModelAndView deleteProc(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
+		String user_id = (String)request.getSession().getAttribute("id");
+		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		Map map = new HashMap();
+		map.put("id", user_id);
+		map.put("chat_index", chat_index);
+		boolean flag = rdao.chat_room_Check(map);
+		
+		modelAndView.addObject("flag",flag);
+		
+		return modelAndView;
+	}
 
 	@RequestMapping("/chat/chatCreate")
 	public String chatCreate(HttpServletRequest request) throws Exception {
@@ -122,11 +176,11 @@ public class ChatController{
 	}
 	
 	@RequestMapping("/chat/chat_write")
-	public String chat_write(HttpServletRequest request) {
+	public ModelAndView chat_write(HttpServletRequest request) {
 		String nickname = request.getParameter("nickname");
 		String msg = request.getParameter("msg");
 		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
-		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 		try {
 			URLDecoder.decode(nickname, "UTF-8");
 			URLDecoder.decode(msg, "UTF-8");
@@ -137,73 +191,55 @@ public class ChatController{
 			dto.setNickname(nickname);
 			
 			mdao.create(dto);
-			request.setAttribute("nickname", nickname);
-			request.setAttribute("msg", msg);
+			modelAndView.addObject("nickname",nickname);
+			modelAndView.addObject("msg",msg);
 			
-			return "/chat/chat_write";
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "/chat/error";
 		}
+		return modelAndView;
 		
 	}
 	
 	@RequestMapping("/chat/chat_time")
-	public String getTime(HttpServletRequest request) {
+	public ModelAndView getTime(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 		try {
 			String realtime = mdao.getRealTime();
-			request.setAttribute("realtime", realtime);
-			return "/chat/chat_write";
+
+			modelAndView.addObject("realtime",realtime);
 		}catch(Exception e){
 			e.printStackTrace();
-			return "/chat/error";
 		}
-	}
-	
-	@RequestMapping("/chat/chat_proc")
-	public String chat_proc(HttpServletRequest request) {
-		int count = 0;
-		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
+		return modelAndView;
 		
-		try {
-			
-			count = mdao.insert_check(chat_index);
-			request.setAttribute("count", count);
-			return "/chat/chat_write";
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			return "/chat/error";
-		}
 	}
 	
 	@RequestMapping("/chat/chat_check")
-	public String chat_check(HttpServletRequest request) {
+	public ModelAndView chat_check(HttpServletRequest request) {
 		int table_cnt = Integer.parseInt(request.getParameter("table_cnt"));
 		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
 		boolean flag = false;
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 		try {
 			
-			mdao.insert_check(chat_index);
-			if(table_cnt != chat_index) {
+			int count = mdao.insert_check(chat_index);
+			if(table_cnt != count) {
 				flag = true;
-				request.setAttribute("flag", flag);
+				modelAndView.addObject("flag",flag);
+				modelAndView.addObject("count", count);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/chat/error";
 		}
-		
-		return "/chat/chat_write";
+		return modelAndView;
 		
 	}
 	
 	@RequestMapping("/chat/chat_show")
-	public String chat_show(HttpServletRequest request) {
-		//아마 필요가 없게 될 것 같다. 일단 보류
-//		int table_cnt = Integer.parseInt(request.getParameter("table_cnt"));
+	public ModelAndView chat_show(HttpServletRequest request) {
 		
 		int chat_index = Integer.parseInt(request.getParameter("chat_index"));
 		String finalDate = request.getParameter("finalDate");
@@ -211,30 +247,25 @@ public class ChatController{
 		Map map = new HashMap(); 
 		map.put("chat_index", chat_index);
 		map.put("finalDate", finalDate);
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 		
 		try {
 			boolean cflag = mdao.Canyou_Seethem(map);
 			if(cflag) {
 				
 			List list = mdao.Chat_content_read(map);
+			int size = list.size();
 			
+			modelAndView.addObject("size",size);
+			modelAndView.addObject("cflag",cflag);
+			modelAndView.addObject("list",list);
 			
-//			String nickname = dto.getNickname();
-//			String chat_content = dto.getChat_content();
-			
-//			request.setAttribute("nickname", nickname);
-//			request.setAttribute("msg", chat_content);
-			request.setAttribute("cflag", cflag);
-			
-			request.setAttribute("list", list);
 			}
-			
-			return "/chat/chat_write";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "/chat/error";
 		}
+		return modelAndView;
 		
 	}
 	
