@@ -22,6 +22,18 @@ public class Utility {
 		return rdao.total(bbsno);
 	}
 	
+	public static String getSepValue(String code) {
+		String value = null;
+		Map<String, String> codes = new HashMap<String, String>();
+		codes.put("A", "질문게시판");
+		codes.put("B", "정답게시판");
+		codes.put("C", "1번게임");
+		codes.put("D", "2번게임");
+
+		value = codes.get(code);
+		return value;
+	}
+	
 
 	public static String getCodeValue(String code) {
 		String value = null;
@@ -57,6 +69,7 @@ public class Utility {
 		List<String> list = new ArrayList<String>();
 
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Calendar cal = Calendar.getInstance();
 		for (int j = 0; j < 3; j++) {
 			list.add(sd.format(cal.getTime()));// 오늘날짜를 add
@@ -75,6 +88,7 @@ public class Utility {
 	public static boolean compareDay(String wdate) {
 		boolean flag = false;
 		List<String> list = getDay();
+		wdate=wdate.substring(0, 10);
 		if (wdate.equals(list.get(0)) || wdate.equals(list.get(1)) || wdate.equals(list.get(2))) {
 			flag = true;
 		}
@@ -135,6 +149,7 @@ public class Utility {
 		str.append("</style>");
 		str.append("<DIV id='paging'>");
 		str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+
 
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
@@ -307,7 +322,7 @@ public class Utility {
 
 	}
 
-	public static String paging2(int totalRecord, int nPage, int recordPerPage, String url, int bbsno, int nowPage,
+	public static String paging2(int totalRecord, int nPage, int recordPerPage, String url, int qnum, int nowPage,
 			String col, String word) {
 
 		int pagePerBlock = 5; // 블럭당 페이지 수
@@ -350,7 +365,7 @@ public class Utility {
 
 		int _nPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='" + url + "?bbsno=" + bbsno + "&nPage=" + _nPage + "&col="
+			str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
 					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>이전</A></span>");
 		}
 
@@ -362,14 +377,14 @@ public class Utility {
 			if (nPage == i) {
 				str.append("<span class='span_box_2'>" + i + "</span>");
 			} else {
-				str.append("<span class='span_box_1'><A href='" + url + "?bbsno=" + bbsno + "&nowPage=" + nowPage
+				str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nowPage=" + nowPage
 						+ "&col=" + col + "&word=" + word + "&nPage=" + i + "'>" + i + "</A></span>");
 			}
 		}
 
 		_nPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='" + url + "?bbsno=" + bbsno + "&nPage=" + _nPage + "&col="
+			str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
 					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>다음</A></span>");
 		}
 		str.append("</DIV>");

@@ -77,59 +77,40 @@ function qrdelete(qrnum){
 		location.href=url;
 	}
 }
-
-function upCheck(f){
-	if(f.filenameMF.value==""){
-		if(confirm("사진 변경이 되지 않았습니다.\n사진을 변경하시려면 '확인'을 \n그대로 사용하시려면 '취소'를 눌러주세요.")==true){
-		f.filenameMF.click();
-		return false;
-		}
-	}
-}
-
-function imgfile(){
-	document.frm.filenameMF.click();
-	document.frm.text1.value=document.frm.filenameMF.value;
-}
 </script>
 </head>
 <body>
 
 <br>
-<DIV class="w3-panel w3-border-right w3-border-left w3-border-green w3-wide" style="width:30%; max-width:200px; margin:0 auto; font-size: x-large; text-align: center;">글 수정</DIV>
+<DIV class="w3-panel w3-border-right w3-border-left w3-border-green w3-wide" style="width:25%; max-width:200px; margin:0 auto; font-size: x-large; text-align: center;">
+	${util:sepvalue(dto.gamenum) } - <br>${util:sepvalue(dto.qsep) }
+	
+</DIV>
 <br><br>
 
-<FORM class="w3-container" name='frm' method='POST' enctype="multipart/form-data" onsubmit="return upCheck(this)" action='updateProc'>
-<input type="hidden" name="qnum" value="${qnum }">
-<input type="hidden" name="oldfile" value="${fname }">
-<input type="hidden" name="col" value="${param.col }">
-<input type="hidden" name="word" value="${param.word }">
-<input type="hidden" name="nowPage" value="${param.nowPage}">
-
-	<div class="w3-card-4" style="width:40%; max-width:400px; margin: 0 auto;">
-		<p style="text-align: left">${dto.id }(${dto.qcount })</p>
-		
-		<input type="file" name="filenameMF" style="display:none;">
-		<input type="hidden" name="text1" size="10" >
-		<a href="javascript:imgfile();">
-		<img src="${root }/storage_qbbs/${dto.fname}" style="width:100%; display:block;  height: auto;" ></a>
-	
-	    <div class="w3-container">
-	      <h4><b><input class="w3-input w3-border" type="text" name='title' value='${dto.title }' style="width:100%;"></b></h4>
-	      <span class="glyphicon glyphicon-pencil"></span> <p><textarea name="content" style="width:100%; height:100px;">${content }</textarea></p>
-	    </div>
-	<p style="text-align: right;">${dto.qdate }</p>
-	</div>
-
+<div class="w3-card-4" style="width:40%; max-width:400px; margin: 0 auto;">
+	<p style="text-align: left">${dto.id }(${dto.qcount })</p>
+	<a href="${root }/storage_qbbs/${dto.fname}" download>
+		<img src="${root }/storage_qbbs/${dto.fname}" style="width:100%; display:block;  height: auto;"  class="w3-hover-opacity" 
+							alt="<c:set var="a" value="${fn:indexOf(dto.fname,'.') }" />  
+ 				      		 	${fn:substring(dto.fname, 0, a) } 
+ 				      		    ">
+	</a>
+    <div class="w3-container">
+      <h4><b>${dto.title }</b></h4>
+      <span class="glyphicon glyphicon-pencil"></span> <p>${content }</p>
+    </div>
+<p style="text-align: right;">${dto.qdate }</p>
+</div>
 <br><br>
   
   <DIV class='w3-center'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='submit' value='수정'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='reset' value='다시쓰기'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='취소' onclick="history.back()">
+    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='등록' onclick="qcreate()">
+    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='수정' onclick="qupdate()">
+    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='삭제' onclick="qdelete('${dto.qnum}','${dto.fname }')">
+    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='목록' onclick="qlist()">
   </DIV>
 
-</FORM>
 <!-- 댓글 -->
 <hr>
 <div style=" width:60%; max-width:600px; margin: 0 auto;"> 
@@ -207,3 +188,10 @@ function imgfile(){
 </body>
 
 </html>
+
+<c:if test="${not empty str }">
+ <script type="text/javascript"> 
+	  alert('${str}'); 
+ </script> 
+	<c:remove var="Update" scope="session" />
+</c:if>

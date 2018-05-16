@@ -21,9 +21,9 @@
         <put-attribute name="title" value="정/질게 글보기" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/qbbs/read.jsp" /> 
     </definition> 
-    <definition name="/qbbs/delete" extends="main"> 
-        <put-attribute name="title" value="정/질게 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/qbbs/deleteForm.jsp" /> 
+    <definition name="/qbbs/updateProc" extends="main"> 
+        <put-attribute name="title" value="정/질게 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/updateProc.jsp" /> 
     </definition>  
    
   

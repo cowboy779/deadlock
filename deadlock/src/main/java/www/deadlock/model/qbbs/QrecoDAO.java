@@ -1,21 +1,25 @@
 package www.deadlock.model.qbbs;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
 public class QrecoDAO implements IQrecoDAO{
-	private static SqlSessionTemplate mybatis;
+	
+	@Autowired
+	private SqlSessionTemplate mybatis;
 
 	
 	
 
-	public static void setMybatis(SqlSessionTemplate mybatis) {
-		QrecoDAO.mybatis = mybatis;
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		this.mybatis = mybatis;
 	}
 
 	public Object read(Object qrenum) {
@@ -55,13 +59,18 @@ public class QrecoDAO implements IQrecoDAO{
 		return flag;
 	}
 	
+	public int qdelete(int qnum) throws Exception{
+		return mybatis.delete("qreco.qdelete", qnum);
+	}
+	
 	public int total(Map map) {
 		return mybatis.selectOne("qreco.total", map);
 	}
 	
 	public List<QrecoDTO> list(Map map){
-		
-		return mybatis.selectList("qreco.list", map);
+	
+		List list =mybatis.selectList("qreco.list", map);
+		return list;
 	}
 	
 

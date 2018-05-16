@@ -68,9 +68,11 @@ public class QbbsDAOTest {
 		dto.setContent("내용3");
 		dto.setFname("man.jpg");
 		dto.setQsep("a");
+		dto.setGamenum("c");
 		dto.setId("admin");
 		
 		assertTrue(qdao.create(dto));
+		System.out.println(dto.getQnum());
 	}
 
 	@Test

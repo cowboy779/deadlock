@@ -28,6 +28,17 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
+
+function read(qnum){
+	var url="./read";
+	url+="?qnum="+qnum;
+	url+="&col=${col}";
+	url+="&word=${word}";
+	url+="&nowPage=${nowPage}";
+	
+	location.href=url;
+}
+
 </script>
 </head>
 <body>
@@ -60,15 +71,18 @@ function onClick(element) {
 					<td>
 					<div style="width:100px; height:60px;">
 						<img src="${root }/storage_qbbs/${dto.fname}" style="width:100%; display:block;  height: 100%;" onclick="onClick(this)" class="w3-hover-opacity" 
-					    alt="${dto.fname}
-					    	 <c:set var="a" value="${fn:indexOf(dto.fname,'.') }" />  
+					    alt="<c:set var="a" value="${fn:indexOf(dto.fname,'.') }" />  
  				      		 ${fn:substring(dto.fname, 0, a) } 
 					    	">
+				
 				    </div>
 				    </td>
-					<td>${dto.qsep }</td> 
+					<td>${util:sepvalue(dto.qsep) }</td> 
 					<td>
 						<a href="javascript:read('${dto.qnum }')">${dto.title }</a>
+						<c:if test="${util:newimg(dto.qdate)}">
+				    		<img src="${root }/storage_qbbs/new2.jpg" width="30px">
+				    	</c:if>
 					</td>
 					<td>${dto.id }</td>
 					<td>${dto.qdate }</td>

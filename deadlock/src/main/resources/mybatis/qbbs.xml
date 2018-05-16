@@ -5,13 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="qbbs">
     
     <select id="read" resultType="qbbsDTO" parameterType="int">
-    	select * from qbbs
+    	select qnum,fname,qsep,title,content,qsep,gamenum,id,to_char(qdate,'yyyy-mm-dd hh24:mi:ss')qdate from qbbs
     	where qnum = #{qnum}
     </select>
     
     <insert id="create" parameterType="qbbsDTO">
-    	insert into qbbs(qnum,title,content,fname,qsep,gamenum,qdate,id)
-		values((select nvl(max(qnum),0)+1 as qnum from qbbs),#{title},#{content},#{fname},#{qsep},#{gamenum},sysdate,#{id})
+    	<selectKey keyProperty="qnum" resultType="int" order="BEFORE">
+			select nvl(max(qnum),0)+1 as qnum from qbbs
+		</selectKey>
+    	insert into qbbs(qnum,title,content,fname,qsep,gamenum,qdate,id,filesize)
+		values(#{qnum},#{title},#{content},#{fname},#{qsep},#{gamenum},sysdate,#{id},#{filesize})
     </insert>
      
     <update id="update" parameterType="qbbsDTO">
@@ -25,16 +28,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <delete id="delete" parameterType="int">
-    	delete from qbbs
+    	delete from qbbs cascade
 		where qnum=#{qnum}
     </delete>
     
     <select id="list" resultType="qbbsDTO" parameterType="Map">
-    	select fname,qsep,title,id,qdate, r
+    	select qnum,fname,qsep,title,id,to_char(qdate,'yyyy-mm-dd hh24:mi:ss')qdate, r
 		from(
-		    select fname,qsep,title,id,qdate, rownum r
+		    select qnum,fname,qsep,title,id,qdate, rownum r
 		    from(
-		        select fname,qsep,title,id,qdate 
+		        select qnum,fname,qsep,title,id,qdate 
 		        from qbbs
 		        <where>
 					<if test="col=='title'">

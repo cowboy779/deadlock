@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapais.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
 
 <title>Insert title here</title>
 
@@ -85,6 +86,12 @@ function upCheck(f){
 		return false;
 		}
 	}
+	
+	if (CKEDITOR.instances['content'].getData() == '') {
+	      window.alert('내용을 입력해 주세요.');
+	      CKEDITOR.instances['content'].focus();
+	      return false;
+	}
 }
 
 function imgfile(){
@@ -106,7 +113,7 @@ function imgfile(){
 <input type="hidden" name="word" value="${param.word }">
 <input type="hidden" name="nowPage" value="${param.nowPage}">
 
-	<div class="w3-card-4" style="width:40%; max-width:400px; margin: 0 auto;">
+	<div class="w3-card-4" style="width:60%; max-width:400px; margin: 0 auto;">
 		<p style="text-align: left">${dto.id }(${dto.qcount })</p>
 		
 		<input type="file" name="filenameMF" style="display:none;">
@@ -116,7 +123,15 @@ function imgfile(){
 	
 	    <div class="w3-container">
 	      <h4><b><input class="w3-input w3-border" type="text" name='title' value='${dto.title }' style="width:100%;"></b></h4>
-	      <span class="glyphicon glyphicon-pencil"></span> <p><textarea name="content" style="width:100%; height:100px;">${content }</textarea></p>
+	      <span class="glyphicon glyphicon-pencil"></span> 
+	      <p>
+	      <textarea name="content" id="content" style="width:100%; height:100px;">${content }</textarea>
+	      <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+          </script>
+	      </p>
 	    </div>
 	<p style="text-align: right;">${dto.qdate }</p>
 	</div>
@@ -130,79 +145,7 @@ function imgfile(){
   </DIV>
 
 </FORM>
-<!-- 댓글 -->
-<hr>
-<div style=" width:60%; max-width:600px; margin: 0 auto;"> 
-	  	<table class="w3-table w3-table-all " style="padding:0; width:100%;">
-	  		<c:choose>
-				<c:when test="${empty qrlist }">
-					<tr>
-						<td colspan="4" style="text-align:center">등록된 댓글이 없습니다.</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="rdto" items="${qrlist }">
-				  		<tr>				  		
-				  			<td colspan="3" style="border-bottom-color: white;">
-				  				<img src='${root }/storage_qbbs/화살표.jpg' width='25px'> <img src='${root }/storage_qbbs/re.jpg' width='30px'> 
-				  				<b>${dto.id }</b>
-				  			</td>
-				  		</tr>
-				  		<tr>
-	
-				  			<td style="width:45%">${rdto.content }</td>
-				  			<td style="width:35%; text-align: right;">${rdto.qredate }</td>
-							<td style="width:20%">
-								<span style="float:right">
-								<a href="javascript:qrupdate('${rdto.qrenum }','${rdto.content }')">수정</a>|<a href="javascript:qrdelete('${rdto.qrenum }')">삭제</a>
-								</span>
-							</td>
-						 </tr>
-					 </c:forEach>
-			 	</c:otherwise>
-			 </c:choose>
-		  </table>
 
-  <br>
-  <DIV class='w3-center'>
-	${paging}
-  </DIV>
-  <br>
-  
-  <div class="w3-center">
-  	  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
-  	  	<textarea rows="1" name="content" style="width: 85%;"></textarea>
-  	  	<input type="submit" name="rsubmit" value="등록">
-  	  	
-  	  	<input type="hidden" name="id" value="${sessionScope.id}">
-  	  	<input type="hidden" name="nowPage" value="${param.nowPage}">
-  	  	<input type="hidden" name="col" value="${param.col}">
-  	  	<input type="hidden" name="qnum" value="${dto.qnum}">
-  	  	<input type="hidden" name="word" value="${param.word}">
-  	  	<input type="hidden" name="qrenum" value="${0 }">
-  	  	<input type="hidden" name="nPage" value="${nPage}">
-
-  	  </form>
-  </div>
-</div>
-<!-- 댓글 끝 -->
-  <br>  <br>  <br>  <br>
-
-<!-- 리스트 -->  
-<div>
-<jsp:include page="./list.jsp"  flush="false"/>
-</div>
-
-
-
-<!-- Modal for full size images on click-->
-<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
-  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
-  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-    <img id="img01" class="w3-image">
-    <p id="caption" class="w3-opacity w3-large"></p>
-  </div>
-</div> 
 
 </body>
 

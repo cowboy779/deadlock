@@ -8,6 +8,7 @@ public class QbbsDTO {
      private String fname;
      private String title;
      private String qsep ;
+     private String gamenum ;
      private String qdate;
      private String id;
      private int qcount;
@@ -17,6 +18,12 @@ public class QbbsDTO {
 
     
      
+	public String getGamenum() {
+		return gamenum;
+	}
+	public void setGamenum(String gamenum) {
+		this.gamenum = gamenum;
+	}
 	public MultipartFile getFilenameMF() {
 		return filenameMF;
 	}

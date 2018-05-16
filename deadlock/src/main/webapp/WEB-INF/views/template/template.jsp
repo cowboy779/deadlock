@@ -11,7 +11,7 @@
 
 <tiles:insertAttribute name="header"/>
 <div style="padding-top: 100px">
-	<tiles:insertAttribute name="body"/>
+<tiles:insertAttribute name="body"/>
 </div>
 <tiles:insertAttribute name="footer"/>
 

@@ -7,10 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+ 
 
 @Repository
-public class QbbsDAO implements IQbbsDAO{
+public class QbbsDAO implements IQbbsDAO{ 
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
@@ -36,7 +36,6 @@ public class QbbsDAO implements IQbbsDAO{
 		boolean flag=false;
 		int cnt=mybatis.insert("qbbs.create", dto);
 		if(cnt>0) flag=true;
-		
 		return flag;
 	}
 	
