@@ -23,16 +23,17 @@ function read(rnum){
 }
 </script>
 
- <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
+<link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
-
+<div class="container">
 <div class="container-fluid">
-<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>MongchongE List</h2>
+<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
 
- <div class="search">
+ <div class="template-example">
+ <div class="form-group">
  <form action="${root }/rbbs/list" method = "post">
- <select name="col">
+ <select name="col" class="form-control">
  	<option value="id"
  	
  	<c:if test="${col=='id' }">selected</c:if>
@@ -44,12 +45,12 @@ function read(rnum){
  	<c:if test="${col=='content' }">selected</c:if>
  	>내용</option>
  	<option value="total">전체출력</option>
- 
  </select>
-<input type="search" name="word" value="${word }"  required>
+<input class="form-control" type="search" name="word" value="${word }"  required>
 <button type="submit" class="btn btn-default btn-lg">search</button>
 <button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-lg">regit</button>
 </form>
+ </div>
  </div>
 <br>
 <TABLE class="table table-hover">
@@ -113,6 +114,6 @@ ${dto.fname }
 
   </DIV>
 </div>
-
+</div>
 </body>
 </html>

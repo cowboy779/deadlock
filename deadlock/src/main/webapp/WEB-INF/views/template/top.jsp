@@ -25,7 +25,10 @@
 </head>
 
 <body class="">
-
+<div id="site-border-left"></div>
+<div id="site-border-right"></div>
+<div id="site-border-top"></div>
+<div id="site-border-bottom"></div>
 
 <!-- Add your content of header -->
 <header>

@@ -24,7 +24,7 @@ public class RbbsController {
 	private IrbbsDAO dao;
 
 	@RequestMapping("/rbbs/list")
-	public String list(HttpServletRequest request) {
+	public String list(HttpServletRequest request, Model model) {
 
 		String col = request.getParameter("col");
 		String word = request.getParameter("word");
@@ -44,6 +44,9 @@ public class RbbsController {
 		map.put("word", word);
 		map.put("sno", sno);
 		map.put("eno", eno);
+		if(word == null) {
+			word = "";
+		}
 		List list;
 		try {
 			list = dao.list(map);
