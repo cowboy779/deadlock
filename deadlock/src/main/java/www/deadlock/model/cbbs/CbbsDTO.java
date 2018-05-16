@@ -1,5 +1,7 @@
 package www.deadlock.model.cbbs;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CbbsDTO {
 	
 	private int cnum;
@@ -9,9 +11,24 @@ public class CbbsDTO {
 	private String fname;
 	private int ccount;
 	private String id;
+	private int filesize;
+	private MultipartFile filenameMF;
 	
 	
 	
+	
+	public int getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(int filesize) {
+		this.filesize = filesize;
+	}
+	public MultipartFile getFilenameMF() {
+		return filenameMF;
+	}
+	public void setFilenameMF(MultipartFile filenameMF) {
+		this.filenameMF = filenameMF;
+	}
 	
 	public String getId() {
 		return id;

@@ -27,7 +27,7 @@
     <description>댓글개수</description>
     <name>rcount</name>
     <function-class>
-        spring.utility.blog.Utility
+        www.deadlock.utility.Utility
     </function-class>
     <function-signature>
       int rcount( int, www.deadlock.model.ybbs.ReplyDAO )

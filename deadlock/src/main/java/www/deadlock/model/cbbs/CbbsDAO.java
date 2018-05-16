@@ -13,7 +13,7 @@ public class CbbsDAO implements ICbbsDAO{
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	/*테스트용*/
+	
 	public void setMybatis(SqlSessionTemplate mybatis) {
 			this.mybatis = mybatis;
 	}

@@ -30,6 +30,29 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	
+	<!-- 파일다운 -->
+	<servlet>
+  		<servlet-name>filedown</servlet-name>
+  		<servlet-class>www.deadlock.utility.FileDownload</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+  		<servlet-name>filedown</servlet-name>
+		<url-pattern>/download</url-pattern>
+  	</servlet-mapping>
+  
+    <!-- 어드민체크필터 -->
+    <filter>
+        <filter-name>AdminLoginCheckFilter</filter-name>
+        <filter-class>www.deadlock.utility.AdminLoginCheckFilter</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>AdminLoginCheckFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>   
+	
+	
 	<!-- 한글처리 -->
 	<filter>
      <filter-name>encodingFilter</filter-name>
@@ -46,5 +69,7 @@
 			<filter-name>encodingFilter</filter-name>
 			<url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    
 
 </web-app>

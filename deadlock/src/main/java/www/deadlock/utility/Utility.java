@@ -58,6 +58,7 @@ public class Utility {
 
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
+		
 		for (int j = 0; j < 3; j++) {
 			list.add(sd.format(cal.getTime()));// 오늘날짜를 add
 			cal.add(Calendar.DATE, -1);// 현재날짜에서 -1(오늘날짜 전거를 add)
@@ -75,6 +76,9 @@ public class Utility {
 	public static boolean compareDay(String wdate) {
 		boolean flag = false;
 		List<String> list = getDay();
+		
+		wdate=wdate.substring(0,10);
+		
 		if (wdate.equals(list.get(0)) || wdate.equals(list.get(1)) || wdate.equals(list.get(2))) {
 			flag = true;
 		}

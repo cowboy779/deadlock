@@ -4,6 +4,6 @@ import deadlock.DAOSTDInter;
 
 public interface ICbbsDAO extends DAOSTDInter {
 	
-	
+	public void upccount(int cnum);
 
 }
