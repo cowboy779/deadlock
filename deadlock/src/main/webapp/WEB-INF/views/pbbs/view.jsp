@@ -18,15 +18,15 @@
  
 <script>
     
-//     $(document).ready(function(){
+    $(document).ready(function(){
         
-//         $("#content").summernote({
+        $("#content").summernote({
             
-//             height:300,
-//             width:800
+            height:300,
+            width:800
             
-//         });
-//     });
+        });
+    });
  
  
  

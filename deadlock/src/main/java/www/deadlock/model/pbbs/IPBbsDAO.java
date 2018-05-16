@@ -104,7 +104,6 @@ public class IPBbsDAO implements PBbsDAO{
 	public boolean delete(Object bnum){
     	boolean flag = false; 
         int result = 0;
-       
         try {
        	result = mybatis.delete("pbbs.delete", bnum);
         	if(result>0)flag=true;
@@ -112,8 +111,7 @@ public class IPBbsDAO implements PBbsDAO{
  
             e.printStackTrace();
         }
-        
- 
+       
         return flag;
     }
 

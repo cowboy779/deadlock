@@ -86,7 +86,7 @@
     <h2 style="text-align: center;">오예 성공ㄴ</h2>
  
     <div style="text-align:center; width: 600px;">
-<%--         게시물수:${listsize},  --%>
+        게시물수:${listsize}, 
     
     <br>
     

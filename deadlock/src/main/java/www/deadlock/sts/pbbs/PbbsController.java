@@ -25,10 +25,9 @@ public class PbbsController {
 	private PBbsDAO dao;
 	
 	@RequestMapping("/pbbs/delete")
-    public String delete(@ModelAttribute int bnum) {
+    public String delete(int bnum) {
  
         dao.delete(bnum);
- 
         // 리스트 갱신
         return "redirect:/pbbs/list";
     }
@@ -100,7 +99,7 @@ public class PbbsController {
 		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
 		
 		model.addAttribute("list",list);
-//		model.addAttribute("listsize",list.size());
+		model.addAttribute("listsize",list.size());
 		model.addAttribute("paging",paging);
 		System.out.println("리스트"+list);
 		
