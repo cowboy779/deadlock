@@ -1,8 +1,49 @@
+.bubble 
+{
+position: relative;
+width: 360px;
+height: 40px;
+padding: 0px;
+background: #D3FFFF;
+-webkit-border-radius: 12px;
+-moz-border-radius: 12px;
+border-radius: 12px;
+border: #D9FFFF solid 4px;
+}
+
+.bubble:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 8px 7px 8px 0;
+border-color: transparent #D3FFFF;
+display: block;
+width: 0;
+z-index: 1;
+left: -7px;
+top: 11px;
+}
+
+.bubble:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 11px 10px 11px 0;
+border-color: transparent #D9FFFF;
+display: block;
+width: 0;
+z-index: 0;
+left: -14px;
+top: 8px;
+}
+
 #list
 {
 	overflow-y		: scroll;
 	width			: 400px;
-	height			: 600px;
+	height			: 400px;
 	margin			: 0;
 	padding			: 5px;
 	border			: 1px solid #ccc;
@@ -43,16 +84,35 @@ form input#nickname
 }
 form input#msg
 {
-	width			: 240px;
+	width			: 230px;
 	margin-right	: 5px;
 	padding			: 2px;
 	border			: 1px solid #ccc;
 	font-size		: 9pt;
 	font-family		: 'dotum', '돋움';
 }
+#menu_place{
+	align			: right;
+	width			: 400px;
+	height			: 50px;
+	margin			: 0;  
+	padding			: 5px;
+	border			: 1px solid #ccc;
+}
 form input#btn
 {
 	width			: 48px;
 	font-size		: 9pt;
-	font-family		: 'dotum', '돋움';
+}
+img{
+	width : 	50px;
+	height: 	50px;
+}
+img.fixed{
+	position: fixed;
+	right:0px;
+	top:70px;
+}
+h3{
+	position: ;
 }

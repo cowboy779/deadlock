@@ -6,8 +6,8 @@
 <meta charset="UTF-8"> 
 <title></title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<%-- <script type="text/javascript" src="${root}/chat_util/js/chat.js"></script> --%>
 <link href="${root}/chat_util/css/style.css" rel="Stylesheet" type="text/css">
+<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet"></head>
 <script type="text/javascript">
 
 //시간 설정
@@ -32,7 +32,7 @@ this.loginList = function(){
 		"loginList",
 		"",
 		function(data, textStatus){
-			user_nick = data.nickname;
+			var user_nick = data.nickname;
 			var getTime = data.getTime;
 			
 			var o = document.getElementById("list");
@@ -48,11 +48,13 @@ this.loginList = function(){
 		}
 	)
 }
-	//일단 비동기 통신 이후 id 값 저장, 이후 제어문에서 이전의 아이디 값과 비교하여
-	//똑같으면 접속했단 말 띄우지 않기. 저장. 이후 더 구현하지 말고 css ㄱㄱ
-	<%if(session.getAttribute("id") != null){%>
+	<%
+	if(session.getAttribute("id") != null) {
+	%>
 		this.loginList();
-	<%}%>
+	<%
+	}
+	%>
 
 this.time_Get = function(){
 	
@@ -116,6 +118,7 @@ this.chat_print = function(){
 	// 채팅내용 추가 하기
 		for(var i=0; i<showme.size; i++){
 			
+			
 			dt = document.createElement("dt");
 			dt.appendChild(document.createTextNode(res.list[i].nickname));
 			o.appendChild(dt);
@@ -123,6 +126,8 @@ this.chat_print = function(){
 			dd = document.createElement("dd");
 			dd.appendChild(document.createTextNode(res.list[i].chat_content));
 			o.appendChild(dd);
+			
+			
 	
 		}
 	//스크롤 가장 아래로 내리기
@@ -160,31 +165,67 @@ this.write = function(frm) {
 setInterval(this.time_Get, interval);
 
 }//chatManager close
+$(function(){
+	$("#please_show").click(function(){
+		$("#show_chat").css("display","none");
+		$("#hide_or_chat").css("display","");
+	});
+	$("#please_hide").click(function(){
+		$("#show_chat").css("display","");
+		$("#hide_or_chat").css("display","none");
+	});
+	$("#chat_reset").click(function(){
+		$("#list").empty();
+	})
+})
+
 </script>
 </head> 
 <body>
-<h3 align="center">방제목: ${dto.chat_title}</h3>
+<div id="show_chat"  style="display: none;" align="right">
+<a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a>
+</div>
 
-		<dl id="list" style="margin: auto;"></dl>
+<div id="hide_or_chat" align="right">
+	
+	<div id="menu_place">
+	<p align="left">
+	<a id="please_hide" class="btn btn-primary" style="text-align: left">채팅창 접기</a>
+	<a id="chat_reset" class="btn btn-primary">채팅 내용 지우기</a>
+	
+	<a id="chat_list" class="btn btn-default" href="javascript:history.back()" style="position: absolute; right:15px; ">뒤로가기</a></p>
+	</div>
+		<dl id="list" style="text-align: left">
+	<h5>
+	채팅방 '${dto.chat_title}' 에 입장하셨습니다.
+	</h5>
+		
+		</dl>
 
-<div align="center">
 
 <form onsubmit="chatManager.write(this); return false;"
 	  name="frm"
 	  id="Please_chat">
 	  <!-- 로그인 여부를 물어본 이후, 로그인 한 회원이면 닉네임값을 읽어와서 입력 아니라면 새로 등록하도록 해준다. -->
-<c:choose>
-	<c:when test="${not empty sessionScope.id}">
-		<input name="nickname" id="nickname" type="text" value="${nickname}" readonly/>
-	</c:when>
-	<c:otherwise>
-		<input name="nickname" id="nickname" type="text" required="required" placeholder="닉네임입력">
-	</c:otherwise>
-</c:choose>
-	<input name="msg" id="msg" type="text" required="required" placeholder="채팅내용을 입력해주세요."/>
-	<input name="btn" id="btn" type="submit" value="입력" />
-	<input type="hidden" name="chat_index" value="${dto.chat_index }"/>
+		<p align="left">
+	<c:choose>
+		<c:when test="${not empty sessionScope.id}">
+			<input name="nickname" id="nickname" type="text"
+			value="${nickname}" readonly style="position:static; left: 0px;"/>
+		</c:when>
+		<c:otherwise>
+			<input name="nickname" id="nickname" type="text"
+			 required="required" placeholder="닉네임입력"
+			 >
+		</c:otherwise>
+	</c:choose>
+		<input name="msg" id="msg" type="text" required="required" placeholder="채팅내용을 입력해주세요."/>
+<!-- 		<a id="btn"  class="btn btn-default" type="submit">sub</a> -->
+		<input name="btn" id="btn" class="btn btn-default" type="submit" value="sub" size="20"/>
+		</p>	
+		<input type="hidden" name="chat_index" value="${dto.chat_index }"/>
 </form>
+
 
 </div>
 

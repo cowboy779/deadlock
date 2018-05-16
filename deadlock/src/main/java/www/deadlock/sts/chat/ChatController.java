@@ -165,6 +165,7 @@ public class ChatController{
 			String realId = (String)request.getSession().getAttribute("id");
 			String nickname = mdao.getNcikname(realId);
 			request.setAttribute("nickname", nickname);
+			request.setAttribute("realid", realId);
 		}
 		
 		request.setAttribute("dto", dto);
@@ -255,6 +256,15 @@ public class ChatController{
 				
 			List list = mdao.Chat_content_read(map);
 			int size = list.size();
+			
+			if(request.getParameter("realid") != null) {
+				String realId = request.getParameter("realid");
+				String nickname = mdao.getNcikname(realId);
+				String getTime = mdao.getTime();
+				
+				modelAndView.addObject("nickname",nickname);
+				modelAndView.addObject("getTime",getTime);
+			}
 			
 			modelAndView.addObject("size",size);
 			modelAndView.addObject("cflag",cflag);

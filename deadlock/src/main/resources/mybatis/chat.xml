@@ -81,9 +81,7 @@ chat_index,chat_title,chat_nickname,id,cdate
 )
 VALUES(
 (select nvl(max(chat_index),0)+1 FROM chat_room),
-#{chat_title},#{chat_nickname},#{id},
-(SELECT to_char(sysdate,'yyyy/mm/dd hh24:mi:ss') 
-FROM dual)
+#{chat_title},#{chat_nickname},#{id},sysdate
 )
 </insert>
 

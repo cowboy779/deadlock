@@ -6,12 +6,8 @@
 <meta charset="UTF-8"> 
 <title></title> 
 <style type="text/css">
-.search{
-	width:80%;
-	margin:2px auto;
-	text-align: center;
-}
 </style>
+<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet"></head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
 function read(chat_index){
@@ -55,22 +51,23 @@ function cdelete(chat_index){
 </script>
 </head> 
 <body>
-<div class="search">
-<form method="post" action='list'>
-<select name="col">
-<option value="chat_nickname"
-<c:if test="${col == 'chat_nickname' }">selected</c:if>
->이름</option>
-<option value="chat_title"
-<c:if test="${col == 'chat_title' }">selected</c:if>
->제목</option>
-<option value="total">전체</option>
-</select>
-<input type="search" name="word" value="${word }" required>
-<button>검색</button>
-</form>
+<div align="right">
+		<form method="post" action='list' style="margin: auto;">
+			<select name="col">
+				<option value="chat_nickname"
+				<c:if test="${col == 'chat_nickname' }">selected</c:if>
+				>방장</option>
+				<option value="chat_title"
+				<c:if test="${col == 'chat_title' }">selected</c:if>
+				>제목</option>
+				<option value="total">전체</option>
+			</select>
+		<input type="search" name="word" value="${word }" required>
+			<button>검색</button>
+		</form>
 </div>
-  <TABLE class="table table-hover" style="margin: auto; width: 30%;">
+<div align="right">
+  <TABLE class="table table-hover" style="width: 400px;">
 	   <c:if test="${empty list}">
 			    <tr>
 			    	<td colspan="4">등록된 게시글이 없습니다.</td>
@@ -81,7 +78,7 @@ function cdelete(chat_index){
       <th>채팅방 제목</th>
       <th>방장</th>
       <c:if test="${not empty sessionScope.id}">
-      <th>채팅방 삭제</th>
+      <th>삭제</th>
       </c:if>
     </tr>
 <c:forEach var="dto" items="${list }">
@@ -97,15 +94,11 @@ function cdelete(chat_index){
     </tr>
 </c:forEach>
   </TABLE>
-
 <c:if test="${not empty sessionScope.id}">
-<div align="center">
 <button type="button" onclick="create()">채팅방 생성</button>
-</div> 
 </c:if>
-    <div align="center">
- 	${paging}
-    </div>
+ 	<span style="text-align: right; ">${paging}</span>
+</div>
 
 
 </body>
