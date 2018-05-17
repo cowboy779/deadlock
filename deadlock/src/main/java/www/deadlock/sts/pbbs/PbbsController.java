@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import www.deadlock.model.pbbs.PBbsDAO;
 import www.deadlock.model.pbbs.PBbsDTO;
@@ -27,46 +29,51 @@ public class PbbsController {
 	@RequestMapping("/pbbs/delete")
     public String delete(int bnum) {
  
-        dao.delete(bnum);
+        dao.ydelete(bnum);
         // 리스트 갱신
         return "redirect:/pbbs/list";
     }
  
     @RequestMapping("/pbbs/update")
-    public String update(PBbsDTO dto) {
-    
-    	dao.update(dto);
+    public String update(PBbsDTO dto,HttpServletRequest request,Model model) {
+    	dao.yupdate(dto);
         return "redirect:/pbbs/list";
     }
 	
 	
 	  @RequestMapping("/pbbs/view")
-	    public String view(int bnum, String passwd, Model model) {
-		  Map map = new HashMap();
-	        // 비밀번호가 맞는지 체크
-	        int result = dao.passwdCheck(bnum, passwd);
-	 
-	        if (result>0) {
-	            // 맞으면 view.jsp 로 이동(수정/삭제화면)
-	            model.addAttribute("dto", dao.ybDetail(bnum));
-	            
-	            //view.jsp 에서 수정 삭제 할 수 있다.
-	            return "/pbbs/view";
-	 
-	        } else {
-	 
-	            // 틀리면
-	            model.addAttribute("message", "비밀번호가 일치하지 않습니다");
-	            return "redirect:/pbbs/list";
-	        }
+	    public String real_update(HttpServletRequest request,Model model) {
+		  int bnum = Integer.parseInt(request.getParameter("bnum"));
+		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		  model.addAttribute("dto", dao.ybDetail(bnum));
+		  modelAndView.addObject("bnum",bnum);
+	
+		  
+	      return "/pbbs/view";
 	 
 	    }
+	 @RequestMapping("/pbbs/passwd_check")
+	 public ModelAndView passwd_check(HttpServletRequest request) {
+		 
+		  int bnum = Integer.parseInt(request.getParameter("bnum"));
+		  String passwd = request.getParameter("passwd");
+		  
+		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+	        // 비밀번호가 맞는지 체크
+	        boolean flag = dao.passwdCheck(bnum, passwd);
+	 
+	            // 맞으면 view.jsp 로 이동(수정/삭제화면)
+	            modelAndView.addObject("flag", flag);
+	            modelAndView.addObject("bnum", bnum);
+	            //view.jsp 에서 수정 삭제 할 수 있다.
+	            return modelAndView;
+	 }
 	
 	
 	
 	
 	@RequestMapping("/pbbs/list")
-	public void list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request) {
 		
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
@@ -93,15 +100,17 @@ public class PbbsController {
 		map.put("eno", eno);
 		
 		
-		List<PBbsDTO> list = dao.list(map);
+		List<PBbsDTO> list = dao.ylist(map);
 		
 		int totalRecord = dao.total(map);
-		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
+		String paging3 = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
 		
-		model.addAttribute("list",list);
-		model.addAttribute("listsize",list.size());
-		model.addAttribute("paging",paging);
+		request.setAttribute("ylist",list);
+		request.setAttribute("ylistsize",list.size());
+		request.setAttribute("paging3",paging3);
 		System.out.println("리스트"+list);
+		
+		return "/pbbs/list";
 		
 	}
 	
@@ -120,7 +129,7 @@ public class PbbsController {
             // 테이블에 insert
             // 목록 갱신
  
-        	dao.create(dto);
+        	dao.ycreate(dto);
                 //입력후 리스트로 이동
             return "redirect:/pbbs/list";
 

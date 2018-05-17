@@ -29,14 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where bnum = #{bnum}
     </update>
 
-    
-    
-<!--  <select id="list" resultType="PBbsDTO"> -->
- 
-<!--         select * from pbbs order by -->
-<!--         bnum desc -->
- 
-<!--     </select> -->
 
 	<select id="list" resultType="PBbsDTO" parameterType="Map">
  	SELECT bnum, bname, content, bdate, r
@@ -47,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  				from pbbs
  	<where>
 	<choose>
-		<when test="col=='title'">
+		<when test="col=='bname'">
 		bname like '%' || #{word} || '%'
 		</when>
 		<when test="col=='content'">
@@ -65,7 +57,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  
     
-	<select id="passwdCheck" resultType="int">
+    <select id="total" resultType="int" parameterType="Map">
+	select count(*) from pbbs
+	<where>
+				<choose>
+						<when test="col=='bname'">
+						bname like '%' || #{word} || '%'
+						</when>
+						<when test="col=='content'">
+						content like '%' || #{word} || '%'
+						</when>
+				</choose>
+	</where>   
+	</select>
+    
+    
+    
+    
+    
+    
+    
+	<select id="passwdCheck" resultType="int" parameterType="map">
 	select count(*) from pbbs
     where bnum=#{bnum} and 
     passwd=#{passwd}
@@ -81,19 +93,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
-    <select id="total" resultType="int" parameterType="Map">
-	select count(*) from pbbs
-	<where>
-				<choose>
-						<when test="col=='bname'">
-						bname like '%' || #{word} || '%'
-						</when>
-						<when test="col=='content'">
-						content like '%' || #{word} || '%'
-						</when>
-				</choose>
-	</where>   
-	</select>
-	
 </mapper>
 

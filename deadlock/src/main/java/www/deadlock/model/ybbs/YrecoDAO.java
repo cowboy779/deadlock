@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import www.deadlock.model.pbbs.PBbsDTO;
+
 @Repository
 public class YrecoDAO implements IYrecoDAO{
 	
@@ -51,6 +53,42 @@ public class YrecoDAO implements IYrecoDAO{
 	
 	public int total(Map map){
 		return mybatis.selectOne("yreco.total",map);
+	}
+
+	@Override
+	public int passwdCheck(int bnum, String passwd) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean ycreate(Object dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean yupdate(Object dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean ydelete(Object bnum) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PBbsDTO ybDetail(int bnum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PBbsDTO> ylist(Map map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

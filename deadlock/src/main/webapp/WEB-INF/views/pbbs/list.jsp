@@ -6,44 +6,82 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
 
 
- $(document).ready(function(){
+//  $(document).ready(function(){
         
-        $("#content").summernote({
+//         $("#content").summernote({
             
-            height:300,
-            width:800
+//             height:300,
+//             width:800
             
-        });
-    });
+//         });
+//     });
+
+ 
+ function c_update(){
+	 
+	 var param = $("#update_form").serialize();
+	 
+	 $.post(
+		"passwd_check",
+		param,
+		function(data,textStatus){
+			var flag = data.flag;
+			
+			if(flag == false){
+				alert("비밀번호가 틀렸습니다.");
+				return false;
+			}else{
+				real_update(data);
+			}
+		}
+	 
+	 )
+ }
+ function real_update(data){
+	 var url ="./view";
+	 url += "?bnum="+data.bnum;
+	 
+	location.href=url; 
+ }
+
+
+ function incheck(f){
+		
+		
+		if(f.bname.value==""){
+			alert("작성자를 입력하시요");
+			f.title.focus();		
+			return false;
+		}	
+		
+		if(f.passwd.value==""){
+			alert("비밀번호를 입력하세요");
+			f.passwd.focus();
+			
+			return false;
+		}
+		
+		
+		if(f.content.value==""){
+			alert("내용을 입력하시요");
+			f.content.focus();
+			
+			return false;
+		}	
+		
+		
+		
+	}
 
 </script>
 </head>
 
 <body>
-<div class="search">
-<form action="./list" method="post">
-<select name= "col"><!-- 검색할 컬럼 -->
-	<option value="bname" 
-	<c:if test="${col=='bname'}">
-	selected</c:if>
-	>작성자</option>
-	<option value="content"
-	<c:if test="${col=='content'}">
-	selected</c:if>
-	>내용</option>
-	<option value="total">전체출력</option>
-</select>
-<!-- 검색어 -->
-<input type="search" name="word" value="${word}">
-<button>검색</button>
-</form>
-</div> 
-
 
 
   
@@ -51,8 +89,9 @@
     
     <form name="form1" 
     	  method="post" 
-    	  action="./create">
-    <table border="1" style="width:800px;" align="center">
+    	  action="./create"
+    	  onsubmit="return incheck(this)">
+    <table border="1" style="width:600px;" align="center">
         
         <tr>
             <td>작성자</td>
@@ -74,36 +113,32 @@
  
         <tr>
             <td colspan="2">
-            <input type="submit" value="확인">
+            <input type='submit' value='등록'>
             <input type="reset" value="취소"></td>
         </tr>    
         </table>
     </form>
 
 
-    <!-- <div style="text-align: center;"> -->
+
    
-    <h2 style="text-align: center;">오예 성공ㄴ</h2>
+    <h2 style="text-align: center;">글 목록</h2>
  
-    <div style="text-align:center; width: 600px;">
-        게시물수:${listsize}, 
-    
+    <div style="text-align:center; width: 2100px;">
+        게시물수:${ylistsize}
+    </div>
     <br>
     
     
     <!-- 컨트롤러에서 redirect 로 넘어오면 앞에 param을 붙여준다. -->
-    
-    <span style="color:red;">${param.message}</span>
-    </div>
+<!--    <center> -->
+<%--     <span style="color:red;">${param.message}</span> --%>
+<!--  </center> -->
+    <c:forEach var="row" items="${ylist}">
  
-    <c:forEach var="row" items="${list}">
- 
-        <!-- 폼이 테이블을 감싼 구조 -->
-        <form action="${root}/pbbs/view">
-            <!-- 방명록리스트 -->
+        <form action="${root}/pbbs/view" id="update_form">
+            <!-- 방명록리스트 --> 
             <table align="center" border="1" style="width: 600px;">
- 
- 
                 <tr>
                     <td>이름</td>
                     <td>${row.bname}</td>
@@ -118,19 +153,42 @@
             <!-- 게시물 번호는 hidden field로 넘김 -->
                     <td colspan="4">비밀번호 
                     <input type="hidden" name="bnum" value="${row.bnum}">
-                     <input type="password" name="passwd">
-                    <input type="submit" value="수정/삭제">
-                  
- 
+                     <input type="password" name="passwd">                      
+                    <input type="button" value="수정/삭제" onclick="c_update()">
                     </td>
                 </tr>
- 
             </table>
         </form>
-    </c:forEach>
+ </c:forEach>
+ 
+ <br>
+ 
+ <div class="search" align="center">
+<form action="./list" method="post">
+<select name= "col"><!-- 검색할 컬럼 -->
+	<option value="bname" 
+	<c:if test="${col=='bname'}">
+	selected</c:if>
+	>작성자</option>
+	<option value="content"
+	<c:if test="${col=='content'}">
+	selected</c:if>
+	>내용</option>
+	<option value="total">전체출력</option>
+</select>
+<!-- 검색어 -->
+<input type="search" name="word" value="${word}">
+<button>검색</button>
+</form>
+</div> 
+<br>
+<hr>
+ 
  <DIV class='bottom'>
-   ${paging}
+   ${paging3}
   </DIV>
+ 
+ 
  
 </body>
 </html>

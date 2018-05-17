@@ -5,37 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
- 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
- 
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
- 
- 
+<style type="text/css">
+.textarea{
+	border:0px;
+}
+
+</style>
 <script>
-    
-    $(document).ready(function(){
-        
-        $("#content").summernote({
-            
-            height:300,
-            width:800
-            
-        });
-    });
- 
- 
- 
-</script>
- 
- 
-<script>
-    $(document).ready(function() {
- 
+$(function() {
         $("#yyUpdate").click(function() {
  
             alert("성공?");
@@ -70,37 +49,28 @@
 </head>
 <body>
 
-    
-    
     <!-- //폼의 이름을 써줘야 한다. -->
     <form name="form1">
         <!-- 방명록리스트 -->
         <table align="center" border="1" style="width: 600px;">
- 
- 
             <tr>
                 <td>이름</td>
                 <!-- td에 수정할수 있게 input type 태그를 지정해 줬다. -->
                 <td>
                 <input name="bname" value="${dto.bname}">
                 </td>
-                
                 <td>날짜</td>
-                <td>${dto.bdate}</td>
-                
+                <td>${dto.bdate}</td>         
             </tr>
          
             <tr>
-                <td colspan="4">
-                <textarea name="content" id="content" rows="5" cols="60">
-                ${dto.content}</textarea>
-                </td>
+                <td colspan="4"><textarea name="content" id="content" rows="5" cols="60">${dto.content}</textarea></td>
             </tr>
             
             <tr>
                 <!-- 게시물 번호는 hidden field로 넘김 -->
                 <td colspan="4">
-                <input type="hidden" name="bnum" value="${dto.bnum}"> 
+                <input type="hidden" name="bnum" value="${param.bnum}"> 
                 <input type="button" id="yyUpdate" value="수정"> 
                 <input type="button" id="yyDelete" value="삭제">
                 </td>

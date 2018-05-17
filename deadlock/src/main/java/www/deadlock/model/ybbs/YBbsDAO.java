@@ -63,12 +63,12 @@ public class YBbsDAO implements IYBbsDAO{
 		return mybatis.selectOne("ybbs.total",map);
 	}
 
-
+	
+	
+	
+//	-----------------------------------------필요없음-----------------------------------------
 	
 	
 }
-
-
-
-
-
+	
+	
