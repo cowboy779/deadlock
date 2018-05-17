@@ -22,12 +22,21 @@ public class RbbsController {
 
 	@Autowired
 	private IrbbsDAO dao;
+	
+	
+	@RequestMapping("/rbbs/error")
+	public String error() {
+
+		return "/rbbs/error";
+	}
+	
 
 	@RequestMapping("/rbbs/list")
 	public String list(HttpServletRequest request, Model model) {
 
 		String col = request.getParameter("col");
 		String word = request.getParameter("word");
+		
 
 		// --------------------------------------------------------------
 		int nowPage = 1;

@@ -46,7 +46,7 @@ function read(rnum){
  	>내용</option>
  	<option value="total">전체출력</option>
  </select>
-<input class="form-control" type="search" name="word" value="${word }"  required>
+<input class="form-control" type="text" name="word"  required>
 <button type="submit" class="btn btn-default btn-lg">search</button>
 <button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-lg">regit</button>
 </form>

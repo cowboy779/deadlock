@@ -14,13 +14,13 @@
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
   
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-icon-180x180.png">
-  <link href="./assets/favicon.ico" rel="icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="${root }/images/apple-icon-180x180.png">
+  <link href="${root }/images/favicon.ico" rel="icon">
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 <title>Insert title here</title>
-<link href="univers/main.3f6952e4.css" rel="stylesheet">
+<link href="/univers/main.3f6952e4.css" rel="stylesheet">
 
 </head>
 
@@ -43,9 +43,9 @@
 
       <div class="collapse navbar-collapse" id="navbar-default" >
         <ul class="nav navbar-nav ">
-          <li><a href="../univers/index.html" title="">01 : Home</a></li>
-          <li><a href="../univers/works.html" title="">02 : 게시판</a></li>
-          <li><a href="../univers/about.html" title="">03 : 방명록</a></li>
+          <li><a href="${root}/rbbs/univers/index.html" title="">01 : Home</a></li>
+          <li><a href="${root}/bbs/univers/works.html" title="">02 : 게시판</a></li>
+          <li><a href="${root}/nbbs/about.html" title="">03 : 방명록</a></li>
           <li><a href="${root}/rbbs/list" title="">04 : 건의하기</a></li>
           <li><a href="../univers/components.html" title="">05 : 설문조사</a></li>
           

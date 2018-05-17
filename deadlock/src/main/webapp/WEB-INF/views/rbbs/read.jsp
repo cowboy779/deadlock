@@ -19,7 +19,7 @@ function oneclick(wh){
 </head>
 <body class="">
 <div class="container">
-<h2>04 : 건의하기</h2>
+<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
 		<table class="table table-bordered">
 			<tr>
 				<td>제목</td>

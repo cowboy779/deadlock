@@ -7,8 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
+<div class="container">
+
+<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
 	<FORM	name='frm' method='POST' 
 		onsubmit = "return incheck(this)"
 		action='./update'
@@ -50,16 +54,17 @@
 
     	
   </TABLE>
-  
+  <br>
   <DIV class='bottom'>
-    <input type='submit' value='summit'>
-    <input type='reset' value='reset'>
-    <input type='button' value='cancel' onclick="history.back()">
+    <input class="btn btn-default btn-sm" type='submit' value='summit'>
+    <input class="btn btn-default btn-sm" type='reset' value='reset'>
+    <input class="btn btn-default btn-sm" type='button' value='cancel' onclick="history.back()">
   </DIV>
   <script>
       CKEDITOR.replace( 'content' );
   </script>
   
 </FORM>
+</div>
 </body>
 </html>

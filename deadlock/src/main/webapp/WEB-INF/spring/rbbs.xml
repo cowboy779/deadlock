@@ -5,7 +5,7 @@
 
 <tiles-definitions> 
 
-<definition name="/rbbs/list" extends="main"> 
+	<definition name="/rbbs/list" extends="main"> 
         <put-attribute name="title" value="회원 목록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/rbbs/list.jsp" /> 
     </definition>   
@@ -36,6 +36,10 @@
     <definition name="/rbbs/delete" extends="main"> 
         <put-attribute name="title" value="게시판 삭제" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/rbbs/delete.jsp" /> 
+    </definition>  
+    <definition name="/rbbs/reply" extends="main"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/rbbs/reply.jsp" /> 
     </definition>  
    
   

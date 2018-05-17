@@ -61,9 +61,9 @@
   <br>
   
   <DIV class='bottom'>
-    <button type='submit' class="btn btn-default btn-lg">저장</button>
-    <input type='reset' value='다시쓰기' class="btn btn-default btn-lg">
-    <input type='button' value='취소' onclick="history.back()" class="btn btn-default btn-lg">
+    <button type='submit' class="btn btn-default btn-sm">저장</button>
+    <input type='reset' value='다시쓰기' class="btn btn-default btn-sm">
+    <input type='button' value='취소' onclick="history.back()" class="btn btn-default btn-sm">
   </DIV>
   <script>
       CKEDITOR.replace( 'content' );

@@ -18,13 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<where>
 		<choose>
 			<when test="col=='id'">
-			id like '%' || #{word}||'%'
+			id like '%' || #{word} || '%'
 			</when>
 			<when test="col=='title'">
-			title like '%' || #{title}||'%'
+			title like '%' || #{word} || '%'
 			</when>
 			<when test="col=='content'">
-			content like '%' || #{content} || '%'
+			content like '%' || #{word} || '%'
 			</when>
 		</choose>
 	</where>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<where>
 		<choose>
 			<when test="col=='wname'">
-			wname like '%' || #{word} ||'%'
+			id like '%' || #{word} ||'%'
 			</when>
 			<when test="col=='title'">
 			title like '%' || #{word} ||'%'
