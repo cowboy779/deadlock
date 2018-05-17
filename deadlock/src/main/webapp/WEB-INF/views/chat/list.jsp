@@ -19,21 +19,6 @@ img.fixed{
 <link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$.post(
-		"${root}/sts/chat/list",
-		"",
-		function(data,textStatus){
-			
-		}
-	
-	)
-	
-	
-});
-
-
-
 function read(chat_index){
 	var url = "/sts/chat/chatRead";
 	url += "?chat_index="+chat_index;
@@ -142,7 +127,9 @@ function cdelete(chat_index){
 <c:if test="${not empty sessionScope.id}">
 <a id="btn" href="javascript:create()"  class="btn btn-default" type="button">채팅방 생성</a>
 </c:if>
- 	${paging}
+	<div align="center">
+	 	${paging}
+	</div>
 </div>
 
 

@@ -401,12 +401,12 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: right; margin-top: 5px; margin-right: 150px; font-size: 1em;}");
+		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
 		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
 		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
 		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
 		str.append("  .span_box_1{");
-		str.append("    text-align: right;");
+		str.append("    text-align: center;");
 		str.append("    font-size: 1em;");
 		str.append("    border: 1px;");
 		str.append("    border-style: solid;");
@@ -415,7 +415,7 @@ public class Utility {
 		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
 		str.append("  }");
 		str.append("  .span_box_2{");
-		str.append("    text-align: right;");
+		str.append("    text-align: center;");
 		str.append("    background-color: #668db4;");
 		str.append("    color: #FFFFFF;");
 		str.append("    font-size: 1em;");

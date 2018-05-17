@@ -25,7 +25,7 @@
 function chat(){
 	var url="${root}/chat/list";
 	
-	var wr = window.open(url,"채팅창","width=440, height=610");
+	var wr = window.open(url,"채팅창","width=440, height=610, resizable=no");
 	wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
 	
 }
@@ -49,7 +49,7 @@ function chat(){
           <span class="icon-bar"></span>
         </button>
 
-      <div class="collapse navbar-collapse" id="navbar-default" >
+      <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav ">
           <li><a href="${root}" title="">01 : Home</a></li>
           <li><a href="${root}/ybbs/list" title="">02 : 자유게시판</a></li>

@@ -233,7 +233,7 @@ $(function(){
 	</c:choose>
 		<input name="msg" id="msg" type="text" required="required" placeholder="채팅내용을 입력해주세요."/>
 <!-- 		<a id="btn"  class="btn btn-default" type="submit">sub</a> -->
-		<input name="btn" id="btn" class="btn btn-default" type="submit" value="sub" size="20"/>
+		<input name="btn" id="btn" class="btn btn-default" type="submit" value="전송"/>
 		</p>	
 		<input type="hidden" name="chat_index" value="${dto.chat_index }"/>
 </form>
