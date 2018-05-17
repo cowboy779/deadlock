@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions> 
+
+	<definition name="/qbbs/list" extends="main"> 
+        <put-attribute name="title" value="정/질게 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/list.jsp" /> 
+    </definition>   
+	<definition name="/qbbs/list2" extends="main"> 
+        <put-attribute name="title" value="정/질게 read목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/list2.jsp" /> 
+    </definition>   
+    <definition name="/qbbs/create" extends="main"> 
+        <put-attribute name="title" value="정/질게 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/create.jsp" /> 
+    </definition> 
+    <definition name="/qbbs/update" extends="main"> 
+        <put-attribute name="title" value="정/질게 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/updateForm.jsp" /> 
+    </definition>  
+    <definition name="/qbbs/read" extends="main"> 
+        <put-attribute name="title" value="정/질게 글보기" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/read.jsp" /> 
+    </definition> 
+    <definition name="/qbbs/updateProc" extends="main"> 
+        <put-attribute name="title" value="정/질게 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qbbs/updateProc.jsp" /> 
+    </definition>  
+   
+  
+   
+           
+   
+</tiles-definitions> 

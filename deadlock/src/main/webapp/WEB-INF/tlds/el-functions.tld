@@ -22,6 +22,17 @@
     </function-signature>
   </function>   
   
+   <function>
+    <description>게시판분류</description>
+    <name>sepvalue</name>
+    <function-class>
+        www.deadlock.utility.Utility
+    </function-class>
+    <function-signature>
+      java.lang.string getSepValue(java.lang.String)
+    </function-signature>
+  </function> 
+  
   
    <function>
     <description>댓글개수</description>

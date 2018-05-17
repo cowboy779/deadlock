@@ -113,7 +113,6 @@ function mlist(){
     <input type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
     <br><br>
   <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A') }">
-  	<input type='button' value='사진수정' onclick="updateFile()">
   <input type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
     <input type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
   </c:if>

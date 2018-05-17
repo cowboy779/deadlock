@@ -53,6 +53,7 @@ var create = new function(){
 </table>
 	<div align="center">
 	<button>채팅방 생성</button>
+	<button onclick="history.back()">뒤로가기</button>
 	</div>
 </form>
 	

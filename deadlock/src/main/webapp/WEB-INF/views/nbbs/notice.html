@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function create() {
+	url = "./notiCreate.html";
+	location.href = url;
+}
+
+function read() {
+	url = "./read.html";
+	location.href = url;
+}
+</script>
+<style type="text/css">
+Table{
+/* 	border : 0.5px solid;
+ */	font-size : 14px;
+	text-align: center;
+	width: 100%;
+	max-width: 700px;
+	margin: auto;
+}
+TD {
+	padding-bottom: 5px;
+}
+caption{
+	font-size : 20px;
+	text-align: left;
+	padding-top: 50px;
+}
+
+.subject{
+	text-align: left;
+	padding-left: 10px;
+}
+
+BUTTON{
+	text-align: right;
+	
+}
+THEAD{
+	font-size: 16px;
+}
+.rel{
+	position: relative;	
+	text-align: center;
+	width: 50%;
+	margin: auto;
+	padding-top: 50px;
+}	
+
+.ab{
+	position: absolute;
+	right: 10px;
+	bottom : -30px;
+}
+a:link {
+	text-decoration: none;
+	color: #646464;
+}
+a:visited {
+	text-decoration: none;
+	color: #646464;
+}
+a:active {
+	text-decoration: none;
+	color: #646464;
+}
+a:hover {
+	text-decoration: none;
+	color: #646464;
+}
+</style>
+</head>
+<body>
+
+
+	
+	
+<div class="rel">
+<table>
+	<caption>공지사항</caption>
+	<thead>
+		<tr>
+			<th>제목</th>
+			<th>등록일</th>
+			<th>조회수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="subject">
+				<span>[공지] </span><a href="javascript:read()">04/26(목) 넥슨 정기점검 안내</a> 
+				<img src="./n.png" width="10" height="10" alt="new">
+			</td>
+			<td class="date">2018-04-24</td>
+			<td class="count">4856</td>
+		</tr>
+		
+		<tr>	
+			<td class="subject">
+				<span>[공지] </span><a href="javascript:read()">04/13(목) 넥슨 정기점검 안내</a> 
+				<img src="./n.png" width="10" height="10" alt="new">
+			</td>
+			<td class="date">2018-04-24</td>
+			<td class="count">8056</td>
+		</tr>
+		
+		<tr>	
+			<td class="subject">
+				<span>[공지] </span><a href="javascript:read()">04/13(목) 데드락 등급제도 변경 안내</a> 
+				<img src="./n.png" width="10" height="10" alt="new">
+			</td>
+			<td class="date">2018-04-24</td>
+			<td class="count">56</td>
+		</tr>
+	</tbody>
+	
+</table>
+	<div class="ab">
+	<button onclick="create()" >공지 등록</button>
+	</div>
+</div>
+
+</body>
+</html>

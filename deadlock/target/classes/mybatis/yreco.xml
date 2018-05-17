@@ -27,12 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where yrenum = #{yrenum}
    </update>
    
-   <delete id="delete" parameterType="int">
+   
+   <delete id="ydelete" parameterType="int">
    delete from yreco
-   where yrenum = #{yrenum} 
+   where yrenum = #{yrenum}
    </delete>
    
-   <select id="list" parameterType="Map" resultType="YrecoDTO">
+   <select id="ylist" parameterType="Map" resultType="YrecoDTO">
    select yrenum, content, to_char(yredate,'yyyy-mm-dd') yredate, id,ynum, r
 	FROM(
     select yrenum, content, yredate, ynum, id,rownum r
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 )
             )
             <![CDATA[
-            WHERE r >= 1 and r <= 5
+            where r>=#{sno} and r<=#{eno}
    			]]>
    </select>
    

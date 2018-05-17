@@ -51,11 +51,12 @@ function chat(){
 
       <div class="collapse navbar-collapse" id="navbar-default" >
         <ul class="nav navbar-nav ">
-          <li><a href="../univers/index.html" title="">01 : Home</a></li>
-          <li><a href="../univers/works.html" title="">02 : 게시판</a></li>
-          <li><a href="../univers/about.html" title="">03 : 방명록</a></li>
+          <li><a href="${root}" title="">01 : Home</a></li>
+          <li><a href="${root}/ybbs/list" title="">02 : 자유게시판</a></li>
+          <li><a href="${root}/pbbs/list" title="">03 : 방명록</a></li>
           <li><a href="${root}/rbbs/list" title="">04 : 건의하기</a></li>
-          <li><a href="javascript:chat()">05 : 채팅창</a></li>
+          <li><a href="${root}/qbbs/list" title="">05 : 정답/질문게시판</a></li>
+          <li><a href="javascript:chat()">06 : 채팅창</a></li>
           
         </ul>
 
@@ -67,9 +68,10 @@ function chat(){
 		  
 		  <c:if test="${not empty sessionScope.id }">
 	          <li style="float:right;" ><a href="${root}/member/read" title="내 정보"> MyPage</a></li>
+	          <li style="float:right;" ><a href="${root}/member/logout" title="로그아웃"> 로그아웃</a></li>
 	          <c:choose>
 		          <c:when test="${sessionScope.grade != 'A'}">
-		          	<li style="float:right;" ><a href="${root}/member/delete" title="회원탈퇴"> 회원탈퇴</a></li>
+		          	<li style="float:right;" ><a href="${root}/member/deleteForm" title="회원탈퇴"> 회원탈퇴</a></li>
 		          </c:when>
 		          <c:otherwise>
 		          	<li style="float:right;" ><a href="${root}/admin/list" title="회원목록"> 회원목록</a></li>

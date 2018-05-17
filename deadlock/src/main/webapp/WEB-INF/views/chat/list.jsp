@@ -53,7 +53,7 @@ function cdelete(chat_index){
 	if(confirm("정말로 채팅방을 삭제하시겠습니까?")){
 		
 		$.post(
-				"/chat/deleteProc",
+				"/sts/chat/deleteProc",
 				"chat_index="+chat_index,
 				function(data,textStatus){
 					if(data.flag){
