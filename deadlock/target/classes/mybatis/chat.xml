@@ -145,6 +145,9 @@ SELECT count(*)
 FROM chat_room
 <where>
 		<choose>
+			<when test="col=='chat_index'">
+			chat_index like '%'||#{word}||'%'
+			</when>
 			<when test="col=='chat_title'">
 			chat_title like '%'||#{word}||'%'
 			</when>

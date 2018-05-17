@@ -1,8 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html> 
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title> 
 <style type="text/css"> 
 TABLE{
@@ -23,24 +29,25 @@ body {font-family: "Open Sans"}
 
 </style> 
 </head> 
-<!-- *********************************************** -->
 <body>
-<!-- *********************************************** -->
- 
-<h2 align="center"><span class="glyphicon glyphicon-th-list"></span>이메일 중복 확인</h2>
+<div class="container">
+<p class="w3-center">
+		<img src="${root}/chat_util/image/apple-icon-180x180.png" style="margin-top: 20px;">
+	</p>
+<h4 align="center">이메일 중복 확인</h4>
 
 <FORM name='frm' method='POST' action='email_proc'>
   <TABLE style="margin: auto;">
     <TR>
-      <TD><input type="email" name="email" size="20" required></TD>
+      <TD>이메일 입력  : <input type="email" name="email" size="20" required></TD>
     </TR>
   </TABLE>
+  <p class="w3-center">
+    <button class="w3-button w3-red ">중복확인</button>
+  <button class="w3-button w3-black" type="button" onclick="window.close()">취소</button>
   
-    <button>중복확인</button>
-  <button type="button" onclick="window.close()">취소</button>
 </FORM>
+</div>
  
-<!-- *********************************************** -->
 </body>
-<!-- *********************************************** -->
 </html> 

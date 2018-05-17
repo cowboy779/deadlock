@@ -4,21 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title>
 <style type="text/css">
 
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	var flag = ${flag};
-	
-	if(flag == false){
-	$("#btnclose").html("<button onclick='emailCheck()'>이메일 검증</button>")
-	}
-})
-
-
 function use(){
  opener.frm.email.value="${param.email}";
  self.close();
@@ -79,33 +75,36 @@ function display_choose(){
 
 </script>
 </head>
-<!-- *********************************************** -->
 <body>
-<!-- *********************************************** -->
-<h2><span class="glyphicon glyphicon-th-list"></span>이메일 중복 확인</h2>
-
-입력된 Email:${param.email }<br><br>
-<c:choose>
-	<c:when test="${flag == true }">
-		중복되어서 사용할 수 없습니다.<br><br>
-	    <button onclick="location.href='email_form'">다시시도</button>
-	</c:when>
-	<c:otherwise>
-<div id="pass">
-		중복아님, 사용 가능합니다.<br><br>
-		<button id='email_btn' onclick='emailCheck()'>이메일 인증코드 발송</button>
-</div>
-	</c:otherwise>
-</c:choose>
+<div class="container">
+	<p class="w3-center">
+		<img src="${root}/chat_util/image/apple-icon-180x180.png">
+	</p>
+	<h3 align="center">이메일 중복 확인</h3>
+	<p class="w3-center">
+	입력된 Email:${param.email }<br><br>
+ 	</p>
+	<c:choose>
+		<c:when test="${flag == true }">
+		<div align="center">
+			중복되어서 사용할 수 없습니다.<br><br>
+		    <button onclick="location.href='email_form'">다시시도</button>
+		</div>
+		</c:when>
+		<c:otherwise>
+	<div id="pass" align="center">
+			중복아님, 사용 가능합니다.<br><br>
+			<button class="w3-button w3-red" id='email_btn' onclick='emailCheck()'>이메일 인증코드 발송</button>
+  			<button class="w3-button w3-black" id="btnclose" type="button" onclick="window.close()">닫기</button>
+	</div>
+		</c:otherwise>
+	</c:choose>
  
-  <button id="btnclose" type="button" onclick="window.close()">닫기</button>
  
  
  
- 
-
- <div id="se"  style="display: none;">
-발송된 코드를 입력해주세요.
+ <div id="se" align="center" style="display: none;">
+		발송된 코드를 입력해주세요.
 <form id="checkEmail_form" action="sendMail" method="post">
 
 <input type="hidden" name="from" value="deadlock7683@gmail.com">
@@ -114,14 +113,15 @@ function display_choose(){
 <input type="hidden" id="mail_code" name="content" value="코드 인증창에 아래의 코드를 입력해주세요.<br>${code}">
 
 <input type="text" id="ch_mail_code">
-<button type="button" id="check_try" onclick="check_m()">이메일 인증</button>
+<button class="w3-button w3-red" type="button" id="check_try" onclick="check_m()">이메일 인증</button>
 </form>
 </div>
 
 
-<div id="check_success" style="display: none;">
+<div id="check_success" align="center" style="display: none;">
 이메일 인증이 완료되었습니다.<br>
-<button type="button" onclick="use()">사용</button>
+<button class="w3-button w3-red" type="button" onclick="use()">사용</button>
+</div>
 </div>
 </body>
 </html> 

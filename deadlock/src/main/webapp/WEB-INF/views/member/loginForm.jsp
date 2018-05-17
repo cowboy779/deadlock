@@ -4,6 +4,12 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -33,8 +39,11 @@ function agreement(){
 </script>
 </head> 
 <body>
-<DIV class="title">로그인</DIV>
- 
+<div class="container">
+	<p class="w3-center">
+		<img src="${root}/chat_util/image/apple-icon-180x180.png" style="margin-top: 50px; margin-right: 20px;">
+	</p>
+		
 <FORM name='frm' method='POST' action='${root }/member/loginProc'>
   <TABLE>
     <TR>
@@ -56,10 +65,11 @@ function agreement(){
     </tr>
   </TABLE>
   <br>
-  
-  <button >로그인</button>
-  <button type="button" onclick="agreement()">회원가입</button>
+  <p class="w3-center">
+	  <button class="w3-button w3-red">로그인</button>
+	  <button class="w3-button w3-black" type="button" onclick="agreement()">회원가입</button>
+	</p>
 </FORM>
- 
+ </div>
 </body>
 </html> 

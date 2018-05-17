@@ -3,25 +3,14 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title> 
-<style type="text/css"> 
-TABLE{
-  margin: 0 auto;            /* 테이블 가운데 정렬 */
-  border-color: #AAAAAA;     /* 테이블 외곽선 색깔 */ 
-  border-width: 1px;         /* 테이블 외곽선 두께 */ 
-  border-style: solid;       /* 테이블 외곽선 스타일 */
-  border-collapse: collapse; /* 컬럼의 외곽선을 하나로 결합 */
-  font-size: 20px;
-
-}
-</style> 
 <script type="text/javascript">
-function mcreate(){
-	var url="createForm";
-	location.href=url;
-}
-
 function mdelete(id){
 	var url="deleteForm";
 	url+="?id="+id;
@@ -58,10 +47,10 @@ function mlist(){
 </script>
 </head> 
 <body>
- 
-  <TABLE class="table table-hover" style="width: 60%">
+ <div class="container">
+  <TABLE class="table table-hover" style="width: 50%; margin: auto;">
     <tr>
-    	<td colspan="2"><img src="${root }/storage_member/${dto.fname }"/></td>
+    	<td colspan="2"><img src="${root }/storage_member/${dto.fname }" width="300px;" height="250px;"/></td>
     </tr>
     <TR>
 		<TH>id</TH>
@@ -107,19 +96,18 @@ function mlist(){
   <br>
    <div align="center">
   <c:if test="${(not empty sessionScope.id) && (sessionScope.grade=='A') }">
-  	<input type='button' value='목록' onclick="mlist()">
+  	<input class="w3-button w3-red w3-small" type='button' value='목록' onclick="mlist()">
   </c:if>
-    <input type='button' value='등록' onclick="mcreate()">
-    <input type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
-    <br><br>
+    <input class="w3-button w3-black w3-small" type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
   <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A') }">
-  <input type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
-    <input type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
+  <input class="w3-button w3-gray w3-small" type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
+    <input class="w3-button w3-brown w3-small" type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
   </c:if>
-     <input type='button' value='다운로드'
+     <input class="w3-button w3-green w3-small" type='button' value='다운로드'
                 onclick="location.href='${root }/download?dir=/storage_member&filename=${dto.fname }'">  
   </DIV>
+ </div>
  
- 
+ <div style="margin-bottom: 20px;"></div>
 </body>
 </html> 

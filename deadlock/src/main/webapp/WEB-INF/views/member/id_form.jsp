@@ -4,6 +4,11 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title> 
 <style type="text/css"> 
 TABLE{
@@ -67,7 +72,7 @@ function duplCheck(result){
 		var id = $("#id_form_data").serialize();
 		var real_id = id.split('=');
 		var real_id_get = real_id[1];
-		
+		alert("사용 가능합니다");
 		$("#select_id").text("입력한 아이디: "+real_id_get);
 	}
 }
@@ -84,28 +89,31 @@ $(function(){
 </script>
 </head>
 <body>
-<h2 align="center"><span class="glyphicon glyphicon-th-list"></span>아이디 중복 확인</h2>
+<div class="container">
+<h4 align="center">아이디 중복 확인</h4>
 
 <div align="center" id="id_form">
-<FORM id="id_form_data" name='frm' method='POST'>
-      <label>10자 이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.
-      <input type="text" name="id" 
+<FORM id="id_form_data" name='frm' method='POST' style="margin-right: 20px;">
+      <label>10자 이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.<br>
+      ID : <input type="text" name="id" 
       class="onlyAlphabetAndNumber" size="20" data-rule-required="true" maxlength="10">
       </label>
       
 </FORM>
-    <button type="button" onclick="id_dup_check()">중복확인</button>
-  <button type="button" onclick="window.close()">취소</button>
+<br>
+    <button class="w3-button w3-red" type="button" onclick="id_dup_check()">중복확인</button>
+  <button class="w3-button w3-black" type="button" onclick="window.close()">취소</button>
 </div>
 
 
 
 <div id="id_proc" align="center" style="display: none">
- 		<h3 id="select_id"></h3>
+ 		<h4 id="select_id"></h4>
  		<br>
-		<input type='button' value='사용' onclick='use()'>
-    	<input type='button' value='닫기' onclick="window.close()">
+		<input class="w3-button w3-red" type='button' value='사용' onclick='use()'>
+    	<input class="w3-button w3-black" type='button' value='닫기' onclick="window.close()">
  </div>
  
+</div>
 </body>
 </html> 

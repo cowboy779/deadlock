@@ -62,19 +62,19 @@ function chat(){
 
 		<ul class="nav navbar-nav" style="float: right;">
 		  <c:if test="${empty sessionScope.id }">
-			  <li style="padding-right: 1px;" ><a href="${root}/member/loginForm" title="로그인"> Login</a></li>
-			  <li style="float:right;" ><a href="${root}/member/agreement" title="회원가입"> 회원가입</a></li>
+			  <li style="padding-right: 1px;" ><a href="${root}/member/loginForm" title="로그인"> Sign in</a></li>
+			  <li style="float:right;" ><a href="${root}/member/agreement" title="회원가입"> Sign up</a></li>
 		  </c:if>
 		  
 		  <c:if test="${not empty sessionScope.id }">
 	          <li style="float:right;" ><a href="${root}/member/read" title="내 정보"> MyPage</a></li>
-	          <li style="float:right;" ><a href="${root}/member/logout" title="로그아웃"> 로그아웃</a></li>
+	          <li style="float:right;" ><a href="${root}/member/logout" title="로그아웃"> Logout</a></li>
 	          <c:choose>
-		          <c:when test="${sessionScope.grade != 'A'}">
-		          	<li style="float:right;" ><a href="${root}/member/deleteForm" title="회원탈퇴"> 회원탈퇴</a></li>
+		          <c:when test="${sessionScope.grade == 'A'}">
+		          	<li style="float:right;" ><a href="${root}/admin/list" title="회원목록"> 회원목록</a></li>
 		          </c:when>
 		          <c:otherwise>
-		          	<li style="float:right;" ><a href="${root}/admin/list" title="회원목록"> 회원목록</a></li>
+		          	<li style="float:right;" ><a href="${root}/member/deleteForm" title="회원탈퇴"> 회원탈퇴</a></li>
 		          </c:otherwise>
 	          </c:choose>
 		  </c:if>

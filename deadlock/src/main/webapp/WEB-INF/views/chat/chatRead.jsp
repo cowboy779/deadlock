@@ -7,7 +7,11 @@
 <title></title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <link href="${root}/chat_util/css/style.css" rel="Stylesheet" type="text/css">
-<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet"></head>
+<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript">
 
 //시간 설정
@@ -178,14 +182,14 @@ setInterval(this.time_Get, interval);
 
 
 $(function(){
-// 	$("#please_show").click(function(){
-// 		$("#show_chat").css("display","none");
-// 		$("#hide_or_chat").css("display","");
-// 	});
-// 	$("#please_hide").click(function(){
-// 		$("#show_chat").css("display","");
-// 		$("#hide_or_chat").css("display","none");
-// 	});
+	$("#please_show").click(function(){
+		$("#show_chat").css("display","none");
+		$("#hide_or_chat").css("display","");
+	});
+	$("#please_hide").click(function(){
+		$("#show_chat").css("display","");
+		$("#hide_or_chat").css("display","none");
+	});
 	$("#chat_reset").click(function(){
 		$("#list").empty();
 	})
@@ -195,25 +199,25 @@ $(function(){
 </head> 
 <body onblur="window.focus()">
 <div id="show_chat"  style="display: none;" align="right">
-<%-- <a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a> --%>
+<a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a>
 </div>
 
 <div id="hide_or_chat" align="right">
 	
 	<div id="menu_place">
 	<p align="left">
-<!-- 	<a id="please_hide" class="btn btn-primary" style="text-align: left">채팅창 접기</a> -->
-	<a id="chat_reset" class="btn btn-primary">채팅 내용 지우기</a>
-	
-	<a id="chat_list" class="btn btn-default" href="javascript:history.back()" style="position: absolute; right:15px; ">뒤로가기</a></p>
+	<a id="please_hide" class="w3-button w3-white w3-small" style="text-align: left">접기</a>
+	<a id="chat_reset" class="w3-button w3-white w3-small" style="height: 40px;">채팅 내용 지우기</a>
+	<a id="chat_list" class="w3-button w3-black w3-small"
+	href="javascript:history.back()" style="position: absolute; right:15px; height: 40px;">뒤로가기</a>
+	</p>
 	</div>
 		<dl id="list" style="text-align: left">
-	<h5>
+	<h6 align="center">
 	채팅방 '${dto.chat_title}' 에 입장하셨습니다.
-	</h5>
-		
+	</h6>
 		</dl>
-
+		
 
 <form onsubmit="chatManager.write(this); return false;"
 	  name="frm"
@@ -233,7 +237,7 @@ $(function(){
 	</c:choose>
 		<input name="msg" id="msg" type="text" required="required" placeholder="채팅내용을 입력해주세요."/>
 <!-- 		<a id="btn"  class="btn btn-default" type="submit">sub</a> -->
-		<input name="btn" id="btn" class="btn btn-default" type="submit" value="전송"/>
+		<input name="btn" id="btn" class="w3-button w3-red w3-small" style="height: 33px; margin-bottom: 5px;" type="submit" value="전송"/>
 		</p>	
 		<input type="hidden" name="chat_index" value="${dto.chat_index }"/>
 </form>

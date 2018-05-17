@@ -4,6 +4,11 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <!-- 리캡챠 -->
@@ -128,6 +133,7 @@ function inputCheck(f){
 <!-- *********************************************** -->
 <body>
 <!-- *********************************************** -->
+<div class="container">
         <div align="center">
         회원가입<br>*표시는 반드시 작성하셔야 합니다.</DIV>
         
@@ -150,7 +156,7 @@ function inputCheck(f){
     <th><div style="margin:10px">*아이디<br></div></th>
       <TD>
       <input type='text' name="id" size='20' placeholder="중복확인 버튼을 눌러주세요" value="" readonly>
-      <button style="font-size: 15px" type="button" onclick="idCheck(document.frm.id.value)">중복 확인</button>
+      <button class="w3-button w3-blue w3-small" style="font-size: 15px" type="button" onclick="idCheck(document.frm.id.value)">중복 확인</button>
       </TD>
     </TR>
     <tr>
@@ -174,7 +180,7 @@ function inputCheck(f){
     <th><div style="margin:10px">*이메일<br></div></th>
     	<td>
     	<input type='email' name='email' size="20" placeholder="중복확인 버튼을 눌러주세요" readonly>
-    	<button style="font-size: 15px" type="button" onclick="emailCheck()">이메일 중복확인</button>
+    	<button class="w3-button w3-blue w3-small" style="font-size: 15px" type="button" onclick="emailCheck()">이메일 중복확인</button>
     	</td>
 
     	
@@ -182,7 +188,7 @@ function inputCheck(f){
     <tr>
     <th><div style="margin:10px">우편번호</div></th>
     	<td><input type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호">
-    	<button style="font-size: 15px" style="font-size: 18px" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>
+    	<button class="w3-button w3-blue w3-small" style="font-size: 15px" style="font-size: 18px" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>
     	</td>
     </tr>
     <tr>
@@ -219,10 +225,10 @@ function inputCheck(f){
   </TABLE>
   <br>
   <div align="center">
-  <button>회원가입</button>
+  <button class="w3-button w3-red">회원가입</button>
   </div>
   <br>
 </FORM>
- 
+ </div>
 </body>
 </html> 

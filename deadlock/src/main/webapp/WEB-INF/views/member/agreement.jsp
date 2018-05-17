@@ -4,10 +4,15 @@
 <html>  
 <head> 
 <meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>회원가입</title> 
  
-<script language="javascript"> 
-  // 자바스크립트는 리턴 타입이 없습니다. 
+<script> 
+
   function send(){
     // Checkbox 체크 검사 
     // 폼이름.input 태그의 주어진 이름.속성 
@@ -19,14 +24,13 @@
     } 
   } 
 </script> 
-<!-- <link href="../css/style.css" rel="Stylesheet" type="text/css">  -->
 </head> 
  
 <!-- *********************************************** -->
 <body leftmargin="0" topmargin="0">
 
 <!-- *********************************************** -->
-<div class="w3-white">
+<div class="container">
 
 <br/> 
 <!-- onsubmit 이벤트는 form이 submit이 될 때 발생함. 
@@ -226,15 +230,13 @@
 </table> 
  
 <div style="text-align: center"> 
-  <input type="checkbox" name="agree" value="1" > 약관에 동의합니다</input> 
+  <input type="checkbox" name="agree" value="1"> 약관에 동의합니다</input> 
   <br><br>
-  <button>회원가입</button>
-  <button type='button' onclick='history.back()'>취소</button> 
+  <button class="w3-button w3-red">회원가입</button>
+  <button type='button' onclick='history.back()' class="w3-button w3-black">취소</button> 
 </div> 
- 
 </form> 
  </div> 
-<!-- *********************************************** -->
+ <div style="margin-bottom: 10px;"></div>
 </body>
-<!-- *********************************************** -->
 </html>

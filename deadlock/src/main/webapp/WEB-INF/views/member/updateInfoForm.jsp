@@ -4,6 +4,10 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title></title> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -95,11 +99,9 @@ function emailCheck2(f){
 }
 </script>
 </head> 
-<!-- *********************************************** -->
 <body>
-<!-- *********************************************** -->
- 
-<DIV class="title">회원정보 수정</DIV>
+ <div class="container">
+	<DIV align="center">회원정보 수정</DIV>
  
 <FORM 	name='frm'
 		method='POST'
@@ -114,7 +116,7 @@ function emailCheck2(f){
 	<input type="hidden" name="oldfile" value="${oldfile }">
 	<input type="hidden" name="dto" value="${dto}">
 
-  <TABLE style="width: 60%; margin: auto;">
+  <TABLE class="table table-hover" style="width: 50%; margin: auto;">
   <TR>
       <TH>원본파일</TH>
       <TD>
@@ -125,7 +127,7 @@ function emailCheck2(f){
     <tr>
     	<th>변경파일</th>
     	<td>
-    	<input type='file' name='filenameMF' accept=".jpg,.png,.gif">
+    	<input type='file' name='filenameMF' accept=".jpg,.png,.gif" required="required">
     	</td>
     </tr>
     <TR>
@@ -150,13 +152,13 @@ function emailCheck2(f){
     	<th>이메일</th>
     	<td><input type="text" name="email"
     	value="${dto.email }" onkeydown="emailCheck2(this)">
-    	<button type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button></td>
+    	<button class="w3-button w3-blue w3-small" type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button></td>
     </tr>
     <tr>
     	<th>우편번호</th>
     	<td><input type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호"
     	value="${dto.zipcode }">
-    	<button type="button" onclick="sample6_execDaumPostcode()">주소검색</button></td>
+    	<button class="w3-button w3-blue w3-small" type="button" onclick="sample6_execDaumPostcode()">주소검색</button></td>
     </tr>
     <tr>
     	<th>주소</th>
@@ -190,13 +192,12 @@ function emailCheck2(f){
     
   </TABLE>
   <div align="center">
-    <input type='submit' value='수정'>
-    <input type='button' value='뒤로가기' onclick="history.back()">
+    <input class="w3-button w3-red w3-small" type='submit' value='수정'>
+    <input class="w3-button w3-black w3-small" type='button' value='뒤로가기' onclick="history.back()">
   </div>
 </FORM>
  
  
-<!-- *********************************************** -->
+ </div>
 </body>
-<!-- *********************************************** -->
 </html> 
