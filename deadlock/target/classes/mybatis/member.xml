@@ -3,7 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	
+
+<select id="getGrade" parameterType="String" resultType="String">
+SELECT grade
+FROM member
+WHERE id = #{id}
+</select>
+
 <insert id="create" parameterType="MemberDTO">
 INSERT INTO member(
 id,passwd,mname,tel,email,zipcode,address1,address2,
@@ -138,8 +144,5 @@ FROM member
 WHERE id = #{id}
 and passwd = #{passwd}
 </select>
-
-
-
 
 </mapper>

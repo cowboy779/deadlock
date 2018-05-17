@@ -1,5 +1,7 @@
 package www.deadlock.model.member;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDTO {
 	
 	private String id;
@@ -16,6 +18,7 @@ public class MemberDTO {
 	private String job;
 	private String mdate;
 	private String survey;
+	private MultipartFile filenameMF;
 	
 	
 	public String getMname() {
@@ -101,6 +104,12 @@ public class MemberDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public MultipartFile getFilenameMF() {
+		return filenameMF;
+	}
+	public void setFilenameMF(MultipartFile filenameMF) {
+		this.filenameMF = filenameMF;
 	}
 	
 	

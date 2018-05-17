@@ -14,6 +14,18 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+	<!-- JackSon -->
+<dependency>
+    <groupId>org.codehaus.jackson</groupId>
+    <artifactId>jackson-mapper-asl</artifactId>
+    <version>1.9.13</version>
+</dependency>
+	<!-- Java Mail API -->
+  <dependency>
+     <groupId>javax.mail</groupId>
+     <artifactId>mail</artifactId>
+     <version>1.4.3</version>
+  </dependency>
 
 		<!-- 인터페이스없이 transaction사용시 에러예방 -->
 		<dependency>

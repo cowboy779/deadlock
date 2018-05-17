@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html> 
 <html> 
 <head> 
@@ -48,30 +49,13 @@
         }).open();
     }
 </script> 
-<style type="text/css"> 
-TABLE{
-  margin: 0 auto;            /* 테이블 가운데 정렬 */
-  border-color: #AAAAAA;     /* 테이블 외곽선 색깔 */ 
-  border-width: 1px;         /* 테이블 외곽선 두께 */ 
-  border-style: solid;       /* 테이블 외곽선 스타일 */
-  border-collapse: collapse; /* 컬럼의 외곽선을 하나로 결합 */
-  font-size: 20px;
-  border-spacing:0px;
-  border-style:none;
-  padding:0px;
-}
-h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
-
-body {font-family: "Open Sans"}
-</style> 
-<%-- <link href="<%=root%>/css/style.css" rel="Stylesheet" type="text/css"> --%>
 <script type="text/javascript">
 function idCheck(id){
 	if(id==""){
 		alert("아이디를 입력해주세요");
 		document.frm.id.focus();
 	}else{
-		var url="id_proc.jsp";
+		var url="id_proc";
 		url+="?id="+id;
 		
 		var wr = window.open(url,"새창이름","width=500,height=500");
@@ -84,7 +68,7 @@ function emailCheck(email){
 		alert("이메일을 입력해주세요");
 		document.frm.email.focus();
 	}else{
-		var url="email_proc.jsp";
+		var url="email_proc";
 		url+="?email="+email;
 		
 		var wr = window.open(url,"새창이름","width=500, height=500");
@@ -115,58 +99,75 @@ function emailCheck2(f){
 <body>
 <!-- *********************************************** -->
  
- <div class="w3-white">
-        <div class="w3-container w3-padding w3-black w3-center">
-        회원정보 수정</DIV>
+<DIV class="title">회원정보 수정</DIV>
  
 <FORM 	name='frm'
 		method='POST'
-		action='updateInfoProc.jsp'
-		onsubmit="return incheck(this)">
-		
-	<input type="hidden" name="id" value="<%=%>">
-	<input type="hidden" name="col" value="<%=request.getParameter("col")%>">
-	<input type="hidden" name="word" value="<%=request.getParameter("word")%>">
-	<input type="hidden" name="nowPage" value="<%=request.getParameter("nowPage")%>">
+		action='updateInfoProc'
+		onsubmit="return incheck(this)"
+		enctype="multipart/form-data"
+		>
+	<input type="hidden" name="id" value="${id }">
+	<input type="hidden" name="col" value="${param.col }">
+	<input type="hidden" name="word" value="${param.word }"> 
+	<input type="hidden" name="nowPage" value="${param.nowPage }">
+	<input type="hidden" name="oldfile" value="${oldfile }">
+	<input type="hidden" name="dto" value="${dto}">
 
-  <TABLE>
-  <tr>
-  	<td colspan="2"><img src="<%= %>/storage/<%=%>"></td>
-  </tr>
-    <TR>
-      <TH><div style="margin:10px">아이디</div></TH>
-      <TD><%=%></TD>
+  <TABLE style="width: 60%; margin: auto;">
+  <TR>
+      <TH>원본파일</TH>
+      <TD>
+      <img src="${root }/storage_member/${oldfile }">
+      원본파일명:${oldfile }
+      </TD>
     </TR>
     <tr>
-    	<th><div style="margin:10px">연락처</div></th>
-    	<td><input type="text" name="tel" value="<%= %>"></td>
+    	<th>변경파일</th>
+    	<td>
+    	<input type='file' name='filenameMF' accept=".jpg,.png,.gif">
+    	</td>
+    </tr>
+    <TR>
+      <TH>아이디</TH>
+      <TD>${dto.id }</TD>
+    </TR>
+    <tr>
+    	<th>닉네임</th>
+    	<td>
+    	<input type="text" name="mname" value="${dto.mname }">
+		</td>
     </tr>
     <tr>
-    	<th><div style="margin:10px">이름</div></th>
-    	<td><%=%></td>
+    	<th>연락처</th>
+    	<td><input type="text" name="tel" value="${dto.tel }"></td>
     </tr>
     <tr>
-    	<th><div style="margin:10px">이메일</div></th>
+    	<th>이름</th>
+    	<td>${dto.mname }</td>
+    </tr>
+    <tr>
+    	<th>이메일</th>
     	<td><input type="text" name="email"
-    	value="<%=%>" onkeydown="emailCheck2(this)">
-    	<button style="font-size: 15px;" type="button"  class="w3-button w3-black" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button></td>
+    	value="${dto.email }" onkeydown="emailCheck2(this)">
+    	<button type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button></td>
     </tr>
     <tr>
-    	<th><div style="margin:10px">우편번호</div></th>
+    	<th>우편번호</th>
     	<td><input type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호"
-    	value="<%=%>">
-    	<button type="button" style="font-size: 15px;" class="w3-button w3-black" onclick="sample6_execDaumPostcode()">주소검색</button></td>
+    	value="${dto.zipcode }">
+    	<button type="button" onclick="sample6_execDaumPostcode()">주소검색</button></td>
     </tr>
     <tr>
-    	<th><div style="margin:10px">주소</div></th>
-    	<td><input type="text" name="address1" size="40" value="<%=%>"
+    	<th>주소</th>
+    	<td><input type="text" name="address1" size="40" value="${dto.address1 }"
     	id="sample6_address" placeholder="주소"><br>
-    	<input type="text" name="address2" size="40" value="<%=%>"
+    	<input type="text" name="address2" size="40" value="${dto.address2 }"
     	id="sample6_address2" placeholder="상세주소">
     	</td>
     </tr>
     <tr>
-    	<th><div style="margin:10px">직업</div></th>
+    	<th>직업</th>
     	<td>
     	<select name="job">
     		<option value="0">선택하세요</option>
@@ -182,20 +183,18 @@ function emailCheck2(f){
     		<option value="A10">기타</option>
     	</select>
     	<script type="text/javascript">
-    	document.frm.job.value=""
+    	document.frm.job.value="${dto.job}"
     	</script>
     	</td>
     </tr>
+    
   </TABLE>
-  <p class="w3-center">
-  <button class="w3-button w3-black"><b>정보수정  </b><span class="w3-tag w3-white"></span></button>
-  <button type='button' class="w3-button w3-black" onclick="history.back()"><b>뒤로가기  </b><span class="w3-tag w3-white"></span></button>
-  </p>
-    <!-- <input type='submit' value='수정'> -->
-    <!-- <input type='button' value='뒤로가기' onclick="history.back()"> -->
-
+  <div align="center">
+    <input type='submit' value='수정'>
+    <input type='button' value='뒤로가기' onclick="history.back()">
+  </div>
 </FORM>
- </div>
+ 
  
 <!-- *********************************************** -->
 </body>

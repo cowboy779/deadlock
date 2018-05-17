@@ -10,14 +10,12 @@
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
-	
 	http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd
     http://www.springframework.org/schema/context 
-    http://www.springframework.org/schema/context/spring-context.xsd
-	">
+    http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	
 	<!-- Transaction Manager -->
@@ -43,24 +41,24 @@
    	</context:component-scan>
 	
 	
-	<!-- 데이터베이스 접속 설정 (팀 공용)--> 
-	<bean id="dataSource" 
-	destroy-method="close"
-	class="org.apache.commons.dbcp.BasicDataSource" 
-	p:driverClassName="oracle.jdbc.driver.OracleDriver" 
-	p:url="jdbc:oracle:thin:@localhost:1521:XE" 
-	p:username="deadlock"  
-	p:password="1234"  
-	/> 
-<!-- 	데이터베이스 접속 설정 (개인용) -->
+ 	<!-- 데이터베이스 접속 설정 (팀 공용)-->
 <!-- 	<bean id="dataSource"  -->
 <!-- 	destroy-method="close" -->
 <!-- 	class="org.apache.commons.dbcp.BasicDataSource"  -->
 <!-- 	p:driverClassName="oracle.jdbc.driver.OracleDriver"  -->
 <!-- 	p:url="jdbc:oracle:thin:@localhost:1521:XE"  -->
-<!-- 	p:username="soldesk"   -->
+<!-- 	p:username="deadlock"   -->
 <!-- 	p:password="1234"   -->
 <!-- 	/>  -->
+<!-- 	데이터베이스 접속 설정 (개인용) -->
+	<bean id="dataSource" 
+	destroy-method="close"
+	class="org.apache.commons.dbcp.BasicDataSource" 
+	p:driverClassName="oracle.jdbc.driver.OracleDriver" 
+	p:url="jdbc:oracle:thin:@localhost:1521:XE" 
+	p:username="soldesk"  
+	p:password="1234"  
+	/> 
 	
 	
 	
@@ -105,11 +103,25 @@
         <property name="viewClass"> 
             <value>org.springframework.web.servlet.view.tiles2.TilesView</value> 
         </property>
-        <property name="order"><value>1</value></property> 
+        <property name="order"><value>1</value></property>
     </bean> 
-	
-	
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+    
+    
+      <!-- 메일보내기 2018.05.09 추가 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="deadlock7683@gmail.com" />
+      <property name="password" value="2xlaghkdlxld" />
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+ 
+   </bean>
+    
 </beans>

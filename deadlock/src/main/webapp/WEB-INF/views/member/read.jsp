@@ -1,18 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
-<%-- <% --%>
-// 		if(dto.getId()==null)dto.setId((String)session.getAttribute("id"));
-// 		dto = dao.read(dto.getId());
-<%-- %> --%>
+<%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html> 
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <title></title> 
 <style type="text/css"> 
 TABLE{
@@ -25,141 +16,111 @@ TABLE{
 
 }
 </style> 
-<%-- <link href="<%=root%>/css/style.css" rel="Stylesheet" type="text/css"> --%>
 <script type="text/javascript">
 function mcreate(){
-	var url="createForm.jsp";
+	var url="createForm";
 	location.href=url;
 }
 
 function mdelete(id){
-	var url="deleteForm.jsp";
+	var url="deleteForm";
 	url+="?id="+id;
-	url+="&col=<%=request.getParameter("col")%>"
-	url+="&word=<%=request.getParameter("word")%>"
-	url+="&nowPage=<%=request.getParameter("nowPage")%>"
+	url+="&col=${param.col}";
+	url+="&word=${param.word}";
+	url+="&nowPage=${param.nowPage}";
 	location.href=url;
 }
 
 function pwUpdate(id){
-	var url="passwordCheck.jsp";
+	var url="passwordCheck";
 	url+="?id="+id;
-	url+="&col=<%=request.getParameter("col")%>"
-	url+="&word=<%=request.getParameter("word")%>"
-	url+="&nowPage=<%=request.getParameter("nowPage")%>"
+	url+="&col=${param.col}";
+	url+="&word=${param.word}";
+	url+="&nowPage=${param.nowPage}";
 	location.href=url;
 }
 
 function infoUpdate(id){
-	var url="updateInfoForm.jsp";
+	var url="updateInfoForm";
 	url+="?id="+id;
-	url+="&passwd=<%=request.getParameter("passwd")%>";
-	url+="&col=<%=request.getParameter("col")%>"
-	url+="&word=<%=request.getParameter("word")%>"
-	url+="&nowPage=<%=request.getParameter("nowPage")%>"
+	url+="&col=${param.col}";
+	url+="&word=${param.word}";
+	url+="&nowPage=${param.nowPage}";
 	location.href=url;
 }
 
-function updateFile(){
-	var url="updateFileForm.jsp";
-	url+="?id=";
-	url+="&oldfile=";
-	url+="&col=<%=request.getParameter("col")%>"
-	url+="&word=<%=request.getParameter("word")%>"
-	url+="&nowPage=<%=request.getParameter("nowPage")%>"
-	location.href=url;
-}
 
 function mlist(){
-	var url = "../admin/list.jsp";
+	var url = "../admin/list";
 	location.href=url;
 }
 
 </script>
 </head> 
-<!-- *********************************************** -->
 <body>
-<!-- *********************************************** -->
- <div class="w3-white">
-
-<div class="container">
-	<header class="w3-container w3-center w3-padding-48 w3-white">
-         <h1 class="w3-xxxlarge"><b><span class="glyphicon glyphicon-user"></span>의 회원정보</b></h1>
-  	</header>
  
-  <TABLE class="table table-hover">
+  <TABLE class="table table-hover" style="width: 60%">
     <tr>
-    	<td colspan="2"><img src=./storage/></td>
+    	<td colspan="2"><img src="${root }/storage_member/${dto.fname }"/></td>
     </tr>
     <TR>
 		<TH>id</TH>
-		<td></td>
+		<td>${dto.id }</td>
     </TR>
     <tr>
       <Th>이름</Th>
-      <td></td>
+      <td>${dto.mname }</td>
     </tr>
     <tr>
     	<th>연락처</th>
-    	<td></td>
+    	<td>${dto.tel }</td>
     </tr>
     <tr>
     	<th>이메일</th>
-    	<td></td>
+    	<td>${dto.email }</td>
     </tr>
     <tr>
     	<th>우편번호</th>
-    	<td></td>
+    	<td>${dto.zipcode }</td>
     </tr>
     <tr>
     	<th>주소</th>
     	<td>
-    	
+    	${dto.address1 }
     	<br>
-    	
+    	${dto.address2 }
     	</td>
     </tr>
     <tr>
     	<th>직업</th>
-    	<td>
-    	<br></td>
+    	<td>${util:jobvalue(dto.job) }</td>
     </tr>
     <tr>
     	<th>가입날짜</th>
-    	<td></td>
+    	<td>${dto.mdate }</td>
     </tr>
     <tr>
     	<th>등급</th>
-    	<td></td>
+    	<td>${dto.grade }</td>
     </tr>
   </TABLE>
   <br>
-  <p class="w3-center">
-  <button type='button' class="w3-button w3-blue" onclick="mlist()">목록</button>
-  <button type='button' class="w3-button w3-blue" onclick="mcreate()">등록</button>
-  <button type='button' class="w3-button w3-blue" onclick="infoUpdate('')">정보수정</button>
-  <br><br>
-  <button type='button' class="w3-button w3-white w3-border" onclick="updateFile()">사진수정</button>
-  <button type='button' class="w3-button w3-white w3-border" onclick="pwUpdate('')">패스워드변경</button>
-  <button type='button' class="w3-button w3-white w3-border" onclick="mdelete('')">회원탈퇴</button>
-  <button type='button' class="w3-button w3-white w3-border" onclick="location.href='/download?dir=/member/storage&filename='">
-  다운로드</button>
-  </p>
-  	<!-- <input type='button' value='목록' onclick="mlist()"> -->
-    <%-- <input type='button' value='등록' onclick="mcreate()">
-    <input type='button' value='정보수정' onclick="infoUpdate('<%=dto.getId()%>')">
+   <div align="center">
+  <c:if test="${(not empty sessionScope.id) && (sessionScope.grade=='A') }">
+  	<input type='button' value='목록' onclick="mlist()">
+  </c:if>
+    <input type='button' value='등록' onclick="mcreate()">
+    <input type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
     <br><br>
-    <input type='button' value='사진수정' onclick="updateFile()">
-    <input type='button' value='패스워드변경' onclick="pwUpdate('<%=dto.getId()%>')">
-    <input type='button' value='회원탈퇴' onclick="mdelete('<%=dto.getId()%>')">
-     <input type='button' value='다운로드'  
-           onclick="location.href='<%=root %>/download?dir=/member/storage&filename=<%=dto.getFname()%>'">  
- --%>
-  </div>
-  </div>
+  <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A') }">
+  	<input type='button' value='사진수정' onclick="updateFile()">
+  <input type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
+    <input type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
+  </c:if>
+     <input type='button' value='다운로드'
+                onclick="location.href='${root }/download?dir=/storage_member&filename=${dto.fname }'">  
+  </DIV>
  
  
-<!-- *********************************************** -->
 </body>
-<!-- *********************************************** -->
 </html> 
