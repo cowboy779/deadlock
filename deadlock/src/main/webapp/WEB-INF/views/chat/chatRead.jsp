@@ -12,70 +12,37 @@
 
 //시간 설정
 var interval = 500;
-
 //마지막으로 읽어온 시간을 저장, 그 값을 토대로 읽어오기 위함
 var finalDate = "";
-
 //계속해서 시간이 초기화 되는 것 방지
 var timeFlag = true;
-
 //DB의 변화를 캐치하기 위한 변수
 var table_cnt = 0;
-
+var dubFlag = true;
 var res;
 
 var chatManager = new function(){
-	
-	//접속자 닉네임 뿌리기
-this.loginList = function(){
-	$.post(
-		"loginList",
-		"",
-		function(data, textStatus){
-			var user_nick = data.nickname;
-			var getTime = data.getTime;
-			
-			var o = document.getElementById("list");
-			var dt, dd;
-			
-			dt = document.createElement("dt");
-			dt.appendChild(document.createTextNode(getTime));
-			o.appendChild(dt);
-			
-			dd = document.createElement("dd");
-			dd.appendChild(document.createTextNode(user_nick+"님이 접속하셨습니다."));
-			o.appendChild(dd);
-		}
-	)
-}
-	<%
-	if(session.getAttribute("id") != null) {
-	%>
-		this.loginList();
-	<%
-	}
-	%>
 
 this.time_Get = function(){
-	
-	if(!timeFlag){
-		chatManager.check();
-		return false;
-	}else{
-		timeFlag = false;
 		
-		$.post(
-			"chat_time",
-			"",
-			function(data,textStatus){
+		if(!timeFlag){
+			chatManager.check();
+			return false;
+		}else{
+			timeFlag = false;
+			
+			$.post(
+				"chat_time",
+				"",
+				function(data,textStatus){
 
-				finalDate = data.realtime;
-				chatManager.check();
-			}
-		)
+					finalDate = data.realtime;
+					chatManager.check();
+				}
+			)
+		}
 	}
-}
-
+	
 this.check = function(){
 	
 	$.post(
@@ -161,19 +128,64 @@ this.write = function(frm) {
 	
 }//write close
 
+
+
+
+//접속자 닉네임 뿌리기
+this.loginList = function(){
+		
+		if(dubFlag == false){
+			return false;
+		}
+		
+	$.post(
+		"loginList",
+		"",
+		function(data, textStatus){
+			
+			res = data;
+
+			chatManager.Connect();
+		}
+	)
+}
+	<%
+	if(session.getAttribute("id") != null) {
+	%>
+		this.loginList();
+	<%
+	}
+	%>
+
+this.Connect = function(){
+	var nick = res.nickname+"님이 접속하셨습니다.";
+	
+	$.post(
+		"chat_write",
+		"nickname="+res.getTime+"&msg="+nick+"&chat_index=${dto.chat_index}",
+		function(data,testStatus){
+			dubFlag = false;
+			chatManager.show();
+		}
+	)
+}
+
 //정해둔 시간마다 호출
 setInterval(this.time_Get, interval);
 
 }//chatManager close
+
+
+
 $(function(){
-	$("#please_show").click(function(){
-		$("#show_chat").css("display","none");
-		$("#hide_or_chat").css("display","");
-	});
-	$("#please_hide").click(function(){
-		$("#show_chat").css("display","");
-		$("#hide_or_chat").css("display","none");
-	});
+// 	$("#please_show").click(function(){
+// 		$("#show_chat").css("display","none");
+// 		$("#hide_or_chat").css("display","");
+// 	});
+// 	$("#please_hide").click(function(){
+// 		$("#show_chat").css("display","");
+// 		$("#hide_or_chat").css("display","none");
+// 	});
 	$("#chat_reset").click(function(){
 		$("#list").empty();
 	})
@@ -181,16 +193,16 @@ $(function(){
 
 </script>
 </head> 
-<body>
+<body onblur="window.focus()">
 <div id="show_chat"  style="display: none;" align="right">
-<a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a>
+<%-- <a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a> --%>
 </div>
 
 <div id="hide_or_chat" align="right">
 	
 	<div id="menu_place">
 	<p align="left">
-	<a id="please_hide" class="btn btn-primary" style="text-align: left">채팅창 접기</a>
+<!-- 	<a id="please_hide" class="btn btn-primary" style="text-align: left">채팅창 접기</a> -->
 	<a id="chat_reset" class="btn btn-primary">채팅 내용 지우기</a>
 	
 	<a id="chat_list" class="btn btn-default" href="javascript:history.back()" style="position: absolute; right:15px; ">뒤로가기</a></p>

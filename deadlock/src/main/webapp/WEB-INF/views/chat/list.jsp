@@ -6,21 +6,45 @@
 <meta charset="UTF-8"> 
 <title></title> 
 <style type="text/css">
+img{
+	width : 	50px;
+	height: 	50px;
+}
+img.fixed{
+	position: fixed;
+	right:0px;
+	top:70px;
+}
 </style>
-<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet"></head>
+<link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$.post(
+		"${root}/sts/chat/list",
+		"",
+		function(data,textStatus){
+			
+		}
+	
+	)
+	
+	
+});
+
+
+
 function read(chat_index){
-	var url = "chatRead";
+	var url = "/sts/chat/chatRead";
 	url += "?chat_index="+chat_index;
-	url += "&nowPage=${nowPage}";
+	url += "&cPage=${cPage}";
 	url += "&col=${col}";
 	url += "&word=${word}";
 	
 	location.href=url;
 }
 function create(){
-	var url = "chatCreate";
+	var url = "/sts/chat/chatCreate";
 	location.href=url;
 }
 
@@ -29,7 +53,7 @@ function cdelete(chat_index){
 	if(confirm("정말로 채팅방을 삭제하시겠습니까?")){
 		
 		$.post(
-				"deleteProc",
+				"/chat/deleteProc",
 				"chat_index="+chat_index,
 				function(data,textStatus){
 					if(data.flag){
@@ -48,25 +72,46 @@ function cdelete(chat_index){
 	}
 }
 
+// $(function(){
+// 	$("#please_show").click(function(){
+// 		$("#show_chat").css("display","none");
+// 		$("#hide_or_chat").css("display","");
+// 	});
+// 	$("#please_hide").click(function(){
+// 		$("#show_chat").css("display","");
+// 		$("#hide_or_chat").css("display","none");
+// 	});
+// })
+
 </script>
 </head> 
-<body>
-<div align="right">
+<body onblur="window.focus()">
+<div id="show_chat"  style="display: none;" align="right">
+<%-- <a id="please_show"><img src="${root }/chat_util/image/chat.jpg" class="fixed"></a> --%>
+</div>
+
+<div align="right" id="hide_or_chat">
 		<form method="post" action='list' style="margin: auto;">
-			<select name="col">
-				<option value="chat_nickname"
-				<c:if test="${col == 'chat_nickname' }">selected</c:if>
-				>방장</option>
+<!-- <a id="please_hide" class="btn btn-primary">  채팅창 접기  </a> -->
+			<select name="col" style="height: 35px;">
+				<option value="chat_index"
+					<c:if test="${col == 'chat_index'}">selected</c:if>
+					>번호
+				</option>
 				<option value="chat_title"
-				<c:if test="${col == 'chat_title' }">selected</c:if>
-				>제목</option>
+					<c:if test="${col == 'chat_title'}">selected</c:if>
+					>제목
+				</option>
+				<option value="chat_nickname"
+					<c:if test="${col == 'chat_nickname'}">selected</c:if>
+					>방장이름
+				</option>
 				<option value="total">전체</option>
 			</select>
-		<input type="search" name="word" value="${word }" required>
-			<button>검색</button>
+		<input type="search" name="word" value="${word}" required>
+		<button class="btn btn-default">검색</button>
 		</form>
-</div>
-<div align="right">
+
   <TABLE class="table table-hover" style="width: 400px;">
 	   <c:if test="${empty list}">
 			    <tr>
@@ -74,7 +119,7 @@ function cdelete(chat_index){
 			    </tr>
 	   </c:if>
     <tr>
-	  <th>방 번호</th>
+	  <th>번호</th>
       <th>채팅방 제목</th>
       <th>방장</th>
       <c:if test="${not empty sessionScope.id}">
@@ -83,7 +128,7 @@ function cdelete(chat_index){
     </tr>
 <c:forEach var="dto" items="${list }">
     <tr>
-      <td>${nowPage}-${i = i + 1 }</td>
+      <td>${dto.chat_index}</td>
        <td id="up"><a href="javascript:read('${dto.chat_index}')">${dto.chat_title}</a></td>
       <td>${dto.chat_nickname}</td>
       <c:if test="${not empty sessionScope.id}">
@@ -95,9 +140,9 @@ function cdelete(chat_index){
 </c:forEach>
   </TABLE>
 <c:if test="${not empty sessionScope.id}">
-<button type="button" onclick="create()">채팅방 생성</button>
+<a id="btn" href="javascript:create()"  class="btn btn-default" type="button">채팅방 생성</a>
 </c:if>
- 	<span style="text-align: right; ">${paging}</span>
+ 	${paging}
 </div>
 
 

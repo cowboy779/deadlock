@@ -149,7 +149,7 @@ function inputCheck(f){
     <TR>
     <th><div style="margin:10px">*아이디<br></div></th>
       <TD>
-      <input type='text' name="id" size='20' placeholder="아이디(*필수)" value="" readonly>
+      <input type='text' name="id" size='20' placeholder="중복확인 버튼을 눌러주세요" value="" readonly>
       <button style="font-size: 15px" type="button" onclick="idCheck(document.frm.id.value)">중복 확인</button>
       </TD>
     </TR>
@@ -173,7 +173,7 @@ function inputCheck(f){
     <tr>
     <th><div style="margin:10px">*이메일<br></div></th>
     	<td>
-    	<input type='email' name='email' size="20" placeholder="이메일(*필수)" readonly>
+    	<input type='email' name='email' size="20" placeholder="중복확인 버튼을 눌러주세요" readonly>
     	<button style="font-size: 15px" type="button" onclick="emailCheck()">이메일 중복확인</button>
     	</td>
 

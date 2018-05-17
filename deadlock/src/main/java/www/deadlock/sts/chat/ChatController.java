@@ -121,15 +121,15 @@ public class ChatController{
 			word = "";
 		}
 		
-		int nowPage = 1;
+		int cPage = 1;
 		int recordPerPage = 5;
 		
-		if(request.getParameter("nowPage") != null) {
-			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		if(request.getParameter("cPage") != null) {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}
 		
-		int sno = ((nowPage-1)*recordPerPage)+1;
-		int eno = nowPage * recordPerPage;
+		int sno = ((cPage-1)*recordPerPage)+1;
+		int eno = cPage * recordPerPage;
 		
 		Map map = new HashMap();
 		map.put("sno", sno);
@@ -140,11 +140,11 @@ public class ChatController{
 		List list = rdao.list(map);
 
 		int totalRecord = rdao.total(map);
-		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
+		String paging = Utility.cpaging(totalRecord, cPage, recordPerPage, col, word);
 		
 		int i = 0; 
 		
-		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("cPage", cPage);
 		request.setAttribute("col", col);
 		request.setAttribute("word", word);
 		request.setAttribute("list", list);
@@ -173,7 +173,7 @@ public class ChatController{
 		request.setAttribute("word", request.getParameter("word"));
 		request.setAttribute("nowPage", request.getParameter("nowPage"));
 		
-		return "chat/chatRead";
+		return "/chat/chatRead";
 	}
 	
 	@RequestMapping("/chat/chat_write")
@@ -277,6 +277,19 @@ public class ChatController{
 		}
 		return modelAndView;
 		
+	}
+	
+	@RequestMapping("/chat/room_check")
+	public ModelAndView room_check(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
+		String id = (String)request.getSession().getAttribute("id");
+		
+		boolean room_flag = rdao.crate_room_check(id);
+		
+		modelAndView.addObject("room_flag",room_flag);
+		
+		return modelAndView;
 	}
 	
 	

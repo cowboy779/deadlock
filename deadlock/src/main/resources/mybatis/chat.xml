@@ -4,6 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
+<select id="crate_room_check" parameterType="String" resultType="int">
+SELECT count(*)
+FROM chat_room
+WHERE id=#{id}
+</select>
+
 <select id="chat_room_Check" parameterType="map" resultType="int">
 SELECT count(*)
 FROM chat_room
@@ -114,6 +120,9 @@ r
 		FROM chat_room
 <where>
 		<choose>
+			<when test="col=='chat_index'">
+			chat_index like '%'||#{word}||'%'
+			</when>
 			<when test="col=='chat_title'">
 			chat_title like '%'||#{word}||'%'
 			</when>
