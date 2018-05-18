@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 .d1{
+
 	magin:auto;
+	
 }
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
