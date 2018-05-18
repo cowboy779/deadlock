@@ -6,22 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.d1{
+	magin:auto;
+}
+</style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script src="js/bootstrap.js"></script>
 <script type="text/javascript">
-
-
-//  $(document).ready(function(){
-        
-//         $("#content").summernote({
-            
-//             height:300,
-//             width:800
-            
-//         });
-//     });
-
- 
  function c_update(){
 	 
 	 var param = $("#update_form").serialize();
@@ -77,28 +69,25 @@
 		
 		
 	}
-
 </script>
 </head>
-
 <body>
-
-
-  
-    <h2 style="text-align:center;">방명록 작성</h2>
-    
+<div class="d1">
+    <h2 align="center">방명록 작성</h2>
+</div>    
     <form name="form1" 
     	  method="post" 
     	  action="./create"
     	  onsubmit="return incheck(this)">
-    <table border="1" style="width:600px;" align="center">
-        
+    <table align="center">
+        <thead>
         <tr>
             <td>작성자</td>
             <td><input name="bname" size="20" value=""></td>
             
         </tr>   
- 
+ 		</thead>
+ 		
         <tr>
             <td>비밀번호</td>
             <td><input type="password" name="passwd" size="20"></td>
@@ -119,28 +108,19 @@
         </table>
     </form>
 
-
-
-   
-    <h2 style="text-align: center;">글 목록</h2>
- 
-    <div style="text-align:center; width: 2100px;">
+    <h2>글 목록</h2>
+    <div>
         게시물수:${ylistsize}
     </div>
     <br>
-    
-    
-    <!-- 컨트롤러에서 redirect 로 넘어오면 앞에 param을 붙여준다. -->
-<!--    <center> -->
-<%--     <span style="color:red;">${param.message}</span> --%>
-<!--  </center> -->
     <c:forEach var="row" items="${ylist}">
- 
         <form action="${root}/pbbs/view" id="update_form">
+        
             <!-- 방명록리스트 --> 
-            <table align="center" border="1" style="width: 600px;">
+            
+            <table align="center">
                 <tr>
-                    <td>이름</td>
+                    <td>작성자</td>
                     <td>${row.bname}</td>
                     <td>날짜</td>
                     <td>${row.bdate}</td>
@@ -159,11 +139,11 @@
                 </tr>
             </table>
         </form>
- </c:forEach>
+</c:forEach>
  
- <br>
+<br>
  
- <div class="search" align="center">
+<div class="search" align="center">
 <form action="./list" method="post">
 <select name= "col"><!-- 검색할 컬럼 -->
 	<option value="bname" 
@@ -176,19 +156,18 @@
 	>내용</option>
 	<option value="total">전체출력</option>
 </select>
+
 <!-- 검색어 -->
 <input type="search" name="word" value="${word}">
 <button>검색</button>
 </form>
 </div> 
+
 <br>
 <hr>
- 
+
  <DIV class='bottom'>
    ${paging3}
   </DIV>
- 
- 
- 
 </body>
 </html>
