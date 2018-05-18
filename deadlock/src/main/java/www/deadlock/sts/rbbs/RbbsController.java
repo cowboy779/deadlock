@@ -62,7 +62,7 @@ public class RbbsController {
 
 			int totalRecord = dao.total(map);
 
-			String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
+			String paging = Utility.paging_rbbs(totalRecord, nowPage, recordPerPage, col, word);
 
 			request.setAttribute("list", list);
 			request.setAttribute("nowPage", nowPage);
@@ -207,9 +207,25 @@ public class RbbsController {
 	}
 	
 	@RequestMapping(value="/rbbs/update", method = RequestMethod.POST)
-	public String update(RbbsDTO dto ,HttpServletRequest request) {
+	public String update(RbbsDTO dto ,HttpServletRequest request) throws Exception {
 		
-		boolean flag = dao.createReply(dto);
+		String oldfile = request.getParameter("oldfile");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		dto.setRnum(rnum);
+		if(dto.getFnameMF() != null) {
+		
+		String basePath = request.getRealPath("/storage_rbbs");
+		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
+		int filesize = (int) dto.getFnameMF().getSize();
+		Utility.deleteFile(basePath, oldfile);
+		
+		dto.setFname(filename);
+		
+		}else {
+			dto.setFname(oldfile);
+		}
+		
+		boolean flag = dao.update(dto);
 		
 		if(flag) {
 			return  "redirect:/rbbs/list";

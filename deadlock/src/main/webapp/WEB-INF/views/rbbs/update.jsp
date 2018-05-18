@@ -49,10 +49,11 @@
 
     <TR>
       <TH>File</TH>
-      <TD><input type="file" name="fnameMF" value= "${dto.fname }"></TD>
+      <TD><input type="file" name="fnameMF"></TD>
     </TR>
 
-    	
+    	<input type="hidden" name="oldfile" value="${dto.fname }">
+    	<input type="hidden" name="rnum" value="${rnum }">    	
   </TABLE>
   <br>
   <DIV class='bottom'>

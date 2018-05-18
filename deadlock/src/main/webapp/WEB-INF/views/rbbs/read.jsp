@@ -42,6 +42,10 @@ function oneclick(wh){
 				<td>내용</td>
 				<td>${dto.content }</td>
 			</tr>
+			<tr>
+				<td>파일</td>
+				<td><a href="${root }/storage_rbbs/${dto.fname }" download>${dto.fname }</a></td>
+			</tr>
 
 		</table>
 		
