@@ -5,7 +5,37 @@
 <head> 
 <meta charset="UTF-8"> 
 <title></title> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+.ycreate{
+  position:relative; top: 20px; left: 380px;
+}
+
+.line{border-bottom:1px solid black;}
+
+input[type=button], input[type=submit], input[type=reset]{
+    background-color:#555555;;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+</style>
 <script type="text/javascript">
+
+function del(){
+	var url = "./delete";
+	url += "?ynum=${dto.ynum}";
+	url += "&oldfile=${dto.fname}";
+	url += "&col=${param.col}"; 
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+		
+	location.href=url;
+}
+
+
+
+
 function input(f){
 	if(id==null){
 		if(confirm("로그인후 댓글을 쓰세요")){
@@ -74,10 +104,12 @@ function yyupdate(ynum){
 
 </head> 
 <body>
+
+<DIV class="title" align="center">
+<h2>조회</h2>
+</DIV>
  
-<DIV class="title">조회</DIV>
- 
-  <TABLE>
+  <TABLE width="60%" align="center" border="1">
   	<TR>
       <TH>조회수</TH>
       <TD>${dto.ycount}</TD>
@@ -110,14 +142,16 @@ function yyupdate(ynum){
     <tr>
     <th>내용</th>
     <td>
-     <textarea id="content" rows="100" cols="100" name="content">
-     ${content }
-      	</textarea>
+    <textarea id="content" rows="10" cols="100" name="content">${content}</textarea>
     </td>
+    </tr>
+    <tr>
+    <th>아이디</th>
+    <td>${dto.id }</td>
     </tr>
   </TABLE>
 
-<DIV>
+<DIV style="position: relative; left: 1400px;">
    <input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
    <button id = "button" onclick="del()">삭제</button>
 </DIV>
@@ -129,7 +163,7 @@ function yyupdate(ynum){
 	action="./ycreate" 
 	method="post" 
 	onsubmit="return input(this)">
-	<textarea rows="3" cols="28" name="content"></textarea>	
+	<textarea rows="3" cols="60" name="content"></textarea>	
 	<br>
 	<input type ="submit" name="ysubmit" value="등록">
 	<input type ="hidden" name = "id" value="${id }">
@@ -143,21 +177,37 @@ function yyupdate(ynum){
 </div>
 
 <hr>
-
-
+<!-- <div class="rlist"> -->
+<div id="Layer1" style="position:relative; left:500; top:0; width:100; height:100; z-index:0; visibility: inherit; background-color: #FFCCCC; 
+layer-background-color: #FFCCCC; border: 1px none #000000;"><table >
 <c:forEach var="ydto" items="${ylist}">
-<div class="ylist">
-${ydto.id}<br>
-<p>${ydto.content }</p>
-${ydto.yredate }
+<tr>
+<%--  <img src='${root}/images/re.jpg' width=20 height=15> --%>
+<td>
+<i class="fa fa-address-book-o"></i>
+${ydto.id}
+</td>
+<td>
+<i class="fa fa-calendar"></i>
+${ydto.yredate }</td>
+</tr>
+<tr>
+<td>
+${ydto.content }
+</td>
 <c:if test="${id==ydto.id}">
-<span style="float:right">
+<tr>
+ <td colspan="3" align="right">
 <a href="javascript:yupdate('${ydto.yrenum }','${ydto.content}')">수정</a>
 <a href="javascript:ydelete('${ydto.yrenum}')">삭제</a>
-</span>
+</Td>
+</tr>
+
 </c:if>
-</div>
+</tr>
 </c:forEach>
+</table>
+</div>
 <div class="bottom">
 ${paging2}
 </div>

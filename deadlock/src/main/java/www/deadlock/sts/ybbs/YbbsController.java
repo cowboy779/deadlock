@@ -193,7 +193,7 @@ public class YbbsController {
 
 	@RequestMapping(value = "/ybbs/create", method = RequestMethod.GET)
 	public String create(HttpServletRequest request,YBbsDTO dto) {
-		String id = "test";
+		String id = "user1";
 		request.setAttribute("id", id);
 //		dto.setId(id);
 

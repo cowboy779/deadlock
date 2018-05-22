@@ -9,7 +9,6 @@
 *{ 
   font-family: gulim; 
   font-size: 20px; 
-  
 } 
 </style> 
 <script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
@@ -37,48 +36,46 @@ function incheck(f){
 
 <body>
 <div>
+<center>
 <h2>등록</h2>
+</center>
 <FORM name='frm'
  	  method='POST' 
  	  action='./create'
   	  onsubmit="return incheck(this)"
   	  enctype="multipart/form-data">
  
- <TABLE>
+ <TABLE align="center" width="60%">
    <TR>
-      <TH>제목<TH>
-      <TD><input type="text" name="title"></TD>
+      <Td>제목</td>
+      <td>
+      <input type="text" name="title"></TD>
+        <Td>id
+      <input type="text" name="id" value="${id}" readonly></TD>
     </TR>
   
     <TR>
-      <TH>내용</TH>
-      <TD>
-      <TD>
-      	<textarea id="content" rows="300" cols="300" name="content">
+      <Td>내용</Td>
+      <TD colspan="2" >
+      	<textarea id="content" rows="30" cols="30" name="content">
       	</textarea>
-     
       	<script>
                 // Replace the <textarea id="editor1"> with a CKEditor
                 // instance, using default configuration.
-                CKEDITOR.replace( 'content' );
+                CKEDITOR.replace('content');
         </script>
-         </TD>
-      
+      </TD>
     </TR>
 
-    <TR>
-      <TH>id<TH>
-      <TD><input type="text" name="id" value="${id}" readonly></TD>
-    </TR>
  
     <TR>
-      <TH>파일</TH>
+      <Td>파일</Td>
       <TD><input type="file" name="fnameMF"></TD>
     </TR>
    
   </TABLE>
   
-  <DIV class='bottom'>
+  <DIV class='bottom' style="position: relative; left: 1150px;">
     <input type='submit' value='등록'>
     <input type='button' value='취소' onclick="history.back()">
   </DIV>

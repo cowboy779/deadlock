@@ -74,15 +74,15 @@ public class IPBbsDAO implements PBbsDAO{
         try {
             list = mybatis.selectList("pbbs.list",map);
  
-//            for (PBbsDTO dto : list) {
-//       
-//                String content = dto.getContent();
-//                content = content.replace("\n", "<br>");
-//                content.replace("  ", "&nbsp;&nbsp;");
-//                content.replace("<", "&lt");
-//                content.replace(">", "&gt");
-//                dto.setContent(content);
-//            }
+            for (PBbsDTO dto : list) {
+       
+                String content = dto.getContent();
+                content = content.replace("\n", "<br>");
+                content.replace("  ", "&nbsp;&nbsp;");
+                content.replace("<", "&lt");
+                content.replace(">", "&gt");
+                dto.setContent(content);
+            }
  
         } catch (Exception e) {
             e.printStackTrace();

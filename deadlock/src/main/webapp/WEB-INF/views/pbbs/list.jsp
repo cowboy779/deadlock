@@ -7,14 +7,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.d1{
+*{ 
+  font-family: gulim; 
+  font-size: 20px; 
+/*   font-family:돋움; */
+} 
 
-	magin:auto;
+.table{
+	width: 60%;	
+	margin: 0 auto;
+}
+
+.line{border-bottom:1px solid black;}
+
+input[type=button], input[type=submit], input[type=reset]{
+    background-color:#555555;;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+
+#d1{ 
+ 	position: relative; 
+ 	left:490px; 
+ 	color:blue; 
+ 	font-size:1em;
+ } 
+#d2{
+	width:100%;
+	height:100%;
 	
 }
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="js/bootstrap.js"></script>
 <script type="text/javascript">
  function c_update(){
 	 
@@ -30,26 +56,47 @@
 				alert("비밀번호가 틀렸습니다.");
 				return false;
 			}else{
-				real_update(data);
+				var url ="./view";
+				 url += "?bnum="+data.bnum;
+				 
+				location.href=url; 
 			}
 		}
 	 
 	 )
  }
- function real_update(data){
-	 var url ="./view";
-	 url += "?bnum="+data.bnum;
+
+ function c_create(){
+ var param = $("#form1").serialize();
 	 
-	location.href=url; 
+	 $.post(
+		"create",
+		param,
+		function(data,textStatus){
+			var flag = data.flag;
+			if(flag == false){
+				alert("등록실패");
+				return false;
+			}else{
+				 var url ="./list"; 
+				location.href=url; 
+			}
+		}
+	 
+	 )
  }
-
-
+ 
+//  function real_cc(data){
+// 	 var url ="./list"; 
+// 	location.href=url; 
+//  }
+ 
+ 
  function incheck(f){
-		
 		
 		if(f.bname.value==""){
 			alert("작성자를 입력하시요");
-			f.title.focus();		
+			f.bname.focus();		
 			return false;
 		}	
 		
@@ -74,66 +121,73 @@
 </script>
 </head>
 <body>
-<div class="d1">
-    <h2 align="center">방명록 작성</h2>
-</div>    
-    <form name="form1" 
+	<center>
+    <h2>글 작성</h2>
+    </center>
+    <form id="form1" 
     	  method="post" 
     	  action="./create"
     	  onsubmit="return incheck(this)">
-    <table align="center">
-        <thead>
+    <table align="center" width="60%">
         <tr>
-            <td>작성자</td>
-            <td><input name="bname" size="20" value=""></td>
-            
-        </tr>   
- 		</thead>
- 		
-        <tr>
+        <td>작성자</td>
+            <td>
+            <input name="bname" size="20" value="">
+            </td>
+         </tr>
+           <tr>
             <td>비밀번호</td>
-            <td><input type="password" name="passwd" size="20"></td>
-            
+            <td>
+            <input type="password" name="passwd" size="20">
+            </td>
+           </tr>
+       
+        <tr>
+        <td>내용</td>
+            <td colspan="2">
+            <textarea name="content" id="content" rows="10" cols="100"></textarea></td>
         </tr>
  
- 
         <tr>
-            <td colspan="2">
-            <textarea name="content" id="content" rows="20" cols="80"></textarea></td>
-        </tr>
- 
-        <tr>
-            <td colspan="2">
-            <input type='submit' value='등록'>
+            <td colspan="3" align="right">
+<!--             <input type='submit' value='등록'> -->
+             <input type="button" value="등록" onclick="c_create()">
             <input type="reset" value="취소"></td>
         </tr>    
         </table>
     </form>
-
-    <h2>글 목록</h2>
-    <div>
-        게시물수:${ylistsize}
+    <br>
+    <hr>
+    <div id="d1">
+        현제 페이지 게시물수:${ylistsize}
     </div>
+	<center>
+    <h2>글 목록</h2>
+    </center>
+    
     <br>
     <c:forEach var="row" items="${ylist}">
-        <form action="${root}/pbbs/view" id="update_form">
-        
-            <!-- 방명록리스트 --> 
-            
-            <table align="center">
+        <form 
+        action="${root}/pbbs/view" 
+        id="update_form"
+        >
+    	<br><Br>
+            <table border="0" width="900" align="center" border="1">
                 <tr>
-                    <td>작성자</td>
-                    <td>${row.bname}</td>
-                    <td>날짜</td>
-                    <td>${row.bdate}</td>
+                    <td class="line" >작성자:
+                    ${row.bname}</td>
+                    </tr>
+                    <tr>
+                    <td class="line" >날짜  :
+                    ${row.bdate}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">${row.content}</td>
+                    <td class="line"  colspan="4">${row.content}</td>
                 </tr>
                 <tr>
  
             <!-- 게시물 번호는 hidden field로 넘김 -->
-                    <td colspan="4">비밀번호 
+                    <td colspan="4" class="line">비밀번호 
                     <input type="hidden" name="bnum" value="${row.bnum}">
                      <input type="password" name="passwd">                      
                     <input type="button" value="수정/삭제" onclick="c_update()">
@@ -142,7 +196,7 @@
             </table>
         </form>
 </c:forEach>
- 
+
 <br>
  
 <div class="search" align="center">
@@ -167,6 +221,8 @@
 
 <br>
 <hr>
+
+
 
  <DIV class='bottom'>
    ${paging3}

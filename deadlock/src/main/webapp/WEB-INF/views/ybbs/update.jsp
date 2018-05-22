@@ -37,8 +37,9 @@ function incheck(){
 </head> 
 
 <body>
-<div>
-<h2>등록</h2>
+<div align="center">
+<h2>수정</h2>
+</div>
 <FORM name='frm'
  	  method='POST' 
  	  action='./update'
@@ -52,15 +53,15 @@ function incheck(){
 <input type="hidden" name="oldfile" value="${dto.fname}">
  
  
- <TABLE>
-   <TR>
-      <TH>제목<TH>
-      <TD><input type="text" name="title" value="${dto.title}"></TD>
+ <TABLE align="center" width="60%">
+  <TR>
+      <Td>제목</td>
+      <TD>
+       <input type="text" name="title" value="${dto.title}"></TD>
     </TR>
   
     <TR>
       <TH>내용</TH>
-      <TD>
       <TD>
       	<textarea id="content" rows="300" cols="300" name="content">
       	${dto.content}
@@ -83,17 +84,16 @@ function incheck(){
     <TR>
       <TH>파일</TH>
       <TD><input type="file" name="fnameMF">
-   	 ${dto.fname}</TD>
+   	 기존파일:${dto.fname}</TD>
     </TR>
    
   </TABLE>
   
-  <DIV class='bottom'>
+  <DIV class='bottom' style="position: relative; left: 1150px;">
     <input type='button' value='수정' onclick="incheck()">
     <input type='button' value='취소' onclick="history.back()">
   </DIV>
 </FORM>
- </div>
  
 </body>
 

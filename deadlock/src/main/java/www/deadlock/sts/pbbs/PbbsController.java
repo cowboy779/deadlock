@@ -117,22 +117,14 @@ public class PbbsController {
 	
 	
 	@RequestMapping("/pbbs/create")
-    public String write(@ModelAttribute PBbsDTO dto, Model model) {
- 
+    public ModelAndView write(@ModelAttribute PBbsDTO dto, Model model) {
+		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
         // 입력한 내용이 없을때
-        if (dto.getBname() == null) {
- 
-           
-            return "/pbbs/create";
-        } else {
-            // 입력한 내용이 있을때
-            // 테이블에 insert
-            // 목록 갱신
- 
-        	dao.ycreate(dto);
-                //입력후 리스트로 이동
-            return "redirect:/pbbs/list";
+        	boolean flag = dao.ycreate(dto);
+            modelAndView.addObject("flag", flag);       
+            //view.jsp 에서 수정 삭제 할 수 있다.
+            return modelAndView;
 
         }
-	}
+	
 }

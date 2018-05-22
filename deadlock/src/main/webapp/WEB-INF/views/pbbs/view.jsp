@@ -8,8 +8,21 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+
+*{ 
+  font-family: gulim; 
+  font-size: 20px; 
+/*   font-family:돋움; */
+} 
 .textarea{
 	border:0px;
+}
+
+input[type=button], input[type=submit], input[type=reset]{
+    background-color:#555555;;
+    border: none;
+    color: white;
+    text-decoration: none;
 }
 
 </style>
@@ -48,11 +61,13 @@ $(function() {
  
 </head>
 <body>
-
+<center>
+<h2>글 수정/삭제</h2>
+</center>
     <!-- //폼의 이름을 써줘야 한다. -->
     <form name="form1">
         <!-- 방명록리스트 -->
-        <table align="center" border="1" style="width: 600px;">
+        <table align="center" border="1" width="60%">
             <tr>
                 <td>이름</td>
                 <!-- td에 수정할수 있게 input type 태그를 지정해 줬다. -->
@@ -64,7 +79,7 @@ $(function() {
             </tr>
          
             <tr>
-                <td colspan="4"><textarea name="content" id="content" rows="5" cols="60">${dto.content}</textarea></td>
+                <td colspan="4"><textarea name="content" id="content" rows="15" cols="110">${dto.content}</textarea></td>
             </tr>
             
             <tr>

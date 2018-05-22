@@ -5,7 +5,15 @@
 <head> 
 <meta charset="UTF-8"> 
 <title></title> 
+<style type="text/css">
+.table{
+	width: 60%;	
+	margin: 0 auto;
+}
+</style>
 <script type="text/javascript">
+
+
 function fileDown(filename){
 	var url = "${root}/download";
 	url += "?filename="+filename;
@@ -39,28 +47,12 @@ function read(ynum){
 
 <body>
 
-<div class="search">
-<form action="./list" method="post">
-<select name= "col"><!-- 검색할 컬럼 -->
-	<option value="title" 
-	<c:if test="${col=='title'}">
-	selected</c:if>
-	>제목</option>
-	<option value="content"
-	<c:if test="${col=='content'}">
-	selected</c:if>
-	>내용</option>
-	<option value="total">전체출력</option>
-</select>
-<!-- 검색어 -->
-<input type="search" name="word" value="${word}">
-<button>검색</button>
-<button type="button" onclick="location.href='./create'">등록</button>
-</form>
-</div> 
+
 
 <div class="container-fluid">
+<center>
 <h2><span class="glyphicon glyphicon-th-list"></span>게시판 목록</h2>
+</center>
 
   <TABLE class="table table-condensed">
   <thead>
@@ -101,6 +93,28 @@ function read(ynum){
     </tbody>
   </TABLE>
   
+  
+  <div class="search">
+<form action="./list" method="post">
+<select name= "col"><!-- 검색할 컬럼 -->
+	<option value="title" 
+	<c:if test="${col=='title'}">
+	selected</c:if>
+	>제목</option>
+	<option value="content"
+	<c:if test="${col=='content'}">
+	selected</c:if>
+	>내용</option>
+	<option value="total">전체출력</option>
+</select>
+<!-- 검색어 -->
+<input type="search" name="word" value="${word}">
+<button>검색</button>
+<button type="button" onclick="location.href='./create'">등록</button>
+</form>
+</div> 
+  
+  <br>
   <DIV class='bottom'>
    ${paging }
   </DIV>
