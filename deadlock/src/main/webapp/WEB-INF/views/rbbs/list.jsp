@@ -28,7 +28,7 @@ function read(rnum){
 <body>
 <div class="container">
 <div class="container-fluid">
-<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
+<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h1>
 
 <TABLE class="table table-hover">
 <thead>

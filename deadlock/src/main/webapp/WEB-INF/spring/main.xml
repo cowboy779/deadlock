@@ -9,9 +9,10 @@
         <put-attribute name="footer" value="/WEB-INF/views/template/bottom.jsp" />
     </definition> 
     
-    <definition name="/home" extends="main"> 
-        <put-attribute name="title" value="기본페이지" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/home.jsp" /> 
+
+    <definition name="/template/bbslist" extends="main"> 
+        <put-attribute name="title" value="게시판 선택" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/template/bbslist.jsp" /> 
     </definition>  
 
 </tiles-definitions> 

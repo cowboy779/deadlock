@@ -52,16 +52,17 @@ function oneclick(wh){
 		<br>
 		<div id="button">
 		<form action="javascript:oneclick('delete')">
-		<a class="btn btn-default btn-sm" type="button" onclick="javascript:oneclick('list')" >리스트로</a>
-		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('reply')" value="답변">
-		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('update')" value="수정">
+		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('list')" value="list">
+		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('reply')" value="reply">
+		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('update')" value="modify">
 		
 		<c:if test="${not empty sessionScope.id }">
-		<input class="btn btn-default btn-sm" type="submit" value="삭제">
+		<input class="btn btn-default btn-sm" type="submit" value="delete">
 		</c:if>
 		<input type="hidden" name="oldfile" value="${dto.fname }">
 		</form>
 		</div>
 </div>
+<br><br>
 </body>
 </html>

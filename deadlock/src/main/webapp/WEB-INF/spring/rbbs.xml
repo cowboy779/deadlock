@@ -41,9 +41,9 @@
         <put-attribute name="title" value="게시판 답변" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/rbbs/reply.jsp" /> 
     </definition>  
-   
-  
-   
-           
+    
+    
+    
+
    
 </tiles-definitions> 

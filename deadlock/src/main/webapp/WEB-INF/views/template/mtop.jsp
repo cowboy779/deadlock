@@ -13,14 +13,12 @@
  <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
-  
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-icon-180x180.png">
   <link href="./assets/favicon.ico" rel="icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
+<script type="text/javascript" src="/univers/main.70a66962.js"></script>
 <title>Insert title here</title>
-<link href="univers/main.3f6952e4.css" rel="stylesheet">
 <script type="text/javascript">
 function chat(){
 	var url="${root}/chat/list";
@@ -32,16 +30,12 @@ function chat(){
 </script>
 </head>
 
-<body class="">
-<div id="site-border-left"></div>
-<div id="site-border-right"></div>
-<div id="site-border-top"></div>
-<div id="site-border-bottom"></div>
+<body class="minimal">
 
 <!-- Add your content of header -->
 <header>
-  <nav class="navbar  navbar-fixed-top navbar-default" >
-    <div class="container" style="background-color: ">
+  <nav class="navbar  navbar-fixed-top navbar-inverse">
+    <div class="container" >
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -83,6 +77,8 @@ function chat(){
     </div>
   </nav>
 </header>
+
+
 
 </body>
 </html>

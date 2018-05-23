@@ -36,7 +36,8 @@
 <!-- 임시방편 -->
     <tr>
     <th>id</th>
-    <td><input type="text" name="id" class="form-control"></td>
+    <td><input type="hidden" name="id" value="${sessionScope.id }">${sessionScope.id }</td>
+    
     </tr>
     
     

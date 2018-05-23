@@ -24,6 +24,13 @@ public class RbbsController {
 	private IrbbsDAO dao;
 	
 	
+	@RequestMapping("/template/bbslist")
+	public String bbslist() {
+		
+		return "/template/bbslist";
+	}
+	
+	
 	@RequestMapping("/rbbs/error")
 	public String error() {
 
@@ -150,7 +157,7 @@ public class RbbsController {
 			}
 
 		} else {
-			return "/rbbs/perror";
+			return "/rbbs/error";
 		}
 
 	}
