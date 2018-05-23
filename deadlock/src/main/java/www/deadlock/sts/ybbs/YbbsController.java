@@ -120,7 +120,7 @@ public class YbbsController {
 	@RequestMapping("/ybbs/read")
 	public String read(int ynum, Model model, HttpServletRequest request) {
 		
-		String id = "user1";
+		String id = request.getParameter("id");
 		request.setAttribute("id", id);
 		
 		dao.ycount(ynum);
@@ -167,6 +167,7 @@ public class YbbsController {
 		model.addAttribute("paging2", paging2);
 		model.addAttribute("paging4",paging4);
 		model.addAttribute("nPage", nPage);
+		model.addAttribute("id",id);
 
 		return "/ybbs/read";
 
@@ -193,7 +194,7 @@ public class YbbsController {
 
 	@RequestMapping(value = "/ybbs/create", method = RequestMethod.GET)
 	public String create(HttpServletRequest request,YBbsDTO dto) {
-		String id = "user1";
+		String id = request.getParameter("id");
 		request.setAttribute("id", id);
 //		dto.setId(id);
 
@@ -225,12 +226,13 @@ public class YbbsController {
 	@RequestMapping(value = "/ybbs/delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request, YBbsDTO dto) {
 
-		String id = (String) request.getSession().getAttribute("id");
-		if (id == dto.getId()) {
+//		String id = (String) request.getSession().getAttribute("id");
+//		if (id == dto.getId()) 
+//		{
 			return "/ybbs/delete";
-		} else {
-			return "redirect:/ybbs/error";
-		}
+//		} else {
+//			return "redirect:/ybbs/error";
+//		}
 	}
 
 	@RequestMapping("/ybbs/list")

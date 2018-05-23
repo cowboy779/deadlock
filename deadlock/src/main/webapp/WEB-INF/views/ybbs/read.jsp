@@ -81,24 +81,31 @@ function yupdate(yrenum,ycontent){
 
 
 function del(){
+// 	if('${sessionScope.id}'=='${dto.id}'){
 	var url = "./delete";
 	url += "?ynum=${dto.ynum}";
 	url += "&oldfile=${dto.fname}";
 	url += "&col=${param.col}"; 
 	url += "&word=${param.word}";
 	url += "&nowPage=${param.nowPage}";
-		
+	
 	location.href=url;
+// 	}else{
+// 		alert("본인글이 아니면 수정할 수 없습니다");
+// 	}
 }
 
 function yyupdate(ynum){
+// 	if('${sessionScope.id}'=='${dto.id}'){
 	var url ="./update";
 	url += "?ynum="+ynum;
 	url += "&col=${param.col}"; 
 	url += "&word=${param.word}";
 	url += "&nowPage=${param.nowPage}";
-	
 	location.href=url;
+// 	}else{
+// 		alert("본인글이 아니면 수정할 수 없습니다");
+// 	}
 }
 </script>
 
@@ -108,8 +115,8 @@ function yyupdate(ynum){
 <DIV class="title" align="center">
 <h2>조회</h2>
 </DIV>
- 
-  <TABLE width="60%" align="center" border="1">
+
+  <TABLE  style="width:60%; margin:auto;" border="1">
   	<TR>
       <TH>조회수</TH>
       <TD>${dto.ycount}</TD>
@@ -149,12 +156,18 @@ function yyupdate(ynum){
     <th>아이디</th>
     <td>${dto.id }</td>
     </tr>
-  </TABLE>
 
-<DIV style="position: relative; left: 1400px;">
-   <input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
-   <button id = "button" onclick="del()">삭제</button>
-</DIV>
+	<tr style="border-bottom-style: hidden; border-left-style: hidden; border-right-style: hidden; text-align: right; ">
+	<td colspan="2" >
+		<DIV >
+		<c:if test="${sessionScope.id == dto.id || sessionScope.grade == 'A'}">
+			<input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
+			<button id = "button" onclick="del()">삭제</button>
+		</c:if>
+		</DIV>
+	</td>
+	</tr>
+  </TABLE>
 
 <hr>
 
@@ -178,8 +191,8 @@ function yyupdate(ynum){
 
 <hr>
 <!-- <div class="rlist"> -->
-<div id="Layer1" style="position:relative; left:500; top:0; width:100; height:100; z-index:0; visibility: inherit; background-color: #FFCCCC; 
-layer-background-color: #FFCCCC; border: 1px none #000000;"><table >
+<div id="Layer1">
+<table style="margin-left: 330px;">
 <c:forEach var="ydto" items="${ylist}">
 <tr>
 <%--  <img src='${root}/images/re.jpg' width=20 height=15> --%>

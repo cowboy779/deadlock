@@ -33,10 +33,10 @@ function read(ynum){
 }
 </script>
 <style type="text/css"> 
-*{ 
-  font-family: gulim; 
-  font-size: 20px; 
-} 
+/* *{  */
+/*   font-family: gulim;  */
+/*   font-size: 20px;  */
+/* }  */
 .search{
 	width:80%;
 	margin:2px auto;

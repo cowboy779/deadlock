@@ -119,10 +119,10 @@ public class PbbsController {
 	@RequestMapping("/pbbs/create")
     public ModelAndView write(@ModelAttribute PBbsDTO dto, Model model) {
 		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
-        // 입력한 내용이 없을때
+       
         	boolean flag = dao.ycreate(dto);
             modelAndView.addObject("flag", flag);       
-            //view.jsp 에서 수정 삭제 할 수 있다.
+          
             return modelAndView;
 
         }

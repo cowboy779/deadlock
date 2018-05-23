@@ -7,11 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-*{ 
-  font-family: gulim; 
-  font-size: 20px; 
-/*   font-family:돋움; */
-} 
+ *{  
+   font-family: gulim;  */
+   font-size: 10px;  */
+ }  
 
 .table{
 	width: 60%;	
@@ -34,11 +33,6 @@ input[type=button], input[type=submit], input[type=reset]{
  	color:blue; 
  	font-size:1em;
  } 
-#d2{
-	width:100%;
-	height:100%;
-	
-}
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -145,14 +139,17 @@ input[type=button], input[type=submit], input[type=reset]{
         <tr>
         <td>내용</td>
             <td colspan="2">
-            <textarea name="content" id="content" rows="10" cols="100"></textarea></td>
+            <textarea name="content" id="content" rows="10" cols="146"></textarea></td>
         </tr>
  
-        <tr>
+
+        <tr style="border-bottom-style: hidden; border-left-style: hidden; border-right-style: hidden; text-align: right; ">
             <td colspan="3" align="right">
-<!--             <input type='submit' value='등록'> -->
-             <input type="button" value="등록" onclick="c_create()">
-            <input type="reset" value="취소"></td>
+				<div>
+	            <input type="button" value="등록" onclick="c_create()">
+	            <input type="reset" value="취소">
+	            </div>
+            </td>
         </tr>    
         </table>
     </form>
