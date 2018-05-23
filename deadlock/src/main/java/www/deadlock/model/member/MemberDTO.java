@@ -11,7 +11,7 @@ public class MemberDTO {
 	private String email;
 	private String fname;
 	private int filesize;
-	private int zipcode;
+	private String zipcode;
 	private String address1;
 	private String address2;
 	private String grade;
@@ -57,10 +57,10 @@ public class MemberDTO {
 	public void setFilesize(int filesize) {
 		this.filesize = filesize;
 	}
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 	public String getAddress1() {

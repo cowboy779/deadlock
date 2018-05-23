@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="${root}/chat_util/css/main.3f6952e4.css" rel="stylesheet">
+<link href="${root }/chat_util/css/member.css" rel="Stylesheet" type="text/css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
 var create = new function(){
@@ -38,23 +39,18 @@ var create = new function(){
 		method='POST'
 		onsubmit='create.check(this); return false;'
 		id="form_id"
+		class="signUp2"
 		>
-<!-- 		action='chatCreateProc' -->
+		
+		<h1 class="signUpTitle">채팅방 만들기</h1>
+		
 		<input type="hidden" name="id" value="${sessionScope.id}"/>
-<table style="margin: auto; width: 60%;" class="table table-hover">
-	<tr>
-		<th>방장 이름</th>
-		<td><input type="text" name="chat_nickname" size="20" value="${chat_nickname}" readonly></td>
-	</tr>
-	<tr>
-		<th>채팅방 제목</th>
-		<td><input type="text" name="chat_title" size="20" required="required"></td>
-	</tr>
-</table>
-	<div align="center">
-	<button>채팅방 생성</button>
-	<button onclick="history.back()">뒤로가기</button>
-	</div>
+		
+		<input class="signUpInput" type="text" name="chat_nickname" size="20" value="${chat_nickname}" readonly>
+		<input class="signUpInput" type="text" name="chat_title" size="20" required="required">
+		
+		<button class="signUpButton">채팅방 생성</button>
+		<button class="signUpButton" onclick="history.back()">뒤로가기</button>
 </form>
 	
 

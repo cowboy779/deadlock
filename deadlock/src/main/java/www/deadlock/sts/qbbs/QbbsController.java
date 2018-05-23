@@ -239,14 +239,14 @@ public class QbbsController {
 		int sno2=((nowPage-1)*recordPerPage2)+1;
 		int eno2=nowPage*recordPerPage2;
 		Map map2=new HashMap();
-		map.put("sno", sno2);
-		map.put("eno", eno2);
-		map.put("col", col);
-		map.put("word", word);
+		map2.put("sno", sno2);
+		map2.put("eno", eno2);
+		map2.put("col", col);
+		map2.put("word", word);
 		
 		
 		List qrlist= qrdao.list(map);
-		List list=qdao.list(map);
+		List list=qdao.list(map2);
 		
 		int total=qrdao.total(map);
 		int totalRecord=qdao.total(map2);

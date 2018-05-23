@@ -48,7 +48,7 @@ public class MemberController {
 	@RequestMapping("/member/createProc")
 	public String createProc(MemberDTO dto,HttpServletRequest request,Model model) throws Exception {
 		String basePath = request.getRealPath("/storage_member");
-		
+		System.out.println("호출");
 		String fname = "";
 		
 		int size = (int)dto.getFilenameMF().getSize();

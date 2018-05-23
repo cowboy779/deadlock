@@ -52,12 +52,12 @@ function chat(){
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav ">
           <li><a href="${root}" title="">01 : Home</a></li>
-          <li><a href="${root}/ybbs/list" title="">02 : 자유게시판</a></li>
-          <li><a href="${root}/pbbs/list" title="">03 : 방명록</a></li>
-          <li><a href="${root}/rbbs/list" title="">04 : 건의하기</a></li>
-          <li><a href="${root}/qbbs/list" title="">05 : 정답/질문게시판</a></li>
-          <li><a href="javascript:chat()">06 : 채팅창</a></li>
-          
+          <li><a href="${root}/ybbs/list" title="자유게시판">02 : 자유게시판</a></li>
+          <li><a href="${root}/pbbs/list" title="방명록">03 : 방명록</a></li>
+          <li><a href="${root}/rbbs/list" title="건의하기">04 : 건의하기</a></li>
+          <li><a href="${root}/qbbs/list" title="정답/질문게시판">05 : 정답/질문게시판</a></li>
+          <li><a href="${root}/cbbs/list" title="추천사이트/게시판">06 : 추천사이트/게시판</a></li>
+          <li><a href="javascript:chat()">채팅창</a></li>
         </ul>
 
 		<ul class="nav navbar-nav" style="float: right;">
@@ -65,7 +65,6 @@ function chat(){
 			  <li style="padding-right: 1px;" ><a href="${root}/member/loginForm" title="로그인"> Sign in</a></li>
 			  <li style="float:right;" ><a href="${root}/member/agreement" title="회원가입"> Sign up</a></li>
 		  </c:if>
-		  
 		  <c:if test="${not empty sessionScope.id }">
 	          <li style="float:right;" ><a href="${root}/member/read" title="내 정보"> MyPage</a></li>
 	          <li style="float:right;" ><a href="${root}/member/logout" title="로그아웃"> Logout</a></li>

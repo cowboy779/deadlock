@@ -24,15 +24,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from qreco
 		where qrenum=#{qrenum}
     </delete>
+    <delete id="qdelete" parameterType="int">
+    	delete from qreco
+		where qnum=#{qnum}
+    </delete>
     
     <select id="list" resultType="qrecoDTO" parameterType="Map">
-    	select qrenum, content, to_char(qredate,'yyyy-mm-dd') qredate,id, qnum, r
-		from(
-		    select qrenum, content, qredate, id, qnum, rownum r
-		    from(
-		        select qrenum, content, qredate, id, qnum 
-		        from qreco
-		        order by qrenum desc
+		select qrenum, content, to_char(qredate,'yyyy-mm-dd hh24:mi:ss') qredate,id, qnum, r
+		FROM(
+		select qrenum, content, qredate, id, qnum, rownum r
+		FROM(
+		select qrenum, content, qredate, id, qnum
+		from qreco
+		where qnum=#{qnum}
+		order by qrenum DESC
 		    )
 		)
 		<![CDATA[where r>=#{sno} and r<=#{eno}]]>
@@ -40,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="total" parameterType="Map" resultType="int">
     	select count(*) from qreco
+    	where qnum = #{qnum}
     </select>
     
 </mapper>

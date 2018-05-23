@@ -1,5 +1,7 @@
 package www.deadlock.model.rbbs;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class RbbsDTO {
 	
 	
@@ -14,6 +16,26 @@ public class RbbsDTO {
 	private int grpno;
 	private int ansnum;
 	private int indent;
+	private int refnum;
+	private MultipartFile fnameMF;
+	
+	
+
+	public int getRefnum() {
+		return refnum;
+	}
+
+	public void setRefnum(int refnum) {
+		this.refnum = refnum;
+	}
+
+	public MultipartFile getFnameMF() {
+		return fnameMF;
+	}
+
+	public void setFnameMF(MultipartFile fnameMF) {
+		this.fnameMF = fnameMF;
+	}
 
 	public int getRnum() {
 		return rnum;
@@ -51,7 +73,7 @@ public class RbbsDTO {
 		return rdate;
 	}
 
-	public void setRdate(String date) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 

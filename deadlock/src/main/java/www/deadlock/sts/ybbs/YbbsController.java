@@ -157,7 +157,7 @@ public class YbbsController {
 		String word = request.getParameter("word");
 		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 
-		String paging2 = Utility.paging2(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
+		String paging2 = Utility.ypaging(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
 		String paging4 =  Utility.paging4(ytotal, nowPage, recoredPerPage, col, word, ynum);
 		
 		model.addAttribute("list",list);

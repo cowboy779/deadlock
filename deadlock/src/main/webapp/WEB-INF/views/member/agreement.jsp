@@ -38,7 +38,8 @@
  --> 
 <form name="frm" method="post"  
       action="./createForm"  
-      onsubmit="return send();"> 
+      onsubmit="return send();"
+      > 
  
 <!-- <div class='title' style='width: 20%;'>약관동의</div>  -->
  
@@ -230,7 +231,7 @@
 </table> 
  
 <div style="text-align: center"> 
-  <input type="checkbox" name="agree" value="1"> 약관에 동의합니다</input> 
+  <input  type="checkbox" name="agree" value="1">약관에 동의합니다</input> 
   <br><br>
   <button class="w3-button w3-red">회원가입</button>
   <button type='button' onclick='history.back()' class="w3-button w3-black">취소</button> 

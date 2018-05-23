@@ -9,10 +9,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="${root }/chat_util/css/member.css" rel="Stylesheet" type="text/css">
 <title></title> 
 <script type="text/javascript">
 function mlist(){
 	var url="${root}/admin/list";
+	location.href=url;
+}
+
+function mread(){
+	var url="${root}/member/read";
+	url+="?id=${sessionScope.id}";
+	url+="&col=${col}";
+	url+="&word=${word}";
+	url+="&nowPage=${nowPage}";
 	location.href=url;
 }
 
@@ -44,20 +54,14 @@ function inCheck(){
 </head> 
 <body>
 <div class="container">
-<div align="center">
+<div align="center" class="signUp">
+		<h1 class="signUpTitle">비밀번호 변경</h1>
 <c:choose>
 	<c:when test="${flag == false }">
-	<p class="w3-center">
-		<img src="${root}/chat_util/image/apple-icon-180x180.png" style="margin-top: 20px;">
-	</p>
 		비밀번호가 틀렸습니다.
-		<br><input type='button' value='다시시도' onclick='history.back()'>
+		<br><input class="signUpInput" type='button' value='다시시도' onclick='history.back()'>
 	</c:when>
 	<c:otherwise>
-	<p class="w3-center">
-		<img src="${root}/chat_util/image/apple-icon-180x180.png" style="margin-top: 20px;">
-	</p>
-	<h4>비밀번호 변경</h4>
 <FORM 	name='frm'
 		method='POST'
 		action='updatePasswdProc'
@@ -66,25 +70,13 @@ function inCheck(){
 		<input type="hidden" name="col" value="${param.col }">
 		<input type="hidden" name="word" value="${param.word }">
 		<input type="hidden" name="nowPage" value="${param.nowPage }">
-  <TABLE class="table table-hover" style="width: 50%; margin: auto;">
-    <TR>
-      <TH>아이디</TH>
-      <TD>${param.id }</TD>
-    </TR>
-    <tr>
-    	<th>비밀번호</th>
-    	<td><input type="password" name="passwd" value=""></td>
-    </tr>
-    <tr>
-    	<th>비밀번호 확인</th>
-    	<td><input type="password" name="repasswd" value=""></td>
-    </tr>
-  </TABLE>
+		
+		<input class="signUpInput" value="${param.id }">
+    	<input class="signUpInput" placeholder="변경할 비밀번호" type="password" name="passwd" value="">
+    	<input class="signUpInput" placeholder="비밀번호 확인" type="password" name="repasswd" value="">
   
-  <DIV class='bottom'>
-    <input class="w3-button w3-red w3-small" type='button' value='비밀번호 수정' onclick="inCheck()">
-    <input class="w3-button w3-black w3-small" type='button' value='목록' onclick="mlist()">
-  </DIV>
+    <input class="signUpButton" type='button' value='비밀번호 수정' onclick="inCheck()">
+    <input class="signUpButton_black" type='button' value='내 정보로' onclick="mread()">
 </FORM>
 	</c:otherwise>
 </c:choose>

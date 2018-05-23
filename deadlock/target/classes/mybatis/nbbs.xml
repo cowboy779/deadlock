@@ -4,35 +4,110 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nbbs">
     
-    <select id="read" resultType="NbbsDTO" parameterType="int">
+    <select id="read" resultType="NBbsDTO" parameterType="int">
     	select * from nbbs
-    	where nnum = #{bbsno} 
+    	where nnum = #{nnum}
     </select>
     
 	<insert id="create" parameterType="NbbsDTO">
-		insert into nbbs(title,content,ndate,noname)
-		values (#{title},#{content},now(),#{noname});
+
+		
+		<!-- Oracle -->
+		 	<selectKey keyProperty="nnum" resultType="int" order="BEFORE">
+			select nvl(max(nnum),0)+1 as nnum from nbbs
+			</selectKey>
+			insert into nbbs(nnum,title,content,ndate,noname,category,fname)
+			values (#{nnum},#{title},#{content},sysdate,#{noname},#{category},#{fname})
+			
 	</insert>
 	
 	<select id="list" parameterType="Map" resultType="NbbsDTO">
-		select c.*
-		from(
-			select @RNUM := @RNUM + 1 AS r, a.*
-			from(
-				  ( SELECT *  FROM nbbs  ) a, ( SELECT @RNUM := 0 ) b
-			)
-		)c
-		<![CDATA[ where r >= #{sno} and r <=#{eno}; ]]> 
-	</select>
 	
-	<insert id="update" parameterType="NbbsDTO">
-		update nbbs set title=#{title},content=#{content},corname=#{corname},cordate=now() 
-		where nnum=#{nnum};
-	</insert>
+		
+	<!-- Oracle -->
+	 	SELECT nnum, title, content, ndate, category, ncount, r
+ 		from(
+ 			select nnum, title, content, ndate, category, ncount, rownum r
+ 			from (
+ 				select nnum, title, content, to_char(ndate, 'yyyy-mm-dd')ndate, category, ncount
+ 				from nbbs
+		<where>
+			<choose>
+				<when test="col=='title'">
+				title like '%' || #{word} || '%'
+				</when>
+				<when test="col=='content'">
+				content like '%' || #{word} || '%'
+				</when>
+				<when test="col=='category'">
+				category like '%' || #{word} || '%'
+				</when>
+			</choose>
+		</where>
+	order by ndate DESC            
+		)
+	)
+	<![CDATA[
+	where r>=#{sno} and r<=#{eno}
+	]]>
+	</select> 
+
+	<update id="update" parameterType="NbbsDTO">
+
+		
+		<!-- Oracle -->
+ 		update nbbs set title=#{title},content=#{content},corname=#{corname},cordate=sysdate,fname=#{fname}
+		where nnum=#{nnum}
+	</update>
 	
 	<delete id="delete" parameterType="int">
 		delete from nbbs where nnum = #{nnum}
 	</delete>
+	
+	<update id="upViewcnt" parameterType="int">
+		update nbbs set ncount = ncount + 1 where nnum = #{nnum}
+	</update>
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from nbbs
+		<where>
+			<choose>
+				<when test="col=='title'">
+				title like '%' || #{word} || '%'
+				</when>
+				<when test="col=='content'">
+				content like '%' || #{word} || '%'
+				</when>
+				<when test="col=='category'">
+				category like '%' || #{word} || '%'
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="passwdCheck" parameterType="Map" resultType="int">
+ 	select count(*) from member
+	where id = #{id}
+	and passwd = #{passwd}
+	</select>
+	
+	<select id="fixlist" resultType="NbbsDTO">
+	select nnum, title, content, ndate, category, ncount from nbbs
+	where fix = 'Y'
+
+	</select>
+	
+	<update id="upfix" parameterType="int">
+		Update nbbs set fix = 'Y'
+		where nnum = #{nnum}
+	</update>
+	
+	<update id="delfix">
+		UPDATE nbbs
+		SET fix = NULL
+		WHERE fix is not null
+	</update>
+	
 	
 </mapper>
 

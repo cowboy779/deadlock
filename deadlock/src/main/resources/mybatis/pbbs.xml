@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pbbs">
+    
+ 
+  <insert id = "create" parameterType="PBbsDTO">
+	
+	<selectKey keyProperty="bnum" resultType="int" order="BEFORE">
+	select nvl(max(bnum),0)+1 as bnum from pbbs
+	</selectKey>
+	
+	insert into pbbs(bnum, bname, content, bdate, passwd)
+	values(#{bnum},#{bname},#{content},sysdate,#{passwd})
+    </insert>
+	
+	<delete id= "delete" parameterType="int">
+	delete from pbbs
+	where bnum = #{bnum}
+	</delete>
+    
+   
+    <update id = "update" parameterType="PBbsDTO">
+    update pbbs
+	set bname = #{bname},
+	content = #{content}
+	where bnum = #{bnum}
+    </update>
+
+
+	<select id="list" resultType="PBbsDTO" parameterType="Map">
+ 	SELECT bnum, bname, content, bdate, r
+ 		from(
+ 			select bnum, bname, content, bdate, rownum r
+ 			from (
+ 				select bnum, bname, content, to_char(bdate, 'yyyy-mm-dd')bdate
+ 				from pbbs
+ 	<where>
+	<choose>
+		<when test="col=='bname'">
+		bname like '%' || #{word} || '%'
+		</when>
+		<when test="col=='content'">
+		content like '%' || #{word} || '%'
+		</when>
+	</choose>
+	</where>   
+	order by bnum DESC            
+		)
+	)
+	<![CDATA[
+	where r>=#{sno} and r<=#{eno}
+	]]>
+	</select>
+
+ 
+    
+    <select id="total" resultType="int" parameterType="Map">
+	select count(*) from pbbs
+	<where>
+				<choose>
+						<when test="col=='bname'">
+						bname like '%' || #{word} || '%'
+						</when>
+						<when test="col=='content'">
+						content like '%' || #{word} || '%'
+						</when>
+				</choose>
+	</where>   
+	</select>
+    
+    
+    
+    
+    
+    
+    
+	<select id="passwdCheck" resultType="int" parameterType="map">
+	select count(*) from pbbs
+    where bnum=#{bnum} and 
+    passwd=#{passwd}
+	</select>
+	
+	
+	 <select id="ybDetail" resultType="PBbsDTO">
+ 
+        select * from pbbs
+        where
+        bnum=#{bnum}
+ 
+    </select>
+    
+    
+</mapper>
+

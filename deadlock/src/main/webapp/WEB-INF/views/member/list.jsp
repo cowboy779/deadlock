@@ -18,6 +18,7 @@
 }
 </style> 
 <script type="text/javascript">
+
 function create(){
 	var url = "createForm";
 	location.href=url;
@@ -83,7 +84,7 @@ function read(id){
     </tr>
   </TABLE>
     </c:forEach>
- 	${paging }
+ 	${paging}
   </div>
  </div>
 </body>

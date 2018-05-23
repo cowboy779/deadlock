@@ -9,32 +9,27 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="${root }/chat_util/css/member.css" rel="Stylesheet" type="text/css">
 <title></title> 
 </head> 
 <body>
  
 <div class="container">
-
-<FORM name='frm' method='POST' action='deleteProc'>
-<input type="hidden" name="id" value="${id }">
-<input type="hidden" name="fname" value="${fname }">
-<p class="w3-center">
-	<img src="${root}/chat_util/image/apple-icon-180x180.png" style="margin-top: 50px;">
-</p>
-			<h3 align="center">
-			정말 탈퇴 하시겠습니까?<br>
-			회원 탈퇴시 복구하실 수 없습니다.
-			</h3>
- 			<br>
-<p class="w3-center">
-    <input class="w3-button w3-red" type='submit' value='회원탈퇴' onclick="mdelete()">
-    <input class="w3-button w3-black" type='button' value='취소' onclick='history.back()'>
-</p>
-
- </FORM>
- </div>
+	<div class="signUp">
+		<FORM name='frm' method='POST' action='deleteProc'>
+			<h1 class="signUpTitle">회원 탈퇴</h1>
+			<input class="signUpInput" type="hidden" name="id" value="${id }">
+			<input class="signUpInput" type="hidden" name="fname" value="${fname }">
+						<h4>
+						정말 탈퇴 하시겠습니까?<br>
+						회원 탈퇴시 복구하실 수 없습니다.
+						</h4>
+			<input class="signUpButton" type='submit' value='회원탈퇴' onclick="mdelete()">
+			<input class="signUpButton" type='button' value='취소' onclick='history.back()'>
+		
+		</FORM>
+	</div>
+</div>
  
-<!-- *********************************************** -->
 </body>
-<!-- *********************************************** -->
 </html> 

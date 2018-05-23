@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 
-public class BbsTest {
+public class RbbsTest {
 
 	public static void main(String[] args) {
-		
 		
 		RbbsDAO dao = new RbbsDAO();
 		
@@ -89,7 +88,7 @@ public class BbsTest {
 	private static void read(RbbsDAO dao) {
 		int rnum = 1;
 		
-		RbbsDTO dto = dao.read(rnum);
+		RbbsDTO dto = (RbbsDTO)dao.read(rnum);
 		
 		p(dto);
 		

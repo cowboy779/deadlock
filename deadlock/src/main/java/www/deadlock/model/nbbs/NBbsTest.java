@@ -4,37 +4,57 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+
+
 
 public class NBbsTest {
 
 	public static void main(String[] args) {
-		
-		
-		NBbsDAO dao = new NBbsDAO();
-		
-		//read(dao);
+	
+		Resource rs = new ClassPathResource("daoTest.xml");
+		BeanFactory factory = new XmlBeanFactory(rs);
+		NBbsDAO dao = (NBbsDAO) factory.getBean("ndao");
+	
+		read(dao);
 		//create(dao);
-		list(dao);
+		//list(dao);
 		//update(dao);
 		//delete(dao);
 	}
 	
 	private static void delete(NBbsDAO dao) {
-		if(dao.delete(8)) {
-			p("SUCCESS");
-		}else {
-			p("FAILED");
+		try {
+			if(dao.delete(8)) {
+				p("SUCCESS");
+			}else {
+				p("FAILED");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	private static void update(NBbsDAO dao) {
-		NBbsDTO dto = dao.read(1);
-		dto.setCorname("tt");
-		if(dao.update(dto)) {
-			p("success");
-		}else {
-			p("fail");
+		NBbsDTO dto;
+		try {
+			dto = (NBbsDTO) dao.read(1);
+			dto.setCorname("tt");
+			if(dao.update(dto)) {
+				p("success");
+			}else {
+				p("fail");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 	}
 
 	private static void create(NBbsDAO dao) {
@@ -43,10 +63,15 @@ public class NBbsTest {
 		dto.setTitle("create");
 		dto.setNoname("creat2");
 		dto.setContent("create");
-		if(dao.create(dto)) {
-			p("성공");
-		} else {
-			p("실패");
+		try {
+			if(dao.create(dto)) {
+				p("성공");
+			} else {
+				p("실패");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
@@ -71,10 +96,15 @@ public class NBbsTest {
 	
 	private static void read(NBbsDAO dao) {
 		int bbsno = 1;
+		NBbsDTO dto;
+		try {
+			dto = (NBbsDTO) dao.read(bbsno);
+			p(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		NBbsDTO dto = dao.read(bbsno);
-		
-		p(dto);
 		
 	}
 

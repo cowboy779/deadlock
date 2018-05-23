@@ -41,5 +41,10 @@
         <put-attribute name="title" value="비밀번호 확인" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/member/passwordCheck.jsp" /> 
     </definition>   
+    <definition name="/member/passwdError" extends="main"> 
+        <put-attribute name="title" value="비밀번호 확인" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/member/passwdError.jsp" /> 
+    </definition>   
+    
 	
 </tiles-definitions> 

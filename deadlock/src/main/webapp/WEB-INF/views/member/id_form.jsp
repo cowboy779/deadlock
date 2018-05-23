@@ -9,25 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="${root }/chat_util/css/member.css" rel="Stylesheet" type="text/css">
 <title></title> 
-<style type="text/css"> 
-TABLE{
-  margin: 0 auto;            /* 테이블 가운데 정렬 */
-  border-color: #AAAAAA;     /* 테이블 외곽선 색깔 */ 
-  border-width: 1px;         /* 테이블 외곽선 두께 */ 
-  border-style: solid;       /* 테이블 외곽선 스타일 */
-  border-collapse: collapse; /* 컬럼의 외곽선을 하나로 결합 */
-  font-size: 15px;
-  border-spacing:0px;
-  border-style:none;
-  padding:0px;
-}
-
-h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
-
-body {font-family: "Open Sans"}
-
-</style> 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
 function use(){
@@ -77,7 +60,7 @@ function duplCheck(result){
 	}
 }
 $(function(){
-	 $('.onlyAlphabetAndNumber').keyup(function(event){
+	 $('#id').keyup(function(event){
 		                    if (!(event.keyCode >=37 && event.keyCode<=40)) {
 		                        var inputVal = $(this).val();
 		                        $(this).val($(this).val().replace(/[^_a-z0-9]/gi,''));
@@ -90,19 +73,18 @@ $(function(){
 </head>
 <body>
 <div class="container">
-<h4 align="center">아이디 중복 확인</h4>
-
+<FORM id="id_form_data" class="signUp" name='frm' method='POST'>
+<h1 class="signUpTitle">아이디 중복 확인</h1>
 <div align="center" id="id_form">
-<FORM id="id_form_data" name='frm' method='POST' style="margin-right: 20px;">
       <label>10자 이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.<br>
-      ID : <input type="text" name="id" 
-      class="onlyAlphabetAndNumber" size="20" data-rule-required="true" maxlength="10">
+      <input type="text" name="id" id="id"
+      class="signUpInput" size="20" data-rule-required="true" maxlength="10"
+      placeholder="사용하실 아이디를 입력하세요.">
       </label>
       
-</FORM>
 <br>
-    <button class="w3-button w3-red" type="button" onclick="id_dup_check()">중복확인</button>
-  <button class="w3-button w3-black" type="button" onclick="window.close()">취소</button>
+    <button class="signUpButton" type="button" onclick="id_dup_check()">중복확인</button>
+<!--   <button class="signUpButton" type="button" onclick="window.close()">취소</button> -->
 </div>
 
 
@@ -110,10 +92,11 @@ $(function(){
 <div id="id_proc" align="center" style="display: none">
  		<h4 id="select_id"></h4>
  		<br>
-		<input class="w3-button w3-red" type='button' value='사용' onclick='use()'>
-    	<input class="w3-button w3-black" type='button' value='닫기' onclick="window.close()">
+		<input class="signUpButton" type='button' value='사용' onclick='use()'>
+<!--     	<input class="signUpButton" type='button' value='다시시도' onclick="history.back()"> -->
  </div>
  
+</FORM>
 </div>
 </body>
 </html> 

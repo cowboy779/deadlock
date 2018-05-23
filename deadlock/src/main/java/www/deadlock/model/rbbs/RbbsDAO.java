@@ -6,66 +6,68 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import www.mybatis.MyAppSqlConfig;
+@Repository
+public class RbbsDAO implements IrbbsDAO{
 
-public class RbbsDAO {
-
-	private static SqlSessionFactory sqlMapper;
-
-	static {
-
-		sqlMapper = MyAppSqlConfig.getSqlMapInstance();
+	@Autowired
+	private SqlSessionTemplate mybatis;
+	
+	
+	public void setMybatis(SqlSessionTemplate mybatis) {
+		//RbbsDAO.mybatis = mybatis;
+		this.mybatis = mybatis;
 	}
 
-	public RbbsDTO read(int bbsno) {
 
-		return sqlMapper.openSession().selectOne("bbs.read", bbsno);
+
+	public Object read(Object rnum) {
+
+		RbbsDTO dto = mybatis.selectOne("rbbs.read", rnum);
+		
+
+		return dto;
 	}
 
 	public List list(Map map) {
+		
+		List list =  mybatis.selectList("rbbs.list", map);
 
-		return sqlMapper.openSession().selectList("bbs.list", map);
+		return list;
 	}
 
-	public boolean create(RbbsDTO dto) {
+	public boolean create(Object dto) {
 		boolean flag = false;
-		SqlSession session = sqlMapper.openSession();
 
-		int cnt = session.insert("bbs.create", dto);
-		System.out.println(cnt);
+
+		int cnt = mybatis.insert("rbbs.create", dto);
 		if (cnt > 0)
 			flag = true;
-
-		session.commit();
-		session.close();
 
 		return flag;
 	}
 
-	public boolean delete(int rnum) {
+	public boolean delete(Object rnum) {
 		boolean flag = false;
-		SqlSession session = sqlMapper.openSession();
 
-		int cnt = session.insert("bbs.delete", rnum);
+
+		int cnt = mybatis.insert("rbbs.delete", rnum);
 
 		if (cnt > 0)
 			flag = true;
 
-		session.commit();
-		session.close();
-
 		return flag;
 	}
 
-	public boolean update(RbbsDTO dto) {
+	public boolean update(Object dto) {
 		boolean flag = false;
-		SqlSession session = sqlMapper.openSession();
 
-		int cnt = session.insert("bbs.update", dto);
+		int cnt = mybatis.insert("rbbs.update", dto);
 
-		session.commit();
-		session.close();
 		if (cnt > 0)
 			flag = true;
 
@@ -77,50 +79,52 @@ public class RbbsDAO {
 		// map에 sno eno col word포함 되어있어야함
 		
 		int total;
-		SqlSession session = sqlMapper.openSession();
-		
-		total = (Integer)session.selectOne("bbs.total", map);
-		
-		session.commit();
-		session.close();
-		
+
+		total = (Integer)mybatis.selectOne("rbbs.total", map);
+	
 		return total;
 	}
 	
 	public boolean upViewCount(int rnum){
 		boolean flag = false;
-		SqlSession session = sqlMapper.openSession();
+
 		
-		int cnt  = session.update("bbs.upviewcount", rnum);
+		int cnt  = mybatis.update("rbbs.upviewcount", rnum);
 		
-		session.commit();
-		session.close();
+	
 		if(cnt>0) flag=true;
 		
 		return flag;
 	}
-	
-	public boolean passCheck(Map map){
+
+
+	public boolean createReply(RbbsDTO dto) {
 		boolean flag = false;
-//		Map map = new HashMap();
-//		map.put("rnum", rnum);
-//		map.put("id", id);
 		
-		// map에 id,rnum 포함
+		int cnt = mybatis.insert("rbbs.createReply",dto);
 		
-		SqlSession session = sqlMapper.openSession();
-		
-		int cnt  = session.selectOne("bbs.idcheck", map);
-		
-		session.commit();
-		session.close();
-		
-		if(cnt>0)flag=true;
-		
+		if(cnt>0) flag=true;
 		
 		return flag;
 	}
-	
 
-	
+	public boolean idCheck(Map map) {
+		boolean flag = false;
+
+		
+		int cnt = mybatis.selectOne("rbbs.idcheck", map);
+		
+		if(cnt>0) flag = true;
+		
+		return flag;
+	}
+
+	public boolean vCheck(String id) {
+		boolean flag = false;
+		int cnt = mybatis.selectOne("rbbs.vCheck", id);
+		if(cnt>0)flag = true;
+		
+		return flag;
+	}
+
 }
