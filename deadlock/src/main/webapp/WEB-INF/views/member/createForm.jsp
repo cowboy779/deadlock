@@ -178,11 +178,11 @@ $(function(){
 	<div id="Detail" style="display: none">
 		<input class="signUpInput" type='text' name='tel' placeholder="전화번호">
 		<button class="signUpButton" style="font-size: 15px" style="font-size: 18px" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>
-		<input class="signUpInput" type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호">
+		<input class="signUpInput" type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="주소검색 버튼을 누르세요" readonly="readonly">
 		<input class="signUpInput" type='text' name='address1' size="40" id="sample6_address" placeholder="주소">
     	<input class="signUpInput" type='text' name='address2' size="40" id="sample6_address2" placeholder="상세주소">
 	</div>
-<!--     	<div id="grecaptcha" class="g-recaptcha" data-sitekey="6LdqpVgUAAAAAD4GL5mVsRPaFNFtrKyq42a1gD-X"></div> -->
+    	<div id="grecaptcha" class="g-recaptcha" data-sitekey="6LdqpVgUAAAAAD4GL5mVsRPaFNFtrKyq42a1gD-X"></div>
 		 <button class="signUpButton">회원가입</button>
 </FORM>
  </div>

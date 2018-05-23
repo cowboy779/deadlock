@@ -100,8 +100,8 @@ function mlist(){
   </c:if>
     <input class="w3-button w3-black w3-small" type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
   <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A') }">
-  <input class="w3-button w3-gray w3-small" type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
-    <input class="w3-button w3-brown w3-small" type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
+  <input class="w3-button w3-black w3-small" type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
+    <input class="w3-button w3-gray w3-small" type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
   </c:if>
      <input class="w3-button w3-black w3-small" type='button' value='다운로드'
                 onclick="location.href='${root }/download?dir=/storage_member&filename=${dto.fname }'">  
