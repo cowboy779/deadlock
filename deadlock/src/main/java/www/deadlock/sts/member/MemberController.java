@@ -23,6 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import www.deadlock.model.member.IMemberDAO;
 import www.deadlock.model.member.MemberDTO;
@@ -88,9 +90,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/sendMail")
-	public String sendMail(Model model, HttpServletRequest request) {
-		String viewPage = "/member/sendMail";
+	public ModelAndView sendMail(Model model, HttpServletRequest request) {
 		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
+		boolean sendFlag = false;
 		
 		String from = request.getParameter("from");
 		String to = request.getParameter("to");
@@ -130,22 +134,36 @@ public class MemberController {
 		     
 		    Transport.send(msg); // 전송
 		    
+		    sendFlag = true;
 		    
 		} catch(Exception e){
 			
-			// 오류 발생시 뒤로 돌아가도록
 			//flag 값에 따라 jsp페이지에서 보여줄 화면 및 실행 될 스크립트 함수가 달라진다.
 			
 		    e.printStackTrace();
 		    
 		}
-		return viewPage;
+		
+		modelAndView.addObject("sendFlag",sendFlag);
+		return modelAndView;
 	}
 	
 	@RequestMapping("/member/email_proc_send")
-	public String email_proc_send() {
+	public ModelAndView email_proc_send(HttpServletRequest request) {
 		
-		return "/member/email_proc_send";
+		String from = request.getParameter("from");
+		String to = request.getParameter("to");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
+		modelAndView.addObject("from",from);
+		modelAndView.addObject("to",to);
+		modelAndView.addObject("subject",subject);
+		modelAndView.addObject("content",content);
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping("/member/id_form")
@@ -155,16 +173,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/id_proc_check")
-	public String id_proc_check(HttpServletRequest request,Model model) throws Exception {
+	public ModelAndView id_proc_check(HttpServletRequest request,Model model) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		
 		String id = request.getParameter("id");
+		
 		boolean flag = false;
 		
 		flag = dao.duplicateId(id);
 		
-		model.addAttribute("flag",flag);
-		model.addAttribute("id",id);
+		modelAndView.addObject("flag",flag);
+		modelAndView.addObject("id",id);
 		
-		return "/member/id_proc_check";
+		return modelAndView;
 	}
 	
 	@RequestMapping("/member/loginForm")

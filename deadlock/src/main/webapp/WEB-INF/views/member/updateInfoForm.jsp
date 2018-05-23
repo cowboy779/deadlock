@@ -68,16 +68,11 @@ function idCheck(id){
 	
 }
 function emailCheck(email){
-	if(email==""){
-		alert("이메일을 입력해주세요");
-		document.frm.email.focus();
-	}else{
-		var url="email_proc";
+		var url="email_form";
 		url+="?email="+email;
 		
 		var wr = window.open(url,"새창이름","width=500, height=500");
 		wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-	}
 }
 
 function incheck(f){
@@ -86,12 +81,6 @@ function incheck(f){
 		f.tel.focus();
 		return false;
 	}
-	if(f.email.value==""){
-		alert("이메일을 입력해주세요");
-		f.tel.focus();
-		return false;
-	}
-	
 }
 function emailCheck2(f){
 	f.blur();

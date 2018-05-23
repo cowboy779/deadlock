@@ -42,6 +42,10 @@ function oneclick(wh){
 				<td>내용</td>
 				<td>${dto.content }</td>
 			</tr>
+			<tr>
+				<td>파일</td>
+				<td><a href="${root }/storage_rbbs/${dto.fname }" download>${dto.fname }</a></td>
+			</tr>
 
 		</table>
 		
@@ -51,7 +55,10 @@ function oneclick(wh){
 		<a class="btn btn-default btn-sm" type="button" onclick="javascript:oneclick('list')" >리스트로</a>
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('reply')" value="답변">
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('update')" value="수정">
+		
+		<c:if test="${not empty sessionScope.id }">
 		<input class="btn btn-default btn-sm" type="submit" value="삭제">
+		</c:if>
 		<input type="hidden" name="oldfile" value="${dto.fname }">
 		</form>
 		</div>

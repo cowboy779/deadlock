@@ -16,10 +16,12 @@
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
+
 function use(){
  opener.frm.email.value="${param.email}";
  self.close();
 }
+
 function emailCheck(){
 	//여기서 proc내에서 자체적으로 비동기통신 요청후 코드값 발송,
 	//그 값을 입력시 받아와서 메소드 호출
@@ -27,14 +29,12 @@ function emailCheck(){
 	
 	var param = $("#checkEmail_form").serialize();
 	
-	//alert(param);
-	
 	$.post(
 		"email_proc_send",
 		param,
 		function(data, textStatus){
-			//alert(textStatus);
-			var result = eval("("+data+")");
+
+			var result = data;
 			
 			sendMail(result);
 		}
@@ -43,22 +43,27 @@ function emailCheck(){
 }
 
 function sendMail(result){
-	var url = "sendMail";
-	url+="?from="+result.from;
-	url+="&to="+result.to;
-	url+="&subject="+result.subject;
-	url+="&content="+result.content;
+	var parameter = "from="+result.from+"&to="+result.to+"&subject="+result.subject+"&content="+result.content;
 	
-	var ww = window.open(url,"코드발송","width=500, height=500");
-	ww.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-	
-	display_choose();
+	$.post(
+			"sendMail",
+			parameter,
+			function(data, textStatus){
+				var sendFlag = data.sendFlag;
+				
+				if(sendFlag == true){
+					alert("인증코드를 발송하였습니다. \n 인증코드를 입력해주세요.");
+					display_choose();
+				}else{
+					alert("인증코드 발송이 실패하였습니다. \n 다시 시도해주세요.");
+				}
+			}
+		)
 }
 
 function display_choose(){
-	
-			$("#pass").css("display","none");
-			$("#se").css("display","");
+		$("#pass").css("display","none");
+		$("#se").css("display","");
 }
 
  function check_m(){
@@ -66,8 +71,8 @@ function display_choose(){
 	var checkcode = ${code};
 	
 	if(checkcode==emailcode){
-	$("#se").css("display","none");
-	$("#check_success").css("display","");
+		$("#se").css("display","none");
+		$("#check_success").css("display","");
 	}else{
 		alert("인증코드를 잘못 입력하셨습니다. \n 확인후 다시 입력해주세요.");
 		return false;
@@ -80,7 +85,7 @@ function display_choose(){
 <div class="container">
 	<div class="signUp">
 		<h1 class="signUpTitle">이메일 확인</h1>
-		<input class="signUpInput" value="입력된 Email:${param.email }">
+		<input class="signUpInput" value="입력된 Email:${param.email }" readonly="readonly">
 		<c:choose>
 			<c:when test="${flag == true }">
 			<script>alert("중복되어서 사용하실 수 없습니다.")

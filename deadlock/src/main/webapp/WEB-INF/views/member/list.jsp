@@ -57,32 +57,31 @@ function read(id){
 <h4 align="center">회원 목록</h4>
 
 	<c:forEach var="dto" items="${list }">
- 
-  <TABLE class="table table-hover">
-    <TR>
-      <td rowspan="5" width="30%"><img src="${root}/storage_member/${dto.fname}" width="300px" height="200px" style="margin-right: 20px;"></td>
-      <TH width="20%">ID</TH>
-      <td width="50%"><a href="javascript:read('${dto.id }')">${dto.id }</a></td>
-    </tr>
-    <tr>
-      <th>이름</th>
-       <td>${dto.mname }</td>
-    </tr>
-    <tr>
-      <th>연락처</th>
-      <td>${dto.tel }</td>
-    </tr>
-    <tr>
-      <th>이메일</th>
-      <td>${dto.email }</td>
-    </tr>
-    <tr>
-    	<th>주소</th>
-    	<td>${dto.address1 }
-    		${dto.address2 }
-    	</td>
-    </tr>
-  </TABLE>
+	  <TABLE class="table table-hover">
+	    <TR>
+	      <td rowspan="5" width="30%"><img src="${root}/storage_member/${dto.fname}" width="300px" height="200px" style="margin-right: 20px;"></td>
+	      <TH width="20%">ID</TH>
+	      <td width="50%"><a href="javascript:read('${dto.id }')">${dto.id }</a></td>
+	    </tr>
+	    <tr>
+	      <th>이름</th>
+	      <td>${dto.mname }</td>
+	    </tr>
+	    <tr>
+	      <th>연락처</th>
+	      <td>${dto.tel }</td>
+	    </tr>
+	    <tr>
+	      <th>이메일</th>
+	      <td>${dto.email }</td>
+	    </tr>
+	    <tr>
+	      <th>주소</th>
+	      <td>${dto.address1 }
+	    	  ${dto.address2 }
+	      </td>
+	    </tr>
+	  </TABLE>
     </c:forEach>
  	${paging}
   </div>

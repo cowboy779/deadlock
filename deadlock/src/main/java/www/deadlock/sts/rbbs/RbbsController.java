@@ -128,7 +128,7 @@ public class RbbsController {
 		Map map = new HashMap();
 		String basePath = request.getRealPath("./storage_rbbs");
 		String oldfile = request.getParameter("oldfile");
-		String id = request.getParameter("id");
+		String id = (String)request.getSession().getAttribute("id");
 		String rnum = request.getParameter("rnum");
 
 		map.put("id", id);
@@ -140,7 +140,9 @@ public class RbbsController {
 
 			if (dao.delete(rnum)) {
 				
-				Utility.deleteFile(basePath, oldfile);
+				if(oldfile != null) {
+					Utility.deleteFile(basePath, oldfile);
+				}
 				
 				return "redirect:/rbbs/list";
 			} else {
@@ -207,9 +209,25 @@ public class RbbsController {
 	}
 	
 	@RequestMapping(value="/rbbs/update", method = RequestMethod.POST)
-	public String update(RbbsDTO dto ,HttpServletRequest request) {
+	public String update(RbbsDTO dto ,HttpServletRequest request) throws Exception {
 		
-		boolean flag = dao.createReply(dto);
+		String oldfile = request.getParameter("oldfile");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		dto.setRnum(rnum);
+		if(dto.getFnameMF() != null) {
+		
+		String basePath = request.getRealPath("/storage_rbbs");
+		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
+		int filesize = (int) dto.getFnameMF().getSize();
+		Utility.deleteFile(basePath, oldfile);
+		
+		dto.setFname(filename);
+		
+		}else {
+			dto.setFname(oldfile);
+		}
+		
+		boolean flag = dao.update(dto);
 		
 		if(flag) {
 			return  "redirect:/rbbs/list";

@@ -37,7 +37,7 @@ function id_dup_check(){
 		param,
 		function(data, textStatus){
 			//alert(textStatus);
-			var result = eval("("+data+")");
+			var result = data;
 			
 			duplCheck(result);
 		}
@@ -46,7 +46,7 @@ function id_dup_check(){
 
 function duplCheck(result){
 	
-	if(result.flag=='true'){
+	if(result.flag == true){
 		alert("중복된 아이디입니다.");
 	}else{
 		$("#id_form").css("display","none");
@@ -60,15 +60,15 @@ function duplCheck(result){
 	}
 }
 $(function(){
-	 $('#id').keyup(function(event){
-		                    if (!(event.keyCode >=37 && event.keyCode<=40)) {
-		                        var inputVal = $(this).val();
-		                        $(this).val($(this).val().replace(/[^_a-z0-9]/gi,''));
-								//_(underscore), 영어, 숫자만 가능
+	 $('#id').keyup(
+			function(event){
+		             if (!(event.keyCode >=37 && event.keyCode<=40)) {
+		                 var inputVal = $(this).val();
+		                 $(this).val($(this).val().replace(/[^_a-z0-9]/gi,''));
+						 //_(underscore), 영어, 숫자만 가능
 		                    }
 		                });
 });
-
 </script>
 </head>
 <body>
@@ -81,20 +81,17 @@ $(function(){
       class="signUpInput" size="20" data-rule-required="true" maxlength="10"
       placeholder="사용하실 아이디를 입력하세요.">
       </label>
-      
 <br>
     <button class="signUpButton" type="button" onclick="id_dup_check()">중복확인</button>
 <!--   <button class="signUpButton" type="button" onclick="window.close()">취소</button> -->
 </div>
-
-
 
 <div id="id_proc" align="center" style="display: none">
  		<h4 id="select_id"></h4>
  		<br>
 		<input class="signUpButton" type='button' value='사용' onclick='use()'>
 <!--     	<input class="signUpButton" type='button' value='다시시도' onclick="history.back()"> -->
- </div>
+</div>
  
 </FORM>
 </div>
