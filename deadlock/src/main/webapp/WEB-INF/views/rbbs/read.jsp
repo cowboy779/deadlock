@@ -32,11 +32,15 @@ function oneclick(wh){
 
 			<tr>
 				<td>분류</td>
-				<td>건의</td>
+				<td>건의
+				<c:if test="${dto.imp == 'V' }">
+				<img alt="" src="">호잇
+				</c:if>
+				</td>
 			</tr>
 			<tr id="impo" style="visibility: visible;">
-				<td>중요도</td>
-				<td>${dto.imp }</td>
+				<td>아이디</td>
+				<td>${dto.id }</td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -53,9 +57,10 @@ function oneclick(wh){
 		<div id="button">
 		<form action="javascript:oneclick('delete')">
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('list')" value="list">
+		<c:if test="${grade }">
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('reply')" value="reply">
+		</c:if>
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('update')" value="modify">
-		
 		<c:if test="${not empty sessionScope.id }">
 		<input class="btn btn-default btn-sm" type="submit" value="delete">
 		</c:if>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,18 +110,19 @@ public class RbbsController {
 
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request, Model model) throws Exception {
-		//String id = (String)request.getSession().getAttribute("id");
-		String id = "admin";
-		boolean flag = false;
-		flag= dao.vCheck(id);
-		
-		if(flag) {
-
+		String id = (String)request.getSession().getAttribute("id");
+		boolean gflag = false;
+		gflag= dao.vCheck(id);
 		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
+		boolean flag = dto.getId().equals(id);
+		
+		if(gflag || flag) {
+
 		
 		dao.upViewCount(rnum);
 		
+		model.addAttribute("grade", gflag);
 		model.addAttribute("dto", dto);
 		model.addAttribute("rnum", rnum);
 

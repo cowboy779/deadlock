@@ -37,7 +37,7 @@ function read(rnum){
       <th>Name</Th>
       <th>Title</th>
       <th>Date</th>
-      <th>View</th>
+      <th>Class</th>
       <th>file</th>
 
     </TR>
@@ -72,7 +72,7 @@ function read(rnum){
 </c:if>
     </td>
     <td>${dto.rdate }</td>
-    <td>${dto.rcount}</td>
+    <td>${dto.imp }</td>
     <td>
 <c:if test="${not empty dto.fname }">
 ${dto.fname }
@@ -110,7 +110,9 @@ ${dto.fname }
 <td>
 &nbsp;
 <button type="submit" class="btn btn-default btn-sm">search</button>
+<c:if test="${not empty sessionScope.id }">
 <button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-sm">regit</button>
+</c:if>
 </td>
 </tr>
 </table>

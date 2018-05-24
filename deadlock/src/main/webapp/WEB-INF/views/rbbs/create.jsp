@@ -21,27 +21,23 @@
 		action='./create'
 		enctype = 'multipart/form-data'
 		class="reveal-content">
-  <TABLE>
+  <TABLE class="table table-hover">
     <TR>
       <TH>분류</TH>
       <TD>
 		<select onchange="impot(this.value)" name="imp">
-			<option value="V">문의</option>
-			<option value="G">건의</option>
-			<option value="J">질문</option>
+			<option value="Qes">문의</option>
+			<option value="Adv">건의</option>
 		</select>
       </TD>
     </TR>
     
-<!-- 임시방편 -->
+
     <tr>
     <th>id</th>
     <td><input type="hidden" name="id" value="${sessionScope.id }">${sessionScope.id }</td>
     
     </tr>
-    
-    
-<!-- 임시방편 -->
 
     <TR>
       <TH>Title</TH>
