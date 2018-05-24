@@ -10,8 +10,8 @@
 <style type="text/css">
 
 *{ 
-  font-family: gulim; 
-  font-size: 20px; 
+/*   font-family: gulim;  */
+/*   font-size: 20px;  */
 /*   font-family:돋움; */
 } 
 .textarea{

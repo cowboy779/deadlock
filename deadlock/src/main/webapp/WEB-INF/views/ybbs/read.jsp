@@ -116,7 +116,7 @@ function yyupdate(ynum){
 <h2>조회</h2>
 </DIV>
 
-  <TABLE  style="width:60%; margin:auto;" border="1">
+  <TABLE style="width:60%; margin:auto;" border="1">
   	<TR>
       <TH>조회수</TH>
       <TD>${dto.ycount}</TD>
@@ -178,6 +178,7 @@ function yyupdate(ynum){
 	onsubmit="return input(this)">
 	<textarea rows="3" cols="60" name="content"></textarea>	
 	<br>
+	<c:if test="${not empty sessionScope.id }">
 	<input type ="submit" name="ysubmit" value="등록">
 	<input type ="hidden" name = "id" value="${id }">
 	<input type ="hidden" name = "ynum" value="${dto.ynum }">
@@ -186,6 +187,7 @@ function yyupdate(ynum){
 	<input type ="hidden" name = "nowPage" value="${param.nowPage }">
 	<input type ="hidden" name = "yrenum" value="${0} ">
 	<input type ="hidden" name = "nPage" value="${nPage}">
+	</c:if>
 </form>
 </div>
 

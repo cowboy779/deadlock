@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -17,7 +18,11 @@
 	margin: 0 auto;
 }
 
-.line{border-bottom:1px solid black;}
+.line{
+	border-top:0px;
+	border-bottom:0px;
+
+}
 
 input[type=button], input[type=submit], input[type=reset]{
     background-color:#555555;;
@@ -29,10 +34,14 @@ input[type=button], input[type=submit], input[type=reset]{
 
 #d1{ 
  	position: relative; 
- 	left:490px; 
+ 	left:1100px; 
  	color:blue; 
- 	font-size:1em;
+ 	font-size:0.4cm;
  } 
+ 
+#d2{
+	box-shadow: 10px 10px;
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -115,31 +124,45 @@ input[type=button], input[type=submit], input[type=reset]{
 </script>
 </head>
 <body>
-	<center>
-    <h2>글 작성</h2>
-    </center>
+	
+	<div align="center">
+   <i class="fa fa-commenting" style="font-size:36px">방명록</i>  
+   </div>
+   <div align="center">
+   <br>
+   방명록을 남겨주세요
+   바르고 고운말을 사용합시다
+   </div>
     <form id="form1" 
     	  method="post" 
     	  action="./create"
     	  onsubmit="return incheck(this)">
     <table align="center" width="60%">
         <tr>
-        <td>작성자</td>
-            <td>
-            <input name="bname" size="20" value="">
+        <td width="40" height="40">
+        <div style="color: red">
+        name
+        </div>
+        </td>
+        <td>
+        <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="">
+        </td>
+     	</tr>
+     	<tr>
+            <td height="60">
+            <div style="color: red">
+            Password
+            </div>
             </td>
-         </tr>
-           <tr>
-            <td>비밀번호</td>
             <td>
-            <input type="password" name="passwd" size="20">
+            <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" type="password" name="passwd" size="20">
             </td>
-           </tr>
+          </tr>
        
         <tr>
-        <td>내용</td>
+       
             <td colspan="2">
-            <textarea name="content" id="content" rows="10" cols="146"></textarea></td>
+            <textarea name="content" id="content" rows="10" cols="156"></textarea></td>
         </tr>
  
 
@@ -155,23 +178,25 @@ input[type=button], input[type=submit], input[type=reset]{
     </form>
     <br>
     <hr>
-    <div id="d1">
+  
+  <br>
+      <div id="d1">
         현제 페이지 게시물수:${ylistsize}
-    </div>
-	<center>
-    <h2>글 목록</h2>
-    </center>
+      </div>
     
     <br>
+    
     <c:forEach var="row" items="${ylist}">
+    
         <form 
         action="${root}/pbbs/view" 
         id="update_form"
         >
-    	<br><Br>
-            <table border="0" width="900" align="center" border="1">
+        <Br>
+<!--             <table style="border="0" width="900" align="center"> -->
+            <table style="box-shadow: 5px 5px grey;" border="1"; align="center" width="900">
                 <tr>
-                    <td class="line" >작성자:
+                    <td class="line">작성자:
                     ${row.bname}</td>
                     </tr>
                     <tr>
@@ -179,7 +204,7 @@ input[type=button], input[type=submit], input[type=reset]{
                     ${row.bdate}</td>
                 </tr>
                 <tr>
-                    <td class="line"  colspan="4">${row.content}</td>
+                    <td width="100"  class="line"  colspan="4">${row.content}</td>
                 </tr>
                 <tr>
  
@@ -191,7 +216,9 @@ input[type=button], input[type=submit], input[type=reset]{
                     </td>
                 </tr>
             </table>
+            
         </form>
+       
 </c:forEach>
 
 <br>
