@@ -36,4 +36,12 @@ public class HomeController {
 		return "/home";
 	}
 	
+	@RequestMapping(value="/template/about")
+	public String about() {
+		
+		return "/template/about";
+	}
+	
+	
+	
 }

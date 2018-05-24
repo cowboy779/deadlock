@@ -62,13 +62,13 @@ function read(rnum){
 <c:forEach begin="1" end="${dto.indent }">
 [re]
 </c:forEach>
-    <img src="${root}/images/re.png" height="50%">
+    <img src="${root}/univers/images/re.png" height="50%">
 
 </c:if>
 
 <a href="javascript:read('${dto.rnum }')">   ${dto.title }   </a>
 <c:if test="${util:newimg(dto.rdate) }">
-		<img src="${root }/images/new.gif">
+		<img src="${root }/univers/images/new.gif">
 </c:if>
     </td>
     <td>${dto.rdate }</td>
@@ -125,6 +125,7 @@ ${dto.fname }
     ${paging }
 
   </DIV>
+  <br>
 </div>
 </div>
 </body>

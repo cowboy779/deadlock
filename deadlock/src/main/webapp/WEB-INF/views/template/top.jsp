@@ -14,13 +14,12 @@
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
   
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-icon-180x180.png">
-  <link href="./assets/favicon.ico" rel="icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="${root }/univers/apple-icon-180x180.png">
+  <link href="${root }/univers/favicon.ico" rel="icon">
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 <title>Insert title here</title>
-<link href="univers/main.3f6952e4.css" rel="stylesheet">
 <script type="text/javascript">
 function chat(){
 	var url="${root}/chat/list";
@@ -33,10 +32,7 @@ function chat(){
 </head>
 
 <body class="">
-<div id="site-border-left"></div>
-<div id="site-border-right"></div>
-<div id="site-border-top"></div>
-<div id="site-border-bottom"></div>
+
 
 <!-- Add your content of header -->
 <header>
@@ -52,13 +48,11 @@ function chat(){
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav ">
           <li><a href="${root}" title="">01 : Home</a></li>
-          <li><a href="${root}/ybbs/list" title="자유게시판">02 : 자유게시판</a></li>
-          <li><a href="${root}/pbbs/list" title="방명록">03 : 방명록</a></li>
-          <li><a href="${root}/rbbs/list" title="건의하기">04 : 건의하기</a></li>
-          <li><a href="${root}/qbbs/list" title="정답/질문게시판">05 : 정답/질문게시판</a></li>
-          <li><a href="${root}/cbbs/list" title="추천사이트/게시판">06 : 추천사이트/게시판</a></li>
-          <li><a href="${root}/template/bbslist" title="test">06 : test</a></li>
-          <li><a href="javascript:chat()">채팅창</a></li>
+          <li><a href="${root}/template/bbslist" title="Board">02 : Board</a></li>
+          <li><a href="${root}/pbbs/list" title="방명록">03 : Game</a></li>
+          <li><a href="${root}/nbbs/list" title="Infomation">04 : Infomation</a></li>
+          <li><a href="${root}/template/about" title="About">05 : About</a></li>
+          <li><a href="javascript:chat()" title="Chat">06: Chat</a></li>
         </ul>
 
 		<ul class="nav navbar-nav" style="float: right;">

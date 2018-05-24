@@ -29,7 +29,7 @@
       
       <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
         <div class="text-center">
-          <h1 class="h2">02 : Works</h1>
+          <h1 class="h2">02 : BoardList</h1>
           <p>Nulla facilisi. Vivamus vestibulum, elit in scelerisque ultricies, nisl nunc pulvinar ligula, id sodales arcu sapien in nisi. Quisque libero enim, mattis non augue posuere, venenatis dapibus urna.</p>
         </div>
       </div>
@@ -48,31 +48,31 @@
                       </a>
                       <div class="card-container card-container-lg">
                         <h4>001/006</h4>
-                        <h3>Fringilla sit amet</h3>
-                        <p>Nulla facilisi. Vivamus vestibulum, elit in scelerisque ultricies.</p>
+                        <h3>RBBS 입니당</h3>
+                        <p>건의하기 합시당</p>
                         <a href="${root }/rbbs/list" title="" class="btn btn-default">Discover</a>
                       </div>
                     </div>
                     <div class="col-sm-4">
-                      <a href="/qbbs/list" title="" class="black-image-project-hover">
+                      <a href="${root }/nbbs/list" title="" class="black-image-project-hover">
                         <img src="${root }/univers/images/work02-hover.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="card-container card-container-lg">
                         <h4>002/006</h4>
-                        <h3>Nulla scelerisque</h3>
-                        <p>Proin pharetra metus id iaculis dignissim. In aliquet lorem ut ex ullamcorper.</p>
-                        <a href="/qbbs/list" title="" class="btn btn-default">Discover</a>
+                        <h3>공지사항</h3>
+                        <p>자세한 내용을 보시려면 클릭하세요</p>
+                        <a href="${root }/nbbs/list" title="" class="btn btn-default">Discover</a>
                       </div>
                     </div>
                     <div class="col-sm-4">
-                      <a href="${root }/nbbs/list" title="" class="black-image-project-hover">
+                      <a href="${root }/qbbs/list" title="" class="black-image-project-hover">
                         <img src="${root }/univers/images/work03-hover.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="card-container card-container-lg">
                         <h4>003/006</h4>
-                        <h3>Vivamus vestibulum</h3>
-                        <p>Fusce sed hendrerit augue, a rhoncus velit. In non lorem mattis, tempor sem sit amet.</p>
-                        <a href="${root }/nbbs/list" title="" class="btn btn-default">Discover</a>
+                        <h3>QnA</h3>
+                        <p>Do you get more infomation? come here!</p>
+                        <a href="${root }/qbbs/list" title="" class="btn btn-default">Discover</a>
                       </div>
                     </div>
                     
@@ -83,37 +83,37 @@
             <div class="item">
                 <div class="row">
                   <div class="col-sm-4">
-                    <a href="${root }/nbbs/list" class="black-image-project-hover">
+                    <a href="${root }/cbbs/list" class="black-image-project-hover">
                       <img src="${root }/univers/images/work02-hover.jpg" alt="Image" class="img-responsive">
                     </a>
                     <div class="card-container">
                       <h4>004/006</h4>
-                      <h3>Nulla scelerisque</h3>
-                      <p>Proin pharetra metus id iaculis dignissim. In aliquet lorem ut ex ullamcorper.</p>
-                      <a href="${root }/nbbs/list" class="btn btn-default">Discover</a>
+                      <h3>Cbbs</h3>
+                      <p>추천 사이트</p>
+                      <a href="${root }/cbbs/list" class="btn btn-default">Discover</a>
                     </div>
                   </div>
                    <div class="col-sm-4">
-                      <a href="${root }/nbbs/list" class="black-image-project-hover">
+                      <a href="${root }/ybbs/list" class="black-image-project-hover">
                         <img src="${root }/univers/images/work01-hover.jpg" alt="Image" class="img-responsive">
                       </a>
                       <div class="card-container">
                         <h4>005/006</h4>
-                        <h3>Fringilla sit amet</h3>
-                        <p>Nulla facilisi. Vivamus vestibulum, elit in scelerisque ultricies.</p>
-                        <a href="${root }/nbbs/list" class="btn btn-default">Discover</a>
+                        <h3>ybbs</h3>
+                        <p>방명록.</p>
+                        <a href="${root }/ybbs/list" class="btn btn-default">Discover</a>
                       </div>
                     </div>
                     
                     <div class="col-sm-4">
-                      <a href="${root }/cbbs/list" class="black-image-project-hover">
+                      <a href="${root }/pbbs/list" class="black-image-project-hover">
                         <img src="${root }/univers/images/work03-hover.jpg" alt="Image" class="img-responsive">
                       </a>
                       <div class="card-container">
                         <h4>006/006</h4>
-                        <h3>Vivamus vestibulum</h3>
-                        <p>Fusce sed hendrerit augue, a rhoncus velit. In non lorem mattis, tempor sem sit amet.</p>
-                        <a href="${root }/cbbs/list" class="btn btn-default">Discover</a>
+                        <h3>pbbs?</h3>
+                        <p>여기로 오셈 pbbs 모여라!</p>
+                        <a href="${root }/pbbs/list" class="btn btn-default">Discover</a>
                       </div>
                     </div>
                     
@@ -153,6 +153,6 @@
   });
 </script>
 
-<script type="text/javascript" src="./main.70a66962.js"></script>
+<script type="text/javascript" src="${root }/univers/main.70a66962.js"></script>
 </body>
 </html>
