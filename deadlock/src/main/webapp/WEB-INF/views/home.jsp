@@ -75,9 +75,9 @@
         <div class="col-xs-12">
           <div class="hero-full-wrapper">
             <div class="text-content">
-              <h1>Dear. Dead Lock...,<br>
+              <h1>Hi Dead Lock<br>
                 <span id="typed-strings">
-                  <span>please dont'tell me</span>
+                  <span>Game is already Started</span>
                   <span></span>
                   <span></span>
                 </span>
