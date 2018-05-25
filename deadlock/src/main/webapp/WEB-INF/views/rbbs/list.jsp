@@ -13,13 +13,20 @@ function bcreate(){
 	
 }
 function read(rnum){
+	if(${empty sessionScope.id}){
+		alert("로그인을 해주세요");
+		return;
+	}else{
+	
+	
 	var url = "${root}/rbbs/read"
 	url += "?rnum="+rnum;
 	url += "&col=${col}";
 	url += "&word=${word}";
-	url += "&nowPage=${nowPage}"
+	url += "&nowPage=${nowPage}";
 	
 	location.href = url;
+	}
 }
 </script>
 

@@ -61,7 +61,7 @@ function oneclick(wh){
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('reply')" value="reply">
 		</c:if>
 		<input class="btn btn-default btn-sm" type="button" onclick="oneclick('update')" value="modify">
-		<c:if test="${not empty sessionScope.id }">
+		<c:if test="${dto.id == sessionScope.id || grade}">
 		<input class="btn btn-default btn-sm" type="submit" value="delete">
 		</c:if>
 		<input type="hidden" name="oldfile" value="${dto.fname }">

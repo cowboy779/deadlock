@@ -110,14 +110,19 @@ public class RbbsController {
 
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request, Model model) throws Exception {
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		String id = (String)request.getSession().getAttribute("id");
+		if(id == "") {
+			return "/rbbs/aderror";
+		}
 		boolean gflag = false;
 		gflag= dao.vCheck(id);
-		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
 		boolean flag = dto.getId().equals(id);
+		boolean ggflag = id.equals(dao.idC(dto.getRefnum()));
 		
-		if(gflag || flag) {
+		
+		if(gflag || flag || ggflag) {
 
 		
 		dao.upViewCount(rnum);
@@ -138,12 +143,17 @@ public class RbbsController {
 		String basePath = request.getRealPath("./storage_rbbs");
 		String oldfile = request.getParameter("oldfile");
 		String id = (String)request.getSession().getAttribute("id");
-		String rnum = request.getParameter("rnum");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		
+		if(dao.refC(rnum)) {
+			return "/rbbs/error";
+		}
 
 		map.put("id", id);
 		map.put("rnum", rnum);
 
 		boolean flag = dao.idCheck(map);
+		
 
 		if (flag) {
 

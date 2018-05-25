@@ -100,6 +100,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     </select>
     
+    <select id="idC" parameterType="int" resultType="String">
+    select id from rbbs where rnum=#{refnum}
+    </select>
+    
+    <select id="refC" parameterType="int" resultType="int">
+    select count(*) as cnt from rbbs where refnum=#{rnum}
+    </select>
+    
      
 </mapper>
 
