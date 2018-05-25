@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 
 	<insert id="create" parameterType="CbbsDTO">
-	 	INSERT INTO cbbs(cnum, title, content, cdate, fname,id)
+	 	INSERT INTO cbbs(cnum, title, content, cdate, fname,id,urllink)
 		VALUES((select nvl(max(cnum),0)+1 from cbbs),#{title},#{content},sysdate,
-		#{fname, jdbcType=VARCHAR},#{id})
+		#{fname, jdbcType=VARCHAR},#{id},#{urllink})
  	</insert> 
 
     <select id="read" resultType="CbbsDTO" parameterType="int">
@@ -66,11 +66,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <select id="list" resultType="CbbsDTO" parameterType="Map">
  	select cnum,title,content,
- 	to_char(cdate,'yyyy-mm-dd hh24:mi:ss')cdate,fname,ccount,id, r
+ 	to_char(cdate,'yyyy-mm-dd hh24:mi:ss')cdate,fname,ccount,id,urllink,r
 from(
-		select cnum,title,content,cdate,fname,ccount,id,rownum r
+		select cnum,title,content,cdate,fname,ccount,id,urllink,rownum r
 	from(                                                      
-			select cnum,title,content,cdate,fname,ccount,id
+			select cnum,title,content,cdate,fname,ccount,id,urllink
 			from(
 			select *from cbbs                                                  
 			<where>

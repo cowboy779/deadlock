@@ -13,10 +13,18 @@ public class CbbsDTO {
 	private String id;
 	private int filesize;
 	private MultipartFile filenameMF;
+	private String urllink;
 	
 	
 	
 	
+	
+	public String getUrllink() {
+		return urllink;
+	}
+	public void setUrllink(String urllink) {
+		this.urllink = urllink;
+	}
 	public int getFilesize() {
 		return filesize;
 	}

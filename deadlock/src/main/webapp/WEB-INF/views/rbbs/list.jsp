@@ -84,30 +84,32 @@ ${dto.fname }
 </c:otherwise>
 </c:choose>
 <br>
+
 <div class="template-example">
  <div class="form-group">
  <form action="${root }/rbbs/list" method = "post">
+ 
  <table style="margin:auto;">
  <tr>
- <td>
- <select name="col" class="form-control" style="width:100px;height:33px;">
- 	<option value="id"
- 	
- 	<c:if test="${col=='id' }">selected</c:if>
- 	>ID</option>
- 	<option value="title"
- 	<c:if test="${col=='title' }">selected</c:if>
- 	>제목</option>
- 	<option value="content"
- 	<c:if test="${col=='content' }">selected</c:if>
- 	>내용</option>
- 	<option value="total">전체출력</option>
- </select>
- </td>
- <td>
-<input class="form-control" type="text" name="word" style="width:300px; height:33px;"  required>
-</td>
-<td>
+ 	<td>
+	 <select name="col" class="form-control" style="width:100px;height:33px;">
+	 	<option value="id"
+	 	
+	 	<c:if test="${col=='id' }">selected</c:if>
+	 	>ID</option>
+	 	<option value="title"
+	 	<c:if test="${col=='title' }">selected</c:if>
+	 	>제목</option>
+	 	<option value="content"
+	 	<c:if test="${col=='content' }">selected</c:if>
+	 	>내용</option>
+	 	<option value="total">전체출력</option>
+	 </select>
+ 	</td>
+	<td>
+		<input class="form-control" type="text" name="word" style="width:300px; height:33px;"  required>
+	</td>
+	<td>
 &nbsp;
 <button type="submit" class="btn btn-default btn-sm">search</button>
 <button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-sm">regit</button>
