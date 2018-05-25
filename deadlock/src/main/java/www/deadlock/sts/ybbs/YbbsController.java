@@ -120,6 +120,11 @@ public class YbbsController {
 	@RequestMapping("/ybbs/read")
 	public String read(int ynum, Model model, HttpServletRequest request) {
 		
+
+		String col = request.getParameter("col");
+		String word = request.getParameter("word");
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
 		
@@ -138,28 +143,53 @@ public class YbbsController {
 		if (request.getParameter("nPage") != null) {
 			nPage = Integer.parseInt(request.getParameter("nPage"));
 		}
-		int recoredPerPage = 3;
-		int sno = ((nPage - 1) * recoredPerPage) + 1;
-		int eno = nPage * recoredPerPage;
+		int recordPerPage = 3;
+		int sno = ((nPage - 1) * recordPerPage) + 1;
+		int eno = nPage * recordPerPage;
+		
+		
+		String col2 = Utility.checkNull(request.getParameter("col"));
+		String word2 = Utility.checkNull(request.getParameter("word"));
+//		dto.setId("user1");
+
+		if (col.equals("total"))
+			word = "";
+		// 검색관련end----------------------------
+
+		// paging관련
+		int nowPage2 = 1;// 현제 보이는 페이지
+		if (request.getParameter("nowPage") != null)
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+
+		int recordPerPage2 = 5; // 한페이지당 보여줄 레코드 개수
+
+		int sno2 = ((nowPage - 1) * recordPerPage) + 1; // 시작 페이지
+		int eno2 = nowPage * recordPerPage; // 어디부터 어디까지 보여주겠다 =끝페이지
+		
+		
+		
+		
 		
 		Map map = new HashMap();
 		map.put("sno", sno);
 		map.put("eno", eno);
 		map.put("ynum", ynum);
+		
+		Map map2 = new HashMap();
+		map2.put("col", col2);
+		map2.put("word", word2);
+		map2.put("sno", sno2);
+		map2.put("eno", eno2);
 	
 		List<YrecoDTO> ylist = rdao.list(map);
-		List<YBbsDTO> list = dao.list(map);
+		List<YBbsDTO> list = dao.list(map2);
 		
 		int total = rdao.total(map);
-		int ytotal = dao.total(map);
+		int ytotal = dao.total(map2);
 
-		String col = request.getParameter("col");
-		String word = request.getParameter("word");
-		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 
-		
-		String paging2 = Utility.ypaging(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
-		String paging4 =  Utility.paging4(ytotal, nowPage, recoredPerPage, col, word, ynum);
+		String paging2 = Utility.ypaging(total, nPage, recordPerPage, url, ynum, nowPage, col, word);
+		String paging4 =  Utility.paging4(ynum, ytotal, recordPerPage, nowPage, col, word);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("ylist", ylist);
@@ -240,7 +270,7 @@ public class YbbsController {
 
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
-		dto.setId("user1");
+//		dto.setId("user1");
 
 		if (col.equals("total"))
 			word = "";

@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
- *{  
-   font-family: gulim;  */
-   font-size: 10px;  */
- }  
+/*  *{   */
+/*    font-family: gulim;   */
+/*    font-size: 14px;   */
+/*  }   */
 
 .table{
 	width: 60%;	
@@ -19,9 +19,16 @@
 }
 
 .line{
-	border-top:0px;
-	border-bottom:0px;
+	border-top:1px;
+	border-bottom:1px;
+	border-left: 1px;
+	border-right: 1px;	
+}
 
+	
+.linee{
+	border-top: 1px;
+	border-bottom: 1px;
 }
 
 input[type=button], input[type=submit], input[type=reset]{
@@ -34,7 +41,7 @@ input[type=button], input[type=submit], input[type=reset]{
 
 #d1{ 
  	position: relative; 
- 	left:1100px; 
+ 	left:900px; 
  	color:blue; 
  	font-size:0.4cm;
  } 
@@ -128,25 +135,36 @@ input[type=button], input[type=submit], input[type=reset]{
 	<div align="center">
    <i class="fa fa-commenting" style="font-size:36px">방명록</i>  
    </div>
-   <div align="center">
+   <div style="font-family: monospace;" align="center">
    <br>
    방명록을 남겨주세요
-   바르고 고운말을 사용합시다
+   <div style="color: blue">
+   바르고 고운말을 사용합시다!
+	</div>
    </div>
     <form id="form1" 
     	  method="post" 
     	  action="./create"
     	  onsubmit="return incheck(this)">
-    <table align="center" width="60%">
+    <table style="width:30%" align="center">
         <tr>
         <td width="40" height="40">
         <div style="color: red">
         name
         </div>
         </td>
+        <c:choose>
+        <c:when test="${not empty sessionScope.id }">
         <td>
-        <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="">
+         <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="${sessionScope.id }" readonly="readonly">
         </td>
+		</c:when>
+		<c:otherwise>
+		<td>
+        <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="">
+		</td>
+		</c:otherwise>
+		</c:choose>
      	</tr>
      	<tr>
             <td height="60">
@@ -159,10 +177,9 @@ input[type=button], input[type=submit], input[type=reset]{
             </td>
           </tr>
        
-        <tr>
-       
+        <tr>  
             <td colspan="2">
-            <textarea name="content" id="content" rows="10" cols="156"></textarea></td>
+            <textarea name="content" id="content" rows="10" cols="80"></textarea></td>
         </tr>
  
 
@@ -194,25 +211,30 @@ input[type=button], input[type=submit], input[type=reset]{
         >
         <Br>
 <!--             <table style="border="0" width="900" align="center"> -->
-            <table style="box-shadow: 5px 5px grey;" border="1"; align="center" width="900">
+            <table style="box-shadow: 5px 5px grey;" border="1"; align="center" width="600">
                 <tr>
-                    <td class="line">작성자:
-                    ${row.bname}</td>
-                    </tr>
-                    <tr>
-                    <td class="line" >날짜  :
+				    <td class="line">
+                <i class="fa fa-edit" style="font-size:12px; color: black">
+				 </i>작성자:
+                    ${row.bname}</td>    
+               
+                 <td class="line">
+                <i class="fa fa-clock-o" style="font-size:12px; color: black">
+                 </i>날짜 :
                     ${row.bdate}</td>
                 </tr>
                 <tr>
-                    <td width="100"  class="line"  colspan="4">${row.content}</td>
+                    <td width="100" height="80" colspan="2">${row.content}</td>
                 </tr>
                 <tr>
  
             <!-- 게시물 번호는 hidden field로 넘김 -->
                     <td colspan="4" class="line">비밀번호 
                     <input type="hidden" name="bnum" value="${row.bnum}">
-                     <input type="password" name="passwd">                      
-                    <input type="button" value="수정/삭제" onclick="c_update()">
+                     <input type="password" name="passwd">  
+                     <span style="float: right;">          
+                     <input type=button style="width: 60pt; height: 23pt;" value="수정/삭제" onclick="c_update()">
+                     </span>
                     </td>
                 </tr>
             </table>

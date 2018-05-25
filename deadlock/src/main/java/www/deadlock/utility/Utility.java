@@ -462,19 +462,16 @@ public class Utility {
 	
 	
 //	페이징4
-	public static String paging4(int totalRecord, int nowPage, int recordPerPage, String col, String word, int ynum) {
+	public static String paging4(int ynum, int totalRecord, int recordPerPage2, int nowPage, String col, String word) {
 		int pagePerBlock = 10; // 블럭당 페이지 수
-		int totalPage = (int) (Math.ceil((double) totalRecord / recordPerPage)); // 전체
-																					// 페이지
-		int totalGrp = (int) (Math.ceil((double) totalPage / pagePerBlock));// 전체
-																			// 그룹
-		int nowGrp = (int) (Math.ceil((double) nowPage / pagePerBlock)); // 현재
-																			// 그룹
+		int totalPage = (int) (Math.ceil((double) totalRecord / recordPerPage2)); // 전체 페이지
+		int totalGrp = (int) (Math.ceil((double) totalPage / pagePerBlock));// 전체 그룹
+		int nowGrp = (int) (Math.ceil((double) nowPage / pagePerBlock)); // 현재 그룹
 		int startPage = ((nowGrp - 1) * pagePerBlock) + 1; // 특정 그룹의 페이지 목록 시작
 		int endPage = (nowGrp * pagePerBlock); // 특정 그룹의 페이지 목록 종료
-
+		
 		StringBuffer str = new StringBuffer();
-
+		
 		str.append("<style type='text/css'>");
 		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
 		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
@@ -502,37 +499,36 @@ public class Utility {
 		str.append("  }");
 		str.append("</style>");
 		str.append("<DIV id='paging'>");
-		//하나는 평범한 스팬태그, 하나는 백그라운드가 있는 
+		str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
 		
 		
-		// str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
-
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
 			str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
 					+ _nowPage + "'>이전</A></span>");
 		}
-
-		for (int i = startPage; i <= endPage; i++) {
+		// -----------------------
+		
+		for (int i = startPage; i <= endPage; i++) { // 페이지 번호 색깔
 			if (i > totalPage) {
 				break;
 			}
-
+			
 			if (nowPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>");
+				str.append("<span class='span_box_2'>" + i + "</span>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
 			} else {
 				str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage=" + i
-						+ "'>" + i + "</A></span>");
+						+ "'>" + i + "</A></span>"); // 내페이지를 제외한 다른 곳
 			}
 		}
-
+		
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
+			str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word +"&nowPage="
 					+ _nowPage + "'>다음</A></span>");
 		}
 		str.append("</DIV>");
-
+		
 		return str.toString();
 	}
 	
@@ -607,6 +603,7 @@ public class Utility {
 		
 		return str.toString();
 	}
+	
 	
 	public static String paging6(int totalRecord, int nPage, int recordPerPage, String url, int qnum, int nowPage,
 			String col, String word) {

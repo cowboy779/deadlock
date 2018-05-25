@@ -4,22 +4,12 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapais.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title></title> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css">
-.ycreate{
-  position:relative; top: 20px; left: 380px;
-}
 
-.line{border-bottom:1px solid black;}
-
-input[type=button], input[type=submit], input[type=reset]{
-    background-color:#555555;;
-    border: none;
-    color: white;
-    text-decoration: none;
-}
-</style>
 <script type="text/javascript">
 
 function del(){
@@ -33,12 +23,9 @@ function del(){
 	location.href=url;
 }
 
-
-
-
 function input(f){
 	if(id==null){
-		if(confirm("로그인후 댓글을 쓰세요")){
+		if(confirm("로그인 후 이용해주세요.")){
 		//로그인 창으로 
 		var url = "../member/login";
 		url = url + "?ynum=${dto.ynum}";
@@ -75,7 +62,7 @@ function yupdate(yrenum,ycontent){
 	var f = document.yform;
 	f.content.value = ycontent;
 	f.yrenum.value = yrenum;
-	f.ysubmit.value="수정";
+	f.ysubmit.value="submit";
 	f.action = "./yupdate";
 }
 
@@ -111,127 +98,142 @@ function yyupdate(ynum){
 
 </head> 
 <body>
+<br>
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>게시글 조회</h1>
+</div>
 
-<DIV class="title" align="center">
-<h2>조회</h2>
-</DIV>
-
-  <TABLE style="width:60%; margin:auto;" border="1">
+<br><br>
+<div class="w3-container" style="width:50%; margin:0 auto;">
+  <TABLE class="table table-hover" >
   	<TR>
-      <TH>조회수</TH>
-      <TD>${dto.ycount}</TD>
+      <TH style="width:30%;">${dto.id }</TH>
+      <TD style="width:70%; text-align:right;">(조회수:${dto.ycount})</TD>
     </TR>
-    
-    <TR>
-      <TH>등록날짜</TH>
-      <TD>${dto.ydate}</TD>
-    </TR>
-  	
-    <TR>
-      <TH>제목</TH>
-      <TD>${dto.title}</TD>
-    </TR>
-    
-    <TR>
-      <TH>파일명</TH>
-      <td>
-      <c:choose>
-      <c:when test="${empty dto.fname}">파일없음
-      </c:when>
-      <c:otherwise>
-      <a href="javascript:fileDown('${dto.fname}')">
-      ${dto.fname}(${dto.filesize})</a>
-      </c:otherwise>
-      </c:choose>
-      </td>
-    </TR>
+
     
     <tr>
-    <th>내용</th>
-    <td>
-    <textarea id="content" rows="10" cols="100" name="content">${content}</textarea>
+    <td colspan="2">
+    	<h3>${dto.title}</h3>
+    	<span class="fa fa-pencil"></span><textarea id="content" rows="8" style="width:100%; resize:none;" name="content" readonly>${content}</textarea>
+    	<p style="text-align: right; ">${dto.ydate}</p>
     </td>
     </tr>
-    <tr>
-    <th>아이디</th>
-    <td>${dto.id }</td>
-    </tr>
 
+	<TR>
+      <TH style="width:30%;">File(download)</TH>
+      <td style="width:70%;">
+	      <c:choose>
+	      <c:when test="${empty dto.fname}">파일없음
+	      </c:when>
+	      <c:otherwise>
+	      <a href="javascript:fileDown('${dto.fname}')">
+	      ${dto.fname}(${dto.filesize})</a>
+	      </c:otherwise>
+	      </c:choose>
+      </td>
+    </TR>
+
+    
+    
 	<tr style="border-bottom-style: hidden; border-left-style: hidden; border-right-style: hidden; text-align: right; ">
 	<td colspan="2" >
 		<DIV >
 		<c:if test="${sessionScope.id == dto.id || sessionScope.grade == 'A'}">
-			<input type='button' value='수정' onclick="yyupdate('${dto.ynum}')">
-			<button id = "button" onclick="del()">삭제</button>
+			<input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='update' onclick="yyupdate('${dto.ynum}')">
+			<button class="btn btn-default btn-sm" style="font-size:small;" id = "button" onclick="del()">delete</button>
 		</c:if>
 		</DIV>
 	</td>
 	</tr>
   </TABLE>
+</div>
 
+
+<!-- 댓글 -->
 <hr>
 
-<div class="ycreate">
-	<form name="yform" 
+<div class="w3-center" style=" width:60%;  margin: 0 auto;">
+<table class="w3-table w3-table-all" style="padding:0; width:100%;">
+	<c:choose>
+		<c:when test="${empty ylist }">
+			<tr>
+				<td style="text-align:center">등록된 댓글이 없습니다.</td>
+			</tr>
+		</c:when>
+		<c:otherwise>
+
+			<c:forEach var="ydto" items="${ylist}">
+				<tr>
+					<%--  <img src='${root}/images/re.jpg' width=20 height=15> --%>
+					<td>
+						<i class="fa fa-address-book-o"></i>
+						<b>${ydto.id}</b>
+					</td>
+					<td>
+						<c:if test="${id==ydto.id}">
+							<span style="float:right">
+							<a href="javascript:yupdate('${ydto.yrenum }','${ydto.content}')">update</a>|<a href="javascript:ydelete('${ydto.yrenum}')">delete</a>
+							</span>
+						</c:if>
+					</td>
+				</tr>
+				<tr>
+					<td>${ydto.content }</td>
+					<td style=" text-align: right;">
+						<i class="fa fa-calendar"></i>
+						${ydto.yredate }
+					</td>
+				</tr>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+</table>
+</div>
+<br>
+<div class="w3-center">
+${paging2}
+</div>
+<br><br>
+
+<form name="yform" 
 	action="./ycreate" 
 	method="post" 
 	onsubmit="return input(this)">
-	<textarea rows="3" cols="60" name="content"></textarea>	
-	<br>
-	<c:if test="${not empty sessionScope.id }">
-	<input type ="submit" name="ysubmit" value="등록">
-	<input type ="hidden" name = "id" value="${id }">
-	<input type ="hidden" name = "ynum" value="${dto.ynum }">
-	<input type ="hidden" name = "col" value="${param.col }">
-	<input type ="hidden" name = "word" value="${param.word }">
-	<input type ="hidden" name = "nowPage" value="${param.nowPage }">
-	<input type ="hidden" name = "yrenum" value="${0} ">
-	<input type ="hidden" name = "nPage" value="${nPage}">
-	</c:if>
+	<div class="w3-center" align="center">
+		<c:choose>
+	  	  	<c:when test="${not empty sessionScope.id }">
+	  	  		${sessionScope.id} : 
+		  	  	<textarea rows="1" name="content" style="width: 45%; resize:none;"  required></textarea>
+		  	  	<input class="btn btn-default btn-sm" style="font-size:small; margin-bottom: 20px;" type="submit" name="ysubmit" value="submit">
+	  	  		
+	  	  	</c:when>
+	  	  	<c:otherwise>	  	  	
+		  	  	<textarea rows="1" name="content_log" style="width: 30%; resize:none;" readonly>로그인 후 이용해주세요.</textarea>
+	  	  	</c:otherwise>
+  	  	</c:choose>
+	
+	
+				<input type ="hidden" name = "id" value="${id }">
+				<input type ="hidden" name = "ynum" value="${dto.ynum }">
+				<input type ="hidden" name = "col" value="${param.col }">
+				<input type ="hidden" name = "word" value="${param.word }">
+				<input type ="hidden" name = "nowPage" value="${param.nowPage }">
+				<input type ="hidden" name = "yrenum" value="${0} ">
+				<input type ="hidden" name = "nPage" value="${nPage}">
+	  	
+	</div>
 </form>
-</div>
-
+<!-- 댓글 끝 -->
+<br>
 <hr>
-<!-- <div class="rlist"> -->
-<div id="Layer1">
-<table style="margin-left: 330px;">
-<c:forEach var="ydto" items="${ylist}">
-<tr>
-<%--  <img src='${root}/images/re.jpg' width=20 height=15> --%>
-<td>
-<i class="fa fa-address-book-o"></i>
-${ydto.id}
-</td>
-<td>
-<i class="fa fa-calendar"></i>
-${ydto.yredate }</td>
-</tr>
-<tr>
-<td>
-${ydto.content }
-</td>
-<c:if test="${id==ydto.id}">
-<tr>
- <td colspan="3" align="right">
-<a href="javascript:yupdate('${ydto.yrenum }','${ydto.content}')">수정</a>
-<a href="javascript:ydelete('${ydto.yrenum}')">삭제</a>
-</Td>
-</tr>
+<br>
 
-</c:if>
-</tr>
-</c:forEach>
-</table>
-</div>
-<div class="bottom">
-${paging2}
-</div>
-
-<hr>
-
+<!-- 리스트 -->  
 <jsp:include page="list.jsp" flush="false" />
 <div>
 ${paging4}
 </div>
+<br>
 </body>
 </html> 
