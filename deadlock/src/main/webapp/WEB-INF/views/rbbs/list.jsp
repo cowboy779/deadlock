@@ -34,8 +34,8 @@ function read(rnum){
 </head>
 <body>
 <div class="container">
-<div class="container-fluid">
-<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h1>
+<div class="container-fluid" style="width:60%;">
+<h1 class="h2"><span class="glyphicon glyphicon-th-li st"></span>04 : 건의하기</h1>
 
 <TABLE class="table table-hover">
 <thead>
@@ -45,7 +45,6 @@ function read(rnum){
       <th>Title</th>
       <th>Date</th>
       <th>Class</th>
-      <th>file</th>
 
     </TR>
 </thead>
@@ -74,17 +73,16 @@ function read(rnum){
 </c:if>
 
 <a href="javascript:read('${dto.rnum }')">   ${dto.title }   </a>
+<c:if test="${not empty dto.fname }">
+		<img src="${root }/univers/images/file.gif">
+</c:if>
 <c:if test="${util:newimg(dto.rdate) }">
 		<img src="${root }/univers/images/new.gif">
 </c:if>
     </td>
     <td>${dto.rdate }</td>
     <td>${dto.imp }</td>
-    <td>
-<c:if test="${not empty dto.fname }">
-${dto.fname }
-</c:if>
-</td>
+
 </tr>
 </tbody>
 </c:forEach>
@@ -99,7 +97,6 @@ ${dto.fname }
  <td>
  <select name="col" class="form-control" style="width:100px;height:33px;">
  	<option value="id"
- 	
  	<c:if test="${col=='id' }">selected</c:if>
  	>ID</option>
  	<option value="title"

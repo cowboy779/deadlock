@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions> 
+     <definition name="gmain" template="/WEB-INF/views/game/template.jsp"> 
+        <put-attribute name="gheader" value="/WEB-INF/views/game/top.jsp" />
+        <put-attribute name="gfooter" value="/WEB-INF/views/game/bottom.jsp" />
+    </definition> 
+    
+    <definition name="/game/1" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/1.jsp" /> 
+    </definition>  
+    <definition name="/game/2" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/2.jsp" /> 
+    </definition>  
+    <definition name="/game/3" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/3.jsp" /> 
+    </definition>  
+    <definition name="/game/4" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/4.jsp" /> 
+    </definition>  
+    <definition name="/game/5" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/5.jsp" /> 
+    </definition>  
+    <definition name="/game/6" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/6.jsp" /> 
+    </definition>  
+    <definition name="/game/7" extends="gmain"> 
+        <put-attribute name="title" value="게시판 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/game/7.jsp" /> 
+    </definition>  
+    
+
+
+</tiles-definitions> 

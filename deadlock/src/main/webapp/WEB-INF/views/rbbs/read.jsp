@@ -18,9 +18,9 @@ function oneclick(wh){
  <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body class="">
-<div class="container">
-<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
-		<table class="table table-bordered">
+<div class="container" style="width:60%;">
+<h2 class="h2"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
+		<table class="table table-bordered" >
 			<tr>
 				<td>제목</td>
 				<td>${dto.title }</td>

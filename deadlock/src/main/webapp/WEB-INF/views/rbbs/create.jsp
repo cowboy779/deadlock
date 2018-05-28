@@ -8,14 +8,11 @@
 <title>Insert title here</title>
 <script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
+
 </head>
 <body class="minimal">
-<div id="site-border-left"></div>
-<div id="site-border-right"></div>
-<div id="site-border-top"></div>
-<div id="site-border-bottom"></div>
-
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-10 col-md-offset-1" style="width:60%;">
+<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h1>
 	<FORM	name='frm' method='POST' 
 		onsubmit = "return incheck(this)"
 		action='./create'
@@ -41,7 +38,7 @@
 
     <TR>
       <TH>Title</TH>
-      <TD><input type="text" class="form-control" name="title" placeholder='title'></TD>
+      <TD><input type="text" class="form-control" name="title" placeholder='title' required></TD>
     </TR>
     <TR>
       <TH>Content</TH>
@@ -58,9 +55,9 @@
   <br>
   
   <DIV class='bottom'>
-    <button type='submit' class="btn btn-default btn-sm">저장</button>
-    <input type='reset' value='다시쓰기' class="btn btn-default btn-sm">
-    <input type='button' value='취소' onclick="history.back()" class="btn btn-default btn-sm">
+    <button type='submit' class="btn btn-default btn-sm">submit</button>
+    <input type='reset' value='reset' class="btn btn-default btn-sm">
+    <input type='button' value='cancel' onclick="history.back()" class="btn btn-default btn-sm">
   </DIV>
   <script>
       CKEDITOR.replace( 'content' );

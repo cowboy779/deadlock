@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
-<div class="container">
+<div class="container" style="width:60%;">
 
 <h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
 	<FORM	name='frm' method='POST' 
