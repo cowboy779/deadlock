@@ -18,6 +18,7 @@
 	margin: 0 auto;
 }
 
+
 .line{
 	border-top:1px;
 	border-bottom:1px;
@@ -52,29 +53,12 @@ input[type=button], input[type=submit], input[type=reset]{
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
- function c_update(){
-	 
-	 var param = $("#update_form").serialize();
-	 
-	 $.post(
-		"passwd_check",
-		param,
-		function(data,textStatus){
-			var flag = data.flag;
-			
-			if(flag == false){
-				alert("비밀번호가 틀렸습니다.");
-				return false;
-			}else{
-				var url ="./view";
-				 url += "?bnum="+data.bnum;
-				 
-				location.href=url; 
-			}
-		}
-	 
-	 )
- }
+function go_view(bnum){
+	var url = "${root}/pbbs/view";
+	url += "?bnum="+bnum;
+	location.href=url;
+	
+}
 
  function c_create(){
  var param = $("#form1").serialize();
@@ -95,11 +79,6 @@ input[type=button], input[type=submit], input[type=reset]{
 	 
 	 )
  }
- 
-//  function real_cc(data){
-// 	 var url ="./list"; 
-// 	location.href=url; 
-//  }
  
  
  function incheck(f){
@@ -125,9 +104,8 @@ input[type=button], input[type=submit], input[type=reset]{
 			return false;
 		}	
 		
-		
-		
 	}
+ 
 </script>
 </head>
 <body>
@@ -203,45 +181,45 @@ input[type=button], input[type=submit], input[type=reset]{
     
     <br>
     
-    <c:forEach var="row" items="${ylist}">
     
         <form 
         action="${root}/pbbs/view" 
         id="update_form"
         >
         <Br>
-<!--             <table style="border="0" width="900" align="center"> -->
-            <table style="box-shadow: 5px 5px grey;" border="1"; align="center" width="600">
+      
+    <c:forEach var="row" items="${ylist}" >
+            <table style="box-shadow: 5px 5px grey;"
+            align="center"; border="1"; width="600";>
                 <tr>
-				    <td class="line">
-                <i class="fa fa-edit" style="font-size:12px; color: black">
-				 </i>작성자:
-                    ${row.bname}</td>    
+				    <td class="line" width="50">
+                		<i class="fa fa-edit" style="font-size:12px; color: black">
+				 		</i>작성자:
+                  		${row.bname}
+                  	</td>    
                
-                 <td class="line">
-                <i class="fa fa-clock-o" style="font-size:12px; color: black">
-                 </i>날짜 :
-                    ${row.bdate}</td>
+                 	<td class="line" width="50%;">
+                		<i class="fa fa-clock-o" style="font-size:12px; color: black">
+                 		</i>날짜 :
+                 		${row.bdate}
+                 	</td>
                 </tr>
+                
                 <tr>
-                    <td width="100" height="80" colspan="2">${row.content}</td>
-                </tr>
-                <tr>
- 
-            <!-- 게시물 번호는 hidden field로 넘김 -->
-                    <td colspan="4" class="line">비밀번호 
-                    <input type="hidden" name="bnum" value="${row.bnum}">
-                     <input type="password" name="passwd">  
-                     <span style="float: right;">          
-                     <input type=button style="width: 60pt; height: 23pt;" value="수정/삭제" onclick="c_update()">
-                     </span>
+                    <td width="100%" height="80%" colspan="2" id="br_text">
+                    	<div style="width: 100%; height: 100px; overflow-y: scroll;">
+	                  		${row.content}
+                    	</div>
+	                    <span style="float: right;">       
+	                   		<input type="button" style="font-size:small; style="width: 60pt; height: 23pt;" 
+	                   		onclick="go_view(${row.bnum})" value="수정/삭제">
+	                    </span>
                     </td>
-                </tr>
+                </tr>          
             </table>
-            
-        </form>
-       
+            <br>
 </c:forEach>
+        </form>
 
 <br>
  
@@ -267,9 +245,6 @@ input[type=button], input[type=submit], input[type=reset]{
 
 <br>
 <hr>
-
-
-
  <DIV class='bottom'>
    ${paging3}
   </DIV>

@@ -55,6 +55,7 @@ public class PbbsController {
 	 @RequestMapping("/pbbs/passwd_check")
 	 public ModelAndView passwd_check(HttpServletRequest request) {
 		 
+		 
 		  int bnum = Integer.parseInt(request.getParameter("bnum"));
 		  String passwd = request.getParameter("passwd");
 		  

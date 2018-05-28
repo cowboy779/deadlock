@@ -166,10 +166,6 @@ public class YbbsController {
 		int sno2 = ((nowPage - 1) * recordPerPage) + 1; // 시작 페이지
 		int eno2 = nowPage * recordPerPage; // 어디부터 어디까지 보여주겠다 =끝페이지
 		
-		
-		
-		
-		
 		Map map = new HashMap();
 		map.put("sno", sno);
 		map.put("eno", eno);
@@ -293,8 +289,10 @@ public class YbbsController {
 		map.put("sno", sno);
 		map.put("eno", eno);
 
+		List<YrecoDTO> ylist = rdao.list(map);
 		List<YBbsDTO> list = dao.list(map);
-
+		
+		
 		// 전체 레코드 개수 가져오기
 		int totalRecord = dao.total(map);
 		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);

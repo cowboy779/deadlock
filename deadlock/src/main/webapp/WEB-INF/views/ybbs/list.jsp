@@ -75,7 +75,12 @@ function read(ynum){
 		    	<td>${dto.id }</td>
 		    	<td>
 		    		<a href ="javascript:read('${dto.ynum}')">${dto.title}</a>
-		    	</td>
+		    	</td>  	
+<%--  				<c:set var = "rcount" value="${util:rcount(dto.ynum,rdao) }"></c:set> --%>
+<%--     			<c:if test="${rcount>0 }"> --%>
+<%--     			<span style="color:red">(${rcount})</span> --%>
+<%--   				</c:if> --%>
+ 					
 		    	<td>${dto.ydate}</td>
 		    	<td style="text-align: center;">${dto.ycount}</td>
 		    	<td>
