@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/ssi/ssi.jsp" %>
 <!DOCTYPE html> 
 <html> 
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title></title> 
+<title></title>
 <style type="text/css"> 
 .search{
 	width:80%;
@@ -31,60 +31,109 @@ function read(id){
 	url+="&nowPage=${nowPage}";
 	location.href=url;
 }
+
+//Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
 </script>
 </head> 
 <body>
-<div class="container">
-<div class="search">
-<form method="post" action='list'>
-<select name="col">
-<option value="id"
-<c:if test="${col == 'id' }">selected</c:if>
->ID</option>
-<option value="mname"
-<c:if test="${col == 'mname' }">selected</c:if>
->이름</option>
-<option value="email"
-<c:if test="${col == 'email' }">selected</c:if>
->이메일</option>
-<option value="total">전체출력</option>
-</select>
-<input type="search" name="word" value="${word }" required>
-<button class="w3-button w3-red w3-small">검색</button>
-<button class="w3-button w3-black w3-small" type="button" onclick="location.href='${root}/member/agreement'">회원가입</button>
-</form>
-
-<h4 align="center">회원 목록</h4>
+<br>
+<div class="w3-container" style="width:60%; margin:0 auto;">
+<div style="text-align: center;"> 
+	<h1 class="h2" ><span class="glyphicon glyphicon-th-list"></span>회원 목록</h1>
+</div>
+<br>
 
 	<c:forEach var="dto" items="${list }">
 	  <TABLE class="table table-hover">
 	    <TR>
-	      <td rowspan="5" width="30%"><img src="${root}/storage_member/${dto.fname}" width="300px" height="200px" style="margin-right: 20px;"></td>
+	      <td rowspan="5" width="30%">
+	      	<div style="width: 190px; height: 165px; overflow: hidden">
+	      		<img src="${root}/storage_member/${dto.fname}"  onclick="onClick(this)" class="w3-hover-opacity" style=" display:block; width:190px; height: auto;">
+	      	</div>
+	      </td>
 	      <TH width="20%">ID</TH>
 	      <td width="50%"><a href="javascript:read('${dto.id }')">${dto.id }</a></td>
 	    </tr>
 	    <tr>
-	      <th>이름</th>
+	      <th>Name</th>
 	      <td>${dto.mname }</td>
 	    </tr>
 	    <tr>
-	      <th>연락처</th>
+	      <th>Phone</th>
 	      <td>${dto.tel }</td>
 	    </tr>
 	    <tr>
-	      <th>이메일</th>
+	      <th>E-mail</th>
 	      <td>${dto.email }</td>
 	    </tr>
 	    <tr>
-	      <th>주소</th>
+	      <th>Address</th>
 	      <td>${dto.address1 }
 	    	  ${dto.address2 }
 	      </td>
 	    </tr>
 	  </TABLE>
+	  <br>
     </c:forEach>
- 	${paging}
+ </div> 
+ <br>
+   
+ <!-- 검색 -->   
+<div class="template-example" >
+<div class=" form-group ">
+<form method="post" action='list'>
+<table style=" margin:0 auto;">
+<tr>
+	<td>
+		<select class="form-control" name="col" style="width:100px; height:33px;">
+		<option value="id"
+		<c:if test="${col == 'id' }">selected</c:if>
+		>ID</option>
+		<option value="mname"
+		<c:if test="${col == 'mname' }">selected</c:if>
+		>이름</option>
+		<option value="email"
+		<c:if test="${col == 'email' }">selected</c:if>
+		>이메일</option>
+		<option value="total">전체출력</option>
+		</select>
+	</td>
+	<td>
+		<input class="form-control" type="search" name="word" value="${word }"  style="width:300px; height:33px;" required>
+	</td>
+	<td>
+		&nbsp;
+		<button type="submit" class="btn btn-default btn-sm" style="font-size:small;">search</button>
+		<button class="btn btn-default btn-sm" style="font-size:small;"  type="button" onclick="location.href='${root}/member/agreement'">sign up</button>
+	</td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+
+    <br>
+  	<DIV class='w3-center'>
+ 		${paging}
+ 	</div>
+ 	<br>
+
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
   </div>
- </div>
+</div> 
+
 </body>
 </html> 

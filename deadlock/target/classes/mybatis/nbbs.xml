@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="fixlist" resultType="NbbsDTO">
-	select nnum, title, content, ndate, category, ncount from nbbs
+	select nnum, title, content, to_char(ndate, 'yyyy-mm-dd')ndate, category, ncount from nbbs
 	where fix = 'Y'
 
 	</select>

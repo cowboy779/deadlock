@@ -5,39 +5,24 @@
 
 <tiles-definitions> 
 
-<definition name="/member/list" extends="main"> 
+<definition name="/nbbs/list" extends="main"> 
         <put-attribute name="title" value="회원 목록" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/list.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/nbbs/list.jsp" /> 
     </definition>   
-    <definition name="/member/create" extends="main"> 
+    <definition name="/nbbs/create" extends="main"> 
         <put-attribute name="title" value="회원가입" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/createForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/nbbs/createForm.jsp" /> 
     </definition>
-    <definition name="/member/agree" extends="main"> 
-        <put-attribute name="title" value="약관 동의" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/agreement.jsp" /> 
-    </definition>   
-    <definition name="/member/update" extends="main"> 
+
+    <definition name="/nbbs/update" extends="main"> 
         <put-attribute name="title" value="회원정보 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updateForm.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/nbbs/updateForm.jsp" /> 
     </definition>  
-    <definition name="/member/read" extends="main"> 
+    <definition name="/nbbs/read" extends="main"> 
         <put-attribute name="title" value="회원정보 보기" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/read.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/nbbs/read.jsp" /> 
     </definition>
-    <definition name="/member/login" extends="main"> 
-        <put-attribute name="title" value="회원정보 보기" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" /> 
-    </definition>    
-    <definition name="/member/updateFile" extends="main"> 
-        <put-attribute name="title" value="사진 수정" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/updateFileForm.jsp" /> 
-    </definition>    
-    <definition name="/member/delete" extends="main"> 
-        <put-attribute name="title" value="게시판 삭제" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/member/deleteForm.jsp" /> 
-    </definition>  
-   
+
   
    
            

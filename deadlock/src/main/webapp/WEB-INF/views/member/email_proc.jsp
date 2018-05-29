@@ -34,16 +34,21 @@ function emailCheck(){
 		param,
 		function(data, textStatus){
 
-			var result = data;
-			
-			sendMail(result);
+			sendMail(data);
 		}
 	)
-	
 }
 
 function sendMail(result){
-	var parameter = "from="+result.from+"&to="+result.to+"&subject="+result.subject+"&content="+result.content;
+	
+	display_choose();
+	
+	var parameter = {
+			from: result.from,
+			to: result.to,
+			subject: result.subject,
+			content: result.content
+	}
 	
 	$.post(
 			"sendMail",
@@ -53,7 +58,6 @@ function sendMail(result){
 				
 				if(sendFlag == true){
 					alert("인증코드를 발송하였습니다. \n 인증코드를 입력해주세요.");
-					display_choose();
 				}else{
 					alert("인증코드 발송이 실패하였습니다. \n 다시 시도해주세요.");
 				}
@@ -93,8 +97,9 @@ function display_choose(){
 			</c:when>
 			<c:otherwise>
 		<div id="pass" align="center">
-				<input class="signUpInput" value="중복아님, 사용 가능합니다." readonly="readonly">
 				<button class="signUpButton" id='email_btn' onclick='emailCheck()'>이메일 인증코드 발송</button>
+				
+				<button class="signUpButton_rblack" onclick="history.back()">다시시도</button>
 		</div>
 			</c:otherwise>
 		</c:choose>

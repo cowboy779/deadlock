@@ -104,7 +104,7 @@ $(function(){
 				</option>
 				<option value="total">전체</option>
 			</select>
-		<input type="search" name="word" value="${word}" required>
+		<input type="search" name="word" value="${word}">
 		<button class="w3-button w3-blue w3-small"
 		style="height: 40px;">검색</button>
 		</form>

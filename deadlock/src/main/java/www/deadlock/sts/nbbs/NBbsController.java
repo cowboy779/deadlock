@@ -89,12 +89,12 @@ public class NBbsController {
 			}
 			
 			
-			return "nbbs/read";
+			return "/nbbs/read";
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "nbbs/error";
+			return "/nbbs/error";
 		}
 
 	}

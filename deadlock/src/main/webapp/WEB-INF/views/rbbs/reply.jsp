@@ -10,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
 </head>
 <body>
-<div class="container">
-<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
-
+<div class="container" style="width:60%;">
+<h2 class="h2"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
+<br>
 	<FORM	name='frm' method='POST' 
 		onsubmit = "return incheck(this)"
 		action='./reply'
@@ -22,31 +22,25 @@
 		<input type="hidden" name="grpno" value="${grpno }">
 		<input type="hidden" name="indent" value="${indent }">
 		<input type="hidden" name="ansnum" value="${ansnum }">
-  <TABLE>
+  <TABLE class="table table-hover">
     <TR>
       <TH>분류</TH>
       <TD>
 		<select onchange="impot(this.value)" name="imp">
-			<option value="V">문의</option>
-			<option value="G">건의</option>
-			<option value="J">질문</option>
-			<option value="D">답변</option>
+			<option value="Ans">답변</option>
+			<option value="Qes">질문</option>
 		</select>
       </TD>
     </TR>
     
-<!-- 임시방편 -->
     <tr>
-    <th>id</th>
-    <td><input type="text" name="id"></td>
+    <th>ID</th>
+    <td><input type="hidden" name="id" value="${sessionScope.id }">${sessionScope.id }</td>
     </tr>
-    
-    
-<!-- 임시방편 -->
 
     <TR>
       <TH>Title</TH>
-      <TD><input type="text" name="title"></TD>
+      <TD><input type="text" class="form-control" name="title"  placeholder='${dto.title }'></TD>
     </TR>
     <TR>
       <TH>Content</TH>
@@ -58,14 +52,15 @@
       <TD><input type="file" name="fnameMF"></TD>
     </TR>
 
-    	
   </TABLE>
+    <br>
   
   <DIV class='bottom'>
     <input class="btn btn-default btn-sm" type='submit' value='summit'>
     <input class="btn btn-default btn-sm" type='reset' value='reset'>
     <input class="btn btn-default btn-sm"  type='button' value='cancel' onclick="history.back()">
   </DIV>
+  
   <script>
       CKEDITOR.replace( 'content' );
   </script>

@@ -47,15 +47,18 @@ window.onload = function(){
 Table{
 /* 	border : 0.5px solid;
  */	font-size : 14px;
-	
 	width: 100%;
 	max-width: 700px;
 	margin: auto;
 }
 .content {
+	display:block;
+	padding-top : 10px;
 	padding-bottom: 10px;
 	font-size: 12px;
 	text-align: left;
+	width:100%;
+	min-height: 100px;
 }
 .title {
 	text-align: center;
@@ -91,14 +94,19 @@ THEAD{
 	
 }
 .ab{
-	position : absolute;
-	right: 10px;
+	/*  position : absolute;  */
+	float:right;
+	right: 20px;
 	bottom : 40px;
+	padding-right : 10px;
 }
 
 .inde{
 	font-size : 12px;
 	text-align: right;
+}
+.inde a {
+	margin-right : 8px;
 }
 
 .edit {
@@ -106,36 +114,34 @@ THEAD{
 	color : #bfbfbf;
 	text-align: left;
 }
+#notiImg {
+	max-width: 500px;
+}
 
 </style>
 </head>
 <body>
+<h1 class="h2" ><span class="glyphicon glyphicon-th-list"></span>00 : 공지사항</h1>
 
-	
 <div class="rel">
-<table>
-	<caption>공지사항</caption>
+<table class="">
+	
 	<thead>
 		<tr class='title'>
 			<th>${dto.title }</th>
 		</tr>
 		
 		<c:if test="${grade=='A'}">
-		<tr class='inde'>
-			<td>
-			<a href="javascript:nupdate()">수정</a>
-			|
-			<a href="javascript:ndelete()">삭제</a>
+		<tr class='inde' >
+			<td style="background-color: #e5e5e5; opacity: 0.4;">
+				<span style="float:left;">
+				작성자: ${dto.noname } |
+				수정자: ${dto.corname } | 
+				최종수정일: ${dto.cordate }
+				</span>
+				<a href="javascript:nupdate()">수정</a>|
+				<a href="javascript:ndelete()">삭제</a>
 			</td>
-		</tr>
-		
-		
-		<tr>
-		<td class='edit'>
-		작성자 : ${dto.noname }  |  
-		수정자 : ${dto.corname }  | 
-		최종수정일 : ${dto.cordate }
-		</td>
 		</tr>
 		</c:if>
 		
@@ -144,14 +150,17 @@ THEAD{
 			${content }
 			</td>
 		</tr>
+		<tr>
+		<td>
+			<c:if test='${not empty dto.fname }'>
+			<img id="notiImg" src="${root }/storage_nbbs/${dto.fname }" alt="">
+			</c:if>
+		</td>
+		</tr>
 	</thead>
-	<tbody>
-	
-	</tbody>
-	
 </table>
 	<div class="ab">
-	<button onclick="list()" >목록</button>
+	<button class="btn btn-default btn-sm" onclick="list()" >목록</button>
 	</div>
 </div>
 

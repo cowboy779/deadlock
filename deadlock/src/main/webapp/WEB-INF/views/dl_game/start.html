@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Insert title here</title>
+<style type="text/css">
+table.tb{
+	margin:0 auto; 
+	background-image: url('./image/alphabet.JPG'); 
+	background-repeat:no-repeat; 
+	background-position:center; 
+	width:328px; 
+	height:357px; 
+
+}
+
+input.dd{
+	width: 45px;
+	height:52px;
+	margin-bottom: 3px;
+	margin-top:5px;
+	margin-left:1.5px;
+	visibility:  visible;
+	opacity:0;
+	
+}
+</style>
+
+<script type="text/javascript">
+function aclick(a){
+	var f=document.frm;
+	f.answer.value+=a;
+	
+	
+}
+
+function anscheck(){
+	var f2=document.frm;
+
+	if(f2.answer.value==""){
+		alert("정답을 입력해주세요.");
+		f2.answer.focus();
+	}
+	else if(f2.answer.value!='start'){
+		alert("정답이 아닙니다.");
+		f2.answer.value="";
+		//f2.answer.focus();
+		
+	}else{
+		f2.submit();
+	}
+	
+}
+
+function gmemo(){
+	var url="./memo.html";
+	wr=window.open(url,"메모장","width=500,height=600");
+	wr.moveTo((window.screen.width-500)/100,(window.screen.height-400)/2);
+	document.focus();
+}
+</script>
+</head>
+<body style="background-image: url('./image/background.jpg');">
+<div class="w3-container" >
+	<table>
+	<tr>
+		<td style="width:30%;">
+			<img alt="DeadLock" src="./image/Deadlock.png" style="width:30%;">
+		</td>
+		<td>
+			<h1 class="h2" ><span class="glyphicon glyphicon-th-list"></span>살인사건-다잉메세지</h1>
+
+		</td>
+	</tr>
+	</table>
+</div>
+
+
+<br> <br>
+<FORM class="w3-container" name='frm' method='POST' action="game">
+
+  <TABLE class="tb">
+  
+  	  <TR>
+	      <TD>
+		      <input class="dd" type="button" name="a" value="a" onclick="aclick(value)">
+		      <input class="dd" type="button" name="b" value="b" onclick="aclick(value)">
+		      <input class="dd" type="button" name="c" value="c" onclick="aclick(value)">
+		      <input class="dd" type="button" name="d" value="d" onclick="aclick(value)">
+		      <input class="dd" type="button" name="e" value="e" onclick="aclick(value)">
+		      <input class="dd" type="button" name="f" value="f" onclick="aclick(value)">
+
+		      <input class="dd" type="button" name="g" value="g" onclick="aclick(value)">
+		      <input class="dd" type="button" name="h" value="h" onclick="aclick(value)">
+		      <input class="dd" type="button" name="i" value="i" onclick="aclick(value)">
+		      <input class="dd" type="button" name="j" value="j" onclick="aclick(value)">
+		      <input class="dd" type="button" name="k" value="k" onclick="aclick(value)">
+		      <input class="dd" type="button" name="l" value="l" onclick="aclick(value)">
+
+		      <input class="dd" type="button" name="m" value="m" onclick="aclick(value)">
+		      <input class="dd" type="button" name="n" value="n" onclick="aclick(value)">
+		      <input class="dd" type="button" name="o" value="o" onclick="aclick(value)">
+		      <input class="dd" type="button" name="p" value="p" onclick="aclick(value)">
+		      <input class="dd" type="button" name="q" value="q" onclick="aclick(value)">
+		      <input class="dd" type="button" name="r" value="r" onclick="aclick(value)">
+		      
+		      <input class="dd" type="button" name="s" value="s" onclick="aclick(value)">
+		      <input class="dd" type="button" name="t" value="t" onclick="aclick(value)">
+		      <input class="dd" type="button" name="u" value="u" onclick="aclick(value)">
+		      <input class="dd" type="button" name="v" value="v" onclick="aclick(value)">
+		      <input class="dd" type="button" name="w" value="w" onclick="aclick(value)">
+		      <input class="dd" type="button" name="x" value="x" onclick="aclick(value)">
+
+		      <input class="dd" type="button" name="y" value="y" onclick="aclick(value)">
+		      <input class="dd" type="button" name="z" value="z" onclick="aclick(value)">
+	      </TD>
+      </TR>
+  </TABLE>
+
+<br>
+  
+  <DIV class='bottom' style="text-align:right; position: fixed; bottom: 5px; right: 5px;" >
+  	<button class="btn btn-default btn-sm" style="font-size:small;" style="text-align: left; position: fixed; bottom: 5px; left: 5px;" type="button" onclick="gmemo()">memo</button>
+    <input class="w3-input w3-border-0" type="text" name="answer" required readonly>
+    <button class="btn btn-default btn-sm" style="font-size:small;" type="button" onclick="anscheck()">submit</button>
+    <button class="btn btn-default btn-sm" style="font-size:small;" type="reset">reset</button>
+    
+  </DIV>
+</FORM>
+</body>
+</html>

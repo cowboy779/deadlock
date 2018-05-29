@@ -30,13 +30,11 @@ function id_dup_check(){
 	
 	var param = $("#id_form_data").serialize();
 	
-// 	alert(param);
-	
 	$.post(
 		"id_proc_check",
 		param,
 		function(data, textStatus){
-			//alert(textStatus);
+			
 			var result = data;
 			
 			duplCheck(result);

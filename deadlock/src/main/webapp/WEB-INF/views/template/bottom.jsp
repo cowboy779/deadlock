@@ -19,9 +19,14 @@
 <!--   </div> -->
 <!-- </footer> -->
  
-<footer class="w3-container w3-dark-grey" style="padding:32px; ">
-  <a href="#" class="w3-button w3-black w3-padding-large w3-margin-bottom"><i class="fa fa-arrow-up w3-margin-right"></i>맨 위로</a>
-  <p>Š UNTITLED | Website created with   <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Dead Lock / Soldesk</a></p>
+<footer class="footer-container text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>© UNTITLED | Website created with <a href="http://www.mashup-template.com/" title="Create website with free html template">DeadLock</a>/<a href="https://www.unsplash.com/" title="Beautiful Free Images">Soldesk</a></p>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>

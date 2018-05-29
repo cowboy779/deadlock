@@ -47,7 +47,7 @@ var create = new function(){
 		<input type="hidden" name="id" value="${sessionScope.id}"/>
 		
 		<input class="signUpInput" type="text" name="chat_nickname" size="20" value="${chat_nickname}" readonly>
-		<input class="signUpInput" type="text" name="chat_title" size="20" required="required">
+		<input class="signUpInput" type="text" name="chat_title" size="20" required="required" placeholder="채팅방 제목을 입력해주세요">
 		
 		<button class="signUpButton">채팅방 생성</button>
 		<button class="signUpButton" onclick="history.back()">뒤로가기</button>

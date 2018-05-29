@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공지사항 등</title>
 <style type="text/css">
 TH{
 	width:10%;
@@ -104,10 +104,6 @@ function incheck(f){
 		
 	</table>
 	
-<!-- 	<div id="testNfile" contentEditable="true">
-	 대표 이미지를 텍스트와 함께 입력이 가능
-	</div> -->
-	
 	
 	<table style="border: 1px solid #ededef; width: 97%;">
 		<tr style="text-align: left;">
@@ -127,7 +123,7 @@ function incheck(f){
 		<tr style="text-align: left;">
 		<th  style="background-color: #ededef; width: 20%; text-align:left;">첨부 파일 </th>
 		<td   style="text-align: left; font-size: 12px;">
-		<input type="file" id="nfile" name="fnameMF" onchange="javascript:fileUpload(this)">		
+		<input type="file" id="nfile" name="fnameMF" ><!-- onchange="javascript:fileUpload(this)" -->		
 		</td>
 	
 		</tr>
@@ -146,11 +142,11 @@ function incheck(f){
 function fileUpload() {
 	var fileValue = $("#nfile").val().split("\\");
 	var fileName = fileValue[fileValue.length-1]; // 파일명
- 	var cont = document.getElementById('content');
- 	var testNfile = document.getElementById('testNfile');
+ 	var cont = document.getElementById('content'); // textarea
+ 	var testNfile = document.getElementById('testNfile'); //div Tag, Ajax 사용해서 데이터 저장후에 불러오기 .. 
 	cont.focus();
 	cont.value += '<br><img alt="" src="${root}/storage/' + fileName +'" /><br>';
-	testNfile.append('<img alt="" src="${root}/storage/0000.jpg" >');
+	testNfile.append('<img alt="" src="${root}/storage/0000.jpg" >'); //div Tag
 	alert($("content").value);
 	
 	cont.focus();

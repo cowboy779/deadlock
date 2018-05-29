@@ -47,15 +47,22 @@ function mlist(){
 </script>
 </head> 
 <body>
- <div class="container">
-  <TABLE class="table table-hover" style="width: 50%; margin: auto;">
-    <tr>
-    	<td colspan="2"><img src="${root }/storage_member/${dto.fname }" width="300px;" height="250px;"/></td>
+<br>
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>${dto.id }님</h1>
+</div>
+
+<br>
+ <div class="w3-container" style="width:50%; margin:0 auto;">
+  <TABLE class="table table-hover">
+    <tr style="text-align: center; border-top-style: hidden;">
+    	<td colspan="2" >
+    		<a href="${root }/storage_member/${dto.fname}" download>
+    			<img src="${root }/storage_member/${dto.fname }" width="300px;" height="250px;"/>
+    		</a>
+    	</td>
     </tr>
-    <TR>
-		<TH>id</TH>
-		<td>${dto.id }</td>
-    </TR>
+
     <tr>
       <Th>이름</Th>
       <td>${dto.mname }</td>
@@ -95,19 +102,22 @@ function mlist(){
   </TABLE>
   <br>
    <div align="center">
-  <c:if test="${(not empty sessionScope.id) && (sessionScope.grade=='A') }">
-  	<input class="w3-button w3-red w3-small" type='button' value='목록' onclick="mlist()">
+  <c:if test="${(not empty sessionScope.id) && (sessionScope.grade=='A')}">
+  	<input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='list' onclick="mlist()">
   </c:if>
-    <input class="w3-button w3-black w3-small" type='button' value='정보수정' onclick="infoUpdate('${dto.id}')">
-  <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A') }">
-  <input class="w3-button w3-black w3-small" type='button' value='패스워드변경' onclick="pwUpdate('${dto.id}')">
-    <input class="w3-button w3-gray w3-small" type='button' value='회원탈퇴' onclick="mdelete('${dto.id}')">
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='modify' onclick="infoUpdate('${dto.id}')">
+  <c:if test="${(not empty sessionScope.id) && !(sessionScope.grade=='A')}">
+  	<input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='changeP/W' onclick="pwUpdate('${dto.id}')">
+  	<input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='withdrawal' onclick="mdelete('${dto.id}')">
   </c:if>
-     <input class="w3-button w3-black w3-small" type='button' value='다운로드'
-                onclick="location.href='${root }/download?dir=/storage_member&filename=${dto.fname }'">  
+  <c:if test="${(not empty sessionScope.id) && (sessionScope.grade=='A')}">
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='expel' onclick="mdelete('${dto.id}')">
+  </c:if>
+<!--      <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='download' -->
+<%--                 onclick="location.href='${root }/download?dir=/storage_member&filename=${dto.fname }'">   --%>
   </DIV>
  </div>
  
- <div style="margin-bottom: 20px;"></div>
+<br>
 </body>
 </html> 

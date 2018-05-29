@@ -16,6 +16,7 @@
 <script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
 <script type="text/javascript">
 function inCheck(f){
+	
 	if(f.title.value==""){
 		alert("제목을 입력해주세요.");
 		f.title.focus();
@@ -32,48 +33,55 @@ function inCheck(f){
 <body>
 <br>
 
-<DIV class="w3-panel w3-border-right w3-border-left w3-border-green" style="width:30%; max-width:200px; margin:0 auto; font-size: x-large; text-align: center;">글 쓰기</DIV>
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>게시물 작성</h1>
+</div>
 <br><br>
 <FORM class="w3-container" name='frm' method='POST' enctype="multipart/form-data" onsubmit="return inCheck(this)" action='create'>
 
 <div style=" width:60%; max-width:600px; margin: 0 auto;"> 
-  <TABLE class="w3-table w3-white w3-bordered">
+  <TABLE class="table table-hover">
     <tr>
-  	  <TH class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444;">작성자</TH>
+  	  <TH>Name</TH>
   	  <td>${id}</td>
     </tr> 
     <TR>
-      <TH class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444;">게시판 분류<span style="color:red;">*</span></TH>
+      <TH>Sperate<span style="color:red;">*</span></TH>
       <TD>
-      	<select name="qsep">
+      	<div>
+      	<select class="form-control" name="qsep" style="width:80px; height:35px;">
       		<option value="0">---선택---</option>
       		<option value="A" selected>질문</option>
       		<option value="B">정답</option>
       	</select>
-      	<select name="gamenum">
+      	<select class="form-control" name="gamenum" style="width:100px; height:35px;">
       		<option value="0">---선택---</option>
-      		<option value="C" selected>1번 게임</option>
-      		<option value="D">2번 게임</option>
+      		<option value="C" selected>Dark Soldesk</option>
+      		<option value="D">다잉메세지</option>
+      		<option value="E">도레미마켓</option>
+      		<option value="F">도리를찾아서</option>
+      		<option value="G">심리테스트</option>
       	</select>
+      	</div>
       </TD>
     </TR>
     
     <TR>
-      <TH class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444;">이미지업로드</TH>
+      <TH>Image</TH>
       <TD>
       	<input class="w3-input w3-border-0" type="file" name="filenameMF" accept=".jpg,.png,.gif">(JPG, PNG, GIF 파일)
       </TD>
     </TR>
     
     <TR>
-      <TH class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444;">제목<span style="color:red;">*</span></TH>
+      <TH>Title<span style="color:red;">*</span></TH>
       <TD>
       	<input class="w3-input w3-border-0" type="text" name="title">
       </TD>
     </TR>
     
     
-    <TR >
+    <TR>
       <TD colspan="2">
       	<textarea id="content" name="content" style="width:100%; height:400px;"></textarea>
       	<script>
@@ -89,11 +97,11 @@ function inCheck(f){
 <br>
   
   <DIV class='w3-center'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='submit' value='등록'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='reset' value='다시쓰기'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='취소' onclick="history.back()">
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='submit' value='submit'>
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='reset' value='reset'>
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='cancel' onclick="history.back()">
   </DIV>
 </FORM>
-
+<br>
 </body>
 </html>

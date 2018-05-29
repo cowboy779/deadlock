@@ -176,6 +176,7 @@ $(function(){
 			    	</select>
 			<button class="signUpButton_rblack" id="Detail_show" type="button">상세정보 입력</button>
 			<button class="signUpButton_rblack" id="Detail_hide" type="button" style="display: none">상세정보 접기</button>
+			<br>
 		<div id="Detail" style="display: none">
 			<input class="signUpInput" type='text' name='tel' placeholder="전화번호">
 			<button class="signUpButton" style="font-size: 15px" style="font-size: 18px" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>

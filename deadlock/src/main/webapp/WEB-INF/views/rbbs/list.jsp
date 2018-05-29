@@ -13,13 +13,20 @@ function bcreate(){
 	
 }
 function read(rnum){
+	if(${empty sessionScope.id}){
+		alert("로그인을 해주세요");
+		return;
+	}else{
+	
+	
 	var url = "${root}/rbbs/read"
 	url += "?rnum="+rnum;
 	url += "&col=${col}";
 	url += "&word=${word}";
-	url += "&nowPage=${nowPage}"
+	url += "&nowPage=${nowPage}";
 	
 	location.href = url;
+	}
 }
 </script>
 
@@ -27,18 +34,17 @@ function read(rnum){
 </head>
 <body>
 <div class="container">
-<div class="container-fluid">
-<h2 class="main"><span class="glyphicon glyphicon-th-list"></span>04 : 건의하기</h2>
+<div class="container-fluid" style="width:60%;">
+<h1 class="h2"><span class="glyphicon glyphicon-th-li st"></span>01 : 건의하기</h1>
 
 <TABLE class="table table-hover">
 <thead>
     <TR>
       <TH>Number</TH>
-      <th>Name</Th>
+      <th>ID</Th>
       <th>Title</th>
       <th>Date</th>
-      <th>View</th>
-      <th>file</th>
+      <th>Class</th>
 
     </TR>
 </thead>
@@ -62,22 +68,21 @@ function read(rnum){
 <c:forEach begin="1" end="${dto.indent }">
 [re]
 </c:forEach>
-    <img src="${root}/images/re.png" height="50%">
+    <img src="${root}/univers/images/re.png" height="50%">
 
 </c:if>
 
 <a href="javascript:read('${dto.rnum }')">   ${dto.title }   </a>
+<c:if test="${not empty dto.fname }">
+		<img src="${root }/univers/images/file.gif">
+</c:if>
 <c:if test="${util:newimg(dto.rdate) }">
-		<img src="${root }/images/new.gif">
+		<img src="${root }/univers/images/new.gif">
 </c:if>
     </td>
     <td>${dto.rdate }</td>
-    <td>${dto.rcount}</td>
-    <td>
-<c:if test="${not empty dto.fname }">
-${dto.fname }
-</c:if>
-</td>
+    <td>${dto.imp }</td>
+
 </tr>
 </tbody>
 </c:forEach>
@@ -92,7 +97,6 @@ ${dto.fname }
  <td>
  <select name="col" class="form-control" style="width:100px;height:33px;">
  	<option value="id"
- 	
  	<c:if test="${col=='id' }">selected</c:if>
  	>ID</option>
  	<option value="title"
@@ -105,12 +109,14 @@ ${dto.fname }
  </select>
  </td>
  <td>
-<input class="form-control" type="text" name="word" style="width:300px; height:33px;"  required>
+<input class="form-control" type="text" name="word" style="width:300px; height:33px;">
 </td>
 <td>
 &nbsp;
 <button type="submit" class="btn btn-default btn-sm">search</button>
+<c:if test="${not empty sessionScope.id }">
 <button type="button" onclick="location.href='${root}/rbbs/create'" class="btn btn-default btn-sm">regit</button>
+</c:if>
 </td>
 </tr>
 </table>
@@ -125,6 +131,7 @@ ${dto.fname }
     ${paging }
 
   </DIV>
+  <br>
 </div>
 </div>
 </body>

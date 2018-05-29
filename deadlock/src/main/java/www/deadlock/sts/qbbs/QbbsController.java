@@ -204,8 +204,10 @@ public class QbbsController {
 		String content=dto.getContent();
 		content=content.replaceAll("\r\n", "<br>");
 		
-		dto.setId("admin");
-		rdto.setId("admin");
+		
+//		String id=(String) request.getSession().getAttribute("id");
+//		dto.setId(id);
+//		rdto.setId(id);
 		
 		
 		//검색관련
@@ -280,9 +282,9 @@ public class QbbsController {
 	@RequestMapping(value="/qbbs/create", method=RequestMethod.GET)
 	public String create(HttpServletRequest request, MemberDTO dto){
 		
-		dto.setId("admin");
-		//String id=dto.getId();
-		//request.setAttribute("id",id);
+		String id=(String) request.getSession().getAttribute("id");
+		dto.setId(id);
+		
 		
 		return "/qbbs/create";
 	}
@@ -304,7 +306,8 @@ public class QbbsController {
 		
 		
 		
-		dto.setId("admin");
+		String id=(String) request.getSession().getAttribute("id");
+		dto.setId(id);
 		
 		boolean flag=qdao.create(dto);
 
@@ -323,8 +326,18 @@ public class QbbsController {
 		//검색관련
 		String col=Utility.checkNull(request.getParameter("col"));
 		String word=Utility.checkNull(request.getParameter("word"));
-
+		String real_word = "";
+		
 		if(col.equals("total")) word="";
+		
+		if(word.indexOf("질문")!=-1) {
+			real_word = word;
+			word = "A";
+		}
+		if(word.indexOf("정답")!=-1) {
+			real_word = word;
+			word = "B";
+		}
 		
 		//페이징관련
 		int nowPage=1;
@@ -349,6 +362,10 @@ public class QbbsController {
 		
 		String paging=Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);
 		
+		if(real_word.indexOf("질문")!=-1 || real_word.indexOf("정답")!=-1) {
+			
+			word = real_word;
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);

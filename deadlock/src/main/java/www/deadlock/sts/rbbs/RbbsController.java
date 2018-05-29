@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class RbbsController {
 	private IrbbsDAO dao;
 	
 	
+	@RequestMapping("/template/bbslist")
+	public String bbslist() {
+		
+		return "/template/bbslist";
+	}
+	
+	
 	@RequestMapping("/rbbs/error")
 	public String error() {
 
@@ -34,8 +42,8 @@ public class RbbsController {
 	@RequestMapping("/rbbs/list")
 	public String list(HttpServletRequest request, Model model) {
 
-		String col = request.getParameter("col");
-		String word = request.getParameter("word");
+		String col = Utility.checkNull(request.getParameter("col"));
+		String word = Utility.checkNull(request.getParameter("word"));
 		
 
 		// --------------------------------------------------------------
@@ -102,18 +110,24 @@ public class RbbsController {
 
 	@RequestMapping("/rbbs/read")
 	public String read(HttpServletRequest request, Model model) throws Exception {
-		//String id = (String)request.getSession().getAttribute("id");
-		String id = "admin";
-		boolean flag = false;
-		flag= dao.vCheck(id);
-		
-		if(flag) {
-
 		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		String id = (String)request.getSession().getAttribute("id");
+		if(id == "") {
+			return "/rbbs/aderror";
+		}
+		boolean gflag = false;
+		gflag= dao.vCheck(id);
 		RbbsDTO dto = (RbbsDTO) dao.read(rnum);
+		boolean flag = dto.getId().equals(id);
+		boolean ggflag = id.equals(dao.idC(dto.getRefnum()));
+		
+		
+		if(gflag || flag || ggflag) {
+
 		
 		dao.upViewCount(rnum);
 		
+		model.addAttribute("grade", gflag);
 		model.addAttribute("dto", dto);
 		model.addAttribute("rnum", rnum);
 
@@ -124,17 +138,23 @@ public class RbbsController {
 	}
 
 	@RequestMapping("/rbbs/delete")
-	public String delete(HttpServletRequest request) throws Exception {
+	public String delete(HttpServletRequest request,Model model) throws Exception {
+		
 		Map map = new HashMap();
 		String basePath = request.getRealPath("./storage_rbbs");
 		String oldfile = request.getParameter("oldfile");
 		String id = (String)request.getSession().getAttribute("id");
-		String rnum = request.getParameter("rnum");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		
+		if(dao.refC(rnum)) {
+			return "/rbbs/error";
+		}
 
 		map.put("id", id);
 		map.put("rnum", rnum);
 
 		boolean flag = dao.idCheck(map);
+		
 
 		if (flag) {
 
@@ -143,6 +163,9 @@ public class RbbsController {
 				if(oldfile != null) {
 					Utility.deleteFile(basePath, oldfile);
 				}
+				model.addAttribute("nowPage",request.getParameter("nowPage"));
+				model.addAttribute("col",request.getParameter("col"));
+				model.addAttribute("word",request.getParameter("word"));
 				
 				return "redirect:/rbbs/list";
 			} else {
@@ -150,7 +173,7 @@ public class RbbsController {
 			}
 
 		} else {
-			return "/rbbs/perror";
+			return "/rbbs/error";
 		}
 
 	}
@@ -209,19 +232,18 @@ public class RbbsController {
 	}
 	
 	@RequestMapping(value="/rbbs/update", method = RequestMethod.POST)
-	public String update(RbbsDTO dto ,HttpServletRequest request) throws Exception {
+	public String update(RbbsDTO dto ,HttpServletRequest request, Model model) throws Exception {
 		
 		String oldfile = request.getParameter("oldfile");
 		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		dto.setRnum(rnum);
-		if(dto.getFnameMF() != null) {
-		
 		String basePath = request.getRealPath("/storage_rbbs");
 		String filename = Utility.saveFileSpring30(dto.getFnameMF(), basePath);
 		int filesize = (int) dto.getFnameMF().getSize();
-		Utility.deleteFile(basePath, oldfile);
 		
-		dto.setFname(filename);
+		if(filesize > 0) {
+			Utility.deleteFile(basePath, oldfile);
+			dto.setFname(filename);
 		
 		}else {
 			dto.setFname(oldfile);
@@ -230,6 +252,10 @@ public class RbbsController {
 		boolean flag = dao.update(dto);
 		
 		if(flag) {
+			model.addAttribute("nowPage", request.getParameter("nowPage"));
+			model.addAttribute("col",request.getParameter("col"));
+			model.addAttribute("word",request.getParameter("word"));
+			
 			return  "redirect:/rbbs/list";
 		}else {
 		

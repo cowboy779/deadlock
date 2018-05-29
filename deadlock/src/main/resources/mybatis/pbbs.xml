@@ -23,8 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
    
     <update id = "update" parameterType="PBbsDTO">
-    update pbbs
-	set bname = #{bname},
+    update pbbs set
 	content = #{content}
 	where bnum = #{bnum}
     </update>

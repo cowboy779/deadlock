@@ -10,33 +10,60 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapais.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
+
+
 
 <title>Insert title here</title>
 
 <script type="text/javascript">
+//Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
 
 function qdelete(qnum,fname){
-	if(confirm("댓글이 달려있는 글입니다. 정말 삭제하시겠습니까?")){
-		var url="./delete";
-		url+="?qnum="+qnum;
-		url+="&oldfile="+fname;
-		url+="&col=${col}";
-		url+="&word=${word}";
-		url+="&nowPage=${nowPage}";
-		
-		location.href=url;
+	if(${not empty qrlist}){
+		if(confirm("댓글이 달려있는 글입니다. 정말 삭제하시겠습니까?")){
+			var url="./delete";
+			url+="?qnum="+qnum;
+			url+="&oldfile="+fname;
+			url+="&col=${col}";
+			url+="&word=${word}";
+			url+="&nowPage=${nowPage}";
+			
+			location.href=url;
+		}
+	}else{
+		if(confirm("정말 삭제하시겠습니까?")){
+			var url="./delete";
+			url+="?qnum="+qnum;
+			url+="&oldfile="+fname;
+			url+="&col=${col}";
+			url+="&word=${word}";
+			url+="&nowPage=${nowPage}";
+			
+			location.href=url;
+		}
 	}
 }
 
 function qcreate(){
-	var url="create";
-	url+= "?col=${col}";
-	url+= "&word=${word}";
-	url+= "&nowPage=${nowPage}";
-	location.href=url;
+	if(${not empty sessionScope.id}){
+		var url="create";
+		url+= "?col=${col}";
+		url+= "&word=${word}";
+		url+= "&nowPage=${nowPage}";
+		location.href=url;
+	}else{
+		if(confirm("로그인 후 이용해주세요.")){
+			location.href="${root}/member/loginForm";
+		}
+	}
 }
 
 function qupdate(){
@@ -60,7 +87,7 @@ function qrupdate(qrnum, qrcontent){
 	var f=document.rform;
 	f.content.value=qrcontent;
 	f.qrenum.value=qrnum;
-	f.rsubmit.value="수정";
+	f.rsubmit.value="submit";
 	f.action="./rupdate";
 }
 
@@ -88,14 +115,14 @@ function read(qnum){
 	location.href=url;
 }
 </script>
+
 </head>
 <body>
-
 <br>
-<DIV class="w3-panel w3-border-right w3-border-left w3-border-green w3-wide" style="width:25%; max-width:200px; margin:0 auto; font-size: x-large; text-align: center;">
-	${util:sepvalue(dto.gamenum) } - <br>${util:sepvalue(dto.qsep) }
-	
-</DIV>
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>${util:sepvalue(dto.gamenum) } - ${util:sepvalue(dto.qsep) }</h1>
+</div>
+
 <br><br>
 
 <div class="w3-card-4" style="width:40%; max-width:400px; margin: 0 auto;">
@@ -106,64 +133,80 @@ function read(qnum){
  				      		 	${fn:substring(dto.fname, 0, a) } 
  				      		    ">
 	</a>
-    <div class="w3-container">
-      <h4><b>${dto.title }</b></h4>
-      <span class="glyphicon glyphicon-pencil"></span> <p>${content }</p>
+    <div class="container" style="width:auto;">
+      <h4 style="width:100%; "><b>${dto.title }</b></h4>
+      <span class="fa fa-pencil"></span>&nbsp;&nbsp;
+      <p  style="width:100%;" >${content }</p>
     </div>
-<p style="text-align: right;">${dto.qdate }</p>
+	<p style="text-align: right;">${dto.qdate }</p>
 </div>
-<br><br>
+<br>
   
   <DIV class='w3-center'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='등록' onclick="qcreate()">
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='수정' onclick="qupdate()">
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='삭제' onclick="qdelete('${dto.qnum}','${dto.fname }')">
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='목록' onclick="qlist()">
+  	<input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='regit' onclick="qcreate()">
+    <c:if test="${sessionScope.grade=='A' ||sessionScope.id==dto.id }">
+	    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='modify' onclick="qupdate()">
+	    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='delete' onclick="qdelete('${dto.qnum}','${dto.fname }')">
+    </c:if>
+    
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='list' onclick="qlist()">
   </DIV>
 
 <!-- 댓글 -->
 <hr>
-<div style=" width:60%; max-width:600px; margin: 0 auto;"> 
-	  	<table class="w3-table w3-table-all " style="padding:0; width:100%;">
+<div class="w3-center" style=" width:60%;  margin: 0 auto;"> 
+
+	  	<table class="w3-table w3-table-all" style="padding:0; width:100%;">
 	  		<c:choose>
 				<c:when test="${empty qrlist }">
 					<tr>
-						<td colspan="4" style="text-align:center">등록된 댓글이 없습니다.</td>
+						<td style="text-align:center">등록된 댓글이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="rdto" items="${qrlist }">
 				  		<tr>				  		
-				  			<td colspan="3" style="border-bottom-color: white;">
+				  			<td>
 				  				<img src='${root }/storage_qbbs/화살표.jpg' width='25px'> <img src='${root }/storage_qbbs/re.jpg' width='30px'> 
-				  				<b>${dto.id }</b>
+				  				<b>${rdto.id }</b>
 				  			</td>
+				  			
+							<td >
+					  			<c:if test="${not empty sessionScope.id && sessionScope.id==rdto.id ||sessionScope.grade=='A'}">
+										<span style="float:right">
+										<a href="javascript:qrupdate('${rdto.qrenum }','${rdto.content }')">modify</a>|<a href="javascript:qrdelete('${rdto.qrenum }')">delete</a>
+										</span>
+								</c:if>
+							</td>
+				  		
 				  		</tr>
 				  		<tr>
-	
-				  			<td style="width:45%">${rdto.content }</td>
-				  			<td style="width:35%; text-align: right;">${rdto.qredate }</td>
-							<td style="width:20%">
-								<span style="float:right">
-								<a href="javascript:qrupdate('${rdto.qrenum }','${rdto.content }')">수정</a>|<a href="javascript:qrdelete('${rdto.qrenum }')">삭제</a>
-								</span>
-							</td>
+				  			<td>${rdto.content }</td>
+				  			<td style=" text-align: right;">${rdto.qredate }</td>
 						 </tr>
 					 </c:forEach>
 			 	</c:otherwise>
 			 </c:choose>
-		  </table>
 
-  <br>
-  <DIV class='w3-center'>
-	${paging2}
-  </DIV>
-  <br>
+		  </table>
+</div>
+	<br>
+	<div class="w3-center" >${paging2}</div>
+
+  <br><br>
   
-  <div class="w3-center">
-  	  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
-  	  	<textarea rows="1" name="content" style="width: 85%;"></textarea>
-  	  	<input type="submit" name="rsubmit" value="등록">
+<form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
+  <div class="w3-center" >
+  	  	<c:choose>
+	  	  	<c:when test="${not empty sessionScope.id }">
+	  	  		${sessionScope.id} : 
+		  	  	<textarea rows="1" name="content" style="width: 45%; resize:none;"  required></textarea>
+		  	  	<input class="btn btn-default btn-sm" style="font-size:small; margin-bottom: 20px;" type="submit" name="rsubmit" value="submit">
+	  	  	</c:when>
+	  	  	<c:otherwise>	  	  	
+		  	  	<textarea rows="1" name="content_log" style="width: 30%; resize:none;" readonly>로그인 후 이용해주세요.</textarea>
+	  	  	</c:otherwise>
+  	  	</c:choose>
   	  	
   	  	<input type="hidden" name="id" value="${sessionScope.id}">
   	  	<input type="hidden" name="nowPage" value="${param.nowPage}">
@@ -173,13 +216,13 @@ function read(qnum){
   	  	<input type="hidden" name="qrenum" value="${0 }">
   	  	<input type="hidden" name="nPage" value="${nPage}">
 
-  	  </form>
   </div>
-</div>
-<!-- 댓글 끝 -->
-  <br>  <br>
-<hr>
+</form>
 
+<!-- 댓글 끝 -->
+<br> 
+<hr>
+<br>
 
 <!-- 리스트 -->  
 <!-- <div> -->
@@ -188,14 +231,14 @@ function read(qnum){
 
 
 
-<div style=" width:60%; margin: 0 auto;"> 
-<table class="w3-table w3-white w3-bordered">
+<div class="container" style=" width:60%; margin: 0 auto;"> 
+<table class="table table-hover">
 	<tr>
-		<th class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444; width:17% ;">이미지</th>
-		<th class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444; width:13% ;">분류</th>
-		<th class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444; width:30% ;">제목</th>
-		<th class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444; width:20% ;">작성자</th>
-		<th class="w3-teal w3-text-white w3-wide" style="font-size:15px; text-shadow:1px 1px 0 #444; width:20% ;">작성일자</th>
+		<th style="width:17% ;">Image</th>
+		<th style="width:13% ;">Seperate</th>
+		<th style="width:30% ;">Title</th>
+		<th style="width:20% ;">Name</th>
+		<th style="width:20% ;">Date</th>
 	</tr>
 	
 	<c:choose>
@@ -235,14 +278,13 @@ function read(qnum){
 
 <br>
 <!-- 검색 -->
-<FORM class="w3-container" method='POST' action='list'>
-<div style="width:100%; max-width:500px; margin: 0 auto;"> 
+<div class="form-group template-example" > 
+<FORM method='POST' action='${root }/qbbs/list'>
 
-
-<table class="w3-table" >
+<table style=" margin: 0 auto;">
 <tr>
-	<td style="width:30%;">
-		<select class="w3-select" name="col">
+	<td>
+		<select class="form-control" name="col" style="width:100px; height:33px;" >
 			<option value="title"
 			<c:if test="${col=='title' }">selected</c:if>
 			 >제목</option>
@@ -255,25 +297,24 @@ function read(qnum){
 			<option value="total" selected>전체보기</option>
 		</select>
 	</td>
-	<td style="width:50%; align-content: center;">
-		<input class="w3-input w3-border" type="search" name="word" value="${word }" required>
+	<td>
+		<input class="form-control" type="search" style="width:300px; height:33px;"  name="word" value="${word }" required>
 	</td>
-	<td style="width:20%;">
-		<button class="w3-button w3-border w3-padding-small w3-hover-teal">검색</button>
+	<td>
+		&nbsp;
+		<button class="btn btn-default btn-sm" style="font-size:small;">search</button>
 	</td>
 </tr>
 </table>
-</div>
 </FORM>
+</div>
 <br>
 <!-- 검색 끝 -->
-
-<br>
 
   <DIV class='w3-center'>
 	${paging3 }
   </DIV>
-
+<br>
 
 <!-- Modal for full size images on click-->
 <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">

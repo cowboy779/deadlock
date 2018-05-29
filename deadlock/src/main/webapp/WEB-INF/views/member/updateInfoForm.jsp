@@ -54,33 +54,12 @@
     }
 </script> 
 <script type="text/javascript">
-function idCheck(id){
-	if(id==""){
-		alert("아이디를 입력해주세요");
-		document.frm.id.focus();
-	}else{
-		var url="id_proc";
-		url+="?id="+id;
-		
-		var wr = window.open(url,"새창이름","width=500,height=500");
-		wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-	}
-	
-}
 function emailCheck(email){
 		var url="email_form";
 		url+="?email="+email;
 		
 		var wr = window.open(url,"새창이름","width=500, height=500");
 		wr.moveTo(((window.screen.width-500)/2),((window.screen.height-500)/2));
-}
-
-function incheck(f){
-	if(f.tel.value==""){
-		alert("연락처를 입력해주세요");
-		f.tel.focus();
-		return false;
-	}
 }
 function emailCheck2(f){
 	f.blur();
@@ -89,9 +68,12 @@ function emailCheck2(f){
 </script>
 </head> 
 <body>
- <div class="container">
-	<DIV align="center">회원정보 수정</DIV>
- 
+<br>
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>정보 수정</h1>
+</div>
+<br><br>
+
 <FORM 	name='frm'
 		method='POST'
 		action='updateInfoProc'
@@ -105,62 +87,76 @@ function emailCheck2(f){
 	<input type="hidden" name="oldfile" value="${oldfile }">
 	<input type="hidden" name="dto" value="${dto}">
 
-  <TABLE class="table table-hover" style="width: 50%; margin: auto;">
+<div style=" width:60%; max-width:600px; margin: 0 auto;">
+
+  <TABLE class="table table-hover" >
   <TR>
       <TH>원본파일</TH>
-      <TD>
+      <TD colspan="2">
       <img src="${root }/storage_member/${oldfile }">
       원본파일명:${oldfile }
       </TD>
     </TR>
     <tr>
     	<th>변경파일</th>
-    	<td>
+    	<td colspan="2">
     	<input type='file' name='filenameMF' accept=".jpg,.png,.gif" required="required">
     	</td>
     </tr>
     <TR>
       <TH>아이디</TH>
-      <TD>${dto.id }</TD>
+      <TD colspan="2">${dto.id }</TD>
     </TR>
     <tr>
     	<th>닉네임</th>
-    	<td>
-    	<input type="text" name="mname" value="${dto.mname }">
+    	<td colspan="2">
+    	<input class="form-control"  style="height:33px; width:200px;" type="text" name="mname" value="${dto.mname }">
 		</td>
     </tr>
     <tr>
     	<th>연락처</th>
-    	<td><input type="text" name="tel" value="${dto.tel }"></td>
+    	<td colspan="2"><input class="form-control" style="height:33px; width:200px;" type="text" name="tel" value="${dto.tel }"></td>
     </tr>
     <tr>
     	<th>이름</th>
-    	<td>${dto.mname }</td>
+    	<td colspan="2">${dto.mname }</td>
     </tr>
     <tr>
     	<th>이메일</th>
-    	<td><input type="text" name="email"
-    	value="${dto.email }" onkeydown="emailCheck2(this)">
-    	<button class="w3-button w3-blue w3-small" type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button></td>
+    	<td style="width:225px;">
+	    	<input class="form-control" type="text" name="email"
+	    	style="width:200px; height:33px; vertical-align:middle" value="${dto.email }" onkeydown="emailCheck2(this)">
+	    </td>
+	    <td>
+	    	<button class="w3-button w3-blue btn-sm" style="font-size:small; vertical-align:middle" type="button" onclick="emailCheck(document.frm.email.value)">이메일 중복 확인</button>
+    	</td>
     </tr>
     <tr>
     	<th>우편번호</th>
-    	<td><input type='text' name='zipcode' size="7" id="sample6_postcode" placeholder="우편번호"
-    	value="${dto.zipcode }">
-    	<button class="w3-button w3-blue w3-small" type="button" onclick="sample6_execDaumPostcode()">주소검색</button></td>
+    	<td colspan="2">
+    		<div style="width:20%; float:left;">
+	    		<input class="form-control" style="width:80px; height:33px;" size="7" type='text' name='zipcode' id="sample6_postcode" placeholder="우편번호"
+		    	value="${dto.zipcode }">
+	    	</div>
+	    	<div style="width:80%; float:left;">
+	    		&nbsp;
+	    		<button class="w3-button w3-blue btn-sm" style="font-size:small;" type="button" onclick="sample6_execDaumPostcode()">주소검색</button>
+    		</div>
+    	</td>
     </tr>
     <tr>
     	<th>주소</th>
-    	<td><input type="text" name="address1" size="40" value="${dto.address1 }"
-    	id="sample6_address" placeholder="주소"><br>
-    	<input type="text" name="address2" size="40" value="${dto.address2 }"
-    	id="sample6_address2" placeholder="상세주소">
+    	<td colspan="2">
+	    	<input class="form-control"  style="height:33px; width:300px;" type="text" name="address1" size="40" value="${dto.address1 }"
+	    	id="sample6_address" placeholder="주소">
+	    	<input class="form-control"  style="height:33px; width:300px;" type="text" name="address2" size="40" value="${dto.address2 }"
+	    	id="sample6_address2" placeholder="상세주소">
     	</td>
     </tr>
     <tr>
     	<th>직업</th>
-    	<td>
-    	<select name="job">
+    	<td colspan="2">
+    	<select name="job" class="form-control" style="height:33px; width:130px;" >
     		<option value="0">선택하세요</option>
     		<option value="A01">회사원</option>
     		<option value="A02">전산관련직</option>
@@ -180,13 +176,16 @@ function emailCheck2(f){
     </tr>
     
   </TABLE>
+</div>
+
+<br>
   <div align="center">
-    <input class="w3-button w3-red w3-small" type='submit' value='수정'>
-    <input class="w3-button w3-black w3-small" type='button' value='뒤로가기' onclick="history.back()">
+    <input class="btn btn-default btn-sm" style="font-size:small;"  type='submit' value='submit'>
+    <input class="btn btn-default btn-sm" style="font-size:small;"  type='button' value='cancel' onclick="history.back()">
   </div>
 </FORM>
+ <br>
  
- 
- </div>
+
 </body>
 </html> 

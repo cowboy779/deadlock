@@ -4,58 +4,88 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style type="text/css">
+/*  *{   */
+/*    font-family: gulim;   */
+/*    font-size: 14px;   */
+/*  }   */
 
-<script type="text/javascript">
+.table{
+	width: 60%;	
+	margin: 0 auto;
+}
 
 
-//  $(document).ready(function(){
-        
-//         $("#content").summernote({
-            
-//             height:300,
-//             width:800
-            
-//         });
-//     });
+.line{
+	border-top:1px;
+	border-bottom:1px;
+	border-left: 1px;
+	border-right: 1px;	
+}
 
+	
+.linee{
+	border-top: 1px;
+	border-bottom: 1px;
+}
+
+input[type=button], input[type=submit], input[type=reset]{
+    background-color:#555555;;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+
+#d1{ 
+ 	position: relative; 
+ 	left:900px; 
+ 	color:blue; 
+ 	font-size:0.4cm;
+ } 
  
- function c_update(){
-	 
-	 var param = $("#update_form").serialize();
+#d2{
+	box-shadow: 10px 10px;
+}
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+function go_view(bnum){
+	var url = "${root}/pbbs/view";
+	url += "?bnum="+bnum;
+	location.href=url;
+	
+}
+
+ function c_create(){
+ var param = $("#form1").serialize();
 	 
 	 $.post(
-		"passwd_check",
+		"create",
 		param,
 		function(data,textStatus){
 			var flag = data.flag;
-			
 			if(flag == false){
-				alert("비밀번호가 틀렸습니다.");
+				alert("등록실패");
 				return false;
 			}else{
-				real_update(data);
+				 var url ="./list"; 
+				location.href=url; 
 			}
 		}
 	 
 	 )
  }
- function real_update(data){
-	 var url ="./view";
-	 url += "?bnum="+data.bnum;
-	 
-	location.href=url; 
- }
-
-
+ 
+ 
  function incheck(f){
-		
 		
 		if(f.bname.value==""){
 			alert("작성자를 입력하시요");
-			f.title.focus();		
+			f.bname.focus();		
 			return false;
 		}	
 		
@@ -74,96 +104,128 @@
 			return false;
 		}	
 		
-		
-		
 	}
-
+ 
 </script>
 </head>
-
 <body>
-
-
-  
-    <h2 style="text-align:center;">방명록 작성</h2>
-    
-    <form name="form1" 
+	
+	<div align="center">
+   <i class="fa fa-commenting" style="font-size:36px">방명록</i>  
+   </div>
+   <div style="font-family: monospace;" align="center">
+   <br>
+   방명록을 남겨주세요
+   <div style="color: blue">
+   바르고 고운말을 사용합시다!
+	</div>
+   </div>
+    <form id="form1" 
     	  method="post" 
     	  action="./create"
     	  onsubmit="return incheck(this)">
-    <table border="1" style="width:600px;" align="center">
-        
+    <table style="width:30%" align="center">
         <tr>
-            <td>작성자</td>
-            <td><input name="bname" size="20" value=""></td>
-            
-        </tr>   
- 
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" name="passwd" size="20"></td>
-            
+        <td width="40" height="40">
+        <div style="color: red">
+        name
+        </div>
+        </td>
+        <c:choose>
+        <c:when test="${not empty sessionScope.id }">
+        <td>
+         <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="${sessionScope.id }" readonly="readonly">
+        </td>
+		</c:when>
+		<c:otherwise>
+		<td>
+        <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" name="bname" size="20" value="">
+		</td>
+		</c:otherwise>
+		</c:choose>
+     	</tr>
+     	<tr>
+            <td height="60">
+            <div style="color: red">
+            Password
+            </div>
+            </td>
+            <td>
+            <input style="border-left-style: hidden; border-right-style: hidden; border-top-style: hidden;" type="password" name="passwd" size="20">
+            </td>
+          </tr>
+       
+        <tr>  
+            <td colspan="2">
+            <textarea name="content" id="content" rows="10" cols="80"></textarea></td>
         </tr>
  
- 
-        <tr>
-            <td colspan="2">
-            <textarea name="content" id="content" rows="20" cols="80"></textarea></td>
-        </tr>
- 
-        <tr>
-            <td colspan="2">
-            <input type='submit' value='등록'>
-            <input type="reset" value="취소"></td>
+
+        <tr style="border-bottom-style: hidden; border-left-style: hidden; border-right-style: hidden; text-align: right; ">
+            <td colspan="3" align="right">
+				<div>
+	            <input type="button" value="등록" onclick="c_create()">
+	            <input type="reset" value="취소">
+	            </div>
+            </td>
         </tr>    
         </table>
     </form>
-
-
-
-   
-    <h2 style="text-align: center;">글 목록</h2>
- 
-    <div style="text-align:center; width: 2100px;">
-        게시물수:${ylistsize}
-    </div>
+    <br>
+    <hr>
+  
+  <br>
+      <div id="d1">
+        현제 페이지 게시물수:${ylistsize}
+      </div>
+    
     <br>
     
     
-    <!-- 컨트롤러에서 redirect 로 넘어오면 앞에 param을 붙여준다. -->
-<!--    <center> -->
-<%--     <span style="color:red;">${param.message}</span> --%>
-<!--  </center> -->
-    <c:forEach var="row" items="${ylist}">
- 
-        <form action="${root}/pbbs/view" id="update_form">
-            <!-- 방명록리스트 --> 
-            <table align="center" border="1" style="width: 600px;">
+        <form 
+        action="${root}/pbbs/view" 
+        id="update_form"
+        >
+        <Br>
+      
+    <c:forEach var="row" items="${ylist}" >
+            <table style="box-shadow: 5px 5px grey;"
+            align="center"; border="1"; width="600";>
                 <tr>
-                    <td>이름</td>
-                    <td>${row.bname}</td>
-                    <td>날짜</td>
-                    <td>${row.bdate}</td>
+				    <td class="line" width="50">
+                		<i class="fa fa-edit" style="font-size:12px; color: black">
+				 		</i>작성자:
+                  		${row.bname}
+                  	</td>    
+               
+                 	<td class="line" width="50%;">
+                		<i class="fa fa-clock-o" style="font-size:12px; color: black">
+                 		</i>날짜 :
+                 		${row.bdate}
+                 	</td>
                 </tr>
+                
                 <tr>
-                    <td colspan="4">${row.content}</td>
-                </tr>
-                <tr>
- 
-            <!-- 게시물 번호는 hidden field로 넘김 -->
-                    <td colspan="4">비밀번호 
-                    <input type="hidden" name="bnum" value="${row.bnum}">
-                     <input type="password" name="passwd">                      
-                    <input type="button" value="수정/삭제" onclick="c_update()">
+                    <td width="100%" height="80%" colspan="2" id="br_text">
+<!--                     	<div style="width: 100%; height: 100px; overflow-y: scroll;"> -->
+                    	 <textarea rows="2" cols="85" style="resize:none; border-right: hidden; border-bottom: hidden; border-left: hidden; border-top: hidden;"  readonly>${row.content}</textarea>
+                    	
+	                  		
+<!--                     	</div> -->
+	                    <span style="float: right;">       
+	                   		<input type="button" style="font-size:small; style="width: 60pt; height: 23pt;" 
+	                   		onclick="go_view(${row.bnum})" value="수정/삭제">
+	                    </span>
                     </td>
-                </tr>
+                </tr>          
             </table>
+            <br>
+</c:forEach>
         </form>
- </c:forEach>
+
+<br>
  
- <br>
- 
- <div class="search" align="center">
+<div class="search" align="center">
 <form action="./list" method="post">
 <select name= "col"><!-- 검색할 컬럼 -->
 	<option value="bname" 
@@ -176,19 +238,17 @@
 	>내용</option>
 	<option value="total">전체출력</option>
 </select>
+
 <!-- 검색어 -->
 <input type="search" name="word" value="${word}">
 <button>검색</button>
 </form>
 </div> 
+
 <br>
 <hr>
- 
  <DIV class='bottom'>
    ${paging3}
   </DIV>
- 
- 
- 
 </body>
 </html>

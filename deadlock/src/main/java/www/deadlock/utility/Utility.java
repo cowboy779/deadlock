@@ -22,8 +22,11 @@ public class Utility {
 		Map<String, String> codes = new HashMap<String, String>();
 		codes.put("A", "질문게시판");
 		codes.put("B", "정답게시판");
-		codes.put("C", "1번게임");
-		codes.put("D", "2번게임");
+		codes.put("C", "Dark Soldesk");
+		codes.put("D", "다잉메세지");
+		codes.put("E", "도레미마켓");
+		codes.put("F", "도리를찾아서");
+		codes.put("G", "심리테스트");
 
 		value = codes.get(code);
 		return value;
@@ -115,38 +118,18 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
-		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
-		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
-		str.append("  .span_box_1{");
-		str.append("    text-align: center;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("  .span_box_2{");
-		str.append("    text-align: center;");
-		str.append("    background-color: #668db4;");
-		str.append("    color: #FFFFFF;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("</style>");
-		str.append("<DIV id='paging'>");
-		str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+		str.append("#paging {text-align: center; font-size:1.3em;  font-color:black; }"
+				+ "li { text-align:center;}");
+		str.append("</style>");		
+		str.append("<div class='container' style='display: flex; justify-content: center;'>");
+		str.append(" <div class='collapse navbar-collapse' >");
+		str.append("<ul class='nav navbar-nav' style='width: 100%;'>");
+
 
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='./list.do?col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>이전</A></span>");
+			str.append("<li><A href='./list?col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "'  class='btn btn-default btn-sm' style='color:black;'>이전</A></li>");
 		}
 		// -----------------------
 
@@ -156,19 +139,19 @@ public class Utility {
 			}
 
 			if (nowPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
+				str.append("<li><a style='color:gray;'>" + i + "</a></li>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
 			} else {
-				str.append("<span class='span_box_1'><A href='./list.do?col=" + col + "&word=" + word + "&nowPage=" + i
-						+ "'>" + i + "</A></span>"); // 내페이지를 제외한 다른 곳
+				str.append("<li><A style='color:black;' href='./list?col=" + col + "&word=" + word + "&nowPage=" + i
+						+ "'>" + i + "</A></li>"); // 내페이지를 제외한 다른 곳
 			}
 		}
 
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='./list.do?col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>다음</A></span>");
+			str.append("<A style='color:black;' href='./list?col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "' class='btn btn-default btn-sm'>다음</A>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></DIV>");
 
 		return str.toString();
 	}
@@ -462,7 +445,7 @@ public class Utility {
 	
 	
 //	페이징4
-	public static String paging4(int totalRecord, int nowPage, int recordPerPage, String col, String word, int ynum) {
+	public static String paging4(int ynum, int totalRecord, int nowPage, int recordPerPage, String col, String word) {
 		int pagePerBlock = 10; // 블럭당 페이지 수
 		int totalPage = (int) (Math.ceil((double) totalRecord / recordPerPage)); // 전체
 																					// 페이지
@@ -476,41 +459,19 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
-		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
-		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
-		str.append("  .span_box_1{");
-		str.append("    text-align: center;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("  .span_box_2{");
-		str.append("    text-align: center;");
-		str.append("    background-color: #668db4;");
-		str.append("    color: #FFFFFF;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("</style>");
-		str.append("<DIV id='paging'>");
-		//하나는 평범한 스팬태그, 하나는 백그라운드가 있는 
-		
-		
-		// str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+		str.append("  #paging {text-align: center; font-size:1.3em;  font-color:black; }"
+				+ "li { text-align:center;}");
+		str.append("</style>");		
+		str.append("<div class='container' style='  display: flex; justify-content: center;'>");
+		str.append(" <div class='collapse navbar-collapse' >");
+		str.append("<ul class='nav navbar-nav' style='width: 100%;'>");
 
+		
+		
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>이전</A></span>");
+			str.append("<li><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "'  class='btn btn-default btn-sm' style='color:black;' >이전</A></li>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
@@ -519,19 +480,19 @@ public class Utility {
 			}
 
 			if (nowPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>");
+				str.append("<li><a style='color:gray;'>" + i + "</a></li>");
 			} else {
-				str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage=" + i
-						+ "'>" + i + "</A></span>");
+				str.append("<li><A style='color:black;' href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage=" + i
+						+ "'>" + i + "</A></li>");
 			}
 		}
 
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>다음</A></span>");
+			str.append("<A style='color:black;' href='./read?ynum="+ynum+"&col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "' class='btn btn-default btn-sm'>다음</A>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></DIV>");
 
 		return str.toString();
 	}
@@ -549,39 +510,18 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 		
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
-		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
-		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
-		str.append("  .span_box_1{");
-		str.append("    text-align: center;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("  .span_box_2{");
-		str.append("    text-align: center;");
-		str.append("    background-color: #668db4;");
-		str.append("    color: #FFFFFF;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("</style>");
-		str.append("<DIV id='paging'>");
-		str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+		str.append("  #paging {text-align: center; font-size:1.3em;  font-color:black; }"
+				+ "li { text-align:center;}");
+		str.append("</style>");		
+		str.append("<div class='container' style='  display: flex; justify-content: center;'>");
+		str.append(" <div class='collapse navbar-collapse' >");
+		str.append("<ul class='nav navbar-nav' style='width: 100%;'>");
 		
 		
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='./read?qnum="+qnum+"&col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>이전</A></span>");
+			str.append("<li><A href='./read?qnum="+qnum+"&col=" + col + "&word=" + word + "&nowPage="
+					+ _nowPage + "'  class='btn btn-default btn-sm' style='color:black;' >이전</A></li>");
 		}
 		// -----------------------
 		
@@ -591,19 +531,19 @@ public class Utility {
 			}
 			
 			if (nowPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
+				str.append("<li><a style='color:gray;'>" + i + "</a></li>"); // 현재 페이지에대한 색 자기페이지라서 링크안걸리고
 			} else {
-				str.append("<span class='span_box_1'><A href='./read?qnum="+qnum+"&col=" + col + "&word=" + word + "&nowPage=" + i
-						+ "'>" + i + "</A></span>"); // 내페이지를 제외한 다른 곳
+				str.append("<li><A style='color:black;' href='./read?qnum="+qnum+"&col=" + col + "&word=" + word + "&nowPage=" + i
+						+ "'>" + i + "</A></li>"); // 내페이지를 제외한 다른 곳
 			}
 		}
 		
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='./read?qnum="+qnum+"&col=" + col + "&word=" + word +"&nowPage="
-					+ _nowPage + "'>다음</A></span>");
+			str.append("<A style='color:black;' href='./read?qnum="+qnum+"&col=" + col + "&word=" + word +"&nowPage="
+					+ _nowPage + "' class='btn btn-default btn-sm'>다음</A>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></DIV>");
 		
 		return str.toString();
 	}
@@ -621,38 +561,18 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
-		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
-		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
-		str.append("  .span_box_1{");
-		str.append("    text-align: center;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("  .span_box_2{");
-		str.append("    text-align: center;");
-		str.append("    background-color: #668db4;");
-		str.append("    color: #FFFFFF;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("</style>");
-		str.append("<DIV id='paging'>");
-		// str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+		str.append("  #paging {text-align: center; font-size:1.3em;  font-color:black; }"
+				+ "li { text-align:center;}");
+		str.append("</style>");		
+		str.append("<div class='container' style='  display: flex; justify-content: center;'>");
+		str.append(" <div class='collapse navbar-collapse' >");
+		str.append("<ul class='nav navbar-nav' style='width: 100%;'>");
 
+		
 		int _nPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
-					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>이전</A></span>");
+			str.append("<li><A href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
+					+ col + "&word=" + word + "&nowPage=" + nowPage + "'  class='btn btn-default btn-sm' style='color:black;' >이전</A></li>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
@@ -661,19 +581,19 @@ public class Utility {
 			}
 
 			if (nPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>");
+				str.append("<li><a style='color:gray;'>" + i + "</a></li>");
 			} else {
-				str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nowPage=" + nowPage
-						+ "&col=" + col + "&word=" + word + "&nPage=" + i + "'>" + i + "</A></span>");
+				str.append("<li><A style='color:black;' href='" + url + "?qnum=" + qnum + "&nowPage=" + nowPage
+						+ "&col=" + col + "&word=" + word + "&nPage=" + i + "'>" + i + "</A></li>");
 			}
 		}
 
 		_nPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
-					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>다음</A></span>");
+			str.append("<A style='color:black;' href='" + url + "?qnum=" + qnum + "&nPage=" + _nPage + "&col="
+					+ col + "&word=" + word + "&nowPage=" + nowPage + "' class='btn btn-default btn-sm'>다음</A>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></DIV>");
 
 		return str.toString();
 	}
@@ -696,38 +616,19 @@ public class Utility {
 		StringBuffer str = new StringBuffer();
 
 		str.append("<style type='text/css'>");
-		str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
-		str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
-		str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
-		str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
-		str.append("  .span_box_1{");
-		str.append("    text-align: center;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("  .span_box_2{");
-		str.append("    text-align: center;");
-		str.append("    background-color: #668db4;");
-		str.append("    color: #FFFFFF;");
-		str.append("    font-size: 1em;");
-		str.append("    border: 1px;");
-		str.append("    border-style: solid;");
-		str.append("    border-color: #cccccc;");
-		str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
-		str.append("  }");
-		str.append("</style>");
-		str.append("<DIV id='paging'>");
-		// str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+		str.append("  #paging {text-align: center; font-size:1.3em;  font-color:black; }"
+				+ "li { text-align:center;}");
+		str.append("</style>");		
+		str.append("<div class='container' style='  display: flex; justify-content: center;'>");
+		str.append(" <div class='collapse navbar-collapse' >");
+		str.append("<ul class='nav navbar-nav' style='width: 100%;'>");
 
+
+		
 		int _nPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<span class='span_box_1'><A href='" + url + "?ynum=" + ynum + "&nPage=" + _nPage + "&col="
-					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>이전</A></span>");
+			str.append("<li><A href='" + url + "?ynum=" + ynum + "&nPage=" + _nPage + "&col="
+					+ col + "&word=" + word + "&nowPage=" + nowPage + "'  class='btn btn-default btn-sm' style='color:black;' >이전</A></li>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
@@ -736,19 +637,19 @@ public class Utility {
 			}
 
 			if (nPage == i) {
-				str.append("<span class='span_box_2'>" + i + "</span>");
+				str.append("<li><a style='color:gray;'>" + i + "</a></li>");
 			} else {
-				str.append("<span class='span_box_1'><A href='" + url + "?ynum=" + ynum + "&nowPage=" + nowPage
-						+ "&col=" + col + "&word=" + word + "&nPage=" + i + "'>" + i + "</A></span>");
+				str.append("<li><A style='color:black;' href='" + url + "?ynum=" + ynum + "&nowPage=" + nowPage
+						+ "&col=" + col + "&word=" + word + "&nPage=" + i + "'>" + i + "</A></li>");
 			}
 		}
 
 		_nPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<span class='span_box_1'><A href='" + url + "?ynum=" + ynum + "&nPage=" + _nPage + "&col="
-					+ col + "&word=" + word + "&nowPage=" + nowPage + "'>다음</A></span>");
+			str.append("<A style='color:black;' href='" + url + "?ynum=" + ynum + "&nPage=" + _nPage + "&col="
+					+ col + "&word=" + word + "&nowPage=" + nowPage + "' class='btn btn-default btn-sm'>다음</A>");
 		}
-		str.append("</DIV>");
+		str.append("</ul></DIV></DIV>");
 
 		return str.toString();
 	}

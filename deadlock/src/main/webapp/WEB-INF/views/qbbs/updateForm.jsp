@@ -7,10 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapais.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
@@ -101,9 +98,11 @@ function imgfile(){
 </script>
 </head>
 <body>
-
 <br>
-<DIV class="w3-panel w3-border-right w3-border-left w3-border-green w3-wide" style="width:30%; max-width:200px; margin:0 auto; font-size: x-large; text-align: center;">글 수정</DIV>
+
+<div style=" text-align: center;">
+	<h1 class="h2"><span class="glyphicon glyphicon-th-list"></span>게시물 수정</h1>
+</div>
 <br><br>
 
 <FORM class="w3-container" name='frm' method='POST' enctype="multipart/form-data" onsubmit="return upCheck(this)" action='updateProc'>
@@ -139,14 +138,14 @@ function imgfile(){
 <br><br>
   
   <DIV class='w3-center'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='submit' value='수정'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='reset' value='다시쓰기'>
-    <input class="w3-button w3-round-large w3-padding-small w3-teal" type='button' value='취소' onclick="history.back()">
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='submit' value='submit'>
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='reset' value='reset'>
+    <input class="btn btn-default btn-sm" style="font-size:small;" type='button' value='cancel' onclick="history.back()">
   </DIV>
 
 </FORM>
 
-
+<br>
 </body>
 
 </html>

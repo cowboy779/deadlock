@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Insert title here</title>
+<script type="text/javascript">
+function incheck(){
+	if(confirm("내용을 txt파일로 저장합니다.")){
+		var f=document.frm;
+		var resultText = f.content.value;
+	
+		var hiddenElement = document.createElement('a');
+	
+		hiddenElement.href = 'data:attachment/text,' + encodeURI(resultText);
+		hiddenElement.target = '_blank';
+		hiddenElement.download = 'gameMemo.txt';
+		hiddenElement.click();
+	}
+}
+</script>
+</head>
+<body>
+<div style="text-align: center; width:100%; margin: 0 auto;"> 
+
+<h2>Memo</h2>
+<FORM class="w3-container" name='frm' method='POST' action='./.do'>
+  <TABLE class="w3-table w3-white w3-bordered">
+    <TR>
+      <TH class="w3-teal w3-text-white w3-wide" style="width:25%; font-size:15px; text-shadow:1px 1px 0 #444;"></TH>
+      <TD>
+      	<textarea style="width:220%;" rows="25" name="content" ></textarea>      
+      </TD>
+    </TR>
+  </TABLE>
+
+<br>
+  
+  <DIV class='w3-center'>
+    <button class="btn btn-default btn-sm" style="font-size:small;" type='reset' >reset</button>
+    <button class="btn btn-default btn-sm" style="font-size:small;" type='button' onclick="incheck()">save</button>
+    <button class="btn btn-default btn-sm" style="font-size:small;" type='button' onclick="window.close()">close</button>
+  </DIV>
+</FORM>
+ </div>
+</body>
+</html>

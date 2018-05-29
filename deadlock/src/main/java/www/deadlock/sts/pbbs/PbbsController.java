@@ -1,6 +1,5 @@
 package www.deadlock.sts.pbbs;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import www.deadlock.model.pbbs.PBbsDAO;
 import www.deadlock.model.pbbs.PBbsDTO;
 import www.deadlock.utility.Utility;
 
-
 @Controller
 public class PbbsController {
 
@@ -35,7 +33,7 @@ public class PbbsController {
     }
  
     @RequestMapping("/pbbs/update")
-    public String update(PBbsDTO dto,HttpServletRequest request,Model model) {
+    public String update(PBbsDTO dto) {
     	dao.yupdate(dto);
         return "redirect:/pbbs/list";
     }
@@ -45,15 +43,21 @@ public class PbbsController {
 	    public String real_update(HttpServletRequest request,Model model) {
 		  int bnum = Integer.parseInt(request.getParameter("bnum"));
 		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+		  System.out.println("bnum: "+bnum);
 		  model.addAttribute("dto", dao.ybDetail(bnum));
-		  modelAndView.addObject("bnum",bnum);
 	
 		  
 	      return "/pbbs/view";
 	 
 	    }
+	  
+	  
+	  
+	  
+	  
 	 @RequestMapping("/pbbs/passwd_check")
 	 public ModelAndView passwd_check(HttpServletRequest request) {
+		 
 		 
 		  int bnum = Integer.parseInt(request.getParameter("bnum"));
 		  String passwd = request.getParameter("passwd");
@@ -114,25 +118,43 @@ public class PbbsController {
 		
 	}
 	
+	@RequestMapping("/pbbs/game4")
+	public String game4(){
+		return "/pbbs/game4";
+	}
+	
+	
+	@RequestMapping("/pbbs/game3")
+	public String game3(){
+		return "/pbbs/game3";
+	}
+	
+	@RequestMapping("/pbbs/game2")
+	public String game2(){
+		return "/pbbs/game2";
+	}
+	
+	
+	@RequestMapping("/pbbs/game")
+	public String game(){
+		return "/pbbs/game";
+	}
+	
+	@RequestMapping("/pbbs/memo")
+	public String memo() {
+		return "/pbbs/memo";
+	}
 	
 	
 	@RequestMapping("/pbbs/create")
-    public String write(@ModelAttribute PBbsDTO dto, Model model) {
- 
-        // 입력한 내용이 없을때
-        if (dto.getBname() == null) {
- 
-           
-            return "/pbbs/create";
-        } else {
-            // 입력한 내용이 있을때
-            // 테이블에 insert
-            // 목록 갱신
- 
-        	dao.ycreate(dto);
-                //입력후 리스트로 이동
-            return "redirect:/pbbs/list";
+    public ModelAndView write(@ModelAttribute PBbsDTO dto, Model model) {
+		  ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
+       
+        	boolean flag = dao.ycreate(dto);
+            modelAndView.addObject("flag", flag);       
+          
+            return modelAndView;
 
         }
-	}
+	
 }

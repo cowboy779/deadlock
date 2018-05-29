@@ -126,5 +126,18 @@ public class RbbsDAO implements IrbbsDAO{
 		
 		return flag;
 	}
+	
+	public String idC(int refnum) {
+		String id = mybatis.selectOne("rbbs.idC", refnum);
+		return id;
+	}
+	
+	public boolean refC(int rnum) {
+		boolean flag = false;
+		int cnt = mybatis.selectOne("rbbs.refC", rnum);
+		if(cnt>0)flag=true;
+		
+		return flag;
+	}
 
 }

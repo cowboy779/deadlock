@@ -16,4 +16,8 @@ public interface IrbbsDAO extends DAOSTDInter {
 	
 	public boolean vCheck(String id);
 	
+	public String idC(int refnum);
+	
+	public boolean refC(int rnum);
+	
 }

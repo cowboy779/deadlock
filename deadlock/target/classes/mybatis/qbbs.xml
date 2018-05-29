@@ -43,8 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<if test="col=='title'">
 						title like '%'||#{word}||'%'
 					</if>
-					<if test="col=='content'">
-						content like '%'||#{word}||'%'
+					<if test="col=='qsep'">
+						qsep like '%'||#{word}||'%'
+					</if>
+					<if test="col=='id'">
+						id like '%'||#{word}||'%'
 					</if>
 				</where>
 		        order by qnum desc

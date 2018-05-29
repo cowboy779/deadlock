@@ -120,7 +120,12 @@ public class YbbsController {
 	@RequestMapping("/ybbs/read")
 	public String read(int ynum, Model model, HttpServletRequest request) {
 		
-		String id = "user1";
+
+		String col = request.getParameter("col");
+		String word = request.getParameter("word");
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		
+		String id = request.getParameter("id");
 		request.setAttribute("id", id);
 		
 		dao.ycount(ynum);
@@ -138,27 +143,49 @@ public class YbbsController {
 		if (request.getParameter("nPage") != null) {
 			nPage = Integer.parseInt(request.getParameter("nPage"));
 		}
-		int recoredPerPage = 3;
-		int sno = ((nPage - 1) * recoredPerPage) + 1;
-		int eno = nPage * recoredPerPage;
+		int recordPerPage = 3;
+		int sno = ((nPage - 1) * recordPerPage) + 1;
+		int eno = nPage * recordPerPage;
+		
+		
+		String col2 = Utility.checkNull(request.getParameter("col"));
+		String word2 = Utility.checkNull(request.getParameter("word"));
+//		dto.setId("user1");
+
+		if (col.equals("total"))
+			word = "";
+		// 검색관련end----------------------------
+
+		// paging관련
+		int nowPage2 = 1;// 현제 보이는 페이지
+		if (request.getParameter("nowPage") != null)
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+
+		int recordPerPage2 = 5; // 한페이지당 보여줄 레코드 개수
+
+		int sno2 = ((nowPage - 1) * recordPerPage) + 1; // 시작 페이지
+		int eno2 = nowPage * recordPerPage; // 어디부터 어디까지 보여주겠다 =끝페이지
 		
 		Map map = new HashMap();
 		map.put("sno", sno);
 		map.put("eno", eno);
 		map.put("ynum", ynum);
+		
+		Map map2 = new HashMap();
+		map2.put("col", col2);
+		map2.put("word", word2);
+		map2.put("sno", sno2);
+		map2.put("eno", eno2);
 	
 		List<YrecoDTO> ylist = rdao.list(map);
-		List<YBbsDTO> list = dao.list(map);
+		List<YBbsDTO> list = dao.list(map2);
 		
 		int total = rdao.total(map);
-		int ytotal = dao.total(map);
+		int ytotal = dao.total(map2);
 
-		String col = request.getParameter("col");
-		String word = request.getParameter("word");
-		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
 
-		String paging2 = Utility.ypaging(total, nPage, recoredPerPage, url, ynum, nowPage, col, word);
-		String paging4 =  Utility.paging4(ytotal, nowPage, recoredPerPage, col, word, ynum);
+		String paging2 = Utility.ypaging(total, nPage, recordPerPage, url, ynum, nowPage, col, word);
+		String paging4 =  Utility.paging4(ynum, ytotal, nowPage, recordPerPage, col, word);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("ylist", ylist);
@@ -166,6 +193,7 @@ public class YbbsController {
 		model.addAttribute("paging2", paging2);
 		model.addAttribute("paging4",paging4);
 		model.addAttribute("nPage", nPage);
+		model.addAttribute("id",id);
 
 		return "/ybbs/read";
 
@@ -180,7 +208,7 @@ public class YbbsController {
 		int filesize = (int) dto.getFnameMF().getSize();
 		dto.setFname(fname);
 		dto.setFilesize(filesize);
-		
+		dto.setId((String)request.getSession().getAttribute("id"));
 		
 		if (dao.create(dto)) {
 			return "redirect:/ybbs/list";
@@ -192,14 +220,14 @@ public class YbbsController {
 
 	@RequestMapping(value = "/ybbs/create", method = RequestMethod.GET)
 	public String create(HttpServletRequest request,YBbsDTO dto) {
-		String id = "test";
+		String id = request.getParameter("id");
 		request.setAttribute("id", id);
 //		dto.setId(id);
 
 		return "/ybbs/create";
 	}
 
-	@RequestMapping(value = "/ybbs/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/ybbs/delete")
 	public String deleteProc(HttpServletRequest request, int ynum, Model model) {
 
 		String oldfile = request.getParameter("oldfile");
@@ -221,23 +249,24 @@ public class YbbsController {
 		}
 	}
 
-	@RequestMapping(value = "/ybbs/delete", method = RequestMethod.GET)
-	public String delete(HttpServletRequest request, YBbsDTO dto) {
-
-		String id = (String) request.getSession().getAttribute("id");
-		if (id == dto.getId()) {
-			return "/ybbs/delete";
-		} else {
-			return "redirect:/ybbs/error";
-		}
-	}
+//	@RequestMapping(value = "/ybbs/delete", method = RequestMethod.GET)
+//	public String delete(HttpServletRequest request, YBbsDTO dto) {
+//
+//		String id = (String) request.getSession().getAttribute("id");
+//		if (id == dto.getId()) 
+//		{
+//			return "/ybbs/list";
+//		} else {
+//			return "redirect:/ybbs/error";
+//		}
+//	}
 
 	@RequestMapping("/ybbs/list")
 	public String list(HttpServletRequest request,YBbsDTO dto) {
 
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
-		dto.setId("user1");
+//		dto.setId("user1");
 
 		if (col.equals("total"))
 			word = "";
@@ -260,8 +289,10 @@ public class YbbsController {
 		map.put("sno", sno);
 		map.put("eno", eno);
 
+		List<YrecoDTO> ylist = rdao.list(map);
 		List<YBbsDTO> list = dao.list(map);
-
+		
+		
 		// 전체 레코드 개수 가져오기
 		int totalRecord = dao.total(map);
 		String paging = Utility.paging3(totalRecord, nowPage, recordPerPage, col, word);

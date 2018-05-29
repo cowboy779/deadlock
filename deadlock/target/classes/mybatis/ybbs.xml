@@ -44,11 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
  
  	<select id="list" resultType="YBbsDTO" parameterType="Map">
- 	SELECT ynum, content, title, ydate, id, fname, filesize, r
+ 	SELECT ynum, content, title, ydate, id, fname, filesize, ycount, r
  		from(
- 			select ynum, content, title, ydate, id, fname,filesize, rownum r
+ 			select ynum, content, title, ydate, id, fname,filesize, ycount, rownum r
  			from (
- 				select ynum, content, title, to_char(ydate, 'yyyy-mm-dd')ydate, id, fname,filesize
+ 				select ynum, content, title, to_char(ydate, 'yyyy-mm-dd')ydate, id, fname, filesize, ycount
  				from ybbs
  	<where>
 	<choose>
