@@ -208,7 +208,7 @@ text-align: center;
 							<div>
 								<h4>
 								<b>
-								<input type="text" name="title" style="width:100%;" value="${dto.title }"  maxlength="15" 
+								<input type="text" name="title" style="width:100%;" value="${dto.title }"  maxlength="13" 
 								autofocus>
 								</b>
 								</h4>

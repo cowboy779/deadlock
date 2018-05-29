@@ -13,10 +13,7 @@
         <put-attribute name="title" value="미궁추천" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/cbbs/createForm.jsp" /> 
     </definition>
-    <definition name="/cbbs/ex" extends="main"> 
-        <put-attribute name="title" value="미궁예제1" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/cbbs/ex1.jsp" /> 
-    </definition>
+   
     
     
 <!--     <definition name="/cbbs/cupdate" extends="main">  -->

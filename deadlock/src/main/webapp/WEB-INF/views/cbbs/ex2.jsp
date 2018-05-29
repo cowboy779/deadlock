@@ -16,22 +16,35 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <title></title>
-
 <script type="text/javascript">
-
+var hCnt = 0;
 function inCheck(f) {
+	
 	if(f.an.value==""){
 		alert("정답을 입력해주세요");
 		f.an.focus();
 		return false;
-	}else if(f.an.value=="START"){
+	}else if(f.an.value=="나도리"){
 		f.an.focus();
 	}else{
-		alert("스타트라구욧!");
+		hCnt += 1;
+		alert("틀렸다구욧! " + hCnt + "번");
 		f.an.focus();
+		
+		
+		if(hCnt==3){
+			alert("힌트를 줄게요.");
+			f.an.focus();
+			$(".hint").css("display", 'block');
+		}
+		if(hCnt==4){
+			alert("이래도 못맞추면 진짜.");
+			f.an.focus();
+			$(".hint2").css("display", 'block');
+		}
 		return false;
 	}
-}
+}//incheck
 
 function keydowncheck()
 {
@@ -53,28 +66,38 @@ return result;
 </style>
 
 </head>
-<body onkeydown="return keydowncheck();" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
+<body onkeydown="return keydowncheck();" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 <br><br>
+
 
 <div class="con" align="center">
-<h2>솔데스크 미스테리를 찾아서</h2>
-<br><br>
-
-(bgm이 울린다)
-<br><br><br><br>
-
-게임을 시작하시려면
-<br><br>
-
-<b>Start</b>를 입력해주세요
-
-</div>
+	<h2>솔데스크 미스테리를 찾아서</h2>
+	<br><br>
 	
+	(솔데스크에 새로운 수강생이 들어왔다.)
+	<br><br>
+	타닥..타닥..
+	<br><br>
+	끼익..
+	<br><br><br><br>
+
+
+		<div class="hint" style="display: none;">
+		<p align="center">힌트 1 : 세글자 </p>
+		</div>
+		
+		<div class="hint2" style="display: none;">
+		<p align="center">힌트 2 : 머리가 빨갛다 </p>
+		</div>
+	
+		<br><br><br><br>
+		<p align="center">기운이 범상치 않다. 뭐지?</p>
+</div>
 	
 <form name="frm" 
 	onsubmit="return inCheck(this)"
-	action="./ex2"
+	action="./ex3"
 	method="POST"
 	style="text-align:center;"
 >

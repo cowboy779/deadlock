@@ -23,9 +23,25 @@ public class CbbsController {
 	private ICbbsDAO dao;
 	
 	
+	@RequestMapping(value="/cbbs/ex4", method=RequestMethod.POST)
+	public String ex4() {
+		return "cbbs/ex4";
+	}
+	
+	@RequestMapping(value="/cbbs/ex3", method=RequestMethod.POST)
+  	public String ex3() {
+  		return "cbbs/ex3";
+  	}
+	
+	
+	@RequestMapping(value="/cbbs/ex2", method=RequestMethod.POST)
+  	public String ex2() {
+  		return "cbbs/ex2";
+  	}
+	
 	@RequestMapping(value="/cbbs/ex")
   	public String ex1() {
-  		return "/cbbs/ex";
+  		return "cbbs/ex1";
   	}
 	
 	

@@ -48,7 +48,7 @@
     <tr>
     	<th>URL</th>
 		<td>
-		   <input type="text" name="urllink" size="30" value="http://">
+		   <input type="text" name="urllink" size="30" placeholder="ex) http://www.naver.com">
 
 		</td>
     </tr>
