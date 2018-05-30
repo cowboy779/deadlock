@@ -84,6 +84,7 @@ public class Utility {
 	 */
 	public static boolean compareDay(String wdate) {
 		boolean flag = false;
+		wdate=wdate.substring(0,10);
 		List<String> list = getDay();
 		if (wdate.equals(list.get(0)) || wdate.equals(list.get(1)) || wdate.equals(list.get(2))) {
 			flag = true;

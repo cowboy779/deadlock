@@ -26,6 +26,7 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
        <tx:attributes>
           <tx:method name="delete" rollback-for="Exception"/>
+          <tx:method name="create_survey" rollback-for="Exception"/>
           <!-- <tx:method name="reply" rollback-for="Exception"/> -->
        </tx:attributes>
     </tx:advice>
@@ -95,6 +96,7 @@
                 <value>/WEB-INF/spring/qbbs.xml</value> 
                 <value>/WEB-INF/spring/rbbs.xml</value> 
                 <value>/WEB-INF/spring/ybbs.xml</value> 
+                <value>/WEB-INF/spring/survey.xml</value> 
             </list>
         </property> 
     </bean>  

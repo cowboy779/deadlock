@@ -10,7 +10,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${root }/univers/main.3f6952e4.css">
+<script type="text/javascript">
+var flag = ${flag};
+if(flag == true){
+	alert("S등급으로 등업하셨습니다.");
+}
 
+
+</script>
 <title></title> 
 <style type="text/css">
 .tb{
@@ -100,7 +107,8 @@ function anscheck(){
 		f2.answer.focus();
 		
 	}else{
-		f2.submit();
+		alert("게임을 클리어하셨습니다.");
+		window.close();
 	}
 	
 }
@@ -155,7 +163,7 @@ function keydowncheck(){
 
 
 <br> <br>
-<FORM class="w3-container" name='frm' method='POST' action="game5">
+<FORM class="w3-container" name='frm' method='POST' action="${root}/template/gintro">
 
   <TABLE>
   

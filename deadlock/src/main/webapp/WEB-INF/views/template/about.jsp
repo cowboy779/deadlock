@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="section-container-spacer text-center">
-            <h1 class="h2">05 : About DeadLock</h1>
+            <h1 class="h2">05 : About</h1>
           </div>
           
           <div class="row">
@@ -24,15 +24,18 @@
               <div class="row">
                 <div class="col-xs-12 col-md-6">
                   <h3>DeadLock</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus at sem quis varius. 
-                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras ultrices hendrerit nisl.</p>
-                  <h3>Ut enim ad minim </h3>
-                  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-                  <h3>Maecenas luctus at sem quis varius</h3>
+                  <p>우리 데드락은 언제나 재미있는 게임으로 전세계 사람들에게 즐거움을 선사하며 글로벌한 미궁 게임 문화를 이끌어나갑니다.
+                  </p>
+                  <h3>구성원 소개</h3>
                   <p>
-                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus iaculis magna sagittis elit sagittis, at hendrerit lorem venenatis. Morbi accumsan iaculis blandit. Cras ultrices hendrerit nisl.</p>
+              	데드락의 조장은 오정훈이며    
+                  구성원은 이나슬이, 이민규, 박영부, 한정환, 안서현 으로 총 6명의 팀입니다.
+                  <h3>끊임없는 도전, 끝없는 변화의지로 종각을 넘어 전국으로 나아갑니다.</h3>
+                  <p>
+                  2017년 12월 개강이 된 이후 데드락의 최초 게임인 도리를 찾아서를 필두로 다잉메세지, 도레미솔등 
+                  	다양한 미궁게임을 개발하고 있습니다.
+                  	저희는 게임뿐 아니라 웹 개발을 통한 문화적 교류를 이루어 사람들의 마음을 사로잡을 것 입니다.
+                  </p>
                 </div>
                 <div class="col-xs-12 col-md-6">
                   <img src="${root }/univers/images/logo3.png" class="img-responsive" alt="">

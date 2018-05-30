@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+    
+<tiles-definitions> 
+
+	<definition name="/survey/create" extends="main"> 
+        <put-attribute name="title" value="설문조사" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/survey/createForm.jsp"/> 
+    </definition>   
+    
+</tiles-definitions>

@@ -9,8 +9,8 @@ public interface IMemberDAO extends DAOSTDInter {
 	public String emailcode() throws Exception;
 	public boolean updatePasswd(MemberDTO dto)  throws Exception;
 	public boolean update(Object dto) throws Exception;
-	public boolean updateGrade_S(Map map) throws Exception;
-	public boolean updateGrade_V(Map map) throws Exception;
+	public boolean updateGrade_S(String id) throws Exception;
+	public boolean updateGrade_V(String id) throws Exception;
 	public MemberDTO read(Object id) throws Exception;
 	public boolean delete(Object id) throws Exception;
 	public String Find_Id(String email) throws Exception;

@@ -63,10 +63,10 @@ public class MemberDAO implements IMemberDAO{
 		return flag;
 	}
 	
-	public boolean updateGrade_S(Map map) throws Exception {
+	public boolean updateGrade_S(String id) throws Exception {
 		boolean flag = false;
 		
-		int cnt = mybatis.update("member.updateGrade_S",map);
+		int cnt = mybatis.update("member.updateGrade_S",id);
 		
 		if(cnt>0) {
 			flag = true;
@@ -75,10 +75,10 @@ public class MemberDAO implements IMemberDAO{
 		return flag;
 	}
 	
-	public boolean updateGrade_V(Map map) throws Exception {
+	public boolean updateGrade_V(String id) throws Exception {
 		boolean flag = false;
 		
-		int cnt = mybatis.update("member.updateGrade_V",map);
+		int cnt = mybatis.update("member.updateGrade_V",id);
 		
 		if(cnt > 0) {
 			flag = true;

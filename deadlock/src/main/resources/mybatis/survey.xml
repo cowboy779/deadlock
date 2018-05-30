@@ -4,6 +4,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="survey">
 
+	<select id="numread" parameterType="String" resultType="int">
+		select num from surveyitem
+		where id = #{id}
+	</select>
+
+	<select id="man" parameterType="int" resultType="int">
+		select count(*) from surveyitem
+		where gender = '남자' and num = #{num}
+	</select>
+
+	<select id="woman" parameterType="int" resultType="int">
+		select count(*) from surveyitem
+		where gender = '여자' and num = #{num}
+	</select>
+
+	<update id="surveyUpdate" parameterType="String">
+		UPDATE member set
+		survey = 'Y'
+		where id= #{id}
+	</update>
+
+	<select id="dupSurvey" parameterType="String" resultType="int">
+		select count(*) from surveyitem
+		where id = #{id}
+	</select>
+
+	<select id="read" parameterType="String" resultType="SurveyItemDTO">
+		select * from surveyitem
+		where id = #{id}
+	</select>
+	
+	<insert id="create" parameterType="SurveyItemDTO">
+		insert into surveyitem(
+			surveyitemnum,num,gender,age,content,id
+		)
+		values(
+			(select nvl(max(surveyitemnum),0)+1 from surveyitem),
+   			 #{num},#{gender},#{age},#{content},#{id}
+		)
+	</insert>
+	
+	<select id="getCount" parameterType="int" resultType="int">
+		select count(*) from surveyitem
+		where num = #{num}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(*) from surveyitem
+	</select>
 
 
 </mapper>

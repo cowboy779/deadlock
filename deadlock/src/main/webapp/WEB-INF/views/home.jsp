@@ -50,7 +50,7 @@ function chat(){
           <li><a href="${root}" title="">01 : Home</a></li>
           <li><a href="${root}/template/bbslist" title="Board">02 : Board</a></li>
           <li><a href="${root}/template/gintro" title="방명록">03 : Game</a></li>
-          <li><a href="${root}/nbbs/list" title="Infomation">04 : Infomation</a></li>
+          <li><a href="${root}/nbbs/list" title="Infomation">04 : Notice</a></li>
           <li><a href="${root}/template/about" title="About">05 : About</a></li>
           <li><a href="javascript:chat()" title="Chat">06: Chat</a></li>
         </ul>

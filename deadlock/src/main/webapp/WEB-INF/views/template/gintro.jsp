@@ -69,6 +69,11 @@ function han_game(){
 	var wr = window.open(url,"game","width=1200, height=1000, resizable=no");
 	wr.moveTo(((window.screen.width-1200)/2),((window.screen.height-1000)/2));
 }
+function survey(){
+	var url="${root}/survey/create";
+	var wr = window.open(url,"survey","width=1200, height=1000, resizable=no");
+	wr.moveTo(((window.screen.width-1200)/2),((window.screen.height-1000)/2));
+}
 </script>
 
 </head>
@@ -182,21 +187,24 @@ function han_game(){
 				<p class="sp-layer sp-white sp-padding" 
 					data-vertical="10" data-horizontal="2%" data-width="96%" 
 					data-show-transition="down" data-show-delay="400" data-hide-transition="up">
-					최대 높이에서 펼쳐지는 <span class="hide-small-screen">, 기묘한 이야기.</span> <span class="hide-medium-screen">당신은 이 마천루에서 탈출할수 있을것인가.</span>
+					나는 어떤 종류의 <span class="hide-small-screen">사람일까?</span> <span class="hide-medium-screen"> -지금 바로 알아보세요!</span>
 				</p>
 			</div>
 			<!-- ***************************한정환 -->
-
+			
+			<!-- ***************************설문조사 -->
 			<div class="sp-slide">
-				<img class="sp-image" src="${root }/univers/img/blank.gif"
-					data-src="http://bqworks.com/slider-pro/images/image6_medium.jpg"
-					data-retina="http://bqworks.com/slider-pro/images/image6_large.jpg"/>
-
-				<p class="sp-layer sp-white sp-padding" 
-					data-horizontal="10" data-vertical="10" data-width="35%">
-					Comming <span class="hide-small-screen">Soon!</span> <span class="hide-medium-screen">2018-06-05</span>
-				</p>
+				<a href="javascript:survey()">
+					<img class="sp-image" src="${root }/univers/img/blank.gif"
+						data-src="http://bqworks.com/slider-pro/images/image6_medium.jpg"
+						data-retina="http://bqworks.com/slider-pro/images/image6_large.jpg"/>
+				</a>
+					<p class="sp-layer sp-white sp-padding" 
+						data-horizontal="10" data-vertical="10" data-width="35%">
+						등업할 수 있는 기회! <span class="hide-small-screen">게임</span> <span class="hide-medium-screen">인기투표!</span>
+					</p>
 			</div>
+			<!-- ***************************설문조사 -->
 
 
 
@@ -225,12 +233,12 @@ function han_game(){
 
 			<div class="sp-thumbnail">
 				<div class="sp-thumbnail-title">Escape Tower</div>
-				<div class="sp-thumbnail-description">Comming Soon!</div>
+				<div class="sp-thumbnail-description">Now Open!</div>
 			</div>
 
 			<div class="sp-thumbnail">
 				<div class="sp-thumbnail-title">SunSet Out</div>
-				<div class="sp-thumbnail-description">Comming Soon!</div>
+				<div class="sp-thumbnail-description">Now Open!</div>
 			</div>
 
 

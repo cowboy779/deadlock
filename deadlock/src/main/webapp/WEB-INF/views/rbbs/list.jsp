@@ -66,18 +66,17 @@ function read(rnum){
     <td>
 <c:if test="${dto.indent>0 }">
 <c:forEach begin="1" end="${dto.indent }">
-[re]
 </c:forEach>
-    <img src="${root}/univers/images/re.png" height="50%">
+    <img src="${root}/storage_qbbs/re.jpg" width="30px;">
 
 </c:if>
 
 <a href="javascript:read('${dto.rnum }')">   ${dto.title }   </a>
 <c:if test="${not empty dto.fname }">
-		<img src="${root }/univers/images/file.gif">
+		<img src="${root }/storage_qbbs/onfile.png" width="30px;">
 </c:if>
 <c:if test="${util:newimg(dto.rdate) }">
-		<img src="${root }/univers/images/new.gif">
+		<img src="${root }/storage_qbbs/new2.jpg" width="30px;">
 </c:if>
     </td>
     <td>${dto.rdate }</td>

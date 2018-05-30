@@ -35,13 +35,13 @@ address1=#{address1},address2=#{address2},job=#{job}
 WHERE id=#{id}
 </update>
 
-<update id="updateGrade_S" parameterType="map">
+<update id="updateGrade_S" parameterType="String">
 UPDATE member
 SET grade = 'S'
 where id=#{id}
 </update>
 
-<update id="updateGrade_V" parameterType="map">
+<update id="updateGrade_V" parameterType="String">
 UPDATE member
 SET grade = 'V'
 where id=#{id}

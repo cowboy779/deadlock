@@ -17,6 +17,12 @@
 
 <title></title>
 <script type="text/javascript">
+var flag = ${flag};
+if(flag == true){
+	alert("S등급으로 등업하셨습니다.");
+}
+</script>
+<script type="text/javascript">
 var hCnt = 0;
 function inCheck(f) {
 	
