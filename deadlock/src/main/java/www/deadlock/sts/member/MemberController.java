@@ -173,7 +173,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/id_proc_check")
-	public ModelAndView id_proc_check(HttpServletRequest request,Model model) throws Exception {
+	public ModelAndView id_proc_check(HttpServletRequest request) throws Exception {
 		
 		ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 		
@@ -190,7 +190,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/loginForm")
-	public String loginForm(HttpServletRequest request) {
+	public String loginForm(HttpServletRequest request,Model model) {
 		String c_id = "";     // ID 저장 여부를 저장하는 변수, Y
 		String c_id_val = ""; // ID 값
 		 
@@ -210,6 +210,8 @@ public class MemberController {
 		}
 		request.setAttribute("c_id", c_id);
 		request.setAttribute("c_id_val", c_id_val);
+		request.setAttribute("page", request.getParameter("page"));
+		
 		return "/member/loginForm";
 	}
 	 
@@ -217,7 +219,7 @@ public class MemberController {
 	public String loginProc(HttpServletRequest request, Model model, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
-
+		String page = request.getParameter("page");
 		Map map = new HashMap();
 		map.put("id", id);
 		map.put("passwd", passwd);
@@ -260,6 +262,10 @@ public class MemberController {
 		    url = "redirect:/";
 		    
 		}//flag END
+		if(page != null) {
+			url = page;
+		}
+		System.out.println(page);
 		
 		return url;
 	}

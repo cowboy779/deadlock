@@ -96,7 +96,6 @@
                 <value>/WEB-INF/spring/qbbs.xml</value> 
                 <value>/WEB-INF/spring/rbbs.xml</value> 
                 <value>/WEB-INF/spring/ybbs.xml</value> 
-                <value>/WEB-INF/spring/survey.xml</value> 
             </list>
         </property> 
     </bean>  

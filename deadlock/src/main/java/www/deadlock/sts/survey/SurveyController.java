@@ -26,7 +26,7 @@ public class SurveyController {
 	@RequestMapping("/survey/create")
 	public String create() {
 		
-		return "/survey/create";
+		return "/survey/createForm";
 	}
 	
 	@RequestMapping("/survey/createProc")

@@ -21,6 +21,9 @@ function agreement(){
 		
 <FORM class="signUp" name='frm' method='POST' action='${root }/member/loginProc'>
 	<h1 class="signUpTitle">Sign in !</h1>
+	<c:if test="${not empty page}">
+		<input type="hidden" name="page" value="${page}">
+	</c:if>
 	<c:choose>
       	<c:when test="${c_id == 'Y' }">
       		<input type='checkbox' name='c_id' value='Y' checked='checked'> ID저장
